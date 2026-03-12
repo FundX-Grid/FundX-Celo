@@ -272,7 +272,7 @@ export function HeroDeckSlot({ slotRef }: { slotRef: React.RefObject<HTMLDivElem
     <div
       ref={slotRef}
       className="w-full flex justify-center items-center my-6"
-      style={{ height: "80px", pointerEvents: "none" }}
+      style={{ height: "6rem", pointerEvents: "none" }}
       aria-hidden="true"
     />
   )
@@ -350,7 +350,7 @@ export function Hero({ deckSlotRef }: { deckSlotRef: React.RefObject<HTMLDivElem
   }, [])
 
   return (
-    <section className="relative pt-32 pb-24 lg:pt-48 lg:pb-32 overflow-hidden bg-slate-50">
+    <section className="relative pt-28 pb-24 lg:pt-38 lg:pb-32 overflow-hidden bg-slate-200 bg-red-100">
       <div className="container mx-auto max-w-5xl px-4 text-center">
 
         <HeroBadge />

@@ -6,6 +6,7 @@ import { useStacks } from "@/components/fundx/StacksProvider"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
 import { CreatorTab } from "@/components/dashboard/CreatorTab"
+import { BackerTab } from "@/components/dashboard/BackerTab" 
 
 
 export default function DashboardPage() {

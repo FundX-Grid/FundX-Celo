@@ -18,7 +18,7 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
 
   
 
-  if (step === 1) {
+if (step === 1) {
     return (
       <div className="space-y-6 animate-in fade-in slide-in-from-left-4 duration-500">
          <div className="mb-6">
@@ -46,10 +46,27 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
                  />
               </div>
             </div>
+            
+            {/* 🚨 NEW: SOCIAL PROOF */}
+            <div className="grid md:grid-cols-3 gap-4">
+               <div className="space-y-2">
+                  <Label>Twitter / X</Label>
+                  <Input placeholder="@username" className="h-12 rounded-xl" value={formData.twitter} onChange={(e) => setFormData({...formData, twitter: e.target.value})} />
+               </div>
+               <div className="space-y-2">
+                  <Label>GitHub</Label>
+                  <Input placeholder="github.com/..." className="h-12 rounded-xl" value={formData.github} onChange={(e) => setFormData({...formData, github: e.target.value})} />
+               </div>
+               <div className="space-y-2">
+                  <Label>Portfolio / Website</Label>
+                  <Input placeholder="https://..." className="h-12 rounded-xl" value={formData.portfolio} onChange={(e) => setFormData({...formData, portfolio: e.target.value})} />
+               </div>
+            </div>
+
             <div className="space-y-2">
                <Label>Creator Bio</Label>
                <Textarea 
-                  placeholder="Tell us about your background..." 
+                  placeholder="Tell us about your background and why you are the right person to build this..." 
                   className="h-24 rounded-xl resize-none"
                   value={formData.creatorBio}
                   onChange={(e) => setFormData({...formData, creatorBio: e.target.value})}
@@ -108,37 +125,74 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
   }
 
 
-  if (step === 3) {
+if (step === 3) {
     return (
       <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-500">
          <div className="mb-6">
             <h2 className="text-2xl font-bold text-slate-900">The Pitch</h2>
-            <p className="text-slate-500 text-sm">Tell your story.</p>
+            <p className="text-slate-500 text-sm">Tell your story and explain how the funds will be used.</p>
          </div>
          <div className="space-y-4">
-            <div className="space-y-2">
-               <Label>Short Tagline</Label>
-               <Textarea 
-                  placeholder="Explain it in one sentence..." 
-                  className="h-20 rounded-xl resize-none"
-                  value={formData.tagline}
-                  onChange={(e) => setFormData({...formData, tagline: e.target.value})}
-               />
+            
+            <div className="grid md:grid-cols-2 gap-4">
+               <div className="space-y-2">
+                  <Label>Short Tagline</Label>
+                  <Textarea 
+                     placeholder="Explain it in one sentence..." 
+                     className="h-20 rounded-xl resize-none"
+                     value={formData.tagline}
+                     onChange={(e) => setFormData({...formData, tagline: e.target.value})}
+                  />
+               </div>
+               {/* 🚨 NEW: VIDEO LINK */}
+               <div className="space-y-2">
+                  <Label>Pitch Video URL (Optional)</Label>
+                  <Textarea 
+                     placeholder="YouTube or Vimeo link..." 
+                     className="h-20 rounded-xl resize-none"
+                     value={formData.videoUrl}
+                     onChange={(e) => setFormData({...formData, videoUrl: e.target.value})}
+                  />
+               </div>
             </div>
+
+            {/* 🚨 UPDATED: PROBLEM & SOLUTION */}
             <div className="space-y-2">
-               <Label>Full Description</Label>
+               <Label>The Problem & Solution</Label>
                <Textarea 
-                  placeholder="What problem are you solving?" 
-                  className="min-h-[200px] rounded-xl resize-none p-4"
+                  placeholder="What specific problem are you solving, and how does your product fix it?" 
+                  className="min-h-[120px] rounded-xl resize-none p-4"
                   value={formData.description}
                   onChange={(e) => setFormData({...formData, description: e.target.value})}
                />
             </div>
+
+            {/* 🚨 NEW: BUDGET & ROADMAP */}
+            <div className="grid md:grid-cols-2 gap-4">
+               <div className="space-y-2">
+                  <Label>Budget Breakdown</Label>
+                  <Textarea 
+                     placeholder="How will you spend the funds? (e.g., 60% Dev, 40% Servers)" 
+                     className="h-24 rounded-xl resize-none"
+                     value={formData.budgetBreakdown}
+                     onChange={(e) => setFormData({...formData, budgetBreakdown: e.target.value})}
+                  />
+               </div>
+               <div className="space-y-2">
+                  <Label>Product Roadmap</Label>
+                  <Textarea 
+                     placeholder="What are your next 3 major milestones?" 
+                     className="h-24 rounded-xl resize-none"
+                     value={formData.roadmap}
+                     onChange={(e) => setFormData({...formData, roadmap: e.target.value})}
+                  />
+               </div>
+            </div>
+
          </div>
       </div>
     )
   }
-
  if (step === 4) {
    return (
      <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-500">

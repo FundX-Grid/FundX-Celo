@@ -11,10 +11,15 @@ interface CampaignCardProps {
   raised: number
   goal: number
   image: string
+  currency?: "USDCx" | "STX" // 🚨 NEW: Tell the card which currency to use
 }
 
-export function CampaignCard({ id, title, description, raised, goal, image }: CampaignCardProps) {
+export function CampaignCard({ id, title, description, raised, goal, image, currency = "USDCx" }: CampaignCardProps) {
   const percentage = Math.min((raised / goal) * 100, 100)
+
+  // 🚨 NEW: Format the money beautifully based on the currency
+  const formattedRaised = currency === "USDCx" ? `$${raised.toLocaleString()}` : `${raised.toLocaleString()} STX`
+  const formattedGoal = currency === "USDCx" ? `$${goal.toLocaleString()}` : `${goal.toLocaleString()} STX`
 
   return (
     <Link href={`/campaigns/${id}`} className="block h-full group">
@@ -36,8 +41,9 @@ export function CampaignCard({ id, title, description, raised, goal, image }: Ca
 
           <div className="space-y-2">
             <div className="flex justify-between text-sm font-medium">
-              <span className="text-primary font-bold">${raised.toLocaleString()}</span>
-              <span className="text-slate-400">of ${goal.toLocaleString()}</span>
+              {/* 🚨 UPDATED: Using our formatted numbers */}
+              <span className="text-primary font-bold">{formattedRaised}</span>
+              <span className="text-slate-400">of {formattedGoal}</span>
             </div>
             <Progress value={percentage} className="h-3 rounded-full bg-slate-100" />
           </div>

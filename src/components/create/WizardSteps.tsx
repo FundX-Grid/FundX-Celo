@@ -180,7 +180,7 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
     )
   }
 
-  // STEP 6: FUNDING
+
  if (step === 6) {
     return (
       <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-500">
@@ -189,7 +189,7 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
             <p className="text-slate-500 text-sm">Set your target and define your on-chain rules.</p>
          </div>
          
-         {/* 🚨 NEW: THE CURRENCY SELECTOR */}
+
          <div className="space-y-2 mb-6">
             <Label>Funding Asset</Label>
             <Select onValueChange={(val) => setFormData({...formData, currency: val as "USDCx" | "STX"})} defaultValue={formData.currency}>
@@ -207,7 +207,7 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
             <div className="space-y-2">
                <Label>Target Amount</Label>
                <div className="relative">
-                  {/* 🚨 DYNAMIC TICKER LABEL */}
+     
                   <span className={`absolute left-4 top-1/2 -translate-y-1/2 font-bold text-sm ${formData.currency === 'USDCx' ? 'text-blue-600' : 'text-orange-500'}`}>
                      {formData.currency}
                   </span>
@@ -233,7 +233,6 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
             </Select>
          </div>
 
-         {/* 🚨 DYNAMIC INFO BOX BASED ON CURRENCY */}
          <div className={`p-6 rounded-xl border flex gap-4 items-start mt-6 ${formData.currency === 'USDCx' ? 'bg-blue-50 border-blue-100' : 'bg-orange-50 border-orange-100'}`}>
             <div className="p-2 bg-white rounded-full shadow-sm shrink-0">
                <Rocket className={`w-5 h-5 ${formData.currency === 'USDCx' ? 'text-blue-500' : 'text-orange-500'}`} />

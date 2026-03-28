@@ -16,17 +16,17 @@ export interface CreateCampaignData {
   creatorName: string;
   creatorBio: string;
   email: string;
-  twitter: string;       // NEW
-  github: string;        // NEW
-  portfolio: string;     // NEW
+  twitter: string;       
+  github: string;        
+  portfolio: string;     
   title: string;
   tagline: string;
   category: string;
   projectStage: string;
   description: string;
-  videoUrl: string;      // NEW
-  budgetBreakdown: string; // NEW
-  roadmap: string;       // NEW
+  videoUrl: string;      
+  budgetBreakdown: string; 
+  roadmap: string;       
   image: string;
   goal: string;
   duration: string;
@@ -95,7 +95,7 @@ export default function CreateCampaign() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-start">
           {/* LEFT: Wizard */}
           <div className="space-y-8">
-            {/* Steps Indicator */}
+          
        {/* Steps Indicator */}
             <div className="flex gap-4 mb-8 overflow-x-auto pb-2 no-scrollbar">
                {["Identity", "Bio", "Basics", "Story", "Execute", "Fund"].map((label, idx) => {

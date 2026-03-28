@@ -1,11 +1,11 @@
 "use client"
-
+import { LayoutDashboard, Wallet, Clock, CheckCircle2, XCircle, ArrowRight } from "lucide-react"
 import { Navbar } from "@/components/fundx/Navbar"
 import { Footer } from "@/components/fundx/Footer"
 import { useStacks } from "@/components/fundx/StacksProvider"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
-import { LayoutDashboard, Wallet } from "lucide-react"
+
 
 export default function DashboardPage() {
   const { isSignedIn, authenticate } = useStacks()
@@ -40,7 +40,7 @@ export default function DashboardPage() {
            <div className="p-3 bg-white rounded-2xl shadow-sm border border-slate-100">
              <LayoutDashboard className="w-6 h-6 text-orange-500" />
            </div>
-           <h1 className="text-4xl font-bold text-slate-900 tracking-tight">Dashboard</h1>
+           <h1 className="text-4xl font-bold text-slate-900 tracking-tight">Capital Hub</h1>
         </div>
 
         {/* The Tabs (Creator vs Backer) */}

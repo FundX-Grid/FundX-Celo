@@ -193,7 +193,7 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
          <div className="space-y-2 mb-6">
             <Label>Funding Asset</Label>
             <Select onValueChange={(val) => setFormData({...formData, currency: val as "USDCx" | "STX"})} defaultValue={formData.currency}>
-               <SelectTrigger className="h-14 rounded-xl text-lg font-bold text-slate-700 bg-white border-slate-200 shadow-sm">
+               <SelectTrigger className="h-14 rounded-xl text-base font-bold text-slate-700 bg-white border-slate-200 shadow-sm">
                   <SelectValue />
                </SelectTrigger>
                <SelectContent className="bg-white border-slate-200 shadow-xl rounded-xl z-50">

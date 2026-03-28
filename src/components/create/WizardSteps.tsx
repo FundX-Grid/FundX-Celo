@@ -4,16 +4,18 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Twitter, Globe, Github, Disc, Rocket } from "lucide-react"
+import { Rocket } from "lucide-react"
+import { CreateCampaignData } from "@/app/create/page" // 🚨 IMPORTING THE VIP LIST
 
-// Types for the form data
+// 🚨 NO MORE "ANY". WE USE OUR STRICT TYPE NOW.
 interface WizardProps {
   step: number
-  formData: any
-  setFormData: (data: any) => void
+  formData: CreateCampaignData
+  setFormData: (data: CreateCampaignData) => void
 }
 
 export function WizardSteps({ step, formData, setFormData }: WizardProps) {
+
   
 
   if (step === 1) {
@@ -137,53 +139,82 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
     )
   }
 
-  if (step === 4) {
-    return (
-      <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-500">
-         <div className="mb-6">
-            <h2 className="text-2xl font-bold text-slate-900">Funding Goals</h2>
-            <p className="text-slate-500 text-sm">Set your target in USDCx (Stablecoin).</p>
-         </div>
-         
-         <div className="grid grid-cols-2 gap-6">
-            <div className="space-y-2">
-               <Label>Target Amount</Label>
-               <div className="relative">
-                  {/* UPDATED: USDCx Icon/Label */}
-                  <span className="absolute left-4 top-1/2 -translate-y-1/2 font-bold text-blue-600 text-sm">USDCx</span>
-                  <Input 
-                     type="number" 
-                     className="pl-20 h-14 rounded-xl text-lg font-bold"
-                     value={formData.goal}
-                     onChange={(e) => setFormData({...formData, goal: e.target.value})}
-                  />
-               </div>
-            </div>
-            <div className="space-y-2">
-               <Label>Duration (Days)</Label>
-               <Input 
-                  type="number" 
-                  className="h-14 rounded-xl text-lg font-bold"
-                  value={formData.duration}
-                  onChange={(e) => setFormData({...formData, duration: e.target.value})}
-               />
-            </div>
-         </div>
+ if (step === 4) {
+   return (
+     <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-500">
+       <div className="mb-6">
+         <h2 className="text-2xl font-bold text-slate-900">Funding Goals</h2>
+         <p className="text-slate-500 text-sm">
+           Set your target in USDCx (Stablecoin).
+         </p>
+       </div>
 
-         <div className="bg-blue-50 p-6 rounded-xl border border-blue-100 flex gap-4 items-start mt-6">
-            <div className="p-2 bg-white rounded-full shadow-sm shrink-0">
-               <Rocket className="w-5 h-5 text-blue-500" />
-            </div>
-            <div>
-               <h4 className="font-bold text-blue-900">Why USDCx?</h4>
-               <p className="text-sm text-blue-700/80 mt-1">
-                  We use USDCx on Stacks to ensure your funding doesn't fluctuate with market volatility. 
-               </p>
-            </div>
+       <div className="grid grid-cols-2 gap-6">
+         <div className="space-y-2">
+           <Label>Target Amount</Label>
+           <div className="relative">
+             <span className="absolute left-4 top-1/2 -translate-y-1/2 font-bold text-blue-600 text-sm">
+               USDCx
+             </span>
+             <Input
+               type="number"
+               className="pl-20 h-14 rounded-xl text-lg font-bold"
+               value={formData.goal}
+               onChange={(e) =>
+                 setFormData({ ...formData, goal: e.target.value })
+               }
+             />
+           </div>
          </div>
-      </div>
-    )
-  }
+         <div className="space-y-2">
+           <Label>Duration (Days)</Label>
+           <Input
+             type="number"
+             className="h-14 rounded-xl text-lg font-bold"
+             value={formData.duration}
+             onChange={(e) =>
+               setFormData({ ...formData, duration: e.target.value })
+             }
+           />
+         </div>
+       </div>
+
+       {/* 🚨 HERE IS OUR NEW RULE CHOICE DROPDOWN */}
+       <div className="space-y-2 mt-4">
+         <Label>Funding Model</Label>
+         <Select
+           onValueChange={(val) =>
+             setFormData({ ...formData, fundingModel: val as "0" | "1" })
+           }
+           defaultValue={formData.fundingModel}
+         >
+           <SelectTrigger className="h-14 rounded-xl text-lg font-bold text-slate-700">
+             <SelectValue />
+           </SelectTrigger>
+           <SelectContent>
+             <SelectItem value="0">Flexible (Keep what you raise)</SelectItem>
+             <SelectItem value="1">
+               All-or-Nothing (Refunds if goal fails)
+             </SelectItem>
+           </SelectContent>
+         </Select>
+       </div>
+
+       <div className="bg-blue-50 p-6 rounded-xl border border-blue-100 flex gap-4 items-start mt-6">
+         <div className="p-2 bg-white rounded-full shadow-sm shrink-0">
+           <Rocket className="w-5 h-5 text-blue-500" />
+         </div>
+         <div>
+           <h4 className="font-bold text-blue-900">Why USDCx?</h4>
+           <p className="text-sm text-blue-700/80 mt-1">
+             We use USDCx on Stacks to ensure your funding doesn't fluctuate
+             with market volatility.
+           </p>
+         </div>
+       </div>
+     </div>
+   );
+ }
 
   return null
 }

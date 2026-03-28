@@ -60,11 +60,7 @@ export default function DashboardPage() {
        <CreatorTab />
           
           {/* Backer View Placeholder */}
-          <TabsContent value="contributions">
-             <div className="bg-white p-12 text-center rounded-[2rem] border border-slate-100 shadow-sm">
-                <p className="text-slate-500 text-lg">We will build the Backer view here in Step 3!</p>
-             </div>
-          </TabsContent>
+      <BackerTab />
         </Tabs>
 
      

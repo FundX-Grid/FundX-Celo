@@ -32,30 +32,43 @@ export default function ExplorePage() {
     window.scrollTo({ top: 0, behavior: "smooth" })
   }
 
-// 2. Filter & Sort Logic
+// 2. Filter & Sort Logic (Bulletproofed)
   const filteredCampaigns = useMemo(() => {
-    // First, filter down the array based on search, category, and status tab
+    // Step 1: Safely Filter
     const filtered = CAMPAIGNS.filter((c) => {
-      const matchesSearch = 
-        c.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-        c.description.toLowerCase().includes(searchQuery.toLowerCase())
+      const searchTarget = searchQuery.toLowerCase();
       
-      const matchesCategory = selectedCategory === "All" || c.category === selectedCategory || (selectedCategory === "DeFi" && c.category.includes("DeFi"))
+      // Fallbacks added: (c.title || "") prevents crashes if a field is accidentally left blank
+      const matchesSearch = 
+        (c.title || "").toLowerCase().includes(searchTarget) || 
+        (c.description || "").toLowerCase().includes(searchTarget);
+      
+      const matchesCategory = 
+        selectedCategory === "All" || 
+        c.category === selectedCategory || 
+        (selectedCategory === "DeFi" && (c.category || "").includes("DeFi"));
 
-      const matchesStatus = statusFilter === "All" || c.status === statusFilter
+      // Fallback: If a campaign is missing a status, treat it as "active"
+      const campaignStatus = c.status || "active";
+      const matchesStatus = statusFilter === "All" || campaignStatus === statusFilter;
 
-      return matchesSearch && matchesCategory && matchesStatus
+      return matchesSearch && matchesCategory && matchesStatus;
     });
 
-    // Second, SORT the results so Active is always at the top, then Successful, then Failed.
-    // We assign a "weight" to each status. Lower numbers float to the top.
-    const statusWeight = {
-      active: 1,
-      successful: 2,
-      failed: 3
-    };
-
-    return filtered.sort((a, b) => statusWeight[a.status] - statusWeight[b.status]);
+    // Step 2: Safely Sort (Active -> Successful -> Failed)
+    return filtered.sort((a, b) => {
+      const statusWeight: Record<string, number> = {
+        active: 1,
+        successful: 2,
+        failed: 3
+      };
+      
+      // Assign weight, defaulting to 1 (active) if something is wrong
+      const weightA = statusWeight[a.status || "active"] || 1;
+      const weightB = statusWeight[b.status || "active"] || 1;
+      
+      return weightA - weightB;
+    });
     
   }, [searchQuery, selectedCategory, statusFilter]);
 

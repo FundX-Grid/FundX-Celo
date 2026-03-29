@@ -32,22 +32,32 @@ export default function ExplorePage() {
     window.scrollTo({ top: 0, behavior: "smooth" })
   }
 
-  // 2. Filter Logic
+// 2. Filter & Sort Logic
   const filteredCampaigns = useMemo(() => {
-    return CAMPAIGNS.filter((c) => {
+    // First, filter down the array based on search, category, and status tab
+    const filtered = CAMPAIGNS.filter((c) => {
       const matchesSearch = 
         c.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
         c.description.toLowerCase().includes(searchQuery.toLowerCase())
       
       const matchesCategory = selectedCategory === "All" || c.category === selectedCategory || (selectedCategory === "DeFi" && c.category.includes("DeFi"))
 
-      // 🚨 ADDED: Status matching logic
       const matchesStatus = statusFilter === "All" || c.status === statusFilter
 
-      // 🚨 ADDED: Include matchesStatus in the return
       return matchesSearch && matchesCategory && matchesStatus
-    })
-  }, [searchQuery, selectedCategory, statusFilter]) // 🚨 ADDED: statusFilter to dependencies
+    });
+
+    // Second, SORT the results so Active is always at the top, then Successful, then Failed.
+    // We assign a "weight" to each status. Lower numbers float to the top.
+    const statusWeight = {
+      active: 1,
+      successful: 2,
+      failed: 3
+    };
+
+    return filtered.sort((a, b) => statusWeight[a.status] - statusWeight[b.status]);
+    
+  }, [searchQuery, selectedCategory, statusFilter]);
 
   const handleLoadMore = () => {
     setVisibleCount((prev) => prev + 3)

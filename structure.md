@@ -50,3 +50,26 @@
 │   │   │   ├── Navbar.tsx
 │   │   │   ├── StacksProvider.tsx
 │   │   │   └── TrustStrips.tsx
+│   │   └── ui
+│   │       ├── avatar.tsx
+│   │       ├── badge.tsx
+│   │       ├── button.tsx
+│   │       ├── card.tsx
+│   │       ├── dialog.tsx
+│   │       ├── dropdown-menu.tsx
+│   │       ├── input.tsx
+│   │       ├── label.tsx
+│   │       ├── progress.tsx
+│   │       ├── select.tsx
+│   │       ├── separator.tsx
+│   │       ├── sonner.tsx
+│   │       ├── tabs.tsx
+│   │       └── textarea.tsx
+│   └── lib
+│       ├── data.ts
+│       ├── stacks-auth.ts
+│       └── utils.ts
+├── structure.md
+└── tsconfig.json
+
+14 directories, 59 files

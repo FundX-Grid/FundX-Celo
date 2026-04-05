@@ -1,5 +1,6 @@
 export type CampaignStatus = "active" | "successful" | "failed";
 export type FundingModel = "Flexible Model" | "All-or-Nothing";
+export type TokenSymbol = "cUSD" | "USDC";
 
 export interface Campaign {
   id: string;
@@ -11,7 +12,8 @@ export interface Campaign {
   location: string;
   raised: number;
   goal: number;
-  currency: "USDCx" | "STX";
+  currency: TokenSymbol;
+  token_address: string;
   image: string;
   creator: string;
   creatorImage: string;
@@ -25,31 +27,37 @@ export interface Campaign {
   daysLeft: number;
   backers: number;
   isTrending?: boolean;
-  // 🚨 NEW FIELDS ADDED HERE
   status: CampaignStatus;
   fundingModel: FundingModel;
 }
 
+// Celo token addresses
+export const TOKEN_ADDRESSES = {
+  cUSD: "0x765DE816845861e75A25fCA122bb6898B8B1282a",
+  USDC: "0xcebA9300f2b948710d2653dD7B07f33A8B32118C",
+};
+
 export const CAMPAIGNS: Campaign[] = [
-  // --- ACTIVE CAMPAIGNS (Will sort to top) ---
+  // --- ACTIVE CAMPAIGNS ---
   {
-    id: "stacks-school",
-    title: "Stacks School",
-    tagline: "Teaching Clarity smart contracts to 10,000 developers worldwide.",
-    description: "We are building the next generation of Bitcoin builders. Currently, the learning curve for Clarity is too steep.",
+    id: "celo-school",
+    title: "Celo School",
+    tagline: "Teaching Solidity and Celo development to 10,000 developers worldwide.",
+    description: "We are building the next generation of Celo builders. The learning curve for Web3 development is too steep for most developers in Africa and beyond.",
     category: "Education",
     projectStage: "MVP",
     location: "Global",
     raised: 12000,
     goal: 100000,
-    currency: "USDCx",
+    currency: "cUSD",
+    token_address: TOKEN_ADDRESSES.cUSD,
     image: "/campaign-2.jpg",
     creator: "DeFi Academy",
     creatorImage: "https://github.com/shadcn.png",
-    creatorBio: "Ex-educators and early Stacks adopters.",
-    twitter: "@StacksSchool",
-    github: "github.com/stacksschool",
-    portfolio: "stacksschool.com",
+    creatorBio: "Ex-educators and early Celo adopters.",
+    twitter: "@CeloSchool",
+    github: "github.com/celoschool",
+    portfolio: "celoschool.com",
     videoUrl: "",
     budgetBreakdown: "50% Content Creation, 30% Platform Engineering, 20% Marketing",
     roadmap: "Month 1: Launch Beta. Month 3: 50+ Lessons.",
@@ -60,26 +68,27 @@ export const CAMPAIGNS: Campaign[] = [
     fundingModel: "Flexible Model"
   },
   {
-    id: "bitcoin-city",
-    title: "Bitcoin City Initiative",
-    tagline: "Infrastructure for the Bitcoin Economy.",
-    description:  "Developing urban infrastructure powered by Bitcoin mining heat recycling. A model for sustainable cities.",
+    id: "minipay-market",
+    title: "MiniPay Market",
+    tagline: "A peer-to-peer marketplace built natively inside MiniPay.",
+    description: "Enabling millions of MiniPay users across West Africa to buy and sell goods using cUSD — no bank account required.",
     category: "Social Impact",
     projectStage: "Idea",
-    location: "El Salvador",
+    location: "Lagos, Nigeria",
     raised: 12500,
     goal: 500000,
-    currency: "USDCx",
-    image: "/campaign-4.jpg", 
-    creator: "CityDAO",
+    currency: "cUSD",
+    token_address: TOKEN_ADDRESSES.cUSD,
+    image: "/campaign-1.jpg",
+    creator: "PayDAO",
     creatorImage: "https://github.com/shadcn.png",
-    creatorBio: "Urban planners building on Bitcoin.",
-    twitter: "@CityDAO",
-    github: "github.com/citydao",
-    portfolio: "citydao.com",
+    creatorBio: "Fintech builders focused on African markets.",
+    twitter: "@MiniPayMarket",
+    github: "github.com/minipaymarket",
+    portfolio: "minipaymarket.com",
     videoUrl: "",
-    budgetBreakdown: "80% Hardware Procurement, 20% Land Lease",
-    roadmap: "Month 1: Secure Land.",
+    budgetBreakdown: "80% Product Development, 20% Marketing",
+    roadmap: "Month 1: Beta in Lagos. Month 6: Ghana expansion.",
     daysLeft: 120,
     backers: 450,
     isTrending: false,
@@ -87,21 +96,22 @@ export const CAMPAIGNS: Campaign[] = [
     fundingModel: "All-or-Nothing"
   },
   {
-    id: "stacks-gaming",
-    title: "Polyverse",
-    tagline: "An MMORPG where every item is a Bitcoin NFT.",
-    description: "Play, earn, and own your assets on the most secure chain.",
+    id: "celo-gaming",
+    title: "Savannaverse",
+    tagline: "An MMORPG where every item is a Celo NFT.",
+    description: "Play, earn, and own your assets on Celo. Built mobile-first for MiniPay users.",
     category: "Gaming",
     projectStage: "Idea",
-    location: "Seoul, South Korea",
+    location: "Nairobi, Kenya",
     raised: 8000,
     goal: 60000,
-    currency: "USDCx",
-    image: "/campaign-5.jpg",
-    creator: "PolyLabs",
+    currency: "USDC",
+    token_address: TOKEN_ADDRESSES.USDC,
+    image: "/campaign-3.jpg",
+    creator: "SavannaLabs",
     creatorImage: "https://github.com/shadcn.png",
-    creatorBio: "Game devs making the jump to Web3.",
-    twitter: "@PolyLabs",
+    creatorBio: "Game devs making the jump to Web3 on Celo.",
+    twitter: "@SavannaLabs",
     github: "",
     portfolio: "",
     videoUrl: "",
@@ -114,20 +124,21 @@ export const CAMPAIGNS: Campaign[] = [
     fundingModel: "Flexible Model"
   },
   {
-    id: "zero-fee-dex",
-    title: "Zero-Fee DEX",
-    tagline: "Swap Stacks assets with zero protocol fees.",
-    description: "A community-owned automated market maker prioritizing deep liquidity and zero rent-seeking.",
+    id: "celo-dex",
+    title: "Zero-Fee DEX on Celo",
+    tagline: "Swap cUSD and USDC with zero protocol fees.",
+    description: "A community-owned automated market maker on Celo prioritizing deep stablecoin liquidity and zero rent-seeking.",
     category: "DeFi",
     projectStage: "Prototype",
     location: "Remote",
     raised: 5500,
     goal: 25000,
-    currency: "STX",
+    currency: "cUSD",
+    token_address: TOKEN_ADDRESSES.cUSD,
     image: "/campaign-1.jpg",
     creator: "DEX DAO",
     creatorImage: "https://github.com/shadcn.png",
-    creatorBio: "DeFi maximalists.",
+    creatorBio: "DeFi maximalists building on Celo.",
     twitter: "@ZeroFeeDex",
     github: "",
     portfolio: "",
@@ -141,18 +152,19 @@ export const CAMPAIGNS: Campaign[] = [
     fundingModel: "All-or-Nothing"
   },
 
-  // --- SUCCESSFUL CAMPAIGNS (Will sort to middle) ---
+  // --- SUCCESSFUL CAMPAIGNS ---
   {
     id: "defi-for-everyone",
     title: "DeFi for Everyone",
-    tagline: "The first mobile-first yield aggregator on Stacks.",
-    description: "Democratizing finance for the 99% with simple UX and trustless strategies.",
+    tagline: "The first mobile-first yield aggregator on Celo.",
+    description: "Democratizing finance for the 99% with simple UX and trustless strategies built on Celo.",
     category: "DeFi",
     projectStage: "Prototype",
     location: "Lagos, Nigeria",
     raised: 55000,
     goal: 50000,
-    currency: "STX",
+    currency: "cUSD",
+    token_address: TOKEN_ADDRESSES.cUSD,
     image: "/campaign-1.jpg",
     creator: "Alex Smith",
     creatorImage: "https://github.com/shadcn.png",
@@ -170,17 +182,18 @@ export const CAMPAIGNS: Campaign[] = [
     fundingModel: "Flexible Model"
   },
   {
-    id: "liquid-ops",
-    title: "Liquid Ops",
-    tagline: "Decentralized dev-ops tooling for Clarity.",
-    description: "Automate your deployments with 100% uptime.",
+    id: "celo-ops",
+    title: "Celo Ops",
+    tagline: "Decentralized dev-ops tooling for Celo smart contracts.",
+    description: "Automate your Celo deployments with 100% uptime.",
     category: "Infrastructure",
     projectStage: "Idea",
     location: "Berlin, Germany",
     raised: 35000,
     goal: 30000,
-    currency: "USDCx",
-    image: "/campaign-6.jpg",
+    currency: "USDC",
+    token_address: TOKEN_ADDRESSES.USDC,
+    image: "/campaign-2.jpg",
     creator: "OpsTeam",
     creatorImage: "https://github.com/shadcn.png",
     creatorBio: "Infrastructure nerds.",
@@ -197,18 +210,19 @@ export const CAMPAIGNS: Campaign[] = [
     fundingModel: "All-or-Nothing"
   },
 
-  // --- FAILED CAMPAIGNS (Will sort to bottom) ---
+  // --- FAILED CAMPAIGNS ---
   {
     id: "green-mining",
     title: "Green Mining",
-    tagline: "Solar-powered Bitcoin mining initiative.",
-    description: "Carbon neutral production ensuring the future of sustainable POW.",
-    category: "Mining",
+    tagline: "Solar-powered Celo validator node initiative.",
+    description: "Carbon neutral Celo validation ensuring the future of sustainable proof-of-stake.",
+    category: "Infrastructure",
     projectStage: "Idea",
     location: "Austin, TX",
     raised: 5000,
     goal: 25000,
-    currency: "USDCx",
+    currency: "cUSD",
+    token_address: TOKEN_ADDRESSES.cUSD,
     image: "/campaign-3.jpg",
     creator: "EcoBit",
     creatorImage: "https://github.com/shadcn.png",
@@ -228,15 +242,16 @@ export const CAMPAIGNS: Campaign[] = [
   {
     id: "pixel-lords",
     title: "Pixel Lords NFT",
-    tagline: "10,000 on-chain pixel warriors.",
-    description: "A generative art project aiming to build a metaverse.",
+    tagline: "10,000 on-chain pixel warriors on Celo.",
+    description: "A generative art project aiming to build a metaverse on Celo.",
     category: "Gaming",
     projectStage: "Idea",
     location: "Remote",
     raised: 1200,
     goal: 15000,
-    currency: "STX",
-    image: "/campaign-5.jpg",
+    currency: "cUSD",
+    token_address: TOKEN_ADDRESSES.cUSD,
+    image: "/campaign-3.jpg",
     creator: "Pixel Studio",
     creatorImage: "https://github.com/shadcn.png",
     creatorBio: "Digital artists.",
@@ -254,17 +269,14 @@ export const CAMPAIGNS: Campaign[] = [
   }
 ];
 
-// Helper: Get all campaigns for the Explore Page
 export function getAllCampaigns() {
   return CAMPAIGNS;
 }
 
-// Helper: Get the single trending campaign for the center slot
 export function getHeroCampaign() {
   return CAMPAIGNS.find((c) => c.isTrending) || CAMPAIGNS[0];
 }
 
-// Helper: Get 2 other campaigns for the side slots
 export function getSideCampaigns() {
   return CAMPAIGNS.filter((c) => !c.isTrending).slice(0, 2);
 }

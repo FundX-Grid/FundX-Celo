@@ -2,10 +2,12 @@ import { Clock, XCircle, CheckCircle2, Rocket } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { TabsContent } from "@/components/ui/tabs"
 import Image from "next/image"
-import { useWriteContract, useAccount } from "wagmi"
-import { FUNDX_CONTRACT } from "@/lib/celo-config"
+import { useWriteContract, useAccount, useReadContracts } from "wagmi"
+import { FUNDX_CONTRACT, TOKEN_ADDRESSES } from "@/lib/celo-config"
 import { FUNDX_ABI } from "@/lib/fundx-abi"
 import { toast } from "sonner"
+import { useCampaignCount } from "@/lib/hooks/useContract"
+import { formatUnits } from "viem"
 
 type CampaignStatus = "active" | "successful" | "failed";
 
@@ -21,9 +23,9 @@ interface CreatorCampaign {
   daysRemaining?: number;
 }
 
-const myFetchedCampaigns: CreatorCampaign[] = [
+const MOCK_CREATOR_CAMPAIGNS: CreatorCampaign[] = [
   {
-    id: "1",
+    id: "mock-1",
     title: "DeFi Yield Aggregator",
     image: "/campaign-2.jpg",
     raised: 55000,
@@ -33,7 +35,7 @@ const myFetchedCampaigns: CreatorCampaign[] = [
     status: "successful",
   },
   {
-    id: "2",
+    id: "mock-2",
     title: "Celo Dev Bootcamp",
     image: "/campaign-1.jpg",
     raised: 4500,
@@ -44,7 +46,7 @@ const myFetchedCampaigns: CreatorCampaign[] = [
     daysRemaining: 12,
   },
   {
-    id: "3",
+    id: "mock-3",
     title: "NFT Marketplace",
     image: "/campaign-3.jpg",
     raised: 1200,
@@ -57,7 +59,80 @@ const myFetchedCampaigns: CreatorCampaign[] = [
 
 export function CreatorTab() {
   const { writeContractAsync } = useWriteContract();
-  const { isConnected } = useAccount();
+  const { isConnected, address } = useAccount();
+
+  const { data: countData } = useCampaignCount();
+  const count = Number(countData || 0);
+
+  const contracts = [];
+  for (let i = 1; i <= count; i++) {
+     contracts.push({
+        address: FUNDX_CONTRACT as `0x${string}`,
+        abi: FUNDX_ABI,
+        functionName: 'getCampaign',
+        args: [BigInt(i)]
+     });
+  }
+
+  const { data: campaignsData, isLoading } = useReadContracts({
+    contracts,
+    query: {
+       enabled: count > 0 && !!address
+    }
+  });
+
+  const liveCreatorCampaigns: CreatorCampaign[] = [];
+  
+  if (campaignsData && address) {
+     campaignsData.forEach((result, index) => {
+        if (result.status === 'success' && result.result) {
+           const camp = result.result as any;
+           
+           if (camp.creator.toLowerCase() === address.toLowerCase()) {
+              const model = camp.fundingModel === 0 ? "Flexible Model" : "All-or-Nothing";
+              const isCUSD = camp.token.toLowerCase() === TOKEN_ADDRESSES.cUSD.toLowerCase();
+              const decimals = isCUSD ? 18 : 6;
+              const goal = Number(formatUnits(camp.goal, decimals));
+              const raised = Number(formatUnits(camp.totalRaised, decimals));
+              const id = String(index + 1);
+              const deadline = Number(camp.deadline);
+              
+              let status: CampaignStatus = "active";
+              
+              const now = Date.now() / 1000;
+              const isPastDeadline = deadline <= now;
+              
+              if (camp.withdrawn) {
+                 status = "successful";
+              } else if (!isPastDeadline) {
+                 status = "active";
+              } else if (model === "Flexible Model") {
+                 status = "successful";
+              } else if (raised >= goal) {
+                 status = "successful";
+              } else {
+                 status = "failed";
+              }
+              
+              const daysRemaining = Math.max(0, Math.floor((deadline - now) / 86400));
+              
+              liveCreatorCampaigns.push({
+                 id,
+                 title: `My Campaign #${id}`, 
+                 image: "/campaign-1.jpg",
+                 raised,
+                 goal,
+                 currency: isCUSD ? "cUSD" : "USDC",
+                 model,
+                 status,
+                 daysRemaining
+              });
+           }
+        }
+     });
+  }
+
+  const allCampaigns = [...liveCreatorCampaigns, ...MOCK_CREATOR_CAMPAIGNS];
 
   const handleWithdraw = async (id: string, model: string, goal: number, raised: number) => {
     if (!isConnected) {
@@ -65,6 +140,11 @@ export function CreatorTab() {
        return;
     }
     
+    if (id.startsWith("mock-")) {
+       toast.info("Mock Campaign", { description: "This is a mock campaign and cannot be withdrawn on-chain." });
+       return;
+    }
+
     if (model === "All-or-Nothing" && raised < goal) {
        toast.error("Cannot Withdraw", { description: "Goal must be met for All-or-Nothing campaigns." });
        return;
@@ -79,6 +159,8 @@ export function CreatorTab() {
         args: [BigInt(id)],
       });
       toast.success("Funds withdrawn successfully!", { id: "withdraw" });
+      
+      // Usually you'd invalidate the query here, but a page reload works for now or the user checks wallet
     } catch (e) {
       console.error(e);
       toast.error("Withdrawal Failed", { id: "withdraw", description: "Could not withdraw funds." });
@@ -89,10 +171,14 @@ export function CreatorTab() {
     return `$${amount.toLocaleString()} ${currency}`;
   };
 
+  if (isLoading && count > 0) {
+    return <TabsContent value="campaigns"><div className="p-8 text-center text-slate-500">Loading your campaigns...</div></TabsContent>
+  }
+
   return (
     <TabsContent value="campaigns" className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
        
-       {myFetchedCampaigns.map((campaign) => {
+       {allCampaigns.map((campaign) => {
           
           const progress = Math.min((campaign.raised / campaign.goal) * 100, 100);
 
@@ -133,9 +219,6 @@ export function CreatorTab() {
              )
           }
 
-          // ==========================================
-          // RENDER: ACTIVE CAMPAIGN
-          // ==========================================
           if (campaign.status === "active") {
              return (
                 <div key={campaign.id} className="bg-white p-8 md:p-10 min-h-[240px] rounded-[2rem] border border-slate-200 shadow-[0_12px_28px_-6px_rgba(15,23,42,0.08)] flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden hover:-translate-y-1 transition-transform duration-300">
@@ -177,9 +260,6 @@ export function CreatorTab() {
              )
           }
 
-          // ==========================================
-          // RENDER: FAILED CAMPAIGN
-          // ==========================================
           if (campaign.status === "failed") {
              return (
                 <div key={campaign.id} className="bg-slate-50 p-8 md:p-10 min-h-[240px] rounded-[2rem] border border-slate-200 shadow-[inset_0_4px_20px_rgba(0,0,0,0.02)] flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden opacity-80 grayscale-[0.5] hover:grayscale-0 transition-all duration-500">

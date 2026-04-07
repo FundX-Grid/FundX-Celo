@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Navbar } from "@/components/fundx/Navbar"
 import { Footer } from "@/components/fundx/Footer"
 import { Button } from "@/components/ui/button"
@@ -13,6 +13,7 @@ import { toast } from "sonner"
 
 import { WizardSteps } from "@/components/create/WizardSteps"
 import { LivePreview } from "@/components/create/LivePreview"
+import { isMiniPay } from "@/lib/wallet"
 
 export interface CreateCampaignData {
   creatorName: string;
@@ -40,6 +41,7 @@ export default function CreateCampaign() {
   const { isConnected } = useAccount()
   const { writeContractAsync } = useWriteContract()
   const [step, setStep] = useState(1)
+  const [isMini, setIsMini] = useState(false)
   
   const [formData, setFormData] = useState<CreateCampaignData>({
     creatorName: "",
@@ -66,8 +68,15 @@ export default function CreateCampaign() {
   const handleNext = () => setStep(step + 1)
   const handleBack = () => setStep(step - 1)
 
+  useEffect(() => {
+    if (isMiniPay()) {
+      setIsMini(true)
+      setFormData((prev) => ({ ...prev, currency: "cUSD" }))
+    }
+  }, [])
+
   const handleSubmit = async () => {
-    if (!isConnected) {
+    if (!isConnected && !isMini) {
       toast.error("Connect Wallet", {
         description: "You need to connect your wallet to deploy.",
       });
@@ -172,7 +181,7 @@ export default function CreateCampaign() {
                     onClick={handleSubmit}
                     className="h-12 px-8 rounded-xl bg-gradient-tush text-white shadow-glow hover:scale-105 transition-all font-bold"
                   >
-                    {isConnected ? "Deploy Campaign" : "Connect & Deploy"}
+                    {(isConnected || isMini) ? "Deploy Campaign" : "Connect & Deploy"}
                   </Button>
                 )}
               </div>

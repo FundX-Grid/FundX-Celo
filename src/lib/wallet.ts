@@ -1,5 +1,4 @@
 export function isMiniPay(): boolean {
-  if (typeof window === "undefined") return false;
-  // @ts-ignore
-  return !!window.ethereum?.isMiniPay;
+  if (typeof window === "undefined") return false
+  return !!(window as any).ethereum?.isMiniPay
 }

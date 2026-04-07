@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, use } from "react" 
+import { useState, use, useEffect } from "react" 
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { Navbar } from "@/components/fundx/Navbar"
@@ -14,21 +14,92 @@ import { Separator } from "@/components/ui/separator"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Clock, Users, ShieldCheck, Share2, MapPin, ArrowLeft } from "lucide-react" 
 import { useAccount, useWriteContract } from "wagmi"
-import { parseUnits, erc20Abi } from "viem"
+import { parseUnits, formatUnits, erc20Abi } from "viem"
 import { FUNDX_ABI } from "@/lib/fundx-abi"
 import { FUNDX_CONTRACT, TOKEN_ADDRESSES } from "@/lib/celo-config"
 import { ConnectButton } from "@rainbow-me/rainbowkit"
 import { toast } from "sonner"
 import { getCampaign } from "@/lib/data"
+import { useCampaign } from "@/lib/hooks/useContract"
+import { isMiniPay } from "@/lib/wallet"
 
 export default function CampaignPage({ params }: { params: Promise<{ id: string }> }) {
   const { isConnected } = useAccount()
   const { writeContractAsync } = useWriteContract()
   const [donateAmount, setDonateAmount] = useState("")
+  const [mounted, setMounted] = useState(false)
+  const [isMini, setIsMini] = useState(false)
 
   const { id } = use(params)
   
-  const campaign = getCampaign(id)
+  useEffect(() => {
+    setMounted(true)
+    setIsMini(isMiniPay())
+  }, [])
+
+  const { data: campaignData, isLoading: isLoadingContract, error } = useCampaign(Number(id))
+  
+  const localMock = getCampaign(id)
+
+  let campaign: any = null
+  let isContractCampaign = false
+
+  if (campaignData && campaignData.creator !== "0x0000000000000000000000000000000000000000") {
+     isContractCampaign = true
+     const isCUSD = campaignData.token.toLowerCase() === TOKEN_ADDRESSES.cUSD.toLowerCase()
+     const decimals = isCUSD ? 18 : 6
+     const c = {
+        id,
+        creator: campaignData.creator,
+        goal: Number(formatUnits(campaignData.goal, decimals)),
+        raised: Number(formatUnits(campaignData.totalRaised, decimals)),
+        currency: isCUSD ? "cUSD" : "USDC",
+        deadline: Number(campaignData.deadline),
+        withdrawn: campaignData.withdrawn,
+        active: campaignData.active,
+        fundingModel: campaignData.fundingModel === 0 ? "Flexible Model" : "All-or-Nothing",
+
+        title: `Campaign #${id}`,
+        description: "An on-chain Celo campaign.",
+        category: "Web3",
+        location: "Celo Network",
+        image: "/campaign-1.jpg",
+        creatorImage: "https://github.com/shadcn.png",
+        backers: 0,
+        daysLeft: Math.max(0, Math.floor((Number(campaignData.deadline) - Date.now() / 1000) / 86400))
+     }
+
+     if (localMock) {
+        c.title = localMock.title
+        c.description = localMock.description
+        c.category = localMock.category
+        c.location = localMock.location
+        c.image = localMock.image
+        c.creatorImage = localMock.creatorImage
+     }
+     
+     campaign = c
+  } else if (localMock) {
+     campaign = localMock
+  }
+
+  if (!mounted || isLoadingContract) {
+    return (
+      <main className="min-h-screen bg-slate-50 selection:bg-green-100 font-sans flex items-center justify-center">
+         <div className="animate-spin w-8 h-8 rounded-full border-4 border-green-500 border-t-transparent"></div>
+      </main>
+    )
+  }
+
+  if (error && !localMock) {
+    return (
+      <main className="min-h-screen bg-slate-50 pt-32 pb-20 text-center flex flex-col items-center justify-center">
+        <h1 className="text-2xl font-bold mb-4">Error loading campaign</h1>
+        <p className="text-slate-500 mb-6 w-96">{error.message}</p>
+        <Link href="/explore"><Button>Back to explore</Button></Link>
+      </main>
+    )
+  }
 
   if (!campaign) {
     return notFound()
@@ -36,8 +107,19 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
 
   const progress = Math.min((campaign.raised / campaign.goal) * 100, 100)
 
+  let donateDisabledReason = ""
+  if (isContractCampaign && campaignData) {
+      if (Number(campaignData.deadline) * 1000 <= Date.now()) donateDisabledReason = "Campaign Ended"
+      else if (!campaignData.active) donateDisabledReason = "Campaign Closed"
+      else if (campaignData.fundingModel === 1 && campaignData.totalRaised >= campaignData.goal) donateDisabledReason = "Goal Reached"
+  } else {
+     if (campaign.daysLeft <= 0) donateDisabledReason = "Campaign Ended"
+  }
+  
+  if (!donateDisabledReason && donateAmount === "0") donateDisabledReason = "Enter Amount"
+
   const handleDonate = async () => {
-    if (!isConnected) {
+    if (!isConnected && !isMini) {
       toast.error("Connect Wallet", { description: "Please connect your wallet to donate." })
       return
     }
@@ -53,7 +135,6 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
       const decimals = isCUSD ? 18 : 6
       const amountUnits = parseUnits(donateAmount, decimals)
       
-      // Step 1: Approve
       await writeContractAsync({
         address: tokenAddress as `0x${string}`,
         abi: erc20Abi,
@@ -63,7 +144,6 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
 
       toast.loading("Sending donation...", { id: "donate" })
       
-      // Step 2: Donate
       await writeContractAsync({
         address: FUNDX_CONTRACT as `0x${string}`,
         abi: FUNDX_ABI,
@@ -79,18 +159,18 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
     }
   }
 
+  const showDonateButton = isConnected || isMini
+
   return (
     <main className="min-h-screen bg-slate-50 selection:bg-green-100 font-sans">
       <Navbar />
 
       <div className="container mx-auto max-w-6xl px-4 pt-32 pb-20">
         
-        {/* Back Button */}
         <Link href="/explore" className="inline-flex items-center text-slate-400 hover:text-slate-900 mb-8 transition-colors text-sm font-medium">
           <ArrowLeft className="w-4 h-4 mr-2" /> Back to campaigns
         </Link>
 
-        {/* HEADER SECTION */}
         <div className="mb-10 text-center md:text-left">
           <div className="flex flex-wrap gap-3 justify-center md:justify-start mb-4">
              <Badge variant="secondary" className="text-green-600 bg-green-50 hover:bg-green-100 px-3 py-1 text-sm border border-green-100">
@@ -113,23 +193,24 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
           
           <div className="lg:col-span-2 space-y-10">
             
-            {/* Hero Image */}
             <div className="relative aspect-video w-full overflow-hidden rounded-3xl bg-slate-200 shadow-sm border border-slate-100 group">
                <div className="absolute inset-0 flex items-center justify-center text-slate-400 font-bold bg-slate-100">
-                 [Image: {campaign.title}]
+                 {/* Replace with actual image later */}
+                 {campaign.title}
                </div>
             </div>
 
-            {/* Creator Profile */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between border-y border-slate-200 py-6 gap-4">
               <div className="flex items-center gap-4">
                 <Avatar className="h-14 w-14 border-4 border-white shadow-sm">
                   <AvatarImage src={campaign.creatorImage} />
-                  <AvatarFallback>{campaign.creator.slice(0,2).toUpperCase()}</AvatarFallback>
+                  <AvatarFallback>{campaign.creator?.slice(0,2).toUpperCase()}</AvatarFallback>
                 </Avatar>
                 <div>
                   <p className="text-sm font-medium text-slate-500 uppercase tracking-wide">Organized by</p>
-                  <p className="font-bold text-slate-900 text-lg">{campaign.creator}</p>
+                  <p className="font-bold text-slate-900 text-lg">
+                    {campaign.creator?.startsWith("0x") ? `${campaign.creator.slice(0, 6)}...${campaign.creator.slice(-4)}` : campaign.creator}
+                  </p>
                 </div>
               </div>
               <div className="flex gap-6 text-slate-600 font-medium">
@@ -138,7 +219,6 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
               </div>
             </div>
 
-            {/* Content Tabs */}
             <Tabs defaultValue="story" className="w-full">
               <TabsList className="w-full justify-start bg-transparent border-b border-slate-200 rounded-none h-auto p-0 mb-8 overflow-x-auto">
                 <TabsTrigger value="story" className="rounded-none border-b-2 border-transparent data-[state=active]:border-green-500 data-[state=active]:text-green-600 px-6 py-3 text-base">
@@ -188,14 +268,13 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
 
               <Separator className="my-8" />
 
-              {/* Donation Input */}
               <div className="space-y-6">
                 <div className="space-y-2">
                   <h4 className="font-bold text-slate-900 text-lg">Make a contribution</h4>
-                  <p className="text-sm text-slate-500">Support {campaign.creator} to make this happen.</p>
+                  <p className="text-sm text-slate-500">Support the creator to make this happen.</p>
                 </div>
                 
-                <div className={`transition-all duration-300 ${!isConnected ? "opacity-50 grayscale pointer-events-none" : "opacity-100"}`}>
+                <div className={`transition-all duration-300 ${!showDonateButton ? "opacity-50 grayscale pointer-events-none" : "opacity-100"}`}>
                   <div className="relative">
                     <span className={`absolute left-4 top-1/2 -translate-y-1/2 font-bold text-lg ${campaign.currency === 'cUSD' ? 'text-green-600' : 'text-blue-600'}`}>
                       {campaign.currency || "cUSD"}
@@ -210,9 +289,9 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
                   </div>
                 </div>
 
-                {isConnected ? (
-                  <Button onClick={handleDonate} className="w-full h-14 rounded-xl bg-slate-900 text-white shadow-glow hover:scale-[1.02] transition-transform text-lg font-bold">
-                    Donate Now
+                {showDonateButton ? (
+                  <Button disabled={!!donateDisabledReason} onClick={handleDonate} className="w-full h-14 rounded-xl bg-slate-900 text-white shadow-glow hover:scale-[1.02] transition-transform text-lg font-bold">
+                    {donateDisabledReason || "Donate Now"}
                   </Button>
                 ) : (
                   <div className="flex justify-center mt-4">
@@ -226,7 +305,6 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
                 </div>
               </div>
 
-              {/* Share Button */}
               <div className="mt-8 flex justify-center">
                  <Button variant="ghost" className="w-full text-slate-500 hover:text-slate-900 hover:bg-slate-50 rounded-xl h-12">
                     <Share2 className="w-4 h-4 mr-2" /> Share this campaign

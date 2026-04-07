@@ -2,10 +2,13 @@ import { Clock, CheckCircle2, Rocket, RefreshCcw, ShieldAlert } from "lucide-rea
 import { Button } from "@/components/ui/button"
 import { TabsContent } from "@/components/ui/tabs"
 import Image from "next/image"
-import { useWriteContract, useAccount } from "wagmi"
-import { FUNDX_CONTRACT } from "@/lib/celo-config"
+import { useWriteContract, useAccount, useReadContracts } from "wagmi"
+import { FUNDX_CONTRACT, TOKEN_ADDRESSES } from "@/lib/celo-config"
 import { FUNDX_ABI } from "@/lib/fundx-abi"
 import { toast } from "sonner"
+import { useCampaignCount } from "@/lib/hooks/useContract"
+import { formatUnits } from "viem"
+import { useMemo } from "react"
 
 type ContributionStatus = "active" | "successful" | "refund_available";
 
@@ -22,10 +25,10 @@ export interface BackerContribution {
   daysRemaining?: number;
 }
 
-const myContributions: BackerContribution[] = [
-  { id: "1", title: "Green Mining Farm", image: "/campaign-3.jpg", myContribution: 500, totalRaised: 12000, goal: 50000, currency: "USDC", model: "All-or-Nothing", status: "refund_available" },
-  { id: "2", title: "Celo Dev Bootcamp", image: "/campaign-1.jpg", myContribution: 1200, totalRaised: 4500, goal: 10000, currency: "USDC", model: "All-or-Nothing", status: "active", daysRemaining: 12 },
-  { id: "3", title: "DeFi Yield Aggregator", image: "/campaign-2.jpg", myContribution: 250, totalRaised: 55000, goal: 50000, currency: "cUSD", model: "Flexible Model", status: "successful" }
+const MOCK_CONTRIBUTIONS: BackerContribution[] = [
+  { id: "mock-1", title: "Green Mining Farm", image: "/campaign-3.jpg", myContribution: 500, totalRaised: 12000, goal: 50000, currency: "USDC", model: "All-or-Nothing", status: "refund_available" },
+  { id: "mock-2", title: "Celo Dev Bootcamp", image: "/campaign-1.jpg", myContribution: 1200, totalRaised: 4500, goal: 10000, currency: "USDC", model: "All-or-Nothing", status: "active", daysRemaining: 12 },
+  { id: "mock-3", title: "DeFi Yield Aggregator", image: "/campaign-2.jpg", myContribution: 250, totalRaised: 55000, goal: 50000, currency: "cUSD", model: "Flexible Model", status: "successful" }
 ];
 
 const formatMoney = (amount: number, currency: string) => {
@@ -39,6 +42,11 @@ function RefundCard({ contribution }: { contribution: BackerContribution }) {
   const handleRefund = async (id: string) => {
     if (!isConnected) {
        toast.error("Connect Wallet", { description: "You need to connect your wallet." });
+       return;
+    }
+
+    if (id.startsWith("mock-")) {
+       toast.info("Mock Campaign", { description: "Cannot claim refund for a mock campaign." });
        return;
     }
     
@@ -164,7 +172,7 @@ function SuccessfulContributionCard({ contribution }: { contribution: BackerCont
        </div>
        
        <div className="w-full md:w-auto shrink-0 relative z-10 mt-6 md:mt-0">
-          <Button variant="outline" className="w-full md:w-auto h-16 px-10 rounded-xl bg-white border-slate-200 text-slate-600 font-bold shadow-sm hover:bg-slate-50 transition-colors text-lg">
+          <Button variant="outline" disabled className="w-full md:w-auto h-16 px-10 rounded-xl bg-white border-slate-200 text-slate-600 font-bold shadow-sm cursor-not-allowed text-lg">
              View Project
           </Button>
        </div>
@@ -172,19 +180,119 @@ function SuccessfulContributionCard({ contribution }: { contribution: BackerCont
   )
 }
 
-// ==========================================
-// 3. THE MAIN SWITCHBOARD COMPONENT
-// ==========================================
 export function BackerTab() {
+  const { address } = useAccount();
+
+  const { data: countData } = useCampaignCount();
+  const count = Number(countData || 0);
+
+  const campaignContracts = useMemo(() => {
+     const c = [];
+     for (let i = 1; i <= count; i++) {
+        c.push({
+           address: FUNDX_CONTRACT as `0x${string}`,
+           abi: FUNDX_ABI,
+           functionName: 'getCampaign',
+           args: [BigInt(i)]
+        });
+     }
+     return c;
+  }, [count])
+
+  const donationContracts = useMemo(() => {
+     const c = [];
+     for (let i = 1; i <= count; i++) {
+        c.push({
+           address: FUNDX_CONTRACT as `0x${string}`,
+           abi: FUNDX_ABI,
+           functionName: 'getDonation',
+           args: [BigInt(i), address as `0x${string}`]
+        });
+     }
+     return c;
+  }, [count, address])
+
+  const { data: campaignsData, isLoading: isLoading1 } = useReadContracts({
+    contracts: campaignContracts,
+    query: {
+       enabled: count > 0 && !!address
+    }
+  });
+
+  const { data: donationsData, isLoading: isLoading2 } = useReadContracts({
+    contracts: donationContracts,
+    query: {
+       enabled: count > 0 && !!address
+    }
+  });
+  
+  const isLoading = isLoading1 || isLoading2;
+
+  const liveContributions: BackerContribution[] = [];
+
+  if (campaignsData && donationsData && address) {
+     campaignsData.forEach((result, index) => {
+        const donationResult = donationsData[index];
+        if (result.status === 'success' && result.result && donationResult?.status === 'success') {
+           const camp = result.result as any;
+           const rawDonation = donationResult.result as bigint;
+
+           if (rawDonation > BigInt(0)) {
+              const isCUSD = camp.token.toLowerCase() === TOKEN_ADDRESSES.cUSD.toLowerCase();
+              const decimals = isCUSD ? 18 : 6;
+              const myContribution = Number(formatUnits(rawDonation, decimals));
+              const goal = Number(formatUnits(camp.goal, decimals));
+              const totalRaised = Number(formatUnits(camp.totalRaised, decimals));
+              const id = String(index + 1);
+              const deadline = Number(camp.deadline);
+              const fundingModelUint = Number(camp.fundingModel);
+              
+              let status: ContributionStatus = "active";
+              const now = Date.now() / 1000;
+              const isPastDeadline = deadline <= now;
+              const isAllOrNothing = fundingModelUint === 1;
+
+              if (!isPastDeadline) {
+                 status = "active";
+              } else if (!isAllOrNothing) {
+                 status = "successful";
+              } else if (isAllOrNothing && totalRaised >= goal) {
+                 status = "successful";
+              } else if (isAllOrNothing && totalRaised < goal && isPastDeadline) {
+                 status = "refund_available";
+              }
+              
+              const daysRemaining = Math.max(0, Math.floor((deadline - now) / 86400));
+              
+              liveContributions.push({
+                 id,
+                 title: `Project #${id}`,
+                 image: "/campaign-2.jpg",
+                 myContribution,
+                 totalRaised,
+                 goal,
+                 currency: isCUSD ? "cUSD" : "USDC",
+                 model: isAllOrNothing ? "All-or-Nothing" : "Flexible Model",
+                 status,
+                 daysRemaining
+              });
+           }
+        }
+     });
+  }
+
+  const allContributions = [...liveContributions, ...MOCK_CONTRIBUTIONS];
+
+  if (isLoading && count > 0) {
+    return <TabsContent value="contributions"><div className="p-8 text-center text-slate-500">Loading your contributions...</div></TabsContent>
+  }
+
   return (
     <TabsContent value="contributions" className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
        
-       {myContributions.map((contribution) => {
-          // If the campaign missed its all-or-nothing goal, the backer gets a refund button
+       {allContributions.map((contribution) => {
           if (contribution.status === "refund_available") return <RefundCard key={contribution.id} contribution={contribution} />
-          
           if (contribution.status === "active") return <ActiveContributionCard key={contribution.id} contribution={contribution} />
-          
           if (contribution.status === "successful") return <SuccessfulContributionCard key={contribution.id} contribution={contribution} />
           
           return null;

@@ -1,13 +1,11 @@
 "use client"
-
 import Link from "next/link"
 import Logo from "@/components/Logo"
 import { ConnectWallet } from "@/components/fundx/ConnectWallet"
-import { useStacks } from "@/components/fundx/StacksProvider"
+import { useAccount } from "wagmi"
 
 export function Navbar() {
-  // Pull in the connection status to know if we should show the Dashboard link
-  const { isSignedIn } = useStacks()
+  const { isConnected } = useAccount()
 
   return (
     <div className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4">
@@ -22,19 +20,15 @@ export function Navbar() {
         <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-500">
           <Link href="/explore" className="hover:text-primary transition-colors">Campaigns</Link>
           <Link href="/create" className="hover:text-primary transition-colors">Create Campaign</Link>
-          <Link href="https://bridge.stacks.co/usdc/eth/stx" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">Bridge</Link>
-          
-       
-          {isSignedIn && (
+          <Link href="https://app.uniswap.org" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">Bridge</Link>
+          {isConnected && (
             <Link href="/dashboard" className="hover:text-primary transition-colors">
               Dashboard
             </Link>
           )}
         </div>
 
-        {/* Wallet Button (Handles its own connected/disconnected state visually) */}
         <ConnectWallet />
-        
       </nav>
     </div>
   )

@@ -7,7 +7,7 @@ export function TrustStrip() {
         <div className="flex flex-wrap justify-center gap-8 text-sm font-semibold text-slate-700 tracking-wide">
           <span className="flex items-center gap-2">
             <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-            USDCx-backed
+            cUSD-backed
           </span>
 
           <span className="flex items-center gap-2">
@@ -17,7 +17,7 @@ export function TrustStrip() {
 
           <span className="flex items-center gap-2">
             <span className="h-2 w-2 rounded-full bg-purple-500 animate-pulse" />
-            SIP-010 Compatible
+            ERC-20 Compatible
           </span>
 
           <span className="flex items-center gap-2">

@@ -85,7 +85,7 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
          <div className="space-y-6">
             <div className="space-y-2">
                <Label>Project Title</Label>
-               <Input placeholder="e.g. Stacks DeFi Academy" className="h-14 rounded-xl text-lg font-bold" value={formData.title} onChange={(e) => setFormData({...formData, title: e.target.value})} />
+               <Input placeholder="e.g. Celo DeFi Academy" className="h-14 rounded-xl text-lg font-bold" value={formData.title} onChange={(e) => setFormData({...formData, title: e.target.value})} />
             </div>
             
             <div className="grid md:grid-cols-2 gap-5">
@@ -207,13 +207,13 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
 
          <div className="space-y-2 mb-6">
             <Label>Funding Asset</Label>
-            <Select onValueChange={(val) => setFormData({...formData, currency: val as "USDCx" | "STX"})} defaultValue={formData.currency}>
+            <Select onValueChange={(val) => setFormData({...formData, currency: val as "cUSD" | "USDC"})} defaultValue={formData.currency}>
                <SelectTrigger className="h-14 rounded-xl text-base font-bold text-slate-700 bg-white border-slate-200 shadow-sm">
                   <SelectValue />
                </SelectTrigger>
                <SelectContent className="bg-white border-slate-200 shadow-xl rounded-xl z-50">
-                  <SelectItem value="USDCx" className="text-sm font-bold text-blue-600 py-3 cursor-pointer">USDCx (Stablecoin)</SelectItem>
-                  <SelectItem value="STX" className="text-sm font-bold text-orange-500 py-3 cursor-pointer">STX (Native Stacks)</SelectItem>
+                  <SelectItem value="cUSD" className="text-sm font-bold text-green-600 py-3 cursor-pointer">cUSD (Celo Dollar)</SelectItem>
+                  <SelectItem value="USDC" className="text-sm font-bold text-blue-500 py-3 cursor-pointer">USDC (Circle USD)</SelectItem>
                </SelectContent>
             </Select>
          </div>
@@ -223,7 +223,7 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
                <Label>Target Amount</Label>
                <div className="relative">
      
-                  <span className={`absolute left-4 top-1/2 -translate-y-1/2 font-bold text-sm ${formData.currency === 'USDCx' ? 'text-blue-600' : 'text-orange-500'}`}>
+                  <span className={`absolute left-4 top-1/2 -translate-y-1/2 font-bold text-sm ${formData.currency === 'cUSD' ? 'text-green-600' : 'text-blue-500'}`}>
                      {formData.currency}
                   </span>
                   <Input type="number" className="pl-20 h-14 rounded-xl text-lg font-bold" value={formData.goal} onChange={(e) => setFormData({...formData, goal: e.target.value})} />
@@ -248,18 +248,18 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
             </Select>
          </div>
 
-         <div className={`p-6 rounded-xl border flex gap-4 items-start mt-6 ${formData.currency === 'USDCx' ? 'bg-blue-50 border-blue-100' : 'bg-orange-50 border-orange-100'}`}>
+         <div className={`p-6 rounded-xl border flex gap-4 items-start mt-6 ${formData.currency === 'cUSD' ? 'bg-green-50 border-green-100' : 'bg-blue-50 border-blue-100'}`}>
             <div className="p-2 bg-white rounded-full shadow-sm shrink-0">
-               <Rocket className={`w-5 h-5 ${formData.currency === 'USDCx' ? 'text-blue-500' : 'text-orange-500'}`} />
+               <Rocket className={`w-5 h-5 ${formData.currency === 'cUSD' ? 'text-green-500' : 'text-blue-500'}`} />
             </div>
             <div>
-               <h4 className={`font-bold ${formData.currency === 'USDCx' ? 'text-blue-900' : 'text-orange-900'}`}>
+               <h4 className={`font-bold ${formData.currency === 'cUSD' ? 'text-green-900' : 'text-blue-900'}`}>
                   Raising in {formData.currency}
                </h4>
-               <p className={`text-sm mt-1 ${formData.currency === 'USDCx' ? 'text-blue-700/80' : 'text-orange-700/80'}`}>
-                  {formData.currency === 'USDCx' 
-                     ? "USDCx ensures your funding runway doesn't evaporate due to market volatility." 
-                     : "STX is great for crypto-native communities, but involves price volatility risk."}
+               <p className={`text-sm mt-1 ${formData.currency === 'cUSD' ? 'text-green-700/80' : 'text-blue-700/80'}`}>
+                  {formData.currency === 'cUSD' 
+                     ? "cUSD ensures your funding runway doesn't evaporate due to market volatility, natively on Celo." 
+                     : "USDC is the industry standard stablecoin, providing deep liquidity and trust."}
                </p>
             </div>
          </div>

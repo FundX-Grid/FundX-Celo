@@ -2,10 +2,11 @@ import { Clock, CheckCircle2, Rocket, RefreshCcw, ShieldAlert } from "lucide-rea
 import { Button } from "@/components/ui/button"
 import { TabsContent } from "@/components/ui/tabs"
 import Image from "next/image"
+import { useWriteContract, useAccount } from "wagmi"
+import { FUNDX_CONTRACT } from "@/lib/celo-config"
+import { FUNDX_ABI } from "@/lib/fundx-abi"
+import { toast } from "sonner"
 
-// ==========================================
-// 1. TYPES & DATA (Investor Perspective)
-// ==========================================
 type ContributionStatus = "active" | "successful" | "refund_available";
 
 export interface BackerContribution {
@@ -15,29 +16,47 @@ export interface BackerContribution {
   myContribution: number;
   totalRaised: number;
   goal: number;
-  currency: "USDCx" | "STX";
+  currency: "cUSD" | "USDC";
   model: "Flexible Model" | "All-or-Nothing";
   status: ContributionStatus;
   daysRemaining?: number;
 }
 
 const myContributions: BackerContribution[] = [
-  { id: "inv-1", title: "Green Mining Farm", image: "/campaign-3.jpg", myContribution: 500, totalRaised: 12000, goal: 50000, currency: "STX", model: "All-or-Nothing", status: "refund_available" },
-  { id: "inv-2", title: "Stacks Dev Bootcamp", image: "/campaign-1.jpg", myContribution: 1200, totalRaised: 4500, goal: 10000, currency: "STX", model: "All-or-Nothing", status: "active", daysRemaining: 12 },
-  { id: "inv-3", title: "DeFi Yield Aggregator", image: "/campaign-2.jpg", myContribution: 250, totalRaised: 55000, goal: 50000, currency: "USDCx", model: "Flexible Model", status: "successful" }
+  { id: "1", title: "Green Mining Farm", image: "/campaign-3.jpg", myContribution: 500, totalRaised: 12000, goal: 50000, currency: "USDC", model: "All-or-Nothing", status: "refund_available" },
+  { id: "2", title: "Celo Dev Bootcamp", image: "/campaign-1.jpg", myContribution: 1200, totalRaised: 4500, goal: 10000, currency: "USDC", model: "All-or-Nothing", status: "active", daysRemaining: 12 },
+  { id: "3", title: "DeFi Yield Aggregator", image: "/campaign-2.jpg", myContribution: 250, totalRaised: 55000, goal: 50000, currency: "cUSD", model: "Flexible Model", status: "successful" }
 ];
 
-// Helper Function
 const formatMoney = (amount: number, currency: string) => {
-  return currency === "USDCx" ? `$${amount.toLocaleString()} USDCx` : `${amount.toLocaleString()} STX`;
+  return `$${amount.toLocaleString()} ${currency}`;
 };
 
-// ==========================================
-// 2. THE PLUG-IN COMPONENTS
-// ==========================================
-
 function RefundCard({ contribution }: { contribution: BackerContribution }) {
-  // For refunds, we use a striking blue to differentiate from the creator's green withdraw button
+  const { writeContractAsync } = useWriteContract();
+  const { isConnected } = useAccount();
+
+  const handleRefund = async (id: string) => {
+    if (!isConnected) {
+       toast.error("Connect Wallet", { description: "You need to connect your wallet." });
+       return;
+    }
+    
+    try {
+      toast.loading("Claiming refund...", { id: "refund" });
+      await writeContractAsync({
+        address: FUNDX_CONTRACT as `0x${string}`,
+        abi: FUNDX_ABI,
+        functionName: "claimRefund",
+        args: [BigInt(id)],
+      });
+      toast.success("Refund claimed successfully!", { id: "refund" });
+    } catch (e) {
+      console.error(e);
+      toast.error("Refund Failed", { id: "refund", description: "Could not claim refund." });
+    }
+  };
+
   return (
     <div className="bg-white p-8 md:p-10 min-h-[240px] rounded-[2rem] border border-blue-200 shadow-[0_12px_28px_-6px_rgba(59,130,246,0.12)] flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden hover:-translate-y-1 transition-transform duration-300">
        <div className="absolute -right-4 -bottom-10 text-[120px] font-black text-blue-50 opacity-80 z-0 select-none pointer-events-none tracking-tighter leading-none">REFUND</div>
@@ -66,7 +85,7 @@ function RefundCard({ contribution }: { contribution: BackerContribution }) {
        </div>
        
        <div className="w-full md:w-auto shrink-0 relative z-10 mt-6 md:mt-0">
-          <Button className="w-full md:w-auto h-16 px-10 rounded-xl bg-gradient-to-b from-blue-400 to-blue-500 border border-blue-600 text-white shadow-[inset_0_1px_1px_rgba(255,255,255,0.4),0_4px_15px_rgba(59,130,246,0.4)] font-bold text-lg transition-all hover:scale-[1.02] active:scale-95 active:shadow-inner flex items-center gap-2">
+          <Button onClick={() => handleRefund(contribution.id)} className="w-full md:w-auto h-16 px-10 rounded-xl bg-gradient-to-b from-blue-400 to-blue-500 border border-blue-600 text-white shadow-[inset_0_1px_1px_rgba(255,255,255,0.4),0_4px_15px_rgba(59,130,246,0.4)] font-bold text-lg transition-all hover:scale-[1.02] active:scale-95 active:shadow-inner flex items-center gap-2">
              <RefreshCcw className="w-5 h-5" /> Claim Refund
           </Button>
        </div>
@@ -99,7 +118,7 @@ function ActiveContributionCard({ contribution }: { contribution: BackerContribu
                 <div className="font-semibold text-slate-700 bg-slate-50 px-5 py-2.5 rounded-xl border border-slate-200/60 shadow-[inset_0_2px_4px_rgba(0,0,0,0.03)] text-base">
                    My Contribution: <span className="text-orange-600 font-extrabold">{formatMoney(contribution.myContribution, contribution.currency)}</span>
                 </div>
-                <div className="text-slate-500 font-medium text-base">Goal: {contribution.goal.toLocaleString()} {contribution.currency === 'USDCx' ? '' : 'STX'}</div>
+                <div className="text-slate-500 font-medium text-base">Goal: {contribution.goal.toLocaleString()} {contribution.currency}</div>
              </div>
              <div className="w-full max-w-md bg-slate-100 rounded-full h-8 mt-6 overflow-hidden shadow-[inset_0_3px_6px_rgba(0,0,0,0.1)] border border-slate-200/50 p-1 relative z-10">
                 <div className="bg-gradient-to-r from-[#FF6B4A] to-[#FF3D71] h-full rounded-full shadow-[0_0_15px_rgba(255,107,74,0.6)] relative flex items-center px-4" style={{ width: `${progress}%` }}>

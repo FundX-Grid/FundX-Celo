@@ -2,8 +2,11 @@ import { Clock, XCircle, CheckCircle2, Rocket } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { TabsContent } from "@/components/ui/tabs"
 import Image from "next/image"
+import { useWriteContract, useAccount } from "wagmi"
+import { FUNDX_CONTRACT } from "@/lib/celo-config"
+import { FUNDX_ABI } from "@/lib/fundx-abi"
+import { toast } from "sonner"
 
-// 🚨 1. DEFINE THE DATA STRUCTURE
 type CampaignStatus = "active" | "successful" | "failed";
 
 interface CreatorCampaign {
@@ -12,66 +15,87 @@ interface CreatorCampaign {
   image: string;
   raised: number;
   goal: number;
-  currency: "USDCx" | "STX";
+  currency: "cUSD" | "USDC";
   model: "Flexible Model" | "All-or-Nothing";
   status: CampaignStatus;
   daysRemaining?: number;
 }
 
-// 🚨 2. SIMULATE FETCHED DATA (Later, this comes from your Smart Contract)
 const myFetchedCampaigns: CreatorCampaign[] = [
   {
-    id: "camp-1",
+    id: "1",
     title: "DeFi Yield Aggregator",
     image: "/campaign-2.jpg",
     raised: 55000,
     goal: 50000,
-    currency: "USDCx",
+    currency: "cUSD",
     model: "Flexible Model",
     status: "successful",
   },
   {
-    id: "camp-2",
-    title: "Stacks Dev Bootcamp",
+    id: "2",
+    title: "Celo Dev Bootcamp",
     image: "/campaign-1.jpg",
     raised: 4500,
     goal: 10000,
-    currency: "STX",
+    currency: "USDC",
     model: "All-or-Nothing",
     status: "active",
     daysRemaining: 12,
   },
   {
-    id: "camp-3",
+    id: "3",
     title: "NFT Marketplace",
     image: "/campaign-3.jpg",
     raised: 1200,
     goal: 50000,
-    currency: "STX",
+    currency: "USDC",
     model: "All-or-Nothing",
     status: "failed",
   }
 ];
 
 export function CreatorTab() {
-  
-  // Helper to format money correctly based on currency
+  const { writeContractAsync } = useWriteContract();
+  const { isConnected } = useAccount();
+
+  const handleWithdraw = async (id: string, model: string, goal: number, raised: number) => {
+    if (!isConnected) {
+       toast.error("Connect Wallet", { description: "You need to connect your wallet." });
+       return;
+    }
+    
+    if (model === "All-or-Nothing" && raised < goal) {
+       toast.error("Cannot Withdraw", { description: "Goal must be met for All-or-Nothing campaigns." });
+       return;
+    }
+
+    try {
+      toast.loading("Withdrawing funds...", { id: "withdraw" });
+      await writeContractAsync({
+        address: FUNDX_CONTRACT as `0x${string}`,
+        abi: FUNDX_ABI,
+        functionName: "withdraw",
+        args: [BigInt(id)],
+      });
+      toast.success("Funds withdrawn successfully!", { id: "withdraw" });
+    } catch (e) {
+      console.error(e);
+      toast.error("Withdrawal Failed", { id: "withdraw", description: "Could not withdraw funds." });
+    }
+  };
+
   const formatMoney = (amount: number, currency: string) => {
-    return currency === "USDCx" ? `$${amount.toLocaleString()} USDCx` : `${amount.toLocaleString()} STX`;
+    return `$${amount.toLocaleString()} ${currency}`;
   };
 
   return (
     <TabsContent value="campaigns" className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
        
-       {/* 🚨 3. MAP OVER THE DATA */}
        {myFetchedCampaigns.map((campaign) => {
           
-          // Calculate progress percentage for active campaigns
           const progress = Math.min((campaign.raised / campaign.goal) * 100, 100);
 
-          // ==========================================
-          // RENDER: SUCCESSFUL CAMPAIGN
-          // ==========================================
           if (campaign.status === "successful") {
              return (
                 <div key={campaign.id} className="bg-white p-8 md:p-10 min-h-[240px] rounded-[2rem] border border-slate-200 shadow-[0_12px_28px_-6px_rgba(15,23,42,0.08)] flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden hover:-translate-y-1 transition-transform duration-300">
@@ -95,13 +119,13 @@ export function CreatorTab() {
                             <div className="font-semibold text-slate-700 bg-slate-50 px-5 py-2.5 rounded-xl border border-slate-200/60 shadow-[inset_0_2px_4px_rgba(0,0,0,0.03)] text-base">
                                Raised: <span className="text-green-600 font-extrabold">{formatMoney(campaign.raised, campaign.currency)}</span>
                             </div>
-                            <div className="text-slate-500 font-medium text-base">Goal: {campaign.goal.toLocaleString()} {campaign.currency === 'USDCx' ? '' : 'STX'}</div>
+                            <div className="text-slate-500 font-medium text-base">Goal: {campaign.goal.toLocaleString()} {campaign.currency}</div>
                          </div>
                       </div>
                    </div>
                    
                    <div className="w-full md:w-auto shrink-0 relative z-10">
-                      <Button className="w-full md:w-auto h-16 px-10 rounded-xl bg-gradient-to-b from-green-300 to-green-400 border border-green-500 text-green-950 shadow-[inset_0_1px_1px_rgba(255,255,255,0.8),0_4px_15px_rgba(134,239,172,0.5)] font-bold text-lg transition-all hover:scale-[1.02] active:scale-95 active:shadow-inner">
+                      <Button onClick={() => handleWithdraw(campaign.id, campaign.model, campaign.goal, campaign.raised)} disabled={campaign.model === "All-or-Nothing" && campaign.raised < campaign.goal} className="w-full md:w-auto h-16 px-10 rounded-xl bg-gradient-to-b from-green-300 to-green-400 border border-green-500 text-green-950 shadow-[inset_0_1px_1px_rgba(255,255,255,0.8),0_4px_15px_rgba(134,239,172,0.5)] font-bold text-lg transition-all hover:scale-[1.02] active:scale-95 active:shadow-inner disabled:opacity-50 disabled:grayscale">
                          Withdraw Funds
                       </Button>
                    </div>
@@ -135,7 +159,7 @@ export function CreatorTab() {
                             <div className="font-semibold text-slate-700 bg-slate-50 px-5 py-2.5 rounded-xl border border-slate-200/60 shadow-[inset_0_2px_4px_rgba(0,0,0,0.03)] text-base">
                                Raised: <span className="text-orange-600 font-extrabold">{formatMoney(campaign.raised, campaign.currency)}</span>
                             </div>
-                            <div className="text-slate-500 font-medium text-base">Goal: {campaign.goal.toLocaleString()} {campaign.currency === 'USDCx' ? '' : 'STX'}</div>
+                            <div className="text-slate-500 font-medium text-base">Goal: {campaign.goal.toLocaleString()} {campaign.currency}</div>
                          </div>
                          <div className="w-full max-w-md bg-slate-100 rounded-full h-6 mt-6 overflow-hidden shadow-[inset_0_3px_6px_rgba(0,0,0,0.1)] border border-slate-200/50 p-1 relative z-10">
                             <div className="bg-gradient-to-r from-[#FF6B4A] to-[#FF3D71] h-full rounded-full shadow-[0_0_15px_rgba(255,107,74,0.6)] relative flex items-center px-4" style={{ width: `${progress}%` }}>
@@ -179,7 +203,7 @@ export function CreatorTab() {
                             <div className="font-semibold text-slate-500 bg-white/50 px-5 py-2.5 rounded-xl border border-slate-200/60 shadow-[inset_0_2px_4px_rgba(0,0,0,0.03)] text-base">
                                Raised: {formatMoney(campaign.raised, campaign.currency)}
                             </div>
-                            <div className="text-slate-500 font-medium text-base">Goal: {campaign.goal.toLocaleString()} {campaign.currency === 'USDCx' ? '' : 'STX'}</div>
+                            <div className="text-slate-500 font-medium text-base">Goal: {campaign.goal.toLocaleString()} {campaign.currency}</div>
                          </div>
                       </div>
                    </div>

@@ -13,19 +13,21 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Separator } from "@/components/ui/separator"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Clock, Users, ShieldCheck, Share2, MapPin, ArrowLeft } from "lucide-react" 
-import { useStacks } from "@/components/fundx/StacksProvider"
+import { useAccount, useWriteContract } from "wagmi"
+import { parseUnits, erc20Abi } from "viem"
+import { FUNDX_ABI } from "@/lib/fundx-abi"
+import { FUNDX_CONTRACT, TOKEN_ADDRESSES } from "@/lib/celo-config"
+import { ConnectButton } from "@rainbow-me/rainbowkit"
 import { toast } from "sonner"
 import { getCampaign } from "@/lib/data"
 
-// 2. Update Type Definition to Promise
 export default function CampaignPage({ params }: { params: Promise<{ id: string }> }) {
-  const { isSignedIn, authenticate } = useStacks()
+  const { isConnected } = useAccount()
+  const { writeContractAsync } = useWriteContract()
   const [donateAmount, setDonateAmount] = useState("")
 
-  // 3. Unwrap the params using 'use()'
   const { id } = use(params)
   
-  // Now we can use the ID safely
   const campaign = getCampaign(id)
 
   if (!campaign) {
@@ -34,9 +36,9 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
 
   const progress = Math.min((campaign.raised / campaign.goal) * 100, 100)
 
-  const handleDonate = () => {
-    if (!isSignedIn) {
-      authenticate()
+  const handleDonate = async () => {
+    if (!isConnected) {
+      toast.error("Connect Wallet", { description: "Please connect your wallet to donate." })
       return
     }
     if (!donateAmount || Number(donateAmount) <= 0) {
@@ -44,13 +46,41 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
       return
     }
     
-    toast.success("Transaction Initiated", { 
-      description: `Contributing ${donateAmount} STX to ${campaign.title}` 
-    })
+    try {
+      toast.loading("Approving token...", { id: "donate" })
+      const isCUSD = campaign.currency === "cUSD"
+      const tokenAddress = isCUSD ? TOKEN_ADDRESSES.cUSD : TOKEN_ADDRESSES.USDC
+      const decimals = isCUSD ? 18 : 6
+      const amountUnits = parseUnits(donateAmount, decimals)
+      
+      // Step 1: Approve
+      await writeContractAsync({
+        address: tokenAddress as `0x${string}`,
+        abi: erc20Abi,
+        functionName: "approve",
+        args: [FUNDX_CONTRACT as `0x${string}`, amountUnits],
+      })
+
+      toast.loading("Sending donation...", { id: "donate" })
+      
+      // Step 2: Donate
+      await writeContractAsync({
+        address: FUNDX_CONTRACT as `0x${string}`,
+        abi: FUNDX_ABI,
+        functionName: "donate",
+        args: [BigInt(id), amountUnits],
+      })
+
+      toast.success("Thank you for your contribution!", { id: "donate" })
+      setDonateAmount("")
+    } catch (error) {
+       console.error(error)
+       toast.error("Donation Failed", { id: "donate", description: "Failed to complete transaction on Celo." })
+    }
   }
 
   return (
-    <main className="min-h-screen bg-slate-50 selection:bg-orange-100 font-sans">
+    <main className="min-h-screen bg-slate-50 selection:bg-green-100 font-sans">
       <Navbar />
 
       <div className="container mx-auto max-w-6xl px-4 pt-32 pb-20">
@@ -63,7 +93,7 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
         {/* HEADER SECTION */}
         <div className="mb-10 text-center md:text-left">
           <div className="flex flex-wrap gap-3 justify-center md:justify-start mb-4">
-             <Badge variant="secondary" className="text-orange-600 bg-orange-50 hover:bg-orange-100 px-3 py-1 text-sm border border-orange-100">
+             <Badge variant="secondary" className="text-green-600 bg-green-50 hover:bg-green-100 px-3 py-1 text-sm border border-green-100">
                {campaign.category}
              </Badge>
              <div className="flex items-center text-slate-500 text-sm font-medium">
@@ -81,13 +111,11 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
 
         <div className="grid lg:grid-cols-3 gap-12">
           
-          {/* LEFT COLUMN: Media & Story */}
           <div className="lg:col-span-2 space-y-10">
             
             {/* Hero Image */}
             <div className="relative aspect-video w-full overflow-hidden rounded-3xl bg-slate-200 shadow-sm border border-slate-100 group">
                <div className="absolute inset-0 flex items-center justify-center text-slate-400 font-bold bg-slate-100">
-                 {/* In production, replace this text with <Image src={campaign.image} ... /> */}
                  [Image: {campaign.title}]
                </div>
             </div>
@@ -106,17 +134,17 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
               </div>
               <div className="flex gap-6 text-slate-600 font-medium">
                  <div className="flex items-center gap-2"><ShieldCheck className="w-5 h-5 text-green-500"/> Verified</div>
-                 <div className="flex items-center gap-2"><Users className="w-5 h-5 text-orange-500"/> {campaign.backers} Backers</div>
+                 <div className="flex items-center gap-2"><Users className="w-5 h-5 text-green-500"/> {campaign.backers} Backers</div>
               </div>
             </div>
 
             {/* Content Tabs */}
             <Tabs defaultValue="story" className="w-full">
               <TabsList className="w-full justify-start bg-transparent border-b border-slate-200 rounded-none h-auto p-0 mb-8 overflow-x-auto">
-                <TabsTrigger value="story" className="rounded-none border-b-2 border-transparent data-[state=active]:border-orange-500 data-[state=active]:text-orange-600 px-6 py-3 text-base">
+                <TabsTrigger value="story" className="rounded-none border-b-2 border-transparent data-[state=active]:border-green-500 data-[state=active]:text-green-600 px-6 py-3 text-base">
                   The Story
                 </TabsTrigger>
-                <TabsTrigger value="updates" className="rounded-none border-b-2 border-transparent data-[state=active]:border-orange-500 data-[state=active]:text-orange-600 px-6 py-3 text-base">
+                <TabsTrigger value="updates" className="rounded-none border-b-2 border-transparent data-[state=active]:border-green-500 data-[state=active]:text-green-600 px-6 py-3 text-base">
                   Updates
                 </TabsTrigger>
               </TabsList>
@@ -127,9 +155,9 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
                   This is the full story of the campaign. In a real app, this would be rich text content loaded from the database.
                 </p>
                 
-                <div className="bg-orange-50 p-6 rounded-2xl border border-orange-100 my-8 not-prose">
-                  <h4 className="font-bold text-orange-800 mb-2">Risks & Challenges</h4>
-                  <p className="text-orange-700/80 text-sm">
+                <div className="bg-green-50 p-6 rounded-2xl border border-green-100 my-8 not-prose">
+                  <h4 className="font-bold text-green-800 mb-2">Risks & Challenges</h4>
+                  <p className="text-green-700/80 text-sm">
                     All projects involve risk. Please do your own research (DYOR) before contributing.
                   </p>
                 </div>
@@ -154,7 +182,7 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
 
                 <div className="flex justify-between text-sm font-bold pt-2">
                   <span className="text-slate-900">{Math.round(progress)}% funded</span>
-                  <span className="flex items-center gap-1 text-orange-600"><Clock className="w-4 h-4"/> {campaign.daysLeft} days left</span>
+                  <span className="flex items-center gap-1 text-green-600"><Clock className="w-4 h-4"/> {campaign.daysLeft} days left</span>
                 </div>
               </div>
 
@@ -167,33 +195,34 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
                   <p className="text-sm text-slate-500">Support {campaign.creator} to make this happen.</p>
                 </div>
                 
-                <div className={`transition-all duration-300 ${!isSignedIn ? "opacity-50 grayscale pointer-events-none" : "opacity-100"}`}>
+                <div className={`transition-all duration-300 ${!isConnected ? "opacity-50 grayscale pointer-events-none" : "opacity-100"}`}>
                   <div className="relative">
-                    {/* Change STX to USDCx */}
-                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-blue-600 font-bold text-lg">USDCx</span>
+                    <span className={`absolute left-4 top-1/2 -translate-y-1/2 font-bold text-lg ${campaign.currency === 'cUSD' ? 'text-green-600' : 'text-blue-600'}`}>
+                      {campaign.currency || "cUSD"}
+                    </span>
                     <Input 
                       type="number" 
                       placeholder="100" 
                       value={donateAmount}
                       onChange={(e) => setDonateAmount(e.target.value)}
-                      className="pl-24 h-14 rounded-xl border-slate-200 bg-slate-50 text-xl font-bold focus-visible:ring-blue-500"
+                      className="pl-24 h-14 rounded-xl border-slate-200 bg-slate-50 text-xl font-bold focus-visible:ring-green-500"
                     />
                   </div>
                 </div>
 
-                {isSignedIn ? (
-                  <Button onClick={handleDonate} className="w-full h-14 rounded-xl bg-gradient-tush text-white shadow-glow hover:scale-[1.02] transition-transform text-lg font-bold">
+                {isConnected ? (
+                  <Button onClick={handleDonate} className="w-full h-14 rounded-xl bg-slate-900 text-white shadow-glow hover:scale-[1.02] transition-transform text-lg font-bold">
                     Donate Now
                   </Button>
                 ) : (
-                  <Button onClick={authenticate} className="w-full h-14 rounded-xl bg-slate-900 text-white shadow-xl hover:bg-slate-800 transition-all text-lg font-bold">
-                    Connect Wallet to Contribute
-                  </Button>
+                  <div className="flex justify-center mt-4">
+                    <ConnectButton />
+                  </div>
                 )}
 
                 <div className="flex items-center justify-center gap-2 text-xs text-slate-400">
                   <ShieldCheck className="w-3 h-3" />
-                  <span>Secure transaction via Stacks</span>
+                  <span>Secure transaction via Celo</span>
                 </div>
               </div>
 

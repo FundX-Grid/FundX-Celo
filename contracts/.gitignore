@@ -12,3 +12,5 @@ costs-reports.json
 node_modules
 **/deployments/default.testnet-plan.yaml
 elite.cjs
+FundX-Celo-Complete.md
+FundX-Progress.md

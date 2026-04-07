@@ -5,12 +5,14 @@ import { Navbar } from "@/components/fundx/Navbar"
 import { Footer } from "@/components/fundx/Footer"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, ArrowLeft, CheckCircle2 } from "lucide-react"
-import { useStacks } from "@/components/fundx/StacksProvider"
+import { useAccount, useWriteContract } from "wagmi"
+import { parseUnits } from "viem"
+import { FUNDX_ABI } from "@/lib/fundx-abi"
+import { FUNDX_CONTRACT, TOKEN_ADDRESSES } from "@/lib/celo-config"
 import { toast } from "sonner"
 
 import { WizardSteps } from "@/components/create/WizardSteps"
 import { LivePreview } from "@/components/create/LivePreview"
-
 
 export interface CreateCampaignData {
   creatorName: string;
@@ -31,14 +33,14 @@ export interface CreateCampaignData {
   goal: string;
   duration: string;
   fundingModel: "0" | "1";
-  currency: "USDCx" | "STX"; 
+  currency: "cUSD" | "USDC"; 
 }
 
 export default function CreateCampaign() {
-  const { isSignedIn, authenticate } = useStacks()
+  const { isConnected } = useAccount()
+  const { writeContractAsync } = useWriteContract()
   const [step, setStep] = useState(1)
   
-
   const [formData, setFormData] = useState<CreateCampaignData>({
     creatorName: "",
     creatorBio: "",
@@ -58,24 +60,39 @@ export default function CreateCampaign() {
     goal: "10000",
     duration: "30",
     fundingModel: "0",
-    currency: "USDCx", // 
+    currency: "cUSD", 
   })
 
   const handleNext = () => setStep(step + 1)
   const handleBack = () => setStep(step - 1)
-  // ... the rest stays the same!
 
-  const handleSubmit = () => {
-    if (!isSignedIn) {
+  const handleSubmit = async () => {
+    if (!isConnected) {
       toast.error("Connect Wallet", {
-        description: "You need a Stacks wallet to deploy.",
+        description: "You need to connect your wallet to deploy.",
       });
-      authenticate();
       return;
     }
-    toast.success("Deployment Initiated", {
-      description: "Creating USDCx Fundraising Contract on Stacks...",
-    });
+    try {
+      toast.loading("Deploying Campaign...", { id: "deploy" })
+      const tokenAddress = formData.currency === "cUSD" ? TOKEN_ADDRESSES.cUSD : TOKEN_ADDRESSES.USDC
+      const decimals = formData.currency === "cUSD" ? 18 : 6
+      const goalUnits = parseUnits(formData.goal, decimals)
+      const durationSeconds = BigInt(Number(formData.duration) * 86400)
+      const fundingModelUint = Number(formData.fundingModel)
+
+      await writeContractAsync({
+        // @ts-ignore
+        address: FUNDX_CONTRACT,
+        abi: FUNDX_ABI,
+        functionName: "createCampaign",
+        args: [tokenAddress as `0x${string}`, goalUnits, durationSeconds, fundingModelUint],
+      })
+      toast.success("Campaign Deployed!", { id: "deploy" })
+    } catch (error) {
+      console.error(error)
+      toast.error("Deployment Failed", { id: "deploy", description: "Failed to deploy on Celo." })
+    }
   };
 
   return (
@@ -88,7 +105,7 @@ export default function CreateCampaign() {
             Launch your Vision
           </h1>
           <p className="text-slate-500 text-lg">
-            Create a trustless <strong>USDCx</strong> crowdfunding campaign.
+            Create a trustless <strong>cUSD</strong> crowdfunding campaign.
           </p>
         </div>
 
@@ -155,7 +172,7 @@ export default function CreateCampaign() {
                     onClick={handleSubmit}
                     className="h-12 px-8 rounded-xl bg-gradient-tush text-white shadow-glow hover:scale-105 transition-all font-bold"
                   >
-                    {isSignedIn ? "Deploy Campaign" : "Connect & Deploy"}
+                    {isConnected ? "Deploy Campaign" : "Connect & Deploy"}
                   </Button>
                 )}
               </div>

@@ -162,7 +162,7 @@ const leftX = useTransform(smoothProgress, [0, 1], [-8, 0])
           Trending Campaigns
         </h2>
         <p className="text-lg text-slate-500">
-          Support verified builders on Stacks. Trustless & Transparent.
+          Support verified builders on Celo. Trustless & Transparent.
         </p>
       </motion.div>
 

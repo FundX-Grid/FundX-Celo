@@ -2,7 +2,8 @@
 import { LayoutDashboard, Wallet, Clock, CheckCircle2, XCircle, ArrowRight } from "lucide-react"
 import { Navbar } from "@/components/fundx/Navbar"
 import { Footer } from "@/components/fundx/Footer"
-import { useStacks } from "@/components/fundx/StacksProvider"
+import { useAccount } from "wagmi"
+import { ConnectButton } from "@rainbow-me/rainbowkit"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
 import { CreatorTab } from "@/components/dashboard/CreatorTab"
@@ -10,20 +11,19 @@ import { BackerTab } from "@/components/dashboard/BackerTab"
 
 
 export default function DashboardPage() {
-  const { isSignedIn, authenticate } = useStacks()
+  const { isConnected } = useAccount()
 
-
-  if (!isSignedIn) {
+  if (!isConnected) {
     return (
       <main className="min-h-screen bg-slate-50 font-sans">
         <Navbar />
         <div className="container mx-auto max-w-4xl px-4 pt-48 pb-20 text-center">
            <Wallet className="w-16 h-16 text-slate-300 mx-auto mb-6" />
            <h1 className="text-3xl font-bold text-slate-900 mb-4">Connect your wallet</h1>
-           <p className="text-slate-500 mb-8">You need to connect your Stacks wallet to view your dashboard.</p>
-           <Button onClick={authenticate} size="lg" className="h-12 px-8 rounded-xl bg-slate-900 text-white hover:scale-105 transition-transform">
-             Connect Wallet
-           </Button>
+           <p className="text-slate-500 mb-8">You need to connect your wallet to view your dashboard.</p>
+           <div className="flex justify-center">
+             <ConnectButton />
+           </div>
         </div>
         <Footer />
       </main>

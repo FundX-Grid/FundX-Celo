@@ -98,7 +98,7 @@ export default function ExplorePage() {
             Explore the <span className="bg-gradient-tush bg-clip-text text-transparent">Economy</span>
           </h1>
           <p className="text-xl text-slate-500 leading-relaxed">
-            Discover verified projects building on Stacks Ecosystem. 
+            Discover verified projects building on the Celo Ecosystem. 
             Fund the builders, own the future.
           </p>
         </div>

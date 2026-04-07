@@ -34,7 +34,7 @@ function SideCard({ campaign, progress, tilt }: SideCardProps) {
 
   return (
     <div className={`w-full xl:w-[300px] bg-white rounded-[2rem] shadow-soft-md border border-slate-100 overflow-hidden group hover:border-orange-200 transition-all duration-500 ease-out flex flex-col hover:z-30 hover:scale-105 hover:rotate-0 ${tiltClass}`}>
-      
+
       <div className="relative h-48 bg-slate-100 overflow-hidden shrink-0">
         <Image
           src={campaign.image}
@@ -65,7 +65,7 @@ function SideCard({ campaign, progress, tilt }: SideCardProps) {
               </span>
             </div>
             <Link href={`/campaigns/${campaign.id}`}>
-              <Button size="sm" className="h-10 rounded-xl bg-slate-900 text-white shadow-md hover:bg-primary hover:shadow-glow transition-all px-6">
+              <Button size="sm" className="h-10 rounded-xl bg-slate-900 text-white shadow-md hover:bg-[#fbe72b] hover:text-slate-900 hover:shadow-glow transition-all px-6">
                 Donate
               </Button>
             </Link>
@@ -127,7 +127,7 @@ export function CampaignFan({ deckSlotRef }: CampaignFanProps) {
 
   // Left card — peeks out slightly at start, fans to final flex position
   // At scale 1 the flex layout naturally places left card ~310px left of center
-const leftX = useTransform(smoothProgress, [0, 1], [-8, 0])
+  const leftX = useTransform(smoothProgress, [0, 1], [-8, 0])
   const leftRotate = useTransform(smoothProgress, [0, 1], [-6, 0])
   const leftZ = useTransform(smoothProgress, [0, 1], [15, 0])
 
@@ -137,7 +137,7 @@ const leftX = useTransform(smoothProgress, [0, 1], [-8, 0])
 
   // Animate gap — at scroll 0 cards have no gap (stacked), at scroll 1 gap is 24px
   const cardGap = useTransform(smoothProgress, [0, 1], [0, 24])
-    // Pull side cards behind center card at scroll 0 using negative margin
+  // Pull side cards behind center card at scroll 0 using negative margin
   // At scale 0.15, center card is ~96px wide, side cards are ~45px wide
   // Negative margin of -320px pulls side cards almost completely behind center
   const sideCardMargin = useTransform(smoothProgress, [0, 1], [-200, 0])
@@ -174,13 +174,13 @@ const leftX = useTransform(smoothProgress, [0, 1], [-8, 0])
           y: measured ? deckY : 0,
           scale: deckScale,
           transformOrigin: "center center",
-           gap: cardGap,
+          gap: cardGap,
         }}
         className="flex flex-col xl:flex-row justify-center items-center xl:items-stretch h-auto xl:h-[420px]"
       >
 
         {/* Left card */}
-     <motion.div
+        <motion.div
           style={{
             x: leftX,
             rotate: leftRotate,
@@ -203,7 +203,7 @@ const leftX = useTransform(smoothProgress, [0, 1], [-8, 0])
           className="w-full max-w-3xl xl:flex-1"
         >
           <div className="relative z-20 shadow-2xl rounded-[2rem] border border-slate-100 bg-white hover:border-orange-200 transition-all duration-300 flex flex-col md:flex-row overflow-hidden group h-full">
-            <div className="absolute top-4 left-4 z-30 bg-gradient-tush text-white px-4 py-1 rounded-full text-xs font-bold shadow-soft-xl animate-pulse">
+            <div className="absolute top-4 left-4 z-30 bg-gradient-tush text-slate-900 px-4 py-1 rounded-full text-xs font-bold shadow-soft-xl animate-pulse">
               🔥 Top Trending
             </div>
             <div className="relative h-64 md:h-full md:w-5/12 bg-slate-100 overflow-hidden">
@@ -238,7 +238,7 @@ const leftX = useTransform(smoothProgress, [0, 1], [-8, 0])
                     </p>
                   </div>
                   <Link href={`/campaigns/${hero.id}`}>
-                    <Button className="h-12 rounded-xl px-8 bg-slate-900 text-white shadow-lg hover:bg-primary hover:shadow-glow transition-all duration-300">
+                    <Button className="h-12 rounded-xl px-8 bg-slate-900 text-white shadow-lg hover:bg-[#fbe72b] hover:text-slate-900 hover:shadow-glow transition-all duration-300">
                       Donate Now
                     </Button>
                   </Link>
@@ -249,7 +249,7 @@ const leftX = useTransform(smoothProgress, [0, 1], [-8, 0])
         </motion.div>
 
         {/* Right card */}
- <motion.div
+        <motion.div
           style={{
             x: rightX,
             rotate: rightRotate,

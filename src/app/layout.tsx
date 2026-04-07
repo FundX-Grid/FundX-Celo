@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     icon: "/LogoFrame.svg",
   },
   other: {
-    "talentapp:project_verification": "0abaa0ca8e316c1b114773ac99e1f239642ea2a42ce4d1dd12f62a9306c327599fa0e4fa75d209534e2d88970b06583648c40233e8f5d1e6e63947041a3188f6",
+    "talentapp:project_verification": "3839e108be306fd6501c861844fd0eafde6cebea898fdf85f2bdabf47ee78512d7c459454dd77a067c1920d9ecd3533cc41b2f2068ed2b8c156380187e10843f",
   },
 };
 

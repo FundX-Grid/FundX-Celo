@@ -63,12 +63,12 @@ export function ConnectWallet() {
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button
+              <Button
               className={`
                 relative z-10 rounded-full px-6 font-bold tracking-tight transition-all duration-500
                 ${justConnected
-                  ? "bg-green-500 border-green-400 text-white shadow-lg"
-                  : "bg-gradient-tush text-white shadow-glow hover:opacity-90 hover:scale-105"
+                  ? "bg-yellow-500 border-yellow-400 text-slate-900 shadow-lg"
+                  : "bg-gradient-tush text-slate-900 shadow-glow hover:opacity-90 hover:scale-105"
                 }
               `}
             >

@@ -10,15 +10,14 @@
   --radius-2xl: 1rem;
   --radius-3xl: 1.5rem;
 
-  /* 2. The "Soft SaaS" Shadows (Retinted for Orange) */
+  /* 2. The "Soft SaaS" Shadows (Retinted for Yellow) */
   --shadow-soft-xs: 0px 4px 10px rgba(0, 0, 0, 0.03);
   --shadow-soft-md: 0px 10px 40px -10px rgba(0, 0, 0, 0.08);
   --shadow-soft-xl: 0px 20px 60px -15px rgba(0, 0, 0, 0.12);
-  --shadow-glow: 0px 0px 40px rgba(53, 208, 127, 0.25);
-  /* Green Glow */
-
+  --shadow-glow: 0px 0px 40px rgba(251, 231, 43, 0.35); /* #fbe72b Yellow Glow */
+  
   /* 3. The "Tush" Gradient Utilities */
-  --image-gradient-tush: linear-gradient(135deg, #35D07F 0%, #10B981 100%);
+  --image-gradient-tush: linear-gradient(135deg, #fbe72b 0%, #fbe72b 100%);
 }
 
 /* Custom Utilities */
@@ -27,7 +26,7 @@
 }
 
 @utility text-gradient-tush {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-[#35D07F] to-[#10B981];
+  @apply text-[#fbe72b];
 }
 
 /* Container Setup */
@@ -40,12 +39,12 @@
   }
 }
 
-/* 4. THE COLOR VARIABLES (Celo Green Rebrand) */
+/* 4. THE COLOR VARIABLES (Celo Yellow) */
 :root {
   --font-jakarta: "Plus Jakarta Sans", sans-serif;
   --radius: 0.625rem;
 
-  /* Celo Green: #35D07F */
+  /* Celo Yellow */
   /* We map standard shadcn variables to our new brand colors */
   --background: 0 0% 100%;
   --foreground: 222.2 84% 4.9%;
@@ -53,8 +52,8 @@
   --card: 0 0% 100%;
   --card-foreground: 222.2 84% 4.9%;
 
-  /* PRIMARY IS NOW GREEN */
-  --primary: 152 60% 51%;
+  /* PRIMARY IS NOW YELLOW (#fbe72b) */
+  --primary: 54 96% 58%; /* HSL for fbe72b */
   --primary-foreground: 0 0% 100%;
 
   --secondary: 210 40% 96.1%;
@@ -71,7 +70,7 @@
 
   --border: 214.3 31.8% 91.4%;
   --input: 214.3 31.8% 91.4%;
-  --ring: 152 60% 51%;
+  --ring: 54 96% 58%;
   /* Ring matches Primary */
 }
 

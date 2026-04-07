@@ -6,7 +6,7 @@ export function HeroCTAs() {
   return (
     <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
       <Link href="/create">
-        <Button size="lg" className="h-16 px-10 rounded-full text-lg" style={{ transition: "opacity 250ms ease, transform 250ms ease", boxShadow: "0 4px 20px 0 rgba(23,200,126,0.3)" }} onMouseEnter={e => (e.currentTarget.style.transform = "scale(1.025)")} onMouseLeave={e => (e.currentTarget.style.transform = "scale(1)")} onMouseDown={e => (e.currentTarget.style.transform = "scale(0.975)")} onMouseUp={e => (e.currentTarget.style.transform = "scale(1.025)")}>
+        <Button size="lg" className="h-16 px-10 rounded-full text-lg bg-[#fbe72b] text-slate-900 font-bold hover:bg-[#eab308]" style={{ transition: "opacity 250ms ease, transform 250ms ease", boxShadow: "0 4px 20px 0 rgba(251, 231, 43, 0.3)" }} onMouseEnter={e => (e.currentTarget.style.transform = "scale(1.025)")} onMouseLeave={e => (e.currentTarget.style.transform = "scale(1)")} onMouseDown={e => (e.currentTarget.style.transform = "scale(0.975)")} onMouseUp={e => (e.currentTarget.style.transform = "scale(1.025)")}>
           Start a Campaign
         </Button>
       </Link>

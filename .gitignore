@@ -22,3 +22,7 @@ deployments/FUNDX-GUIDE.md
 Another.md
 elite.cjs
 .env.local
+.env
+simulate.js        
+distribute.js
+fund.js

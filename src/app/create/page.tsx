@@ -6,9 +6,10 @@ import { Footer } from "@/components/fundx/Footer"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, ArrowLeft, CheckCircle2 } from "lucide-react"
 import { useAccount, useWriteContract } from "wagmi"
+import { waitForTransactionReceipt } from "@wagmi/core"
 import { parseUnits } from "viem"
 import { FUNDX_ABI } from "@/lib/fundx-abi"
-import { FUNDX_CONTRACT, TOKEN_ADDRESSES } from "@/lib/celo-config"
+import { FUNDX_CONTRACT, TOKEN_ADDRESSES, config } from "@/lib/celo-config"
 import { toast } from "sonner"
 
 import { WizardSteps } from "@/components/create/WizardSteps"
@@ -89,14 +90,23 @@ export default function CreateCampaign() {
       const goalUnits = parseUnits(formData.goal, decimals)
       const durationSeconds = BigInt(Number(formData.duration) * 86400)
       const fundingModelUint = Number(formData.fundingModel)
+      // feeCurrency: in MiniPay use cUSD (only supported); otherwise use the campaign token
+      const feeCurrency = isMini
+        ? (TOKEN_ADDRESSES.cUSD as `0x${string}`)
+        : (tokenAddress as `0x${string}`)
 
-      await writeContractAsync({
-        // @ts-ignore
-        address: FUNDX_CONTRACT,
+      const hash = await writeContractAsync({
+        address: FUNDX_CONTRACT as `0x${string}`,
         abi: FUNDX_ABI,
         functionName: "createCampaign",
         args: [tokenAddress as `0x${string}`, goalUnits, durationSeconds, fundingModelUint],
-      })
+        feeCurrency,
+      } as any)
+
+      toast.loading("Confirming on-chain...", { id: "deploy" })
+      const receipt = await waitForTransactionReceipt(config, { hash })
+      if (receipt.status !== "success") throw new Error("Campaign creation was reverted on-chain")
+
       toast.success("Campaign Deployed!", { id: "deploy" })
     } catch (error) {
       console.error(error)

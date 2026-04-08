@@ -2,7 +2,9 @@
 
 import { useEffect, useState } from "react"
 import { ConnectButton } from "@rainbow-me/rainbowkit"
-import { useAccount } from "wagmi"
+import { useAccount, useConnect } from "wagmi"
+import { injected } from "wagmi/connectors"
+import { isMiniPay } from "@/lib/wallet"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -17,11 +19,17 @@ import { toast } from "sonner"
 
 export function ConnectWallet() {
   const { address, isConnected } = useAccount()
+  const { connect } = useConnect()
   const [mounted, setMounted] = useState(false)
   const [justConnected, setJustConnected] = useState(false)
+  const [isMini, setIsMini] = useState(false)
 
   useEffect(() => {
     setMounted(true)
+    if (isMiniPay()) {
+      setIsMini(true)
+      connect({ connector: injected({ target: "metaMask" }) })
+    }
   }, [])
 
   useEffect(() => {
@@ -53,6 +61,9 @@ export function ConnectWallet() {
       </Button>
     )
   }
+
+  // Inside MiniPay: wallet connects silently — hide the button until resolved
+  if (isMini && !isConnected) return null
 
   if (isConnected && address) {
     return (
@@ -108,17 +119,19 @@ export function ConnectWallet() {
 
             <DropdownMenuSeparator />
 
-            <ConnectButton.Custom>
-              {({ openAccountModal }) => (
-                <DropdownMenuItem
-                  onClick={openAccountModal}
-                  className="cursor-pointer focus:bg-red-50 focus:text-red-600 text-red-500 font-medium py-2.5"
-                >
-                  <LogOut className="w-4 h-4 mr-2 opacity-70" />
-                  Disconnect
-                </DropdownMenuItem>
-              )}
-            </ConnectButton.Custom>
+            {!isMini && (
+              <ConnectButton.Custom>
+                {({ openAccountModal }) => (
+                  <DropdownMenuItem
+                    onClick={openAccountModal}
+                    className="cursor-pointer focus:bg-red-50 focus:text-red-600 text-red-500 font-medium py-2.5"
+                  >
+                    <LogOut className="w-4 h-4 mr-2 opacity-70" />
+                    Disconnect
+                  </DropdownMenuItem>
+                )}
+              </ConnectButton.Custom>
+            )}
           </DropdownMenuContent>
         </DropdownMenu>
       </div>

@@ -12,12 +12,12 @@ export function Navbar() {
       <nav className="flex w-full max-w-6xl items-center justify-between rounded-full bg-white/80 px-6 py-3 shadow-soft-md backdrop-blur-md border border-white/20">
         
         {/* Logo */}
-        <Link href="/" className="flex items-center gap_-2 cursor-pointer">
+        <Link href="/" className="flex items-center gap-2 cursor-pointer">
           <Logo className="h-10 w-24" />
         </Link>
 
         {/* Links */}
-        <div className="hidden md:flex items-center gap_-8 text-sm font-medium text-slate-500">
+        <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-500">
           <Link href="/explore" className="hover:text-primary transition-colors">Campaigns</Link>
           <Link href="/create" className="hover:text-primary transition-colors">Create Campaign</Link>
           <Link href="https://app.uniswap.org" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">Bridge</Link>

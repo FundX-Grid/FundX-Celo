@@ -1,6 +1,6 @@
 "use client"
-import Link from "next/link"
 import Logo from "@/components/Logo"
+import Link from "next/link"
 import { ConnectWallet } from "@/components/fundx/ConnectWallet"
 import { useAccount } from "wagmi"
 

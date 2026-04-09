@@ -40,7 +40,7 @@ export const TOKEN_ADDRESSES = {
 export const CAMPAIGNS: Campaign[] = [
   // --- ACTIVE CAMPAIGNS ---
   {
-    id: "celo-school",
+    id: "celo_-school",
     title: "Celo School",
     tagline: "Teaching Solidity and Celo development to 10,000 developers worldwide.",
     description: "We are building the next generation of Celo builders. The learning curve for Web3 development is too steep for most developers in Africa and beyond.",
@@ -96,7 +96,7 @@ export const CAMPAIGNS: Campaign[] = [
     fundingModel: "All-or-Nothing"
   },
   {
-    id: "celo-gaming",
+    id: "celo_-gaming",
     title: "Savannaverse",
     tagline: "An MMORPG where every item is a Celo NFT.",
     description: "Play, earn, and own your assets on Celo. Built mobile-first for MiniPay users.",
@@ -124,7 +124,7 @@ export const CAMPAIGNS: Campaign[] = [
     fundingModel: "Flexible Model"
   },
   {
-    id: "celo-dex",
+    id: "celo_-dex",
     title: "Zero-Fee DEX on Celo",
     tagline: "Swap cUSD and USDC with zero protocol fees.",
     description: "A community-owned automated market maker on Celo prioritizing deep stablecoin liquidity and zero rent-seeking.",
@@ -182,7 +182,7 @@ export const CAMPAIGNS: Campaign[] = [
     fundingModel: "Flexible Model"
   },
   {
-    id: "celo-ops",
+    id: "celo_-ops",
     title: "Celo Ops",
     tagline: "Decentralized dev-ops tooling for Celo smart contracts.",
     description: "Automate your Celo deployments with 100% uptime.",

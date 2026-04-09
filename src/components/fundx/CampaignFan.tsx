@@ -29,8 +29,8 @@ function getPageOffsetTop(el: HTMLElement): number {
 
 function SideCard({ campaign, progress, tilt }: SideCardProps) {
   const tiltClass = tilt === "left"
-    ? "xl:transform xl:-rotate-6 xl:origin-bottom-right xl:translate-x-6 hover:translate-x-0"
-    : "xl:transform xl:rotate-6 xl:origin-bottom-left xl:-translate-x-6 hover:translate-x-0"
+    ? "xl:transform xl:-rotate-6 xl:origin-bottom_-right xl:translate-x-6 hover:translate-x-0"
+    : "xl:transform xl:rotate-6 xl:origin-bottom_-left xl:-translate-x-6 hover:translate-x-0"
 
   return (
     <div className={`w-full xl:w-[300px] bg-white rounded-[2rem] shadow-soft-md border border-slate-100 overflow-hidden group hover:border-orange-200 transition-all duration-500 ease-out flex flex-col hover:z-30 hover:scale-105 hover:rotate-0 ${tiltClass}`}>

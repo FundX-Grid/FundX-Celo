@@ -1,12 +1,12 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
-import { ConnectButton } from "@rainbow-me/rainbowkit"
-import { toast } from "sonner"
-import {
-import { ChevronDown, Copy, LogOut } from "lucide-react"
-import { injected } from "wagmi/connectors"
 import { useEffect, useState } from "react"
+import { ConnectButton } from "@rainbow-me/rainbowkit"
+import { useAccount, useConnect } from "wagmi"
+import { injected } from "wagmi/connectors"
+import { isMiniPay } from "@/lib/wallet"
+import { Button } from "@/components/ui/button"
+import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -14,15 +14,18 @@ import { useEffect, useState } from "react"
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { useAccount, useConnect } from "wagmi"
-import { isMiniPay } from "@/lib/wallet"
+import { ChevronDown, Copy, LogOut } from "lucide-react"
+import { toast } from "sonner"
 
-export function ConnectWallet() {
-  const { address, isConnected } = useAccount()
-  const { connect } = useConnect()
-  const [mounted, setMounted] = useState(false)
-  const [justConnected, setJustConnected] = useState(false)
-  const [isMini, setIsMini] = useState(false)
+  const copyAddress = () => {
+    if (address) {
+      navigator.clipboard.writeText(address)
+      toast.info("Address Copied", {
+        description: "Copied to clipboard",
+        duration: 2000,
+      })
+    }
+  }
 
   useEffect(() => {
     setMounted(true)
@@ -44,15 +47,12 @@ export function ConnectWallet() {
     }
   }, [isConnected])
 
-  const copyAddress = () => {
-    if (address) {
-      navigator.clipboard.writeText(address)
-      toast.info("Address Copied", {
-        description: "Copied to clipboard",
-        duration: 2000,
-      })
-    }
-  }
+export function ConnectWallet() {
+  const { address, isConnected } = useAccount()
+  const { connect } = useConnect()
+  const [mounted, setMounted] = useState(false)
+  const [justConnected, setJustConnected] = useState(false)
+  const [isMini, setIsMini] = useState(false)
 
   if (!mounted) {
     return (

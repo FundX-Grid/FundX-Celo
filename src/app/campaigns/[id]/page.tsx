@@ -60,7 +60,7 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
         active: campaignData.active,
         fundingModel: campaignData.fundingModel === 0 ? "Flexible Model" : "All-or-Nothing",
 
-        title_: `Campaign #${id}`,
+        title: `Campaign #${id}`,
         description: "An on-chain Celo campaign.",
         category: "Web3",
         location: "Celo Network",
@@ -71,7 +71,7 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
      }
 
      if (localMock) {
-        c.title_ = localMock.title_
+        c.title = localMock.title
         c.description = localMock.description
         c.category = localMock.category
         c.location = localMock.location
@@ -196,7 +196,7 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
           </div>
           
           <h1 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-4 leading-tight">
-            {campaign.title_}
+            {campaign.title}
           </h1>
           <p className="text-xl text-slate-500 max-w-3xl">
             {campaign.description}
@@ -210,7 +210,7 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
             <div className="relative aspect-video w-full overflow-hidden rounded-3xl bg-slate-200 shadow-sm border border-slate-100 group">
                <div className="absolute inset-0 flex items-center justify-center text-slate-400 font-bold bg-slate-100">
                  {/* Replace with actual image later */}
-                 {campaign.title_}
+                 {campaign.title}
                </div>
             </div>
 

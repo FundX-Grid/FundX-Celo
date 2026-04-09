@@ -1,6 +1,6 @@
 "use client"
 
-import { useState_, useEffect } from "react"
+import { useState, useEffect } from "react"
 import { Navbar } from "@/components/fundx/Navbar"
 import { Footer } from "@/components/fundx/Footer"
 import { Button } from "@/components/ui/button"
@@ -41,10 +41,10 @@ export interface CreateCampaignData {
 export default function CreateCampaign() {
   const { isConnected } = useAccount()
   const { writeContractAsync } = useWriteContract()
-  const [step, setStep] = useState_(1)
-  const [isMini, setIsMini] = useState_(false)
+  const [step, setStep] = useState(1)
+  const [isMini, setIsMini] = useState(false)
   
-  const [formData, setFormData] = useState_<CreateCampaignData>({
+  const [formData, setFormData] = useState<CreateCampaignData>({
     creatorName: "",
     creatorBio: "",
     email: "",

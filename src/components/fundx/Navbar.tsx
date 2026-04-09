@@ -1,8 +1,8 @@
 "use client"
-import Link from "next/link"
 import Logo from "@/components/Logo"
 import { ConnectWallet } from "@/components/fundx/ConnectWallet"
 import { useAccount } from "wagmi"
+import Link from "next/link"
 
 export function Navbar() {
   const { isConnected } = useAccount()

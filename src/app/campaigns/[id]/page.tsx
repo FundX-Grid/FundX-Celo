@@ -24,12 +24,27 @@ import { getCampaign } from "@/lib/data"
 import { useCampaign } from "@/lib/hooks/useContract"
 import { isMiniPay } from "@/lib/wallet"
 
-export default function CampaignPage({ params }: { params: Promise<{ id: string }> }) {
-  const { isConnected } = useAccount()
-  const { writeContractAsync } = useWriteContract()
-  const [donateAmount, setDonateAmount] = useState("")
-  const [mounted, setMounted] = useState(false)
-  const [isMini, setIsMini] = useState(false)
+  const handleDonate = async () => {
+    if (!isConnected && !isMini) {
+      toast.error("Connect Wallet", { description: "Please connect your wallet to donate." })
+      return
+    }
+    if (!donateAmount || Number(donateAmount) <= 0) {
+      toast.error("Invalid Amount", { description: "Please enter a valid amount to donate." })
+      return
+    }
+    
+    try {
+      toast.loading("Approving token...", { id: "donate" })
+      const isCUSD = campaign.currency === "cUSD"
+      const tokenAddress = isCUSD ? TOKEN_ADDRESSES.cUSD : TOKEN_ADDRESSES.USDC
+      const decimals = isCUSD ? 18 : 6
+      const amountUnits = parseUnits(donateAmount, decimals)
+      // feeCurrency: in MiniPay use cUSD (only supported option);
+      // otherwise use the campaign's own token so gas comes from the same balance
+      const feeCurrency = isMini
+        ? (TOKEN_ADDRESSES.cUSD as `0x${string}`)
+        : (tokenAddress as `0x${string}`)
 
   const { id } = use(params)
   
@@ -119,27 +134,12 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
   
   if (!donateDisabledReason && donateAmount === "0") donateDisabledReason = "Enter Amount"
 
-  const handleDonate = async () => {
-    if (!isConnected && !isMini) {
-      toast.error("Connect Wallet", { description: "Please connect your wallet to donate." })
-      return
-    }
-    if (!donateAmount || Number(donateAmount) <= 0) {
-      toast.error("Invalid Amount", { description: "Please enter a valid amount to donate." })
-      return
-    }
-    
-    try {
-      toast.loading("Approving token...", { id: "donate" })
-      const isCUSD = campaign.currency === "cUSD"
-      const tokenAddress = isCUSD ? TOKEN_ADDRESSES.cUSD : TOKEN_ADDRESSES.USDC
-      const decimals = isCUSD ? 18 : 6
-      const amountUnits = parseUnits(donateAmount, decimals)
-      // feeCurrency: in MiniPay use cUSD (only supported option);
-      // otherwise use the campaign's own token so gas comes from the same balance
-      const feeCurrency = isMini
-        ? (TOKEN_ADDRESSES.cUSD as `0x${string}`)
-        : (tokenAddress as `0x${string}`)
+export default function CampaignPage({ params }: { params: Promise<{ id: string }> }) {
+  const { isConnected } = useAccount()
+  const { writeContractAsync } = useWriteContract()
+  const [donateAmount, setDonateAmount] = useState("")
+  const [mounted, setMounted] = useState(false)
+  const [isMini, setIsMini] = useState(false)
 
       const approveHash = await writeContractAsync({
         address: tokenAddress as `0x${string}`,

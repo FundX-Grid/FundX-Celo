@@ -153,7 +153,7 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
       await waitForTransactionReceipt(config, { hash: approveHash })
 
       toast.loading("Sending donation...", { id: "donate" })
-      const donateHash = await writeContractAsync({
+      const donateHash_ = await writeContractAsync({
         address: FUNDX_CONTRACT as `0x${string}`,
         abi: FUNDX_ABI,
         functionName: "donate",
@@ -162,7 +162,7 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
       } as any)
 
       toast.loading("Confirming donation...", { id: "donate" })
-      const receipt = await waitForTransactionReceipt(config, { hash: donateHash })
+      const receipt = await waitForTransactionReceipt(config, { hash: donateHash_ })
       if (receipt.status !== "success") throw new Error("Donation was reverted on-chain")
 
       toast.success("Thank you for your contribution!", { id: "donate" })

@@ -64,10 +64,10 @@ export default function ExplorePage() {
       };
       
       // Assign weight, defaulting to 1 (active) if something is wrong
-      const weightA = statusWeight[a.status || "active"] || 1;
+      const weightA_ = statusWeight[a.status || "active"] || 1;
       const weightB = statusWeight[b.status || "active"] || 1;
       
-      return weightA - weightB;
+      return weightA_ - weightB;
     });
     
   }, [searchQuery, selectedCategory, statusFilter]);

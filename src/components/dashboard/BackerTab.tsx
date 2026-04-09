@@ -35,14 +35,15 @@ const formatMoney = (amount: number, currency: string) => {
   return `$${amount.toLocaleString()} ${currency}`;
 };
 
+function RefundCard({ contribution }: { contribution: BackerContribution }) {
+  const { writeContractAsync } = useWriteContract();
+  const { isConnected } = useAccount();
+
   const handleRefund = async (id: string) => {
     if (!isConnected) {
        toast.error("Connect Wallet", { description: "You need to connect your wallet." });
        return;
     }
-
-function ActiveContributionCard({ contribution }: { contribution: BackerContribution }) {
-  const progress = Math.min((contribution.totalRaised / contribution.goal) * 100, 100);
 
     if (id.startsWith("mock-")) {
        toast.info("Mock Campaign", { description: "Cannot claim refund for a mock campaign." });
@@ -100,8 +101,8 @@ function ActiveContributionCard({ contribution }: { contribution: BackerContribu
   )
 }
 
-export function BackerTab() {
-  const { address } = useAccount();
+function ActiveContributionCard({ contribution }: { contribution: BackerContribution }) {
+  const progress = Math.min((contribution.totalRaised / contribution.goal) * 100, 100);
 
   return (
     <div className="bg-white p-8 md:p-10 min-h-[240px] rounded-[2rem] border border-slate-200 shadow-[0_12px_28px_-6px_rgba(15,23,42,0.08)] flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden hover:-translate-y-1 transition-transform duration-300">
@@ -143,10 +144,6 @@ export function BackerTab() {
   )
 }
 
-function RefundCard({ contribution }: { contribution: BackerContribution }) {
-  const { writeContractAsync } = useWriteContract();
-  const { isConnected } = useAccount();
-
 function SuccessfulContributionCard({ contribution }: { contribution: BackerContribution }) {
   return (
     <div className="bg-slate-50 p-8 md:p-10 min-h-[240px] rounded-[2rem] border border-slate-200 shadow-[inset_0_4px_20px_rgba(0,0,0,0.02)] flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden transition-all duration-500">
@@ -182,6 +179,9 @@ function SuccessfulContributionCard({ contribution }: { contribution: BackerCont
     </div>
   )
 }
+
+export function BackerTab() {
+  const { address } = useAccount();
 
   const { data: countData } = useCampaignCount();
   const count = Number(countData || 0);

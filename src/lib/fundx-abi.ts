@@ -88,7 +88,7 @@ export const FUNDX_ABI = [
     stateMutability: "view",
     inputs: [
       { name: "campaignId", type: "uint256" },
-      { name: "donor_", type: "address" },
+      { name: "donor", type: "address" },
     ],
     outputs: [{ name: "", type: "uint256" }],
   },
@@ -166,7 +166,7 @@ export const FUNDX_ABI = [
     type: "event",
     inputs: [
       { name: "campaignId", type: "uint256", indexed: true },
-      { name: "donor_", type: "address", indexed: true },
+      { name: "donor", type: "address", indexed: true },
       { name: "amount", type: "uint256", indexed: false },
     ],
   },
@@ -185,7 +185,7 @@ export const FUNDX_ABI = [
     type: "event",
     inputs: [
       { name: "campaignId", type: "uint256", indexed: true },
-      { name: "donor_", type: "address", indexed: true },
+      { name: "donor", type: "address", indexed: true },
       { name: "amount", type: "uint256", indexed: false },
     ],
   },

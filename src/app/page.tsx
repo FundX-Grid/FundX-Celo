@@ -1,9 +1,9 @@
 "use client"
 
-import { useRef } from "react"
 import { Navbar } from "@/components/fundx/Navbar"
 import { Hero } from "@/components/fundx/hero/index"
 import { LogoStrip } from "@/components/fundx/LogoStrip"
+import { useRef } from "react"
 import { Footer } from "@/components/fundx/Footer"
 import { CampaignFan } from "@/components/fundx/CampaignFan"
 

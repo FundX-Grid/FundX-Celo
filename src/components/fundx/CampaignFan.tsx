@@ -13,11 +13,11 @@ interface CampaignFanProps {
 
 interface SideCardProps {
   campaign: Campaign
-  progress: number_
+  progress: number
   tilt: "left" | "right"
 }
 
-function getPageOffsetTop(el: HTMLElement): number_ {
+function getPageOffsetTop(el: HTMLElement): number {
   let top = 0
   let current: HTMLElement | null = el
   while (current) {
@@ -86,7 +86,7 @@ export function CampaignFan({ deckSlotRef }: CampaignFanProps) {
   const sideCampaigns = getSideCampaigns()
   const leftCard = sideCampaigns[0]
   const rightCard = sideCampaigns[1]
-  const getProgress = (raised: number_, goal: number_) =>
+  const getProgress = (raised: number, goal: number) =>
     Math.min((raised / goal) * 100, 100)
 
   useEffect(() => {

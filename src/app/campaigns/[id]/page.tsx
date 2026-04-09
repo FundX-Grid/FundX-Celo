@@ -63,7 +63,7 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
         title: `Campaign #${id}`,
         description: "An on-chain Celo campaign.",
         category: "Web3",
-        location_: "Celo Network",
+        location: "Celo Network",
         image: "/campaign-1.jpg",
         creatorImage: "https://github.com/shadcn.png",
         backers: 0,
@@ -74,7 +74,7 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
         c.title = localMock.title
         c.description = localMock.description
         c.category = localMock.category
-        c.location_ = localMock.location_
+        c.location = localMock.location
         c.image = localMock.image
         c.creatorImage = localMock.creatorImage
      }
@@ -191,7 +191,7 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
                {campaign.category}
              </Badge>
              <div className="flex items-center text-slate-500 text-sm font-medium">
-               <MapPin className="w-3 h-3 mr-1" /> {campaign.location_}
+               <MapPin className="w-3 h-3 mr-1" /> {campaign.location}
              </div>
           </div>
           

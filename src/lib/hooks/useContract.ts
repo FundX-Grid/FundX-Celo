@@ -10,22 +10,22 @@ export function useCampaignCount() {
   })
 }
 
+export function useIsGoalReached(id: number) {
+  return useReadContract({
+    address: FUNDX_CONTRACT as `0x${string}`,
+    abi: FUNDX_ABI,
+    functionName: "isGoalReached",
+    args: [BigInt(id)],
+  })
+}
+
+
 export function useCampaign(id: number) {
   return useReadContract({
     address: FUNDX_CONTRACT as `0x${string}`,
     abi: FUNDX_ABI,
     functionName: "getCampaign",
     args: [BigInt(id)],
-  })
-}
-
-export function useDonation(campaignId: number, donor: `0x${string}` | undefined) {
-  return useReadContract({
-    address: FUNDX_CONTRACT as `0x${string}`,
-    abi: FUNDX_ABI,
-    functionName: "getDonation",
-    args: donor ? [BigInt(campaignId), donor] : undefined,
-    query: { enabled: !!donor },
   })
 }
 
@@ -38,11 +38,12 @@ export function useIsPastDeadline(id: number) {
   })
 }
 
-export function useIsGoalReached(id: number) {
+export function useDonation(campaignId: number, donor: `0x${string}` | undefined) {
   return useReadContract({
     address: FUNDX_CONTRACT as `0x${string}`,
     abi: FUNDX_ABI,
-    functionName: "isGoalReached",
-    args: [BigInt(id)],
+    functionName: "getDonation",
+    args: donor ? [BigInt(campaignId), donor] : undefined,
+    query: { enabled: !!donor },
   })
 }

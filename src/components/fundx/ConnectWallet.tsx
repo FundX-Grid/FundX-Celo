@@ -85,6 +85,11 @@ export function ConnectWallet() {
             >
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-green-300 animate-pulse" />
+                {isMini && (
+                  <span className="text-[10px] text-emerald-600 border border-emerald-300/50 bg-emerald-50 px-2 py-0.5 rounded-full font-bold tracking-wider uppercase">
+                    MiniPay
+                  </span>
+                )}
                 <span className="font-mono text-sm">
                   {address.slice(0, 6)}...{address.slice(-4)}
                 </span>

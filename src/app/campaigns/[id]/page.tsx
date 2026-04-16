@@ -118,14 +118,26 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
   }
   
   if (!donateDisabledReason && donateAmount === "0") donateDisabledReason = "Enter Amount"
+  // Mock campaigns (slug IDs) can't accept on-chain donations
+  if (!donateDisabledReason && !isContractCampaign) donateDisabledReason = "Demo Campaign"
 
   const handleDonate = async () => {
+    if (!isContractCampaign) {
+      toast.error("Demo Campaign", { description: "This is a demo campaign. On-chain donations are only available for real campaigns." })
+      return
+    }
     if (!isConnected && !isMini) {
       toast.error("Connect Wallet", { description: "Please connect your wallet to donate." })
       return
     }
     if (!donateAmount || Number(donateAmount) <= 0) {
       toast.error("Invalid Amount", { description: "Please enter a valid amount to donate." })
+      return
+    }
+
+    const campaignIdNum = Number(id)
+    if (isNaN(campaignIdNum)) {
+      toast.error("Invalid Campaign", { description: "This campaign cannot receive on-chain donations." })
       return
     }
     
@@ -157,7 +169,7 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
         address: FUNDX_CONTRACT as `0x${string}`,
         abi: FUNDX_ABI,
         functionName: "donate",
-        args: [BigInt(id), amountUnits],
+        args: [BigInt(campaignIdNum), amountUnits],
         feeCurrency,
       } as any)
 

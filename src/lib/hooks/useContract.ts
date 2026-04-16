@@ -6,7 +6,7 @@ export function useCampaignCount() {
   return useReadContract({
     address: FUNDX_CONTRACT as `0x${string}`,
     abi: FUNDX_ABI,
-    functionName: "campaignCount",
+    functionName: "campaignCount_",
   })
 }
 

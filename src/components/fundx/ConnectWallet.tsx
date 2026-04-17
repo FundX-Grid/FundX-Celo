@@ -39,8 +39,8 @@ export function ConnectWallet() {
         description: "Ready to fund the future.",
         duration: 3000,
       })
-      const timer = setTimeout(() => setJustConnected(false), 2000)
-      return () => clearTimeout(timer)
+      const timer_ = setTimeout(() => setJustConnected(false), 2000)
+      return () => clearTimeout(timer_)
     }
   }, [isConnected])
 
@@ -56,7 +56,7 @@ export function ConnectWallet() {
 
   if (!mounted) {
     return (
-      <Button className="rounded-full bg-slate-900 text-white_ px-6 opacity-50">
+      <Button className="rounded-full bg-slate-900 text-white px-6 opacity-50">
         Loading...
       </Button>
     )
@@ -148,7 +148,7 @@ export function ConnectWallet() {
       {({ openConnectModal }) => (
         <Button
           onClick={openConnectModal}
-          className="rounded-full bg-slate-900 text-white_ hover:bg-[#fbe72b] hover:text-slate-900 shadow-lg shadow-slate-900/20 px-6 transition-all hover:scale-105"
+          className="rounded-full bg-slate-900 text-white hover:bg-[#fbe72b] hover:text-slate-900 shadow-lg shadow-slate-900/20 px-6 transition-all hover:scale-105"
         >
           Connect Wallet
         </Button>

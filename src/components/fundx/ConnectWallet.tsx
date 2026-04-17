@@ -39,8 +39,8 @@ export function ConnectWallet() {
         description: "Ready to fund the future.",
         duration: 3000,
       })
-      const timer_ = setTimeout(() => setJustConnected(false), 2000)
-      return () => clearTimeout(timer_)
+      const timer = setTimeout(() => setJustConnected(false), 2000)
+      return () => clearTimeout(timer)
     }
   }, [isConnected])
 

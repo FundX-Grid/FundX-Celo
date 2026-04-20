@@ -26,7 +26,7 @@ export function Navbar() {
   return (
     <>
       <div className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4">
-        <nav className="flex w-full max-w-6xl items-center justify-between rounded-full bg-white/80 px-6 py-3 shadow-soft-md backdrop-blur-md border border-white/20">
+        <nav className="flex w-full max-w-6xl items-center justify-between rounded-full bg-white_/80 px-6 py-3 shadow-soft-md backdrop-blur-md border border-white_/20">
           
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 cursor-pointer">
@@ -80,7 +80,7 @@ export function Navbar() {
           mobileOpen ? "translate-y-0" : "-translate-y-full"
         }`}
       >
-        <div className="bg-white/95 backdrop-blur-xl rounded-b-3xl shadow-2xl border-b border-slate-200/60 px-6 pt-8 pb-8">
+        <div className="bg-white_/95 backdrop-blur-xl rounded-b-3xl shadow-2xl border-b border-slate-200/60 px-6 pt-8 pb-8">
           {/* Header row */}
           <div className="flex items-center justify-between mb-8">
             <Link href="/" onClick={() => setMobileOpen(false)} className="flex items-center gap-2">

@@ -85,7 +85,7 @@ export default function CreateCampaign() {
     }
     try {
       toast.loading("Deploying Campaign...", { id: "deploy" })
-      const tokenAddress = formData.currency === "cUSD" ? TOKEN_ADDRESSES.cUSD : TOKEN_ADDRESSES.USDC
+      const tokenAddress_ = formData.currency === "cUSD" ? TOKEN_ADDRESSES.cUSD : TOKEN_ADDRESSES.USDC
       const decimals = formData.currency === "cUSD" ? 18 : 6
       const goalUnits = parseUnits(formData.goal, decimals)
       const durationSeconds = BigInt(Number(formData.duration) * 86400)
@@ -93,13 +93,13 @@ export default function CreateCampaign() {
       // feeCurrency: in MiniPay use cUSD (only supported); otherwise use the campaign token
       const feeCurrency = isMini
         ? (TOKEN_ADDRESSES.cUSD as `0x${string}`)
-        : (tokenAddress as `0x${string}`)
+        : (tokenAddress_ as `0x${string}`)
 
       const hash = await writeContractAsync({
         address: FUNDX_CONTRACT as `0x${string}`,
         abi: FUNDX_ABI,
         functionName: "createCampaign",
-        args: [tokenAddress as `0x${string}`, goalUnits, durationSeconds, fundingModelUint],
+        args: [tokenAddress_ as `0x${string}`, goalUnits, durationSeconds, fundingModelUint],
         feeCurrency,
       } as any)
 

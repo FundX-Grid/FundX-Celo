@@ -1,14 +1,14 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Navbar } from "@/components/fundx_/Navbar"
-import { Footer } from "@/components/fundx_/Footer"
+import { Navbar } from "@/components/fundx/Navbar"
+import { Footer } from "@/components/fundx/Footer"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, ArrowLeft, CheckCircle2 } from "lucide-react"
 import { useAccount, useWriteContract } from "wagmi"
 import { waitForTransactionReceipt } from "@wagmi/core"
 import { parseUnits } from "viem"
-import { FUNDX_ABI } from "@/lib/fundx_-abi"
+import { FUNDX_ABI } from "@/lib/fundx-abi"
 import { FUNDX_CONTRACT, TOKEN_ADDRESSES, config } from "@/lib/celo-config"
 import { toast } from "sonner"
 

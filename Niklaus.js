@@ -380,6 +380,8 @@ async function runCycle(cycleNumber, creatorWallet, funderWallet, masterClient) 
       })
     );
 
+    // Delay to let RPC catch up with the refund transaction
+    await sleep(8000);
     const finalBal = await getCUSDBalance(funderAddr);
     log(`  💰 Funder balance after refund: ${formatUnits(finalBal, 18)} cUSD`);
     log(`\n✅ CYCLE #${cycleNumber} COMPLETE`);
@@ -429,9 +431,13 @@ async function main() {
     //         If it is the creator, fall back to rotation.
     // This way rotation drives the pattern and discovery is an opportunistic override.
 
-    const fundedIndex = await findFundedWalletIndex(wallets, creatorIndex);
+    const fundedIndex = await findFundedWalletIndex(wallets, -1); // don't exclude creator yet
 
-    if (fundedIndex !== -1 && fundedIndex !== creatorIndex) {
+    if (fundedIndex !== -1) {
+      if (fundedIndex === creatorIndex) {
+        log(`[Discovery] 🔄 Funder-Creator collision! Rotating creator index ${creatorIndex}...`);
+        creatorIndex = (creatorIndex + 1) % wallets.length;
+      }
       log(`[Discovery] Wallet #${fundedIndex} (${shortAddr(wallets[fundedIndex].account.address)}) has funds — using as funder.`);
       funderIndex = fundedIndex;
     } else {

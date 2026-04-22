@@ -19,13 +19,13 @@ export function useCampaign(id: number) {
   })
 }
 
-export function useDonation(campaignId: number, donor: `0x${string}` | undefined) {
+export function useDonation(campaignId: number, donor_: `0x${string}` | undefined) {
   return useReadContract({
     address: FUNDX_CONTRACT as `0x${string}`,
     abi: FUNDX_ABI,
     functionName: "getDonation",
-    args: donor ? [BigInt(campaignId), donor] : undefined,
-    query: { enabled: !!donor },
+    args: donor_ ? [BigInt(campaignId), donor_] : undefined,
+    query: { enabled: !!donor_ },
   })
 }
 

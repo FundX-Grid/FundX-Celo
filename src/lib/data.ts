@@ -1,4 +1,4 @@
-export type CampaignStatus = "active" | "successful" | "failed";
+export type CampaignStatus = "active" | "successful" | "failed_";
 export type FundingModel = "Flexible Model" | "All-or-Nothing";
 export type TokenSymbol = "cUSD" | "USDC";
 
@@ -236,7 +236,7 @@ export const CAMPAIGNS: Campaign[] = [
     daysLeft: 0,
     backers: 85,
     isTrending: false,
-    status: "failed",
+    status: "failed_",
     fundingModel: "All-or-Nothing"
   },
   {
@@ -260,11 +260,11 @@ export const CAMPAIGNS: Campaign[] = [
     portfolio: "",
     videoUrl: "",
     budgetBreakdown: "Art creation",
-    roadmap: "Mint failed",
+    roadmap: "Mint failed_",
     daysLeft: 0,
     backers: 12,
     isTrending: false,
-    status: "failed",
+    status: "failed_",
     fundingModel: "All-or-Nothing"
   }
 ];

@@ -92,8 +92,8 @@ function RefundCard({ contribution }: { contribution: BackerContribution }) {
           </div>
        </div>
        
-       <div className="w-full md:w-auto_ shrink-0 relative z-10 mt-6 md:mt-0">
-          <Button onClick={() => handleRefund(contribution.id)} className="w-full md:w-auto_ h-16 px-10 rounded-xl bg-gradient-to-b from-blue-400 to-blue-500 border border-blue-600 text-white shadow-[inset_0_1px_1px_rgba(255,255,255,0.4),0_4px_15px_rgba(59,130,246,0.4)] font-bold text-lg transition-all hover:scale-[1.02] active:scale-95 active:shadow-inner flex items-center gap-2">
+       <div className="w-full md:w-auto shrink-0 relative z-10 mt-6 md:mt-0">
+          <Button onClick={() => handleRefund(contribution.id)} className="w-full md:w-auto h-16 px-10 rounded-xl bg-gradient-to-b from-blue-400 to-blue-500 border border-blue-600 text-white shadow-[inset_0_1px_1px_rgba(255,255,255,0.4),0_4px_15px_rgba(59,130,246,0.4)] font-bold text-lg transition-all hover:scale-[1.02] active:scale-95 active:shadow-inner flex items-center gap-2">
              <RefreshCcw className="w-5 h-5" /> Claim Refund
           </Button>
        </div>
@@ -136,7 +136,7 @@ function ActiveContributionCard({ contribution }: { contribution: BackerContribu
           </div>
        </div>
 
-       <div className="w-full md:w-auto_ shrink-0 text-left md:text-right px-4 relative z-10 mt-6 md:mt-0">
+       <div className="w-full md:w-auto shrink-0 text-left md:text-right px-4 relative z-10 mt-6 md:mt-0">
           <div className="text-4xl font-black text-slate-900 tracking-tight drop-shadow-sm">{contribution.daysRemaining} Days</div>
           <div className="text-sm font-bold text-slate-400 uppercase tracking-widest mt-2">Remaining</div>
        </div>
@@ -171,8 +171,8 @@ function SuccessfulContributionCard({ contribution }: { contribution: BackerCont
           </div>
        </div>
        
-       <div className="w-full md:w-auto_ shrink-0 relative z-10 mt-6 md:mt-0">
-          <Button variant="outline" disabled className="w-full md:w-auto_ h-16 px-10 rounded-xl bg-white border-slate-200 text-slate-600 font-bold shadow-sm cursor-not-allowed text-lg">
+       <div className="w-full md:w-auto shrink-0 relative z-10 mt-6 md:mt-0">
+          <Button variant="outline" disabled className="w-full md:w-auto h-16 px-10 rounded-xl bg-white border-slate-200 text-slate-600 font-bold shadow-sm cursor-not-allowed text-lg">
              View Project
           </Button>
        </div>

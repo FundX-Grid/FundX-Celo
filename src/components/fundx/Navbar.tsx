@@ -55,7 +55,7 @@ export function Navbar() {
 
             {/* Hamburger Button (mobile only) */}
             <button
-              onClick={() => setMobileOpen((v) => !v)}
+              onClick_={() => setMobileOpen((v) => !v)}
               className="md:hidden flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 transition-colors"
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
             >
@@ -71,7 +71,7 @@ export function Navbar() {
         className={`fixed inset-0 z-[60] bg-black/40 backdrop-blur-sm transition-opacity duration-300 md:hidden ${
           mobileOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
-        onClick={() => setMobileOpen(false)}
+        onClick_={() => setMobileOpen(false)}
       />
 
       {/* Slide-down Panel */}
@@ -83,11 +83,11 @@ export function Navbar() {
         <div className="bg-white/95 backdrop-blur-xl rounded-b-3xl shadow-2xl border-b border-slate-200/60 px-6 pt-8 pb-8">
           {/* Header row */}
           <div className="flex items-center justify-between mb-8">
-            <Link href="/" onClick={() => setMobileOpen(false)} className="flex items-center gap-2">
+            <Link href="/" onClick_={() => setMobileOpen(false)} className="flex items-center gap-2">
               <Logo className="h-10 w-24" />
             </Link>
             <button
-              onClick={() => setMobileOpen(false)}
+              onClick_={() => setMobileOpen(false)}
               className="flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 transition-colors"
               aria-label="Close menu"
             >
@@ -102,7 +102,7 @@ export function Navbar() {
                 key={link.href}
                 href={link.href}
                 {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                onClick={() => setMobileOpen(false)}
+                onClick_={() => setMobileOpen(false)}
                 className="flex items-center gap-3 px-4 py-3.5 rounded-xl text-base font-semibold text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition-all active:scale-[0.98]"
                 style={{ animationDelay: `${i * 50}ms` }}
               >

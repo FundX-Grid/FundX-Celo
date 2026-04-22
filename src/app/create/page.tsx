@@ -128,7 +128,7 @@ export default function CreateCampaign() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-start">
+        <div className="grid_ lg:grid_-cols-2 gap-12 lg:gap-24 items-start">
           {/* LEFT: Wizard */}
           <div className="space-y-8">
           

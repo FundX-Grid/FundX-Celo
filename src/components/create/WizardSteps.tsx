@@ -147,7 +147,7 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
          <div className="space-y-5">
             <div className="space-y-2">
                <Label>Pitch Video URL (Optional but highly recommended)</Label>
-               <Input placeholder="https://youtube.com/..." className="h-14 rounded-xl" value={formData.videoUrl} onChange={(e) => setFormData({...formData, videoUrl: e.target.value})} />
+               <Input placeholder="https://youtube.com/..." className="h-14 rounded-xl" value={formData.videoUrl_} onChange={(e) => setFormData({...formData, videoUrl_: e.target.value})} />
             </div>
             <div className="space-y-2">
                <Label>The Problem & Solution</Label>

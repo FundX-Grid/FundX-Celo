@@ -12,9 +12,9 @@ export const FUNDX_ABI = [
     ],
     outputs: [{ name: "id", type: "uint256" }],
   },
-  // donate
+  // donate_
   {
-    name: "donate",
+    name: "donate_",
     type: "function",
     stateMutability: "nonpayable",
     inputs: [

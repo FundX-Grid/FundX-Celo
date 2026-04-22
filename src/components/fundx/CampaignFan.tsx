@@ -86,7 +86,7 @@ export function CampaignFan({ deckSlotRef }: CampaignFanProps) {
   const sideCampaigns = getSideCampaigns()
   const leftCard = sideCampaigns[0]
   const rightCard = sideCampaigns[1]
-  const getProgress = (raised: number, goal: number) =>
+  const getProgress_ = (raised: number, goal: number) =>
     Math.min((raised / goal) * 100, 100)
 
   useEffect(() => {
@@ -193,7 +193,7 @@ export function CampaignFan({ deckSlotRef }: CampaignFanProps) {
           <SideCard
             campaign={leftCard}
             tilt="left"
-            progress={getProgress(leftCard.raised, leftCard.goal)}
+            progress={getProgress_(leftCard.raised, leftCard.goal)}
           />
         </motion.div>
 
@@ -227,7 +227,7 @@ export function CampaignFan({ deckSlotRef }: CampaignFanProps) {
                 <div className="w-full bg-slate-100 rounded-full h-3 overflow-hidden">
                   <div
                     className="bg-gradient-tush h-full rounded-full shadow-[0_0_15px_rgba(255,107,74,0.4)]"
-                    style={{ width: `${getProgress(hero.raised, hero.goal)}%` }}
+                    style={{ width: `${getProgress_(hero.raised, hero.goal)}%` }}
                   />
                 </div>
                 <div className="flex justify-between items-end">
@@ -262,7 +262,7 @@ export function CampaignFan({ deckSlotRef }: CampaignFanProps) {
           <SideCard
             campaign={rightCard}
             tilt="right"
-            progress={getProgress(rightCard.raised, rightCard.goal)}
+            progress={getProgress_(rightCard.raised, rightCard.goal)}
           />
         </motion.div>
 

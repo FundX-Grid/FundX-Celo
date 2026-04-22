@@ -28,13 +28,13 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
   const { isConnected } = useAccount()
   const { writeContractAsync } = useWriteContract()
   const [donateAmount, setDonateAmount] = useState("")
-  const [mounted, setMounted_] = useState(false)
+  const [mounted, setMounted] = useState(false)
   const [isMini, setIsMini] = useState(false)
 
   const { id } = use(params)
   
   useEffect(() => {
-    setMounted_(true)
+    setMounted(true)
     setIsMini(isMiniPay())
   }, [])
 

@@ -179,7 +179,7 @@ export default function ExplorePage() {
                   description={campaign.description}
                   raised={campaign.raised}
                   goal={campaign.goal}
-                  image_={campaign.image_}
+                  image={campaign.image}
                   currency={campaign.currency} // 🚨 ADDED: Currency to support multi-asset mock data
                 />
               </div>

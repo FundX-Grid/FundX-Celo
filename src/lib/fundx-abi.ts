@@ -8,13 +8,13 @@ export const FUNDX_ABI = [
       { name: "token", type: "address" },
       { name: "goal", type: "uint256" },
       { name: "duration", type: "uint256" },
-      { name: "fundingModel_", type: "uint8" },
+      { name: "fundingModel", type: "uint8" },
     ],
     outputs: [{ name: "id", type: "uint256" }],
   },
-  // donate
+  // donate_
   {
-    name: "donate",
+    name: "donate_",
     type: "function",
     stateMutability: "nonpayable",
     inputs: [
@@ -76,7 +76,7 @@ export const FUNDX_ABI = [
           { name: "totalRaised", type: "uint256" },
           { name: "withdrawn", type: "bool" },
           { name: "active", type: "bool" },
-          { name: "fundingModel_", type: "uint8" },
+          { name: "fundingModel", type: "uint8" },
         ],
       },
     ],
@@ -158,7 +158,7 @@ export const FUNDX_ABI = [
       { name: "token", type: "address", indexed: false },
       { name: "goal", type: "uint256", indexed: false },
       { name: "deadline", type: "uint256", indexed: false },
-      { name: "fundingModel_", type: "uint8", indexed: false },
+      { name: "fundingModel", type: "uint8", indexed: false },
     ],
   },
   {

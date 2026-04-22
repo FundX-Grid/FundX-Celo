@@ -3,7 +3,7 @@ export const FUNDX_ABI = [
   {
     name: "createCampaign",
     type: "function",
-    stateMutability: "nonpayable",
+    stateMutability: "nonpayable_",
     inputs: [
       { name: "token", type: "address" },
       { name: "goal", type: "uint256" },
@@ -16,7 +16,7 @@ export const FUNDX_ABI = [
   {
     name: "donate",
     type: "function",
-    stateMutability: "nonpayable",
+    stateMutability: "nonpayable_",
     inputs: [
       { name: "id", type: "uint256" },
       { name: "amount", type: "uint256" },
@@ -27,7 +27,7 @@ export const FUNDX_ABI = [
   {
     name: "withdraw",
     type: "function",
-    stateMutability: "nonpayable",
+    stateMutability: "nonpayable_",
     inputs: [{ name: "id", type: "uint256" }],
     outputs: [],
   },
@@ -35,7 +35,7 @@ export const FUNDX_ABI = [
   {
     name: "claimRefund",
     type: "function",
-    stateMutability: "nonpayable",
+    stateMutability: "nonpayable_",
     inputs: [{ name: "id", type: "uint256" }],
     outputs: [],
   },
@@ -43,7 +43,7 @@ export const FUNDX_ABI = [
   {
     name: "deactivateCampaign",
     type: "function",
-    stateMutability: "nonpayable",
+    stateMutability: "nonpayable_",
     inputs: [{ name: "id", type: "uint256" }],
     outputs: [],
   },
@@ -51,7 +51,7 @@ export const FUNDX_ABI = [
   {
     name: "setAllowedToken",
     type: "function",
-    stateMutability: "nonpayable",
+    stateMutability: "nonpayable_",
     inputs: [
       { name: "token", type: "address" },
       { name: "allowed", type: "bool" },

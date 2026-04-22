@@ -114,7 +114,7 @@ export function CampaignFan({ deckSlotRef }: CampaignFanProps) {
     offset: ["start end", "end end"],
   })
 
-  // Smooth spring applied to raw scroll_ progress
+  // Smooth spring applied to raw scroll progress
   const smoothProgress = useSpring(scrollYProgress, {
     stiffness: 60,
     damping: 20,
@@ -135,9 +135,9 @@ export function CampaignFan({ deckSlotRef }: CampaignFanProps) {
   const rightRotate = useTransform(smoothProgress, [0, 1], [6, 0])
   const rightZ = useTransform(smoothProgress, [0, 1], [15, 0])
 
-  // Animate gap — at scroll_ 0 cards have no gap (stacked), at scroll_ 1 gap is 24px
+  // Animate gap — at scroll 0 cards have no gap (stacked), at scroll 1 gap is 24px
   const cardGap = useTransform(smoothProgress, [0, 1], [0, 24])
-  // Pull side cards behind center card at scroll_ 0 using negative margin
+  // Pull side cards behind center card at scroll 0 using negative margin
   // At scale 0.15, center card is ~96px wide, side cards are ~45px wide
   // Negative margin of -320px pulls side cards almost completely behind center
   const sideCardMargin = useTransform(smoothProgress, [0, 1], [-200, 0])

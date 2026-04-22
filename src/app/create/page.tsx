@@ -20,7 +20,7 @@ export interface CreateCampaignData {
   creatorName: string;
   creatorBio: string;
   email: string;
-  twitter: string;       
+  twitter_: string;       
   github: string;        
   portfolio: string;     
   title: string;
@@ -48,7 +48,7 @@ export default function CreateCampaign() {
     creatorName: "",
     creatorBio: "",
     email: "",
-    twitter: "",
+    twitter_: "",
     github: "",
     portfolio: "",
     title: "",

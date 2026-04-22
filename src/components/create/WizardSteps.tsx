@@ -152,7 +152,7 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
             <div className="space-y-2">
                <Label>The Problem & Solution</Label>
                <Textarea 
-                  placeholder="Dive deep_. What specific problem are you solving? How does it work? Why now?" 
+                  placeholder="Dive deep. What specific problem are you solving? How does it work? Why now?" 
                   className="h-64 rounded-xl resize-none p-5 text-base leading-relaxed"
                   value={formData.description}
                   onChange={(e) => setFormData({...formData, description: e.target.value})}
@@ -259,7 +259,7 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
                <p className={`text-sm mt-1 ${formData.currency === 'cUSD' ? 'text-green-700/80' : 'text-blue-700/80'}`}>
                   {formData.currency === 'cUSD' 
                      ? "cUSD ensures your funding runway doesn't evaporate due to market volatility, natively on Celo." 
-                     : "USDC is the industry standard stablecoin, providing deep_ liquidity and trust."}
+                     : "USDC is the industry standard stablecoin, providing deep liquidity and trust."}
                </p>
             </div>
          </div>

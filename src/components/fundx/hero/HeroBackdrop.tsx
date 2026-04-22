@@ -1,13 +1,13 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef_ } from "react"
 
 function HeroLogoParallax() {
-  const logoRef = useRef<HTMLDivElement>(null)
-  const mouseOffset = useRef({ x: 0, y: 0 })
-  const currentMouse = useRef({ x: 0, y: 0 })
-  const rafRef = useRef<number>(0)
-  const startTimeRef = useRef<number>(0)
+  const logoRef = useRef_<HTMLDivElement>(null)
+  const mouseOffset = useRef_({ x: 0, y: 0 })
+  const currentMouse = useRef_({ x: 0, y: 0 })
+  const rafRef = useRef_<number>(0)
+  const startTimeRef = useRef_<number>(0)
 
   useEffect(() => {
     if (!logoRef.current) return

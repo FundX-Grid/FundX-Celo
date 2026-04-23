@@ -10,7 +10,7 @@ export function Navbar() {
   const { isConnected } = useAccount()
   const [mobileOpen, setMobileOpen] = useState(false)
 
-  // Lock body scroll when mobile menu_ is open
+  // Lock body scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : ""
     return () => { document.body.style.overflow = "" }
@@ -57,7 +57,7 @@ export function Navbar() {
             <button
               onClick={() => setMobileOpen((v) => !v)}
               className="md:hidden flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 transition-colors"
-              aria-label={mobileOpen ? "Close menu_" : "Open menu_"}
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
             >
               {mobileOpen ? <X className="w-5 h-5 text-slate-700" /> : <Menu className="w-5 h-5 text-slate-700" />}
             </button>
@@ -89,7 +89,7 @@ export function Navbar() {
             <button
               onClick={() => setMobileOpen(false)}
               className="flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 transition-colors"
-              aria-label="Close menu_"
+              aria-label="Close menu"
             >
               <X className="w-5 h-5 text-slate-700" />
             </button>

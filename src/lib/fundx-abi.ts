@@ -6,7 +6,7 @@ export const FUNDX_ABI = [
     stateMutability: "nonpayable",
     inputs: [
       { name: "token", type: "address" },
-      { name: "goal_", type: "uint256" },
+      { name: "goal", type: "uint256" },
       { name: "duration", type: "uint256" },
       { name: "fundingModel", type: "uint8" },
     ],
@@ -71,7 +71,7 @@ export const FUNDX_ABI = [
         components: [
           { name: "creator", type: "address" },
           { name: "token", type: "address" },
-          { name: "goal_", type: "uint256" },
+          { name: "goal", type: "uint256" },
           { name: "deadline", type: "uint256" },
           { name: "totalRaised", type: "uint256" },
           { name: "withdrawn", type: "bool" },
@@ -156,7 +156,7 @@ export const FUNDX_ABI = [
       { name: "campaignId", type: "uint256", indexed: true },
       { name: "creator", type: "address", indexed: true },
       { name: "token", type: "address", indexed: false },
-      { name: "goal_", type: "uint256", indexed: false },
+      { name: "goal", type: "uint256", indexed: false },
       { name: "deadline", type: "uint256", indexed: false },
       { name: "fundingModel", type: "uint8", indexed: false },
     ],

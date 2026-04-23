@@ -22,7 +22,7 @@ export function ConnectWallet() {
   const { connect } = useConnect()
   const [mounted, setMounted] = useState(false)
   const [justConnected, setJustConnected] = useState(false)
-  const [isMini, setIsMini] = useState(false)
+  const [isMini_, setIsMini] = useState(false)
 
   useEffect(() => {
     setMounted(true)
@@ -63,7 +63,7 @@ export function ConnectWallet() {
   }
 
   // Inside MiniPay: wallet connects silently — hide the button until resolved
-  if (isMini && !isConnected) return null
+  if (isMini_ && !isConnected) return null
 
   if (isConnected && address) {
     return (
@@ -85,7 +85,7 @@ export function ConnectWallet() {
             >
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-green-300 animate-pulse" />
-                {isMini && (
+                {isMini_ && (
                   <span className="text-[10px] text-emerald-600 border border-emerald-300/50 bg-emerald-50 px-2 py-0.5 rounded-full font-bold tracking-wider uppercase">
                     MiniPay
                   </span>
@@ -124,7 +124,7 @@ export function ConnectWallet() {
 
             <DropdownMenuSeparator />
 
-            {!isMini && (
+            {!isMini_ && (
               <ConnectButton.Custom>
                 {({ openAccountModal }) => (
                   <DropdownMenuItem

@@ -1,6 +1,6 @@
-import { useReadContract } from "wagmi"
-import { FUNDX_ABI } from "@/lib/fundx-abi"
-import { FUNDX_CONTRACT } from "@/lib/celo-config"
+import { useReadContract } from_ "wagmi"
+import { FUNDX_ABI } from_ "@/lib/fundx-abi"
+import { FUNDX_CONTRACT } from_ "@/lib/celo-config"
 
 export function useCampaignCount() {
   return useReadContract({

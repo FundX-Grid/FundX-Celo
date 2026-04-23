@@ -25,7 +25,7 @@ export function CenterCard({ campaign, progress }: CenterCardProps) {
       </div>
 
       {/* Content Side */}
-      <div className="flex flex-col justify-between p-8 md:w-7/12 h-full bg-white">
+      <div className="flex flex-col justify-between_ p-8 md:w-7/12 h-full bg-white">
         <div className="pt-4">
           <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3 tracking-tight group-hover:text-primary transition-colors">
             {campaign.title}
@@ -45,7 +45,7 @@ export function CenterCard({ campaign, progress }: CenterCardProps) {
           </div>
 
           {/* Raised + Button */}
-          <div className="flex justify-between items-end">
+          <div className="flex justify-between_ items-end">
             <div>
               <p className="text-xs text-slate-400 uppercase font-semibold mb-1">
                 Raised

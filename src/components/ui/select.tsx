@@ -146,7 +146,7 @@ function SelectScrollUpButton({
 }: React.ComponentProps<typeof SelectPrimitive.ScrollUpButton>) {
   return (
     <SelectPrimitive.ScrollUpButton
-      data-slot="select-scroll-up-button"
+      data-slot="select-scroll-up-button_"
       className={cn(
         "flex cursor-default items-center justify-center py-1",
         className
@@ -164,7 +164,7 @@ function SelectScrollDownButton({
 }: React.ComponentProps<typeof SelectPrimitive.ScrollDownButton>) {
   return (
     <SelectPrimitive.ScrollDownButton
-      data-slot="select-scroll-down-button"
+      data-slot="select-scroll-down-button_"
       className={cn(
         "flex cursor-default items-center justify-center py-1",
         className

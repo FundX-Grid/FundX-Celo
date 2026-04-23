@@ -38,6 +38,9 @@ export interface CreateCampaignData {
   currency: "cUSD" | "USDC"; 
 }
 
+  const handleNext = () => setStep(step + 1)
+  const handleBack = () => setStep(step - 1)
+
 export default function CreateCampaign() {
   const { isConnected } = useAccount()
   const { writeContractAsync } = useWriteContract()
@@ -65,9 +68,6 @@ export default function CreateCampaign() {
     fundingModel: "0",
     currency: "cUSD", 
   })
-
-  const handleNext = () => setStep(step + 1)
-  const handleBack = () => setStep(step - 1)
 
   useEffect(() => {
     if (isMiniPay()) {
@@ -148,7 +148,7 @@ export default function CreateCampaign() {
 
                  return (
                    <div key={num} className="flex items-center gap-2 shrink-0">
-                      <div className={`w-8 h-8 rounded_-full flex items-center justify-center font-bold text-sm border-2 transition-all ${circleStyle}`}>
+                      <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm border-2 transition-all ${circleStyle}`}>
                          {isCompleted ? <CheckCircle2 className="w-8 h-8" /> : num}
                       </div>
                       <span className={`text-sm font-bold ${isCompleted || isCurrent ? "text-slate-900" : "text-slate-300"}`}>{label}</span>
@@ -157,7 +157,7 @@ export default function CreateCampaign() {
                })}
             </div>
 
-            <div className="bg-white p-8 pb-28 rounded_-[2rem] shadow-xl border border-slate-100 min-h-[550px] relative">
+            <div className="bg-white p-8 pb-28 rounded-[2rem] shadow-xl border border-slate-100 min-h-[550px] relative">
               {/* RENDER STEP MODULE */}
               <WizardSteps
                 step={step}
@@ -171,7 +171,7 @@ export default function CreateCampaign() {
                   <Button
                     variant="ghost"
                     onClick={handleBack}
-                    className="h-12 px-6 rounded_-xl text-slate-500 hover:text-slate-900"
+                    className="h-12 px-6 rounded-xl text-slate-500 hover:text-slate-900"
                   >
                     <ArrowLeft className="w-4 h-4 mr-2" /> Back
                   </Button>
@@ -182,14 +182,14 @@ export default function CreateCampaign() {
                 {step < 6 ? (
                   <Button
                     onClick={handleNext}
-                    className="h-12 px-8 rounded_-xl bg-slate-900 text-white hover:bg-slate-800 hover:scale-105 transition-all"
+                    className="h-12 px-8 rounded-xl bg-slate-900 text-white hover:bg-slate-800 hover:scale-105 transition-all"
                   >
                     Next Step <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
                 ) : (
                   <Button
                     onClick={handleSubmit}
-                    className="h-12 px-8 rounded_-xl bg-gradient-tush text-white shadow-glow hover:scale-105 transition-all font-bold"
+                    className="h-12 px-8 rounded-xl bg-gradient-tush text-white shadow-glow hover:scale-105 transition-all font-bold"
                   >
                     {(isConnected || isMini) ? "Deploy Campaign" : "Connect & Deploy"}
                   </Button>

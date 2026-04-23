@@ -198,11 +198,11 @@ export function CreatorTab() {
                             <span className="px-3 py-1 rounded-lg bg-green-50 border border-green-100/50 text-green-700 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
                                <CheckCircle2 className="w-3.5 h-3.5 text-green-500" /> Successful
                             </span>
-                            <span className="text-slate-400 text-sm font-semibold_">{campaign.model}</span>
+                            <span className="text-slate-400 text-sm font-semibold">{campaign.model}</span>
                          </div>
                          <h3 className="text-3xl font-bold text-slate-900 tracking-tight">{campaign.title}</h3>
                          <div className="flex items-center gap-4 text-sm mt-4">
-                            <div className="font-semibold_ text-slate-700 bg-slate-50 px-5 py-2.5 rounded-xl border border-slate-200/60 shadow-[inset_0_2px_4px_rgba(0,0,0,0.03)] text-base">
+                            <div className="font-semibold text-slate-700 bg-slate-50 px-5 py-2.5 rounded-xl border border-slate-200/60 shadow-[inset_0_2px_4px_rgba(0,0,0,0.03)] text-base">
                                Raised: <span className="text-green-600 font-extrabold">{formatMoney(campaign.raised, campaign.currency)}</span>
                             </div>
                             <div className="text-slate-500 font-medium text-base">Goal: {campaign.goal.toLocaleString()} {campaign.currency}</div>
@@ -235,11 +235,11 @@ export function CreatorTab() {
                             <span className="px-3 py-1 rounded-lg bg-orange-50 border border-orange-100/50 text-orange-600 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
                                <Clock className="w-3.5 h-3.5" /> Active
                             </span>
-                            <span className="text-slate-400 text-sm font-semibold_">{campaign.model}</span>
+                            <span className="text-slate-400 text-sm font-semibold">{campaign.model}</span>
                          </div>
                          <h3 className="text-3xl font-bold text-slate-900 tracking-tight">{campaign.title}</h3>
                          <div className="flex items-center gap-4 text-sm mt-4">
-                            <div className="font-semibold_ text-slate-700 bg-slate-50 px-5 py-2.5 rounded-xl border border-slate-200/60 shadow-[inset_0_2px_4px_rgba(0,0,0,0.03)] text-base">
+                            <div className="font-semibold text-slate-700 bg-slate-50 px-5 py-2.5 rounded-xl border border-slate-200/60 shadow-[inset_0_2px_4px_rgba(0,0,0,0.03)] text-base">
                                Raised: <span className="text-orange-600 font-extrabold">{formatMoney(campaign.raised, campaign.currency)}</span>
                             </div>
                             <div className="text-slate-500 font-medium text-base">Goal: {campaign.goal.toLocaleString()} {campaign.currency}</div>
@@ -276,11 +276,11 @@ export function CreatorTab() {
                             <span className="px-3 py-1 rounded-lg bg-white border border-red-100 text-red-600 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
                                <XCircle className="w-3.5 h-3.5 text-red-500" /> Failed
                             </span>
-                            <span className="text-slate-400 text-sm font-semibold_">{campaign.model}</span>
+                            <span className="text-slate-400 text-sm font-semibold">{campaign.model}</span>
                          </div>
                          <h3 className="text-3xl font-bold text-slate-500 line-through decoration-slate-300 decoration-2 tracking-tight">{campaign.title}</h3>
                          <div className="flex items-center gap-4 text-sm mt-4">
-                            <div className="font-semibold_ text-slate-500 bg-white/50 px-5 py-2.5 rounded-xl border border-slate-200/60 shadow-[inset_0_2px_4px_rgba(0,0,0,0.03)] text-base">
+                            <div className="font-semibold text-slate-500 bg-white/50 px-5 py-2.5 rounded-xl border border-slate-200/60 shadow-[inset_0_2px_4px_rgba(0,0,0,0.03)] text-base">
                                Raised: {formatMoney(campaign.raised, campaign.currency)}
                             </div>
                             <div className="text-slate-500 font-medium text-base">Goal: {campaign.goal.toLocaleString()} {campaign.currency}</div>

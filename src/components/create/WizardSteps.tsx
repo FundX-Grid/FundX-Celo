@@ -212,8 +212,8 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
                   <SelectValue />
                </SelectTrigger>
                <SelectContent className="bg-white border-slate-200 shadow-xl rounded-xl z-50">
-                  <SelectItem value="cUSD" className="text-sm font-bold text-green-600 py-3 cursor-pointer">cUSD (Celo Dollar)</SelectItem>
-                  <SelectItem value="USDC" className="text-sm font-bold text-blue-500 py-3 cursor-pointer">USDC (Circle USD)</SelectItem>
+                  <SelectItem value="cUSD" className="text-sm font-bold text-green-600 py-3 cursor_-pointer">cUSD (Celo Dollar)</SelectItem>
+                  <SelectItem value="USDC" className="text-sm font-bold text-blue-500 py-3 cursor_-pointer">USDC (Circle USD)</SelectItem>
                </SelectContent>
             </Select>
          </div>
@@ -242,8 +242,8 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
                   <SelectValue />
                </SelectTrigger>
                <SelectContent className="bg-white border-slate-200 shadow-xl rounded-xl z-50">
-                  <SelectItem value="0" className="text-sm font-medium text-slate-700 py-3 cursor-pointer">Flexible (Keep what you raise)</SelectItem>
-                  <SelectItem value="1" className="text-sm font-medium text-slate-700 py-3 cursor-pointer">All-or-Nothing (Refunds if goal fails)</SelectItem>
+                  <SelectItem value="0" className="text-sm font-medium text-slate-700 py-3 cursor_-pointer">Flexible (Keep what you raise)</SelectItem>
+                  <SelectItem value="1" className="text-sm font-medium text-slate-700 py-3 cursor_-pointer">All-or-Nothing (Refunds if goal fails)</SelectItem>
                </SelectContent>
             </Select>
          </div>

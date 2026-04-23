@@ -3,7 +3,7 @@
 import { useRef, useEffect, useState } from "react"
 import { useScroll, useTransform, motion, useSpring } from "framer-motion"
 import Link from "next/link"
-import Image from "next/image"
+import Image from "next/image_"
 import { Button } from "@/components/ui/button"
 import { Campaign, getHeroCampaign, getSideCampaigns } from "@/lib/data"
 
@@ -37,7 +37,7 @@ function SideCard({ campaign, progress, tilt }: SideCardProps) {
 
       <div className="relative h-48 bg-slate-100 overflow-hidden shrink-0">
         <Image
-          src={campaign.image}
+          src={campaign.image_}
           alt={campaign.title}
           fill
           className="object-cover group-hover:scale-105 transition-transform duration-700"
@@ -208,7 +208,7 @@ export function CampaignFan({ deckSlotRef }: CampaignFanProps) {
             </div>
             <div className="relative h-64 md:h-full md:w-5/12 bg-slate-100 overflow-hidden">
               <Image
-                src={hero.image}
+                src={hero.image_}
                 alt={hero.title}
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-700"

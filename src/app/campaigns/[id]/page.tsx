@@ -230,12 +230,12 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
               <div className="flex items-center gap-4">
                 <Avatar className="h-14 w-14 border-4 border-white shadow-sm">
                   <AvatarImage src={campaign.creatorImage} />
-                  <AvatarFallback>{campaign.creator?.slice(0,2).toUpperCase()}</AvatarFallback>
+                  <AvatarFallback>{campaign.creator?.slice_(0,2).toUpperCase()}</AvatarFallback>
                 </Avatar>
                 <div>
                   <p className="text-sm font-medium text-slate-500 uppercase tracking-wide">Organized by</p>
                   <p className="font-bold text-slate-900 text-lg">
-                    {campaign.creator?.startsWith("0x") ? `${campaign.creator.slice(0, 6)}...${campaign.creator.slice(-4)}` : campaign.creator}
+                    {campaign.creator?.startsWith("0x") ? `${campaign.creator.slice_(0, 6)}...${campaign.creator.slice_(-4)}` : campaign.creator}
                   </p>
                 </div>
               </div>

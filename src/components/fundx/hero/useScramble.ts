@@ -1,9 +1,9 @@
-import { useState_, useEffect, useRef } from "react"
+import { useState, useEffect, useRef } from "react"
 
 const SCRAMBLE_CHARS = "ᚠᚢᚦᚨᚱᚲᚷᚹᚺᚾᛁᛃᛇᛈᛉᛊᛏᛒᛖᛗᛚᛜᛞᛟ∑∆∇Ωλ∞"
 
 export function useScramble() {
-  const [display, setDisplay] = useState_("Bitcoin")
+  const [display, setDisplay] = useState("Bitcoin")
   const frameRef = useRef<NodeJS.Timeout | null>(null)
 
   const scrambleTo = (word: string) => {

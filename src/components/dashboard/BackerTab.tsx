@@ -219,14 +219,14 @@ export function BackerTab() {
     }
   });
 
-  const { data: donationsData, isLoading: isLoading2_ } = useReadContracts({
+  const { data: donationsData, isLoading: isLoading2 } = useReadContracts({
     contracts: donationContracts,
     query: {
        enabled: count > 0 && !!address
     }
   });
   
-  const isLoading = isLoading1 || isLoading2_;
+  const isLoading = isLoading1 || isLoading2;
 
   const liveContributions: BackerContribution[] = [];
 

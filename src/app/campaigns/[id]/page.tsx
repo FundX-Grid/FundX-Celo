@@ -1,28 +1,28 @@
 "use client"
 
-import { useState, use, useEffect } from "react" 
-import { notFound } from "next/navigation"
-import Link from "next/link"
-import { Navbar } from "@/components/fundx/Navbar"
-import { Footer } from "@/components/fundx/Footer"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Separator } from "@/components/ui/separator"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Clock, Users, ShieldCheck, Share2, MapPin, ArrowLeft } from "lucide-react" 
-import { useAccount, useWriteContract } from "wagmi"
 import { waitForTransactionReceipt } from "@wagmi/core"
-import { parseUnits, formatUnits, erc20Abi } from "viem"
-import { FUNDX_ABI } from "@/lib/fundx-abi"
+import { Progress } from "@/components/ui/progress"
+import { Navbar } from "@/components/fundx/Navbar"
+import { useCampaign } from "@/lib/hooks/useContract"
 import { FUNDX_CONTRACT, TOKEN_ADDRESSES, config } from "@/lib/celo-config"
+import { notFound } from "next/navigation"
+import { useState, use, useEffect } from "react" 
+import { useAccount, useWriteContract } from "wagmi"
 import { ConnectButton } from "@rainbow-me/rainbowkit"
+import { parseUnits, formatUnits, erc20Abi } from "viem"
+import Link from "next/link"
+import { isMiniPay } from "@/lib/wallet"
+import { FUNDX_ABI } from "@/lib/fundx-abi"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Footer } from "@/components/fundx/Footer"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { toast } from "sonner"
 import { getCampaign } from "@/lib/data"
-import { useCampaign } from "@/lib/hooks/useContract"
-import { isMiniPay } from "@/lib/wallet"
+import { Clock, Users, ShieldCheck, Share2, MapPin, ArrowLeft } from "lucide-react" 
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Input } from "@/components/ui/input"
+import { Separator } from "@/components/ui/separator"
 
 export default function CampaignPage({ params }: { params: Promise<{ id: string }> }) {
   const { isConnected } = useAccount()
@@ -144,17 +144,17 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
     try {
       toast.loading("Approving token...", { id: "donate" })
       const isCUSD = campaign.currency === "cUSD"
-      const tokenAddress_ = isCUSD ? TOKEN_ADDRESSES.cUSD : TOKEN_ADDRESSES.USDC
+      const tokenAddress = isCUSD ? TOKEN_ADDRESSES.cUSD : TOKEN_ADDRESSES.USDC
       const decimals = isCUSD ? 18 : 6
       const amountUnits = parseUnits(donateAmount, decimals)
       // feeCurrency: in MiniPay use cUSD (only supported option);
       // otherwise use the campaign's own token so gas comes from the same balance
       const feeCurrency = isMini
         ? (TOKEN_ADDRESSES.cUSD as `0x${string}`)
-        : (tokenAddress_ as `0x${string}`)
+        : (tokenAddress as `0x${string}`)
 
       const approveHash = await writeContractAsync({
-        address: tokenAddress_ as `0x${string}`,
+        address: tokenAddress as `0x${string}`,
         abi: erc20Abi,
         functionName: "approve",
         args: [FUNDX_CONTRACT as `0x${string}`, amountUnits],

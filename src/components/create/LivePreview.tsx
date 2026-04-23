@@ -1,7 +1,7 @@
 import { CampaignCard } from "@/components/fundx/CampaignCard"
 
 export function LivePreview({ formData }: { formData: any }) {
-  const isCUSD = formData.currency_ === "cUSD";
+  const isCUSD = formData.currency === "cUSD";
 
   return (
     <div className="sticky top-32 space-y-6">
@@ -17,7 +17,7 @@ export function LivePreview({ formData }: { formData: any }) {
                 raised={0}
                 goal={Number(formData.goal) || 10000}
                 image={formData.image || "/Dummy.jpg"} 
-                currency_={formData.currency_}
+                currency={formData.currency}
             />
         </div>
 
@@ -35,7 +35,7 @@ export function LivePreview({ formData }: { formData: any }) {
                 <span className="w-20 text-xs uppercase font-semibold">Asset:</span>
                
                 <span className={`font-bold px-2 py-0.5 rounded-md text-xs ${isCUSD ? 'bg-green-100 text-green-600' : 'bg-blue-50 text-blue-600'}`}>
-                    {formData.currency_ || "cUSD"}
+                    {formData.currency || "cUSD"}
                 </span>
             </div>
         </div>

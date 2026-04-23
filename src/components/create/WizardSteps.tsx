@@ -226,7 +226,7 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
                   <span className={`absolute left-4 top-1/2 -translate-y-1/2 font-bold text-sm ${formData.currency === 'cUSD' ? 'text-green-600' : 'text-blue-500'}`}>
                      {formData.currency}
                   </span>
-                  <Input type="number" className="pl-20 h-14 rounded-xl text-lg font-bold" value={formData.goal_} onChange={(e) => setFormData({...formData, goal_: e.target.value})} />
+                  <Input type="number" className="pl-20 h-14 rounded-xl text-lg font-bold" value={formData.goal} onChange={(e) => setFormData({...formData, goal: e.target.value})} />
                </div>
             </div>
             <div className="space-y-2">
@@ -243,7 +243,7 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
                </SelectTrigger>
                <SelectContent className="bg-white border-slate-200 shadow-xl rounded-xl z-50">
                   <SelectItem value="0" className="text-sm font-medium text-slate-700 py-3 cursor-pointer">Flexible (Keep what you raise)</SelectItem>
-                  <SelectItem value="1" className="text-sm font-medium text-slate-700 py-3 cursor-pointer">All-or-Nothing (Refunds if goal_ fails)</SelectItem>
+                  <SelectItem value="1" className="text-sm font-medium text-slate-700 py-3 cursor-pointer">All-or-Nothing (Refunds if goal fails)</SelectItem>
                </SelectContent>
             </Select>
          </div>

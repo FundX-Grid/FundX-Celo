@@ -38,7 +38,7 @@ function SideCard({ campaign, progress, tilt }: SideCardProps) {
       <div className="relative h-48 bg-slate-100 overflow-hidden shrink-0">
         <Image
           src={campaign.image}
-          alt={campaign.title_}
+          alt={campaign.title}
           fill
           className="object-cover group-hover:scale-105 transition-transform duration-700"
         />
@@ -46,7 +46,7 @@ function SideCard({ campaign, progress, tilt }: SideCardProps) {
       <div className="p-6 flex flex-col justify-between flex-1 bg-white">
         <div>
           <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-primary transition-colors">
-            {campaign.title_}
+            {campaign.title}
           </h3>
           <p className="text-sm text-slate-500 line-clamp-2">{campaign.description}</p>
         </div>
@@ -209,7 +209,7 @@ export function CampaignFan({ deckSlotRef }: CampaignFanProps) {
             <div className="relative h-64 md:h-full md:w-5/12 bg-slate-100 overflow-hidden">
               <Image
                 src={hero.image}
-                alt={hero.title_}
+                alt={hero.title}
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-700"
               />
@@ -217,7 +217,7 @@ export function CampaignFan({ deckSlotRef }: CampaignFanProps) {
             <div className="flex flex-col justify-between p-8 md:w-7/12 h-full bg-white">
               <div className="pt-4">
                 <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3 tracking-tight group-hover:text-primary transition-colors">
-                  {hero.title_}
+                  {hero.title}
                 </h3>
                 <p className="text-slate-500 leading-relaxed mb-6 text-sm md:text-base">
                   {hero.description}

@@ -144,17 +144,17 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
     try {
       toast.loading("Approving token...", { id: "donate" })
       const isCUSD = campaign.currency === "cUSD"
-      const tokenAddress = isCUSD ? TOKEN_ADDRESSES.cUSD : TOKEN_ADDRESSES.USDC
+      const tokenAddress_ = isCUSD ? TOKEN_ADDRESSES.cUSD : TOKEN_ADDRESSES.USDC
       const decimals = isCUSD ? 18 : 6
       const amountUnits = parseUnits(donateAmount, decimals)
       // feeCurrency: in MiniPay use cUSD (only supported option);
       // otherwise use the campaign's own token so gas comes from the same balance
       const feeCurrency = isMini
         ? (TOKEN_ADDRESSES.cUSD as `0x${string}`)
-        : (tokenAddress as `0x${string}`)
+        : (tokenAddress_ as `0x${string}`)
 
       const approveHash = await writeContractAsync({
-        address: tokenAddress as `0x${string}`,
+        address: tokenAddress_ as `0x${string}`,
         abi: erc20Abi,
         functionName: "approve",
         args: [FUNDX_CONTRACT as `0x${string}`, amountUnits],

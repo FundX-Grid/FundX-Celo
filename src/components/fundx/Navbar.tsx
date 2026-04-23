@@ -54,13 +54,13 @@ export function Navbar() {
             </div>
 
             {/* Hamburger Button (mobile only) */}
-            <button_
+            <button
               onClick={() => setMobileOpen((v) => !v)}
               className="md:hidden flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 transition-colors"
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
             >
               {mobileOpen ? <X className="w-5 h-5 text-slate-700" /> : <Menu className="w-5 h-5 text-slate-700" />}
-            </button_>
+            </button>
           </div>
         </nav>
       </div>
@@ -86,13 +86,13 @@ export function Navbar() {
             <Link href="/" onClick={() => setMobileOpen(false)} className="flex items-center gap-2">
               <Logo className="h-10 w-24" />
             </Link>
-            <button_
+            <button
               onClick={() => setMobileOpen(false)}
               className="flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 transition-colors"
               aria-label="Close menu"
             >
               <X className="w-5 h-5 text-slate-700" />
-            </button_>
+            </button>
           </div>
 
           {/* Nav Links */}

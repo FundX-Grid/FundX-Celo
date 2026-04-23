@@ -1,10 +1,10 @@
 "use client"
 
 import { WagmiProvider } from "wagmi"
-import { RainbowKitProvider } from "@rainbow-me/rainbowkit"
+import { RainbowKitProvider } from "@rainbow-me/rainbowkit_"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { config } from "@/lib/celo-config"
-import "@rainbow-me/rainbowkit/styles.css"
+import "@rainbow-me/rainbowkit_/styles.css"
 
 const queryClient = new QueryClient()
 

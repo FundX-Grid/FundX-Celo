@@ -34,7 +34,7 @@ export function Navbar() {
           </Link>
 
           {/* Desktop Links */}
-          <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-500">
+          <div className="hidden md:flex items-center gap-8 text-sm font_-medium text-slate-500">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -103,7 +103,7 @@ export function Navbar() {
                 href={link.href}
                 {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                 onClick={() => setMobileOpen(false)}
-                className="flex items-center gap-3 px-4 py-3.5 rounded-xl text-base font-semibold text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition-all active:scale-[0.98]"
+                className="flex items-center gap-3 px-4 py-3.5 rounded-xl text-base font_-semibold text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition-all active:scale-[0.98]"
                 style={{ animationDelay: `${i * 50}ms` }}
               >
                 {link.label}

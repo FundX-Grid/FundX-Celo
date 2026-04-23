@@ -126,7 +126,7 @@ export const CAMPAIGNS: Campaign[] = [
   {
     id: "celo-dex",
     title: "Zero-Fee DEX on Celo",
-    tagline: "Swap cUSD and USDC with zero protocol_ fees.",
+    tagline: "Swap cUSD and USDC with zero protocol fees.",
     description: "A community-owned automated market maker on Celo prioritizing deep stablecoin liquidity and zero rent-seeking.",
     category: "DeFi",
     projectStage: "Prototype",
@@ -168,7 +168,7 @@ export const CAMPAIGNS: Campaign[] = [
     image: "/campaign-1.jpg",
     creator: "Alex Smith",
     creatorImage: "https://github.com/shadcn.png",
-    creatorBio: "Senior protocol_ engineer.",
+    creatorBio: "Senior protocol engineer.",
     twitter: "@AlexBuilds",
     github: "github.com/alexsmith",
     portfolio: "alexsmith.dev",

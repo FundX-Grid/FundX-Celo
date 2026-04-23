@@ -19,7 +19,7 @@ export const FUNDX_ABI = [
     stateMutability: "nonpayable",
     inputs: [
       { name: "id", type: "uint256" },
-      { name: "amount_", type: "uint256" },
+      { name: "amount", type: "uint256" },
     ],
     outputs: [],
   },
@@ -105,7 +105,7 @@ export const FUNDX_ABI = [
     name: "calculateFee",
     type: "function",
     stateMutability: "pure",
-    inputs: [{ name: "amount_", type: "uint256" }],
+    inputs: [{ name: "amount", type: "uint256" }],
     outputs: [{ name: "", type: "uint256" }],
   },
   // calculateNet
@@ -113,7 +113,7 @@ export const FUNDX_ABI = [
     name: "calculateNet",
     type: "function",
     stateMutability: "pure",
-    inputs: [{ name: "amount_", type: "uint256" }],
+    inputs: [{ name: "amount", type: "uint256" }],
     outputs: [{ name: "", type: "uint256" }],
   },
   // isPastDeadline
@@ -167,7 +167,7 @@ export const FUNDX_ABI = [
     inputs: [
       { name: "campaignId", type: "uint256", indexed: true },
       { name: "donor", type: "address", indexed: true },
-      { name: "amount_", type: "uint256", indexed: false },
+      { name: "amount", type: "uint256", indexed: false },
     ],
   },
   {
@@ -186,7 +186,7 @@ export const FUNDX_ABI = [
     inputs: [
       { name: "campaignId", type: "uint256", indexed: true },
       { name: "donor", type: "address", indexed: true },
-      { name: "amount_", type: "uint256", indexed: false },
+      { name: "amount", type: "uint256", indexed: false },
     ],
   },
   {

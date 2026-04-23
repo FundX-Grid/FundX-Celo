@@ -66,16 +66,6 @@ export default function CreateCampaign() {
     currency: "cUSD", 
   })
 
-  const handleNext = () => setStep(step + 1)
-  const handleBack = () => setStep(step - 1)
-
-  useEffect(() => {
-    if (isMiniPay()) {
-      setIsMini(true)
-      setFormData((prev) => ({ ...prev, currency: "cUSD" }))
-    }
-  }, [])
-
   const handleSubmit = async () => {
     if (!isConnected && !isMini) {
       toast.error("Connect Wallet", {
@@ -94,6 +84,16 @@ export default function CreateCampaign() {
       const feeCurrency = isMini
         ? (TOKEN_ADDRESSES.cUSD as `0x${string}`)
         : (tokenAddress as `0x${string}`)
+
+  useEffect(() => {
+    if (isMiniPay()) {
+      setIsMini(true)
+      setFormData((prev) => ({ ...prev, currency: "cUSD" }))
+    }
+  }, [])
+
+  const handleNext = () => setStep(step + 1)
+  const handleBack = () => setStep(step - 1)
 
       const hash = await writeContractAsync({
         address: FUNDX_CONTRACT as `0x${string}`,

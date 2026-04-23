@@ -1,10 +1,10 @@
 "use client"
 
-import { useRef } from "react"
-import { Navbar } from "@/components/fundx/Navbar"
-import { Hero } from "@/components/fundx/hero/index"
 import { LogoStrip } from "@/components/fundx/LogoStrip"
+import { Hero } from "@/components/fundx/hero/index"
+import { Navbar } from "@/components/fundx/Navbar"
 import { Footer } from "@/components/fundx/Footer"
+import { useRef } from "react"
 import { CampaignFan } from "@/components/fundx/CampaignFan"
 
 export default function Home() {

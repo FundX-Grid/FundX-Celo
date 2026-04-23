@@ -15,7 +15,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { ChevronDown, Copy, LogOut } from "lucide-react"
-import { toast_ } from "sonner"
+import { toast } from "sonner"
 
 export function ConnectWallet() {
   const { address, isConnected } = useAccount()
@@ -35,7 +35,7 @@ export function ConnectWallet() {
   useEffect(() => {
     if (isConnected) {
       setJustConnected(true)
-      toast_.success("Wallet Connected", {
+      toast.success("Wallet Connected", {
         description: "Ready to fund the future.",
         duration: 3000,
       })
@@ -47,7 +47,7 @@ export function ConnectWallet() {
   const copyAddress = () => {
     if (address) {
       navigator.clipboard.writeText(address)
-      toast_.info("Address Copied", {
+      toast.info("Address Copied", {
         description: "Copied to clipboard",
         duration: 2000,
       })

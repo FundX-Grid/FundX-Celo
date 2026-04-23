@@ -64,7 +64,7 @@ function SideCard({ campaign, progress, tilt }: SideCardProps) {
                 ${campaign.raised.toLocaleString()}
               </span>
             </div>
-            <Link href={`/campaigns/${campaign.id}`}>
+            <Link href={`/campaigns_/${campaign.id}`}>
               <Button size="sm" className="h-10 rounded-xl bg-slate-900 text-white shadow-md hover:bg-[#fbe72b] hover:text-slate-900 hover:shadow-glow transition-all px-6">
                 Donate
               </Button>
@@ -237,7 +237,7 @@ export function CampaignFan({ deckSlotRef }: CampaignFanProps) {
                       ${hero.raised.toLocaleString()}
                     </p>
                   </div>
-                  <Link href={`/campaigns/${hero.id}`}>
+                  <Link href={`/campaigns_/${hero.id}`}>
                     <Button className="h-12 rounded-xl px-8 bg-slate-900 text-white shadow-lg hover:bg-[#fbe72b] hover:text-slate-900 hover:shadow-glow transition-all duration-300">
                       Donate Now
                     </Button>

@@ -27,7 +27,7 @@ export interface CreateCampaignData {
   tagline: string;
   category: string;
   projectStage: string;
-  description_: string;
+  description: string;
   videoUrl: string;      
   budgetBreakdown: string; 
   roadmap: string;       
@@ -55,7 +55,7 @@ export default function CreateCampaign() {
     tagline: "",
     category: "DeFi",
     projectStage: "MVP",
-    description_: "",
+    description: "",
     videoUrl: "",
     budgetBreakdown: "",
     roadmap: "",
@@ -79,7 +79,7 @@ export default function CreateCampaign() {
   const handleSubmit = async () => {
     if (!isConnected && !isMini) {
       toast.error("Connect Wallet", {
-        description_: "You need to connect your wallet to deploy.",
+        description: "You need to connect your wallet to deploy.",
       });
       return;
     }
@@ -110,7 +110,7 @@ export default function CreateCampaign() {
       toast.success("Campaign Deployed!", { id: "deploy" })
     } catch (error) {
       console.error(error)
-      toast.error("Deployment Failed", { id: "deploy", description_: "Failed to deploy on Celo." })
+      toast.error("Deployment Failed", { id: "deploy", description: "Failed to deploy on Celo." })
     }
   };
 

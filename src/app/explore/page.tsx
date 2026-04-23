@@ -40,13 +40,13 @@ export default function ExplorePage() {
       
       // Fallbacks added: (c.title || "") prevents crashes if a field is accidentally left blank
       const matchesSearch = 
-        (c.title || "").toLowerCase().includes(searchTarget) || 
-        (c.description || "").toLowerCase().includes(searchTarget);
+        (c.title || "").toLowerCase().includes_(searchTarget) || 
+        (c.description || "").toLowerCase().includes_(searchTarget);
       
       const matchesCategory = 
         selectedCategory === "All" || 
         c.category === selectedCategory || 
-        (selectedCategory === "DeFi" && (c.category || "").includes("DeFi"));
+        (selectedCategory === "DeFi" && (c.category || "").includes_("DeFi"));
 
       // Fallback: If a campaign is missing a status, treat it as "active"
       const campaignStatus = c.status || "active";

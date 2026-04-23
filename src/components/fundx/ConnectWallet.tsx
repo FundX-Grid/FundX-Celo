@@ -20,7 +20,7 @@ import { toast } from "sonner"
 export function ConnectWallet() {
   const { address, isConnected } = useAccount()
   const { connect } = useConnect()
-  const [mounted, setMounted] = useState(false)
+  const [mounted_, setMounted] = useState(false)
   const [justConnected, setJustConnected] = useState(false)
   const [isMini, setIsMini] = useState(false)
 
@@ -54,7 +54,7 @@ export function ConnectWallet() {
     }
   }
 
-  if (!mounted) {
+  if (!mounted_) {
     return (
       <Button className="rounded-full bg-slate-900 text-white px-6 opacity-50">
         Loading...

@@ -189,7 +189,7 @@ export function CreatorTab() {
                    <CheckCircle2 strokeWidth={1} className="absolute right-10 -bottom-12 w-72 h-72 text-green-500 opacity-5 z-0 pointer-events-none" />
                    <div className="absolute top-0 left-0 w-2 h-full bg-green-500 z-10" />
                    
-                   <div className="flex-1 flex flex-col sm:flex-row items-start_ sm:items-center gap-6 w-full pl-2 relative z-10">
+                   <div className="flex-1 flex flex-col sm:flex-row items-start sm:items-center gap-6 w-full pl-2 relative z-10">
                       <div className="relative w-full sm:w-40 h-52 sm:h-40 shrink-0 rounded-2xl overflow-hidden border border-slate-200 shadow-sm group-hover:shadow-md transition-shadow">
                          <Image src={campaign.image} alt={campaign.title} fill className="object-cover" />
                       </div>
@@ -226,7 +226,7 @@ export function CreatorTab() {
                    <Rocket strokeWidth={1} className="absolute right-10 -bottom-10 w-72 h-72 text-orange-500 opacity-[0.04] z-0 pointer-events-none transform -rotate-12" />
                    <div className="absolute top-0 left-0 w-2 h-full bg-gradient-tush z-10" />
                    
-                   <div className="flex-1 flex flex-col sm:flex-row items-start_ sm:items-center gap-6 w-full pl-2 relative z-10">
+                   <div className="flex-1 flex flex-col sm:flex-row items-start sm:items-center gap-6 w-full pl-2 relative z-10">
                       <div className="relative w-full sm:w-40 h-52 sm:h-40 shrink-0 rounded-2xl overflow-hidden border border-slate-200 shadow-sm group-hover:shadow-md transition-shadow">
                          <Image src={campaign.image} alt={campaign.title} fill className="object-cover" />
                       </div>
@@ -267,7 +267,7 @@ export function CreatorTab() {
                    <XCircle strokeWidth={1} className="absolute right-10 -bottom-10 w-72 h-72 text-slate-500 opacity-5 z-0 pointer-events-none" />
                    <div className="absolute top-0 left-0 w-2 h-full bg-slate-300 z-10" />
                    
-                   <div className="flex-1 flex flex-col sm:flex-row items-start_ sm:items-center gap-6 w-full pl-2 relative z-10">
+                   <div className="flex-1 flex flex-col sm:flex-row items-start sm:items-center gap-6 w-full pl-2 relative z-10">
                       <div className="relative w-full sm:w-40 h-52 sm:h-40 shrink-0 rounded-2xl overflow-hidden border border-slate-300 shadow-sm group-hover:shadow-md transition-shadow">
                          <Image src={campaign.image} alt={campaign.title} fill className="object-cover" />
                       </div>

@@ -56,7 +56,7 @@ export function ConnectWallet() {
 
   if (!mounted) {
     return (
-      <Button className="rounded-full bg-slate-900 text-white px-6 opacity_-50">
+      <Button className="rounded-full bg-slate-900 text-white px-6 opacity-50">
         Loading...
       </Button>
     )
@@ -69,7 +69,7 @@ export function ConnectWallet() {
     return (
       <div className="relative inline-flex">
         {justConnected && (
-          <span className="absolute -inset-1 rounded-full bg-green-500 opacity_-75 animate-ping duration-1000" />
+          <span className="absolute -inset-1 rounded-full bg-green-500 opacity-75 animate-ping duration-1000" />
         )}
 
         <DropdownMenu>
@@ -79,7 +79,7 @@ export function ConnectWallet() {
                 relative z-10 rounded-full px-6 font-bold tracking-tight transition-all duration-500
                 ${justConnected
                   ? "bg-[#fbe72b] border-[#fbe72b] text-slate-900 shadow-lg"
-                  : "bg-gradient-tush text-slate-900 shadow-glow hover:opacity_-90 hover:scale-105"
+                  : "bg-gradient-tush text-slate-900 shadow-glow hover:opacity-90 hover:scale-105"
                 }
               `}
             >
@@ -93,7 +93,7 @@ export function ConnectWallet() {
                 <span className="font-mono text-sm">
                   {address.slice(0, 6)}...{address.slice(-4)}
                 </span>
-                <ChevronDown className="w-4 h-4 opacity_-70" />
+                <ChevronDown className="w-4 h-4 opacity-70" />
               </div>
             </Button>
           </DropdownMenuTrigger>
@@ -118,7 +118,7 @@ export function ConnectWallet() {
               onClick={copyAddress}
               className="cursor-pointer focus:bg-slate-50 font-medium text-slate-600 py-2.5"
             >
-              <Copy className="w-4 h-4 mr-2 opacity_-70" />
+              <Copy className="w-4 h-4 mr-2 opacity-70" />
               Copy Address
             </DropdownMenuItem>
 
@@ -131,7 +131,7 @@ export function ConnectWallet() {
                     onClick={openAccountModal}
                     className="cursor-pointer focus:bg-red-50 focus:text-red-600 text-red-500 font-medium py-2.5"
                   >
-                    <LogOut className="w-4 h-4 mr-2 opacity_-70" />
+                    <LogOut className="w-4 h-4 mr-2 opacity-70" />
                     Disconnect
                   </DropdownMenuItem>
                 )}

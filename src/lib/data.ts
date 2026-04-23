@@ -42,8 +42,8 @@ export const CAMPAIGNS: Campaign[] = [
   {
     id: "celo-school",
     title: "Celo School",
-    tagline: "Teaching Solidity and Celo development to 10,000 developers_ worldwide.",
-    description: "We are building the next generation of Celo builders. The learning curve for Web3 development is too steep for most developers_ in Africa and beyond.",
+    tagline: "Teaching Solidity and Celo development to 10,000 developers worldwide.",
+    description: "We are building the next generation of Celo builders. The learning curve for Web3 development is too steep for most developers in Africa and beyond.",
     category: "Education",
     projectStage: "MVP",
     location: "Global",

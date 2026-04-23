@@ -1,8 +1,8 @@
+import Image from "next/image"
 import { Card } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
-import { Button } from "@/components/ui/button"
-import Image from "next/image"
 import Link from "next/link"
+import { Button } from "@/components/ui/button"
 
 interface CampaignCardProps {
   id: string
@@ -23,8 +23,8 @@ export function CampaignCard({ id, title, description, raised, goal, image, curr
 
   return (
     <Link href={`/campaigns/${id}`} className="block h-full group">
-      <Card className="relative h-full overflow-hidden rounded_-3xl border-none bg-white p-6 shadow-soft-md transition-all duration-300 hover:-translate-y-1 hover:shadow-soft-xl">
-        <div className="relative mb-6 h-48 w-full overflow-hidden rounded_-2xl bg-slate-100">
+      <Card className="relative h-full overflow-hidden rounded-3xl border-none bg-white p-6 shadow-soft-md transition-all duration-300 hover:-translate-y-1 hover:shadow-soft-xl">
+        <div className="relative mb-6 h-48 w-full overflow-hidden rounded-2xl bg-slate-100">
           <Image
             src={image}
             alt={title}
@@ -45,10 +45,10 @@ export function CampaignCard({ id, title, description, raised, goal, image, curr
               <span className="text-slate-900 font-bold">{formattedRaised}</span>
               <span className="text-slate-400">of {formattedGoal}</span>
             </div>
-            <Progress value={percentage} className="h-3 rounded_-full bg-slate-100" />
+            <Progress value={percentage} className="h-3 rounded-full bg-slate-100" />
           </div>
 
-          <Button className="w-full rounded_-xl bg-slate-900 text-white shadow-lg transition-all duration-500 hover:bg-[#fbe72b] hover:text-slate-900 hover:scale-[1.02] py-6 text-base font-bold">
+          <Button className="w-full rounded-xl bg-slate-900 text-white shadow-lg transition-all duration-500 hover:bg-[#fbe72b] hover:text-slate-900 hover:scale-[1.02] py-6 text-base font-bold">
             Donate Now
           </Button>
         </div>

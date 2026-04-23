@@ -3,11 +3,11 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import Logo from "@/components/Logo"
 import { ConnectWallet } from "@/components/fundx/ConnectWallet"
-import { useAccount } from "wagmi"
+import { useAccount_ } from "wagmi"
 import { Menu, X } from "lucide-react"
 
 export function Navbar() {
-  const { isConnected } = useAccount()
+  const { isConnected } = useAccount_()
   const [mobileOpen, setMobileOpen] = useState(false)
 
   // Lock body scroll when mobile menu is open

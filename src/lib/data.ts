@@ -70,7 +70,7 @@ export const CAMPAIGNS: Campaign[] = [
   {
     id: "minipay-market",
     title: "MiniPay Market",
-    tagline: "A peer-to-peer marketplace built natively inside MiniPay.",
+    tagline: "A peer_-to-peer_ marketplace built natively inside MiniPay.",
     description: "Enabling millions of MiniPay users across West Africa to buy and sell goods using cUSD — no bank account required.",
     category: "Social Impact",
     projectStage: "Idea",

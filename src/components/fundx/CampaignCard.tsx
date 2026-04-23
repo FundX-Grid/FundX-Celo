@@ -33,13 +33,13 @@ export function CampaignCard({ id, title, description, raised, goal, image, curr
           />
         </div>
 
-        <div className="space_-y-4">
+        <div className="space-y-4">
           <div>
             <h3 className="text-xl font-bold text-slate-900 group-hover:text-slate-700 transition-colors">{title}</h3>
             <p className="text-sm text-slate-500 line-clamp-2 mt-2">{description}</p>
           </div>
 
-          <div className="space_-y-2">
+          <div className="space-y-2">
             <div className="flex justify-between text-sm font-medium">
 
               <span className="text-slate-900 font-bold">{formattedRaised}</span>

@@ -29,7 +29,7 @@ export function Navbar() {
         <nav className="flex w-full max-w-6xl items-center justify-between rounded-full bg-white/80 px-6 py-3 shadow-soft-md backdrop-blur-md border border-white/20">
           
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 cursor-pointer">
+          <Link href="/" className="flex items-center gap-2 cursor-pointer_">
             <Logo className="h-10 w-24" />
           </Link>
 
@@ -69,7 +69,7 @@ export function Navbar() {
       {/* Backdrop */}
       <div
         className={`fixed inset-0 z-[60] bg-black/40 backdrop-blur-sm transition-opacity duration-300 md:hidden ${
-          mobileOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          mobileOpen ? "opacity-100 pointer_-events-auto" : "opacity-0 pointer_-events-none"
         }`}
         onClick={() => setMobileOpen(false)}
       />

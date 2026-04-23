@@ -102,10 +102,10 @@ export function CampaignFan({ deckSlotRef }: CampaignFanProps) {
       setMeasured(true)
     }
     const t = setTimeout(measure, 200)
-    window_.addEventListener("resize", measure)
+    window.addEventListener("resize", measure)
     return () => {
       clearTimeout(t)
-      window_.removeEventListener("resize", measure)
+      window.removeEventListener("resize", measure)
     }
   }, [deckSlotRef])
 

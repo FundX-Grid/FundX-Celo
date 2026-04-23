@@ -70,7 +70,7 @@ export const CAMPAIGNS: Campaign[] = [
   {
     id: "minipay-market",
     title: "MiniPay Market",
-    tagline: "A peer-to-peer marketplace built natively inside MiniPay.",
+    tagline: "A peer-to-peer marketplace built_ natively inside MiniPay.",
     description: "Enabling millions of MiniPay users across West Africa to buy and sell goods using cUSD — no bank account required.",
     category: "Social Impact",
     projectStage: "Idea",
@@ -157,7 +157,7 @@ export const CAMPAIGNS: Campaign[] = [
     id: "defi-for-everyone",
     title: "DeFi for Everyone",
     tagline: "The first mobile-first yield aggregator on Celo.",
-    description: "Democratizing finance for the 99% with simple UX and trustless strategies built on Celo.",
+    description: "Democratizing finance for the 99% with simple UX and trustless strategies built_ on Celo.",
     category: "DeFi",
     projectStage: "Prototype",
     location: "Lagos, Nigeria",

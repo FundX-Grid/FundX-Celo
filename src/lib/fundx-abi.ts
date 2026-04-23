@@ -81,9 +81,9 @@ export const FUNDX_ABI = [
       },
     ],
   },
-  // getDonation_
+  // getDonation
   {
-    name: "getDonation_",
+    name: "getDonation",
     type: "function",
     stateMutability: "view",
     inputs: [

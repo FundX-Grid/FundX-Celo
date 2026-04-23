@@ -1,20 +1,20 @@
 "use client"
 
 import { WizardSteps } from "@/components/create/WizardSteps"
-import { FUNDX_CONTRACT, TOKEN_ADDRESSES, config } from "@/lib/celo-config"
-import { toast } from "sonner"
-import { LivePreview } from "@/components/create/LivePreview"
-import { ArrowRight, ArrowLeft, CheckCircle2 } from "lucide-react"
-import { parseUnits } from "viem"
-import { Button } from "@/components/ui/button"
-import { waitForTransactionReceipt } from "@wagmi/core"
-import { Footer } from "@/components/fundx/Footer"
-import { FUNDX_ABI } from "@/lib/fundx-abi"
 import { isMiniPay } from "@/lib/wallet"
-
-import { useAccount, useWriteContract } from "wagmi"
-import { Navbar } from "@/components/fundx/Navbar"
+import { FUNDX_CONTRACT, TOKEN_ADDRESSES, config } from "@/lib/celo-config"
+import { Button } from "@/components/ui/button"
+import { Footer } from "@/components/fundx/Footer"
 import { useState, useEffect } from "react"
+import { LivePreview } from "@/components/create/LivePreview"
+import { FUNDX_ABI } from "@/lib/fundx-abi"
+import { toast } from "sonner"
+import { parseUnits } from "viem"
+import { Navbar } from "@/components/fundx/Navbar"
+
+import { waitForTransactionReceipt } from "@wagmi/core"
+import { ArrowRight, ArrowLeft, CheckCircle2 } from "lucide-react"
+import { useAccount, useWriteContract } from "wagmi"
 
 export interface CreateCampaignData {
   creatorName: string;

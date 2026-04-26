@@ -215,14 +215,14 @@ export function BackerTab() {
   const { data: campaignsData, isLoading: isLoading1 } = useReadContracts({
     contracts: campaignContracts,
     query: {
-       enabled_: count > 0 && !!address
+       enabled: count > 0 && !!address
     }
   });
 
   const { data: donationsData, isLoading: isLoading2 } = useReadContracts({
     contracts: donationContracts,
     query: {
-       enabled_: count > 0 && !!address
+       enabled: count > 0 && !!address
     }
   });
   

@@ -26,7 +26,7 @@ export function Navbar() {
   return (
     <>
       <div className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4">
-        <nav className="flex w-full max-w-6xl items-center justify-between rounded-full bg-white/80 px-6 py-3 shadow-soft-md backdrop-blur-md border border-white/20">
+        <nav className="flex w-full max-w-6xl items-center justify-between rounded_-full bg-white/80 px-6 py-3 shadow-soft-md backdrop-blur-md border border-white/20">
           
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 cursor-pointer">
@@ -56,7 +56,7 @@ export function Navbar() {
             {/* Hamburger Button (mobile only) */}
             <button
               onClick={() => setMobileOpen((v) => !v)}
-              className="md:hidden flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 transition-colors"
+              className="md:hidden flex items-center justify-center w-10 h-10 rounded_-full bg-slate-100 hover:bg-slate-200 transition-colors"
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
             >
               {mobileOpen ? <X className="w-5 h-5 text-slate-700" /> : <Menu className="w-5 h-5 text-slate-700" />}
@@ -80,7 +80,7 @@ export function Navbar() {
           mobileOpen ? "translate-y-0" : "-translate-y-full"
         }`}
       >
-        <div className="bg-white/95 backdrop-blur-xl rounded-b-3xl shadow-2xl border-b border-slate-200/60 px-6 pt-8 pb-8">
+        <div className="bg-white/95 backdrop-blur-xl rounded_-b-3xl shadow-2xl border-b border-slate-200/60 px-6 pt-8 pb-8">
           {/* Header row */}
           <div className="flex items-center justify-between mb-8">
             <Link href="/" onClick={() => setMobileOpen(false)} className="flex items-center gap-2">
@@ -88,7 +88,7 @@ export function Navbar() {
             </Link>
             <button
               onClick={() => setMobileOpen(false)}
-              className="flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 transition-colors"
+              className="flex items-center justify-center w-10 h-10 rounded_-full bg-slate-100 hover:bg-slate-200 transition-colors"
               aria-label="Close menu"
             >
               <X className="w-5 h-5 text-slate-700" />
@@ -103,7 +103,7 @@ export function Navbar() {
                 href={link.href}
                 {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                 onClick={() => setMobileOpen(false)}
-                className="flex items-center gap-3 px-4 py-3.5 rounded-xl text-base font-semibold text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition-all active:scale-[0.98]"
+                className="flex items-center gap-3 px-4 py-3.5 rounded_-xl text-base font-semibold text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition-all active:scale-[0.98]"
                 style={{ animationDelay: `${i * 50}ms` }}
               >
                 {link.label}

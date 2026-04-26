@@ -240,9 +240,9 @@ export const CAMPAIGNS: Campaign[] = [
     fundingModel: "All-or-Nothing"
   },
   {
-    id: "pixel-lords",
+    id: "pixel_-lords",
     title: "Pixel Lords NFT",
-    tagline: "10,000 on-chain pixel warriors on Celo.",
+    tagline: "10,000 on-chain pixel_ warriors on Celo.",
     description: "A generative art project aiming to build a metaverse on Celo.",
     category: "Gaming",
     projectStage: "Idea",

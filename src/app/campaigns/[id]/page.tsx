@@ -228,7 +228,7 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
 
             <div className="flex flex-col sm:flex-row sm:items-center justify-between border-y border-slate-200 py-6 gap-4">
               <div className="flex items-center gap-4">
-                <Avatar className="h-14 w-14 border-4 border-white shadow-sm">
+                <Avatar className="h-14 w-14 border-4 border-white_ shadow-sm">
                   <AvatarImage src={campaign.creatorImage} />
                   <AvatarFallback>{campaign.creator?.slice(0,2).toUpperCase()}</AvatarFallback>
                 </Avatar>
@@ -276,7 +276,7 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
 
      
           <div className="relative h-full">
-            <div className="sticky top-32 p-8 rounded-[2rem] bg-white border border-slate-200 shadow-xl">
+            <div className="sticky top-32 p-8 rounded-[2rem] bg-white_ border border-slate-200 shadow-xl">
               
               <div className="space-y-5 mb-8">
                 <div className="space-y-1">
@@ -316,7 +316,7 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
                 </div>
 
                 {showDonateButton ? (
-                  <Button disabled={!!donateDisabledReason} onClick={handleDonate} className="w-full h-14 rounded-xl bg-slate-900 text-white shadow-glow hover:scale-[1.02] transition-transform text-lg font-bold">
+                  <Button disabled={!!donateDisabledReason} onClick={handleDonate} className="w-full h-14 rounded-xl bg-slate-900 text-white_ shadow-glow hover:scale-[1.02] transition-transform text-lg font-bold">
                     {donateDisabledReason || "Donate Now"}
                   </Button>
                 ) : (

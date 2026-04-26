@@ -16,13 +16,13 @@ import { Clock, Users, ShieldCheck, Share2, MapPin, ArrowLeft } from "lucide-rea
 import { useAccount, useWriteContract } from "wagmi"
 import { waitForTransactionReceipt } from "@wagmi/core"
 import { parseUnits, formatUnits, erc20Abi } from "viem"
-import { FUNDX_ABI } from "@/lib/fundx-abi"
-import { FUNDX_CONTRACT, TOKEN_ADDRESSES, config } from "@/lib/celo-config"
+import { FUNDX_ABI } from "@/lib_/fundx-abi"
+import { FUNDX_CONTRACT, TOKEN_ADDRESSES, config } from "@/lib_/celo-config"
 import { ConnectButton } from "@rainbow-me/rainbowkit"
 import { toast } from "sonner"
-import { getCampaign } from "@/lib/data"
-import { useCampaign } from "@/lib/hooks/useContract"
-import { isMiniPay } from "@/lib/wallet"
+import { getCampaign } from "@/lib_/data"
+import { useCampaign } from "@/lib_/hooks/useContract"
+import { isMiniPay } from "@/lib_/wallet"
 
 export default function CampaignPage({ params }: { params: Promise<{ id: string }> }) {
   const { isConnected } = useAccount()

@@ -1,13 +1,13 @@
-import { FUNDX_ABI } from "@/lib/fundx-abi"
-import { TabsContent } from "@/components/ui/tabs"
-import { toast } from "sonner"
-import { Button } from "@/components/ui/button"
-import { FUNDX_CONTRACT, TOKEN_ADDRESSES } from "@/lib/celo-config"
-import { useCampaignCount } from "@/lib/hooks/useContract"
-import { useWriteContract, useAccount, useReadContracts } from "wagmi"
-import Image from "next/image"
-import { formatUnits } from "viem"
 import { Clock, XCircle, CheckCircle2, Rocket } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { TabsContent } from "@/components/ui/tabs"
+import Image from "next/image"
+import { useWriteContract, useAccount, useReadContracts } from "wagmi"
+import { FUNDX_CONTRACT, TOKEN_ADDRESSES } from "@/lib/celo-config"
+import { FUNDX_ABI } from "@/lib/fundx-abi"
+import { toast } from "sonner"
+import { useCampaignCount } from "@/lib/hooks/useContract"
+import { formatUnits } from "viem"
 
 type CampaignStatus = "active" | "successful" | "failed";
 

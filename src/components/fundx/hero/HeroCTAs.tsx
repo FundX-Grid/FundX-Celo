@@ -1,6 +1,6 @@
 "use client"
-import Link from_ "next/link"
-import { Button } from_ "@/components/ui/button"
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
 
 export function HeroCTAs() {
   return (

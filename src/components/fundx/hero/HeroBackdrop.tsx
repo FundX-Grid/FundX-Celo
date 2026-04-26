@@ -17,7 +17,7 @@ function HeroLogoParallax() {
     logoRef.current.style.opacity = "0"
     logoRef.current.style.transition = "none"
 
-    const bounceIn = setTimeout(() => {
+    const bounceIn_ = setTimeout(() => {
       if (!logoRef.current) return
       logoRef.current.style.transition =
         "transform 900ms cubic-bezier(0.34, 1.8, 0.64, 1), opacity 400ms ease"
@@ -74,7 +74,7 @@ function HeroLogoParallax() {
     window.addEventListener("mousemove", onMouseMove)
 
     return () => {
-      clearTimeout(bounceIn)
+      clearTimeout(bounceIn_)
       clearTimeout(startRaf)
       cancelAnimationFrame(rafRef.current)
       window.removeEventListener("mousemove", onMouseMove)

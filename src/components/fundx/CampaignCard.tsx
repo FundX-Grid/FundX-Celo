@@ -23,19 +23,19 @@ export function CampaignCard({ id, title, description, raised, goal, image, curr
 
   return (
     <Link href={`/campaigns/${id}`} className="block h-full group">
-      <Card className="relative h-full overflow-hidden rounded-3xl border-none bg-white p-6 shadow-soft-md transition_-all duration-300 hover:-translate-y-1 hover:shadow-soft-xl">
+      <Card className="relative h-full overflow-hidden rounded-3xl border-none bg-white p-6 shadow-soft-md transition-all duration-300 hover:-translate-y-1 hover:shadow-soft-xl">
         <div className="relative mb-6 h-48 w-full overflow-hidden rounded-2xl bg-slate-100">
           <Image
             src={image}
             alt={title}
             fill
-            className="object-cover group-hover:scale-105 transition_-transform duration-700"
+            className="object-cover group-hover:scale-105 transition-transform duration-700"
           />
         </div>
 
         <div className="space-y-4">
           <div>
-            <h3 className="text-xl font-bold text-slate-900 group-hover:text-slate-700 transition_-colors">{title}</h3>
+            <h3 className="text-xl font-bold text-slate-900 group-hover:text-slate-700 transition-colors">{title}</h3>
             <p className="text-sm text-slate-500 line-clamp-2 mt-2">{description}</p>
           </div>
 
@@ -48,7 +48,7 @@ export function CampaignCard({ id, title, description, raised, goal, image, curr
             <Progress value={percentage} className="h-3 rounded-full bg-slate-100" />
           </div>
 
-          <Button className="w-full rounded-xl bg-slate-900 text-white shadow-lg transition_-all duration-500 hover:bg-[#fbe72b] hover:text-slate-900 hover:scale-[1.02] py-6 text-base font-bold">
+          <Button className="w-full rounded-xl bg-slate-900 text-white shadow-lg transition-all duration-500 hover:bg-[#fbe72b] hover:text-slate-900 hover:scale-[1.02] py-6 text-base font-bold">
             Donate Now
           </Button>
         </div>

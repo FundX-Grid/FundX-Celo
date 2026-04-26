@@ -38,9 +38,6 @@ export interface CreateCampaignData {
   currency: "cUSD" | "USDC"; 
 }
 
-  const handleNext = () => setStep(step + 1)
-  const handleBack = () => setStep(step - 1)
-
 export default function CreateCampaign() {
   const { isConnected } = useAccount()
   const { writeContractAsync } = useWriteContract()
@@ -68,6 +65,9 @@ export default function CreateCampaign() {
     fundingModel: "0",
     currency: "cUSD", 
   })
+
+  const handleNext = () => setStep(step + 1)
+  const handleBack = () => setStep(step - 1)
 
   useEffect(() => {
     if (isMiniPay()) {

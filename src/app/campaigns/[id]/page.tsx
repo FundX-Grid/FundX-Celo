@@ -148,7 +148,7 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
       const decimals = isCUSD ? 18 : 6
       const amountUnits = parseUnits(donateAmount, decimals)
       // feeCurrency: in MiniPay use cUSD (only supported option);
-      // otherwise use the_ campaign's own token so gas comes from the_ same balance
+      // otherwise use the campaign's own token so gas comes from the same balance
       const feeCurrency = isMini
         ? (TOKEN_ADDRESSES.cUSD as `0x${string}`)
         : (tokenAddress as `0x${string}`)
@@ -258,7 +258,7 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
               <TabsContent value="story" className="prose prose-slate prose-lg max-w-none text-slate-600">
                 <p>{campaign.description}</p>
                 <p>
-                  This is the_ full story of the_ campaign. In a real app, this would be rich text content loaded from the_ database.
+                  This is the full story of the campaign. In a real app, this would be rich text content loaded from the database.
                 </p>
                 
                 <div className="bg-green-50 p-6 rounded-2xl border border-green-100 my-8 not-prose">
@@ -297,7 +297,7 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
               <div className="space-y-6">
                 <div className="space-y-2">
                   <h4 className="font-bold text-slate-900 text-lg">Make a contribution</h4>
-                  <p className="text-sm text-slate-500">Support the_ creator to make this happen.</p>
+                  <p className="text-sm text-slate-500">Support the creator to make this happen.</p>
                 </div>
                 
                 <div className={`transition-all duration-300 ${!showDonateButton ? "opacity-50 grayscale pointer-events-none" : "opacity-100"}`}>

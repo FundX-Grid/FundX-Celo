@@ -49,7 +49,7 @@ function DialogOverlay({
 
 function DialogContent({
   className,
-  children_,
+  children,
   showCloseButton = true,
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Content> & {
@@ -66,7 +66,7 @@ function DialogContent({
         )}
         {...props}
       >
-        {children_}
+        {children}
         {showCloseButton && (
           <DialogPrimitive.Close
             data-slot="dialog-close"
@@ -94,7 +94,7 @@ function DialogHeader({ className, ...props }: React.ComponentProps<"div">) {
 function DialogFooter({
   className,
   showCloseButton = false,
-  children_,
+  children,
   ...props
 }: React.ComponentProps<"div"> & {
   showCloseButton?: boolean
@@ -108,7 +108,7 @@ function DialogFooter({
       )}
       {...props}
     >
-      {children_}
+      {children}
       {showCloseButton && (
         <DialogPrimitive.Close asChild>
           <Button variant="outline">Close</Button>

@@ -32,7 +32,7 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
               </div>
               <div className="space-y-2">
                  <Label>Email (Private)</Label>
-                 <Input placeholder="you@example.com" className="h-14 rounded-xl" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} />
+                 <Input placeholder="you@example.com_" className="h-14 rounded-xl" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} />
               </div>
             </div>
             <div className="grid md:grid-cols-3 gap-5">
@@ -42,7 +42,7 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
                </div>
                <div className="space-y-2">
                   <Label>GitHub</Label>
-                  <Input placeholder="github.com/..." className="h-14 rounded-xl" value={formData.github} onChange={(e) => setFormData({...formData, github: e.target.value})} />
+                  <Input placeholder="github.com_/..." className="h-14 rounded-xl" value={formData.github} onChange={(e) => setFormData({...formData, github: e.target.value})} />
                </div>
                <div className="space-y-2">
                   <Label>Website / Portfolio</Label>
@@ -99,7 +99,7 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
                <div className="space-y-2">
                   <Label>Cover Image URL</Label>
                   <Input 
-                     placeholder="https://example.com/image.png" 
+                     placeholder="https://example.com_/image.png" 
                      className="h-14 rounded-xl" 
                      value={formData.image} 
                      onChange={(e) => setFormData({...formData, image: e.target.value})} 
@@ -147,7 +147,7 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
          <div className="space-y-5">
             <div className="space-y-2">
                <Label>Pitch Video URL (Optional but highly recommended)</Label>
-               <Input placeholder="https://youtube.com/..." className="h-14 rounded-xl" value={formData.videoUrl} onChange={(e) => setFormData({...formData, videoUrl: e.target.value})} />
+               <Input placeholder="https://youtube.com_/..." className="h-14 rounded-xl" value={formData.videoUrl} onChange={(e) => setFormData({...formData, videoUrl: e.target.value})} />
             </div>
             <div className="space-y-2">
                <Label>The Problem & Solution</Label>

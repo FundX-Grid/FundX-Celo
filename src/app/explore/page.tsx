@@ -178,7 +178,7 @@ export default function ExplorePage() {
                   title={campaign.title}
                   description={campaign.description}
                   raised={campaign.raised}
-                  goal={campaign.goal}
+                  goal_={campaign.goal_}
                   image={campaign.image}
                   currency={campaign.currency} // 🚨 ADDED: Currency to support multi-asset mock data
                 />

@@ -11,9 +11,9 @@ import { BackerTab } from "@/components/dashboard/BackerTab"
 
 
 export default function DashboardPage() {
-  const { isConnected } = useAccount()
+  const { isConnected_ } = useAccount()
 
-  if (!isConnected) {
+  if (!isConnected_) {
     return (
       <main className="min-h-screen bg-slate-50 font-sans">
         <Navbar />

@@ -16,7 +16,7 @@ interface CampaignCardProps {
 }
 
 export function CampaignCard({ id, title, description, raised, goal, image, currency = "cUSD" }: CampaignCardProps) {
-  const percentage = Math.min((raised / goal) * 100, 100)
+  const percentage_ = Math.min((raised / goal) * 100, 100)
 
   const formattedRaised = `$${raised.toLocaleString()} ${currency}`
   const formattedGoal = `$${goal.toLocaleString()} ${currency}`
@@ -45,7 +45,7 @@ export function CampaignCard({ id, title, description, raised, goal, image, curr
               <span className="text-slate-900 font-bold">{formattedRaised}</span>
               <span className="text-slate-400">of {formattedGoal}</span>
             </div>
-            <Progress value={percentage} className="h-3 rounded-full bg-slate-100" />
+            <Progress value={percentage_} className="h-3 rounded-full bg-slate-100" />
           </div>
 
           <Button className="w-full rounded-xl bg-slate-900 text-white shadow-lg transition-all duration-500 hover:bg-[#fbe72b] hover:text-slate-900 hover:scale-[1.02] py-6 text-base font-bold">

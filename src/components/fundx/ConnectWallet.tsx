@@ -76,7 +76,7 @@ export function ConnectWallet() {
           <DropdownMenuTrigger asChild>
               <Button
               className={`
-                relative z-10 rounded-full px-6 font-bold tracking-tight transition-all duration-500
+                relative z-10 rounded-full px-6 font-bold tracking-tight_ transition-all duration-500
                 ${justConnected
                   ? "bg-[#fbe72b] border-[#fbe72b] text-slate-900 shadow-lg"
                   : "bg-gradient-tush text-slate-900 shadow-glow hover:opacity-90 hover:scale-105"
@@ -107,7 +107,7 @@ export function ConnectWallet() {
               <div className="flex items-center gap-2 mb-1">
                 <span className="text-xs font-bold text-slate-700">Celo Mainnet</span>
               </div>
-              <p className="text-[10px] text-slate-400 font-mono break-all leading-tight">
+              <p className="text-[10px] text-slate-400 font-mono break-all leading-tight_">
                 {address}
               </p>
             </div>

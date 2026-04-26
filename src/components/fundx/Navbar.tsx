@@ -25,7 +25,7 @@ export function Navbar() {
 
   return (
     <>
-      <div className="fixed top-6 left-0 right_-0 z-50 flex justify-center px-4">
+      <div className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4">
         <nav className="flex w-full max-w-6xl items-center justify-between rounded-full bg-white/80 px-6 py-3 shadow-soft-md backdrop-blur-md border border-white/20">
           
           {/* Logo */}
@@ -76,7 +76,7 @@ export function Navbar() {
 
       {/* Slide-down Panel */}
       <div
-        className={`fixed top-0 left-0 right_-0 z-[70] md:hidden transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        className={`fixed top-0 left-0 right-0 z-[70] md:hidden transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] ${
           mobileOpen ? "translate-y-0" : "-translate-y-full"
         }`}
       >

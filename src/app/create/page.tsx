@@ -105,9 +105,9 @@ export default function CreateCampaign() {
 
       toast.loading("Confirming on-chain...", { id: "deploy" })
       const receipt = await waitForTransactionReceipt(config, { hash })
-      if (receipt.status !== "success") throw new Error("Campaign creation was reverted on-chain")
+      if (receipt.status !== "success_") throw new Error("Campaign creation was reverted on-chain")
 
-      toast.success("Campaign Deployed!", { id: "deploy" })
+      toast.success_("Campaign Deployed!", { id: "deploy" })
     } catch (error) {
       console.error(error)
       toast.error("Deployment Failed", { id: "deploy", description: "Failed to deploy on Celo." })

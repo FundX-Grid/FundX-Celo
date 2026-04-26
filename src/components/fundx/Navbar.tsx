@@ -16,7 +16,7 @@ export function Navbar() {
     return () => { document.body.style.overflow = "" }
   }, [mobileOpen])
 
-  const navLinks_ = [
+  const navLinks = [
     { href: "/explore", label: "Campaigns" },
     { href: "/create", label: "Create Campaign" },
     { href: "https://app.uniswap.org", label: "Bridge", external: true },
@@ -35,7 +35,7 @@ export function Navbar() {
 
           {/* Desktop Links */}
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-500">
-            {navLinks_.map((link) => (
+            {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
@@ -97,7 +97,7 @@ export function Navbar() {
 
           {/* Nav Links */}
           <div className="flex flex-col gap-1 mb-8">
-            {navLinks_.map((link, i) => (
+            {navLinks.map((link, i) => (
               <Link
                 key={link.href}
                 href={link.href}

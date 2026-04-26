@@ -142,7 +142,7 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
       <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-500">
          <div className="mb-4">
             <h2 className="text-2xl font-bold text-slate-900">The Pitch</h2>
-            <p className="text-slate-500 text-sm">Explain the problem and how_ your product fixes it.</p>
+            <p className="text-slate-500 text-sm">Explain the problem and how your product fixes it.</p>
          </div>
          <div className="space-y-5">
             <div className="space-y-2">
@@ -169,7 +169,7 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
       <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-500">
          <div className="mb-4">
             <h2 className="text-2xl font-bold text-slate-900">Execution Plan</h2>
-            <p className="text-slate-500 text-sm">Show backers exactly how_ you will spend their funds and hit your goals.</p>
+            <p className="text-slate-500 text-sm">Show backers exactly how you will spend their funds and hit your goals.</p>
          </div>
          <div className="space-y-6">
             <div className="space-y-2">

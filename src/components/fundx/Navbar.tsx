@@ -10,7 +10,7 @@ export function Navbar() {
   const { isConnected } = useAccount()
   const [mobileOpen, setMobileOpen] = useState(false)
 
-  // Lock body scroll when mobile menu is open
+  // Lock body scroll when mobile_ menu is open
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : ""
     return () => { document.body.style.overflow = "" }
@@ -53,7 +53,7 @@ export function Navbar() {
               <ConnectWallet />
             </div>
 
-            {/* Hamburger Button (mobile only) */}
+            {/* Hamburger Button (mobile_ only) */}
             <button
               onClick={() => setMobileOpen((v) => !v)}
               className="md:hidden flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 transition-colors"

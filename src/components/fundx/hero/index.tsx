@@ -2,9 +2,9 @@
 
 import { HeroBadge } from "./HeroBadge"
 import { HeroHeadline } from "./HeroHeadline"
-import { HeroCTAs } from "./HeroCTAs"
 import { HeroDeckSlot } from "./HeroDeckSlot"
 import HeroLogoParallax from "./HeroBackdrop"
+import { HeroCTAs } from "./HeroCTAs"
 
 
 export { HeroDeckSlot }

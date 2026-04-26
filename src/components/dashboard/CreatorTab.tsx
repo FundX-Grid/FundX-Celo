@@ -1,13 +1,13 @@
-import { TabsContent } from "@/components/ui/tabs"
-import { FUNDX_ABI } from "@/lib/fundx-abi"
-import { useWriteContract, useAccount, useReadContracts } from "wagmi"
-import { Button } from "@/components/ui/button"
 import { Clock, XCircle, CheckCircle2, Rocket } from "lucide-react"
-import { useCampaignCount } from "@/lib/hooks/useContract"
-import { toast } from "sonner"
-import { formatUnits } from "viem"
+import { Button } from "@/components/ui/button"
+import { TabsContent } from "@/components/ui/tabs"
 import Image from "next/image"
+import { useWriteContract, useAccount, useReadContracts } from "wagmi"
 import { FUNDX_CONTRACT, TOKEN_ADDRESSES } from "@/lib/celo-config"
+import { FUNDX_ABI } from "@/lib/fundx-abi"
+import { toast } from "sonner"
+import { useCampaignCount } from "@/lib/hooks/useContract"
+import { formatUnits } from "viem"
 
 type CampaignStatus = "active" | "successful" | "failed";
 
@@ -57,9 +57,16 @@ const MOCK_CREATOR_CAMPAIGNS: CreatorCampaign[] = [
   }
 ];
 
-export function CreatorTab() {
-  const { writeContractAsync } = useWriteContract();
-  const { isConnected, address } = useAccount();
+  const handleWithdraw = async (id: string, model: string, goal: number, raised: number) => {
+    if (!isConnected) {
+       toast.error("Connect Wallet", { description: "You need to connect your wallet." });
+       return;
+    }
+    
+    if (id.startsWith("mock-")) {
+       toast.info("Mock Campaign", { description: "This is a mock campaign and cannot be withdrawn on-chain." });
+       return;
+    }
 
   const { data: countData } = useCampaignCount();
   const count = Number(countData || 0);
@@ -134,16 +141,9 @@ export function CreatorTab() {
 
   const allCampaigns = [...liveCreatorCampaigns, ...MOCK_CREATOR_CAMPAIGNS];
 
-  const handleWithdraw = async (id: string, model: string, goal: number, raised: number) => {
-    if (!isConnected) {
-       toast.error("Connect Wallet", { description: "You need to connect your wallet." });
-       return;
-    }
-    
-    if (id.startsWith("mock-")) {
-       toast.info("Mock Campaign", { description: "This is a mock campaign and cannot be withdrawn on-chain." });
-       return;
-    }
+export function CreatorTab() {
+  const { writeContractAsync } = useWriteContract();
+  const { isConnected, address } = useAccount();
 
     if (model === "All-or-Nothing" && raised < goal) {
        toast.error("Cannot Withdraw", { description: "Goal must be met for All-or-Nothing campaigns." });

@@ -2,10 +2,10 @@
 
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import { CreateCampaignData } from "@/app/create/page" 
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Rocket } from "lucide-react"
-import { CreateCampaignData } from "@/app/create/page" 
 
 
 interface WizardProps {
@@ -38,7 +38,7 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
             <div className="grid md:grid-cols-3 gap-5">
                <div className="space-y-2">
                   <Label>Twitter / X</Label>
-                  <Input placeholder="@username" className="h-14 rounded-xl" value={formData.twitter_} onChange={(e) => setFormData({...formData, twitter_: e.target.value})} />
+                  <Input placeholder="@username" className="h-14 rounded-xl" value={formData.twitter} onChange={(e) => setFormData({...formData, twitter: e.target.value})} />
                </div>
                <div className="space-y-2">
                   <Label>GitHub</Label>

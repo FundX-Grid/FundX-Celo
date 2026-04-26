@@ -24,19 +24,12 @@ import { getCampaign } from "@/lib/data"
 import { useCampaign } from "@/lib/hooks/useContract"
 import { isMiniPay } from "@/lib/wallet"
 
-  const handleDonate = async () => {
-    if (!isContractCampaign) {
-      toast.error("Demo Campaign", { description: "This is a demo campaign. On-chain donations are only available for real campaigns." })
-      return
-    }
-    if (!isConnected && !isMini) {
-      toast.error("Connect Wallet", { description: "Please connect your wallet to donate." })
-      return
-    }
-    if (!donateAmount || Number(donateAmount) <= 0) {
-      toast.error("Invalid Amount", { description: "Please enter a valid amount to donate." })
-      return
-    }
+export default function CampaignPage({ params }: { params: Promise<{ id: string }> }) {
+  const { isConnected } = useAccount()
+  const { writeContractAsync } = useWriteContract()
+  const [donateAmount, setDonateAmount] = useState("")
+  const [mounted, setMounted] = useState(false)
+  const [isMini, setIsMini] = useState(false)
 
   const { id } = use(params)
   
@@ -128,12 +121,19 @@ import { isMiniPay } from "@/lib/wallet"
   // Mock campaigns (slug IDs) can't accept on-chain donations
   if (!donateDisabledReason && !isContractCampaign) donateDisabledReason = "Demo Campaign"
 
-export default function CampaignPage({ params }: { params: Promise<{ id: string }> }) {
-  const { isConnected } = useAccount()
-  const { writeContractAsync } = useWriteContract()
-  const [donateAmount, setDonateAmount] = useState("")
-  const [mounted, setMounted] = useState(false)
-  const [isMini, setIsMini] = useState(false)
+  const handleDonate = async () => {
+    if (!isContractCampaign) {
+      toast.error("Demo Campaign", { description: "This is a demo campaign. On-chain donations are only available for real campaigns." })
+      return
+    }
+    if (!isConnected && !isMini) {
+      toast.error("Connect Wallet", { description: "Please connect your wallet to donate." })
+      return
+    }
+    if (!donateAmount || Number(donateAmount) <= 0) {
+      toast.error("Invalid Amount", { description: "Please enter a valid amount to donate." })
+      return
+    }
 
     const campaignIdNum = Number(id)
     if (isNaN(campaignIdNum)) {

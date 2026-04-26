@@ -87,7 +87,7 @@ export const FUNDX_ABI = [
     type: "function",
     stateMutability: "view",
     inputs: [
-      { name: "campaignId_", type: "uint256" },
+      { name: "campaignId", type: "uint256" },
       { name: "donor", type: "address" },
     ],
     outputs: [{ name: "", type: "uint256" }],
@@ -153,7 +153,7 @@ export const FUNDX_ABI = [
     name: "CampaignCreated",
     type: "event",
     inputs: [
-      { name: "campaignId_", type: "uint256", indexed: true },
+      { name: "campaignId", type: "uint256", indexed: true },
       { name: "creator", type: "address", indexed: true },
       { name: "token", type: "address", indexed: false },
       { name: "goal", type: "uint256", indexed: false },
@@ -165,7 +165,7 @@ export const FUNDX_ABI = [
     name: "DonationReceived",
     type: "event",
     inputs: [
-      { name: "campaignId_", type: "uint256", indexed: true },
+      { name: "campaignId", type: "uint256", indexed: true },
       { name: "donor", type: "address", indexed: true },
       { name: "amount", type: "uint256", indexed: false },
     ],
@@ -174,7 +174,7 @@ export const FUNDX_ABI = [
     name: "FundsWithdrawn",
     type: "event",
     inputs: [
-      { name: "campaignId_", type: "uint256", indexed: true },
+      { name: "campaignId", type: "uint256", indexed: true },
       { name: "creator", type: "address", indexed: true },
       { name: "net", type: "uint256", indexed: false },
       { name: "fee", type: "uint256", indexed: false },
@@ -184,7 +184,7 @@ export const FUNDX_ABI = [
     name: "RefundClaimed",
     type: "event",
     inputs: [
-      { name: "campaignId_", type: "uint256", indexed: true },
+      { name: "campaignId", type: "uint256", indexed: true },
       { name: "donor", type: "address", indexed: true },
       { name: "amount", type: "uint256", indexed: false },
     ],
@@ -193,7 +193,7 @@ export const FUNDX_ABI = [
     name: "CampaignDeactivated",
     type: "event",
     inputs: [
-      { name: "campaignId_", type: "uint256", indexed: true },
+      { name: "campaignId", type: "uint256", indexed: true },
     ],
   },
 ] as const

@@ -1,10 +1,10 @@
 "use client"
 
-import { HeroCTAs } from "./HeroCTAs"
-import { HeroHeadline } from "./HeroHeadline"
 import { HeroBadge } from "./HeroBadge"
-import HeroLogoParallax from "./HeroBackdrop"
+import { HeroHeadline } from "./HeroHeadline"
+import { HeroCTAs } from "./HeroCTAs"
 import { HeroDeckSlot } from "./HeroDeckSlot"
+import HeroLogoParallax from "./HeroBackdrop"
 
 
 export { HeroDeckSlot }

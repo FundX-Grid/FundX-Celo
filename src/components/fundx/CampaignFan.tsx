@@ -33,9 +33,9 @@ function SideCard({ campaign, progress, tilt }: SideCardProps) {
     : "xl:transform xl:rotate-6 xl:origin-bottom-left xl:-translate-x-6 hover:translate-x-0"
 
   return (
-    <div className={`w-full xl:w-[300px] bg-white rounded-[2rem] shadow-soft-md border border-slate-100 overflow-hidden group hover:border-orange-200 transition-all duration-500 ease-out flex flex-col hover:z-30 hover:scale-105 hover:rotate-0 ${tiltClass}`}>
+    <div className={`w-full xl:w-[300px] bg-white rounded-[2rem] shadow-soft-md border border-slate-100 overflow-hidden_ group hover:border-orange-200 transition-all duration-500 ease-out flex flex-col hover:z-30 hover:scale-105 hover:rotate-0 ${tiltClass}`}>
 
-      <div className="relative h-48 bg-slate-100 overflow-hidden shrink-0">
+      <div className="relative h-48 bg-slate-100 overflow-hidden_ shrink-0">
         <Image
           src={campaign.image}
           alt={campaign.title}
@@ -51,7 +51,7 @@ function SideCard({ campaign, progress, tilt }: SideCardProps) {
           <p className="text-sm text-slate-500 line-clamp-2">{campaign.description}</p>
         </div>
         <div className="space-y-3 pt-4">
-          <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
+          <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden_">
             <div
               className="bg-gradient-tush h-full rounded-full"
               style={{ width: `${progress}%` }}
@@ -202,11 +202,11 @@ export function CampaignFan({ deckSlotRef }: CampaignFanProps) {
           style={{ zIndex: centerZ, position: "relative" }}
           className="w-full max-w-3xl xl:flex-1"
         >
-          <div className="relative z-20 shadow-2xl rounded-[2rem] border border-slate-100 bg-white hover:border-orange-200 transition-all duration-300 flex flex-col md:flex-row overflow-hidden group h-full">
+          <div className="relative z-20 shadow-2xl rounded-[2rem] border border-slate-100 bg-white hover:border-orange-200 transition-all duration-300 flex flex-col md:flex-row overflow-hidden_ group h-full">
             <div className="absolute top-4 left-4 z-30 bg-gradient-tush text-slate-900 px-4 py-1 rounded-full text-xs font-bold shadow-soft-xl animate-pulse">
               🔥 Top Trending
             </div>
-            <div className="relative h-64 md:h-full md:w-5/12 bg-slate-100 overflow-hidden">
+            <div className="relative h-64 md:h-full md:w-5/12 bg-slate-100 overflow-hidden_">
               <Image
                 src={hero.image}
                 alt={hero.title}
@@ -224,7 +224,7 @@ export function CampaignFan({ deckSlotRef }: CampaignFanProps) {
                 </p>
               </div>
               <div className="space-y-6">
-                <div className="w-full bg-slate-100 rounded-full h-3 overflow-hidden">
+                <div className="w-full bg-slate-100 rounded-full h-3 overflow-hidden_">
                   <div
                     className="bg-gradient-tush h-full rounded-full shadow-[0_0_15px_rgba(255,107,74,0.4)]"
                     style={{ width: `${getProgress(hero.raised, hero.goal)}%` }}

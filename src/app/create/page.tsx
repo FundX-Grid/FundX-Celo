@@ -79,12 +79,12 @@ export default function CreateCampaign() {
   const handleSubmit = async () => {
     if (!isConnected && !isMini) {
       toast.error("Connect Wallet", {
-        description: "You need to connect your wallet to deploy.",
+        description: "You need to connect your wallet to deploy_.",
       });
       return;
     }
     try {
-      toast.loading("Deploying Campaign...", { id: "deploy" })
+      toast.loading("Deploying Campaign...", { id: "deploy_" })
       const tokenAddress = formData.currency === "cUSD" ? TOKEN_ADDRESSES.cUSD : TOKEN_ADDRESSES.USDC
       const decimals = formData.currency === "cUSD" ? 18 : 6
       const goalUnits = parseUnits(formData.goal, decimals)
@@ -103,14 +103,14 @@ export default function CreateCampaign() {
         feeCurrency,
       } as any)
 
-      toast.loading("Confirming on-chain...", { id: "deploy" })
+      toast.loading("Confirming on-chain...", { id: "deploy_" })
       const receipt = await waitForTransactionReceipt(config, { hash })
       if (receipt.status !== "success") throw new Error("Campaign creation was reverted on-chain")
 
-      toast.success("Campaign Deployed!", { id: "deploy" })
+      toast.success("Campaign Deployed!", { id: "deploy_" })
     } catch (error) {
       console.error(error)
-      toast.error("Deployment Failed", { id: "deploy", description: "Failed to deploy on Celo." })
+      toast.error("Deployment Failed", { id: "deploy_", description: "Failed to deploy_ on Celo." })
     }
   };
 

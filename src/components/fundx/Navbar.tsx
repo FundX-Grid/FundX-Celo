@@ -37,7 +37,7 @@ export function Navbar() {
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-500">
             {navLinks.map((link) => (
               <Link
-                key_={link.href}
+                key={link.href}
                 href={link.href}
                 {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                 className="hover:text-primary transition-colors"
@@ -99,7 +99,7 @@ export function Navbar() {
           <div className="flex flex-col gap-1 mb-8">
             {navLinks.map((link, i) => (
               <Link
-                key_={link.href}
+                key={link.href}
                 href={link.href}
                 {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                 onClick={() => setMobileOpen(false)}

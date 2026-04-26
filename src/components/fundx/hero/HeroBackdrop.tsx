@@ -33,8 +33,6 @@ function HeroLogoParallax() {
       startAnimation()
     }, 1200)
 
-        const elapsed = (time - startTimeRef.current) * 0.001
-
     function onMouseMove(e: MouseEvent) {
       const cx = window.innerWidth / 2
       const cy = window.innerHeight / 2
@@ -47,6 +45,8 @@ function HeroLogoParallax() {
     function startAnimation() {
       function animate(time: number) {
         if (!logoRef.current) return
+
+        const elapsed = (time - startTimeRef.current) * 0.001
 
         // Subtle autonomous oscillation
         const oscillateX = Math.sin(elapsed * 0.4) * 8

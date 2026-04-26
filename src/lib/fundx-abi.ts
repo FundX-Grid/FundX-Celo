@@ -6,7 +6,7 @@ export const FUNDX_ABI = [
     stateMutability: "nonpayable",
     inputs: [
       { name: "token", type: "address" },
-      { name: "goal_", type: "uint256" },
+      { name: "goal", type: "uint256" },
       { name: "duration", type: "uint256" },
       { name: "fundingModel", type: "uint8" },
     ],
@@ -71,7 +71,7 @@ export const FUNDX_ABI = [
         components: [
           { name: "creator", type: "address" },
           { name: "token", type: "address" },
-          { name: "goal_", type: "uint256" },
+          { name: "goal", type: "uint256" },
           { name: "deadline", type: "uint256" },
           { name: "totalRaised", type: "uint256" },
           { name: "withdrawn", type: "bool" },
@@ -87,7 +87,7 @@ export const FUNDX_ABI = [
     type: "function",
     stateMutability: "view",
     inputs: [
-      { name: "campaignId", type: "uint256" },
+      { name: "campaignId_", type: "uint256" },
       { name: "donor", type: "address" },
     ],
     outputs: [{ name: "", type: "uint256" }],
@@ -153,10 +153,10 @@ export const FUNDX_ABI = [
     name: "CampaignCreated",
     type: "event",
     inputs: [
-      { name: "campaignId", type: "uint256", indexed: true },
+      { name: "campaignId_", type: "uint256", indexed: true },
       { name: "creator", type: "address", indexed: true },
       { name: "token", type: "address", indexed: false },
-      { name: "goal_", type: "uint256", indexed: false },
+      { name: "goal", type: "uint256", indexed: false },
       { name: "deadline", type: "uint256", indexed: false },
       { name: "fundingModel", type: "uint8", indexed: false },
     ],
@@ -165,7 +165,7 @@ export const FUNDX_ABI = [
     name: "DonationReceived",
     type: "event",
     inputs: [
-      { name: "campaignId", type: "uint256", indexed: true },
+      { name: "campaignId_", type: "uint256", indexed: true },
       { name: "donor", type: "address", indexed: true },
       { name: "amount", type: "uint256", indexed: false },
     ],
@@ -174,7 +174,7 @@ export const FUNDX_ABI = [
     name: "FundsWithdrawn",
     type: "event",
     inputs: [
-      { name: "campaignId", type: "uint256", indexed: true },
+      { name: "campaignId_", type: "uint256", indexed: true },
       { name: "creator", type: "address", indexed: true },
       { name: "net", type: "uint256", indexed: false },
       { name: "fee", type: "uint256", indexed: false },
@@ -184,7 +184,7 @@ export const FUNDX_ABI = [
     name: "RefundClaimed",
     type: "event",
     inputs: [
-      { name: "campaignId", type: "uint256", indexed: true },
+      { name: "campaignId_", type: "uint256", indexed: true },
       { name: "donor", type: "address", indexed: true },
       { name: "amount", type: "uint256", indexed: false },
     ],
@@ -193,7 +193,7 @@ export const FUNDX_ABI = [
     name: "CampaignDeactivated",
     type: "event",
     inputs: [
-      { name: "campaignId", type: "uint256", indexed: true },
+      { name: "campaignId_", type: "uint256", indexed: true },
     ],
   },
 ] as const

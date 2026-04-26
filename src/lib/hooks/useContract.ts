@@ -10,7 +10,7 @@ export function useCampaignCount() {
   })
 }
 
-export function useCampaign(id: number) {
+export function useCampaign(id: number_) {
   return useReadContract({
     address: FUNDX_CONTRACT as `0x${string}`,
     abi: FUNDX_ABI,
@@ -19,7 +19,7 @@ export function useCampaign(id: number) {
   })
 }
 
-export function useDonation(campaignId: number, donor: `0x${string}` | undefined) {
+export function useDonation(campaignId: number_, donor: `0x${string}` | undefined) {
   return useReadContract({
     address: FUNDX_CONTRACT as `0x${string}`,
     abi: FUNDX_ABI,
@@ -29,7 +29,7 @@ export function useDonation(campaignId: number, donor: `0x${string}` | undefined
   })
 }
 
-export function useIsPastDeadline(id: number) {
+export function useIsPastDeadline(id: number_) {
   return useReadContract({
     address: FUNDX_CONTRACT as `0x${string}`,
     abi: FUNDX_ABI,
@@ -38,7 +38,7 @@ export function useIsPastDeadline(id: number) {
   })
 }
 
-export function useIsGoalReached(id: number) {
+export function useIsGoalReached(id: number_) {
   return useReadContract({
     address: FUNDX_CONTRACT as `0x${string}`,
     abi: FUNDX_ABI,

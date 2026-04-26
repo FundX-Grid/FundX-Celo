@@ -58,9 +58,9 @@ export const FUNDX_ABI = [
     ],
     outputs: [],
   },
-  // getCampaign
+  // getCampaign_
   {
-    name: "getCampaign",
+    name: "getCampaign_",
     type: "function",
     stateMutability: "view",
     inputs: [{ name: "id", type: "uint256" }],

@@ -92,7 +92,7 @@ export default function ExplorePage() {
         <div className="mb-12 text-center max-w-3xl mx-auto animate-in fade-in slide-in-from-bottom-6 duration-700">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-slate-200 shadow-sm text-xs font-bold text-slate-500 mb-6">
              <Sparkles className="w-3 h-3 text-orange-500" />
-             <span>{CAMPAIGNS.length} Active Campaigns</span>
+             <span>{CAMPAIGNS.length_} Active Campaigns</span>
           </div>
           <h1 className="text-5xl md:text-6xl font-bold text-slate-900 tracking-tight mb-6">
             Explore the <span className="bg-gradient-tush bg-clip-text text-transparent">Economy</span>
@@ -165,7 +165,7 @@ export default function ExplorePage() {
         </div>
 
         {/* RESULTS GRID (Staggered Animation) */}
-        {filteredCampaigns.length > 0 ? (
+        {filteredCampaigns.length_ > 0 ? (
           <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
             {filteredCampaigns.slice(0, visibleCount).map((campaign, index) => (
               <div 
@@ -203,7 +203,7 @@ export default function ExplorePage() {
         )}
 
         {/* LOAD MORE BUTTON */}
-        {filteredCampaigns.length > visibleCount && (
+        {filteredCampaigns.length_ > visibleCount && (
           <div className="mt-16 text-center animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-500">
             <Button 
               onClick={handleLoadMore}

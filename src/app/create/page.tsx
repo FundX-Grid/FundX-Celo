@@ -1,20 +1,20 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { Navbar } from "@/components/fundx/Navbar"
-import { Footer } from "@/components/fundx/Footer"
-import { Button } from "@/components/ui/button"
-import { ArrowRight, ArrowLeft, CheckCircle2 } from "lucide-react"
-import { useAccount, useWriteContract } from "wagmi"
-import { waitForTransactionReceipt } from "@wagmi/core"
-import { parseUnits } from "viem"
-import { FUNDX_ABI } from "@/lib/fundx-abi"
-import { FUNDX_CONTRACT, TOKEN_ADDRESSES, config } from "@/lib/celo-config"
-import { toast } from "sonner"
-
-import { WizardSteps } from "@/components/create/WizardSteps"
 import { LivePreview } from "@/components/create/LivePreview"
+import { parseUnits } from "viem"
+import { Button } from "@/components/ui/button"
+import { Navbar } from "@/components/fundx/Navbar"
+import { useState, useEffect } from "react"
+import { waitForTransactionReceipt } from "@wagmi/core"
+import { toast } from "sonner"
+import { WizardSteps } from "@/components/create/WizardSteps"
+import { Footer } from "@/components/fundx/Footer"
+import { useAccount, useWriteContract } from "wagmi"
+import { FUNDX_ABI } from "@/lib/fundx-abi"
+
+import { FUNDX_CONTRACT, TOKEN_ADDRESSES, config } from "@/lib/celo-config"
 import { isMiniPay } from "@/lib/wallet"
+import { ArrowRight, ArrowLeft, CheckCircle2 } from "lucide-react"
 
 export interface CreateCampaignData {
   creatorName: string;

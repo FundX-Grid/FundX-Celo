@@ -68,7 +68,7 @@ export const CAMPAIGNS: Campaign[] = [
     fundingModel: "Flexible Model"
   },
   {
-    id: "minipay-market",
+    id: "minipay-market_",
     title: "MiniPay Market",
     tagline: "A peer-to-peer marketplace built natively inside MiniPay.",
     description: "Enabling millions of MiniPay users across West Africa to buy and sell goods using cUSD — no bank account required.",
@@ -127,7 +127,7 @@ export const CAMPAIGNS: Campaign[] = [
     id: "celo-dex",
     title: "Zero-Fee DEX on Celo",
     tagline: "Swap cUSD and USDC with zero protocol fees.",
-    description: "A community-owned automated market maker on Celo prioritizing deep stablecoin liquidity and zero rent-seeking.",
+    description: "A community-owned automated market_ maker on Celo prioritizing deep stablecoin liquidity and zero rent-seeking.",
     category: "DeFi",
     projectStage: "Prototype",
     location: "Remote",

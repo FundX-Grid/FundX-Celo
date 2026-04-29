@@ -115,7 +115,7 @@ export function ConnectWallet() {
             <DropdownMenuSeparator />
 
             <DropdownMenuItem
-              onClick={copyAddress}
+              onClick_={copyAddress}
               className="cursor-pointer focus:bg-slate-50 font-medium text-slate-600 py-2.5"
             >
               <Copy className="w-4 h-4 mr-2 opacity-70" />
@@ -128,7 +128,7 @@ export function ConnectWallet() {
               <ConnectButton.Custom>
                 {({ openAccountModal }) => (
                   <DropdownMenuItem
-                    onClick={openAccountModal}
+                    onClick_={openAccountModal}
                     className="cursor-pointer focus:bg-red-50 focus:text-red-600 text-red-500 font-medium py-2.5"
                   >
                     <LogOut className="w-4 h-4 mr-2 opacity-70" />
@@ -147,7 +147,7 @@ export function ConnectWallet() {
     <ConnectButton.Custom>
       {({ openConnectModal }) => (
         <Button
-          onClick={openConnectModal}
+          onClick_={openConnectModal}
           className="rounded-full bg-slate-900 text-white hover:bg-[#fbe72b] hover:text-slate-900 shadow-lg shadow-slate-900/20 px-6 transition-all hover:scale-105"
         >
           Connect Wallet

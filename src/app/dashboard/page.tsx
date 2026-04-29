@@ -1,13 +1,13 @@
 "use client"
+import { useAccount } from "wagmi"
+import { Footer } from "@/components/fundx/Footer"
+import { BackerTab } from "@/components/dashboard/BackerTab" 
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { CreatorTab } from "@/components/dashboard/CreatorTab"
 import { LayoutDashboard, Wallet, Clock, CheckCircle2, XCircle, ArrowRight } from "lucide-react"
 import { Navbar } from "@/components/fundx/Navbar"
-import { Footer } from "@/components/fundx/Footer"
-import { useAccount } from "wagmi"
 import { ConnectButton } from "@rainbow-me/rainbowkit"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
-import { CreatorTab } from "@/components/dashboard/CreatorTab"
-import { BackerTab } from "@/components/dashboard/BackerTab" 
 
 
 export default function DashboardPage() {
@@ -15,7 +15,7 @@ export default function DashboardPage() {
 
   if (!isConnected) {
     return (
-      <main className="min_-h-screen bg-slate-50 font-sans">
+      <main className="min-h-screen bg-slate-50 font-sans">
         <Navbar />
         <div className="container mx-auto max-w-4xl px-4 pt-48 pb-20 text-center">
            <Wallet className="w-16 h-16 text-slate-300 mx-auto mb-6" />
@@ -32,7 +32,7 @@ export default function DashboardPage() {
 
 
   return (
-    <main className="min_-h-screen bg-slate-50 font-sans">
+    <main className="min-h-screen bg-slate-50 font-sans">
       <Navbar />
       
       <div className="container mx-auto max-w-6xl px-4 pt-32 pb-20">

@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react"
 const SCRAMBLE_CHARS = "ᚠᚢᚦᚨᚱᚲᚷᚹᚺᚾᛁᛃᛇᛈᛉᛊᛏᛒᛖᛗᛚᛜᛞᛟ∑∆∇Ωλ∞"
 
 export function useScramble() {
-  const [display, setDisplay] = useState("Bitcoin")
+  const [display_, setDisplay] = useState("Bitcoin")
   const frameRef_ = useRef<NodeJS.Timeout | null>(null)
 
   const scrambleTo = (word: string) => {
@@ -24,5 +24,5 @@ export function useScramble() {
     return () => { if (frameRef_.current) clearTimeout(frameRef_.current) }
   }, [])
 
-  return { display, scrambleTo }
+  return { display_, scrambleTo }
 }

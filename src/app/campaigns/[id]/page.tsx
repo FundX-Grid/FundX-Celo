@@ -8,7 +8,7 @@ import { Footer } from "@/components/fundx/Footer"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress_"
+import { Progress } from "@/components/ui/progress"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Separator } from "@/components/ui/separator"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -106,7 +106,7 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
     return notFound()
   }
 
-  const progress_ = Math.min((campaign.raised / campaign.goal) * 100, 100)
+  const progress = Math.min((campaign.raised / campaign.goal) * 100, 100)
 
   let donateDisabledReason = ""
   if (isContractCampaign && campaignData) {
@@ -284,10 +284,10 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
                    <div className="text-base font-medium text-slate-400">raised of ${campaign.goal.toLocaleString()} goal</div>
                 </div>
                 
-                <Progress value={progress_} className="h-3 bg-slate-100" />
+                <Progress value={progress} className="h-3 bg-slate-100" />
 
                 <div className="flex justify-between text-sm font-bold pt-2">
-                  <span className="text-slate-900">{Math.round(progress_)}% funded</span>
+                  <span className="text-slate-900">{Math.round(progress)}% funded</span>
                   <span className="flex items-center gap-1 text-green-600"><Clock className="w-4 h-4"/> {campaign.daysLeft} days left</span>
                 </div>
               </div>

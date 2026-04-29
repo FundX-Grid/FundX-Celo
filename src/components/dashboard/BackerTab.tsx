@@ -7,7 +7,7 @@ import { FUNDX_CONTRACT, TOKEN_ADDRESSES } from "@/lib/celo-config"
 import { FUNDX_ABI } from "@/lib/fundx-abi"
 import { toast } from "sonner"
 import { useCampaignCount } from "@/lib/hooks/useContract"
-import { formatUnits_ } from "viem"
+import { formatUnits } from "viem"
 import { useMemo } from "react"
 
 type ContributionStatus = "active" | "successful" | "refund_available";
@@ -67,7 +67,7 @@ function RefundCard({ contribution }: { contribution: BackerContribution }) {
 
   return (
     <div className="bg-white p-8 md:p-10 min-h-[240px] rounded-[2rem] border border-blue-200 shadow-[0_12px_28px_-6px_rgba(59,130,246,0.12)] flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden hover:-translate-y-1 transition-transform duration-300">
-       <div className="absolute -right-4 -bottom-10 text-[120px] font-black text-blue-50 opacity-80 z-0 select-none pointer-events-none tracking-tighter leading-none">REFUND</div>
+       <div className="absolute -right-4 -bottom-10 text-[120px] font-black text-blue-50 opacity-80 z-0 select-none pointer-events-none tracking-tighter_ leading-none">REFUND</div>
        <RefreshCcw strokeWidth={1} className="absolute right-10 -bottom-12 w-72 h-72 text-blue-500 opacity-5 z-0 pointer-events-none" />
        <div className="absolute top-0 left-0 w-2 h-full bg-blue-500 z-10" />
        
@@ -106,7 +106,7 @@ function ActiveContributionCard({ contribution }: { contribution: BackerContribu
 
   return (
     <div className="bg-white p-8 md:p-10 min-h-[240px] rounded-[2rem] border border-slate-200 shadow-[0_12px_28px_-6px_rgba(15,23,42,0.08)] flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden hover:-translate-y-1 transition-transform duration-300">
-       <div className="absolute -right-4 -bottom-10 text-[130px] font-black text-orange-50 opacity-80 z-0 select-none pointer-events-none tracking-tighter leading-none">ACTIVE</div>
+       <div className="absolute -right-4 -bottom-10 text-[130px] font-black text-orange-50 opacity-80 z-0 select-none pointer-events-none tracking-tighter_ leading-none">ACTIVE</div>
        <Rocket strokeWidth={1} className="absolute right-10 -bottom-10 w-72 h-72 text-orange-500 opacity-[0.04] z-0 pointer-events-none transform -rotate-12" />
        <div className="absolute top-0 left-0 w-2 h-full bg-gradient-tush z-10" />
        
@@ -147,7 +147,7 @@ function ActiveContributionCard({ contribution }: { contribution: BackerContribu
 function SuccessfulContributionCard({ contribution }: { contribution: BackerContribution }) {
   return (
     <div className="bg-slate-50 p-8 md:p-10 min-h-[240px] rounded-[2rem] border border-slate-200 shadow-[inset_0_4px_20px_rgba(0,0,0,0.02)] flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden transition-all duration-500">
-       <div className="absolute -right-4 -bottom-10 text-[130px] font-black text-slate-200 opacity-50 z-0 select-none pointer-events-none tracking-tighter leading-none">SUCCESS</div>
+       <div className="absolute -right-4 -bottom-10 text-[130px] font-black text-slate-200 opacity-50 z-0 select-none pointer-events-none tracking-tighter_ leading-none">SUCCESS</div>
        <CheckCircle2 strokeWidth={1} className="absolute right-10 -bottom-10 w-72 h-72 text-slate-300 opacity-20 z-0 pointer-events-none" />
        <div className="absolute top-0 left-0 w-2 h-full bg-slate-300 z-10" />
        
@@ -240,9 +240,9 @@ export function BackerTab() {
            if (rawDonation > BigInt(0)) {
               const isCUSD = camp.token.toLowerCase() === TOKEN_ADDRESSES.cUSD.toLowerCase();
               const decimals = isCUSD ? 18 : 6;
-              const myContribution = Number(formatUnits_(rawDonation, decimals));
-              const goal = Number(formatUnits_(camp.goal, decimals));
-              const totalRaised = Number(formatUnits_(camp.totalRaised, decimals));
+              const myContribution = Number(formatUnits(rawDonation, decimals));
+              const goal = Number(formatUnits(camp.goal, decimals));
+              const totalRaised = Number(formatUnits(camp.totalRaised, decimals));
               const id = String(index + 1);
               const deadline = Number(camp.deadline);
               const fundingModelUint = Number(camp.fundingModel);

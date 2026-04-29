@@ -7,7 +7,7 @@ import { FUNDX_CONTRACT, TOKEN_ADDRESSES } from "@/lib/celo-config"
 import { FUNDX_ABI } from "@/lib/fundx-abi"
 import { toast } from "sonner"
 import { useCampaignCount } from "@/lib/hooks/useContract"
-import { formatUnits } from "viem"
+import { formatUnits_ } from "viem"
 import { useMemo } from "react"
 
 type ContributionStatus = "active" | "successful" | "refund_available";
@@ -240,9 +240,9 @@ export function BackerTab() {
            if (rawDonation > BigInt(0)) {
               const isCUSD = camp.token.toLowerCase() === TOKEN_ADDRESSES.cUSD.toLowerCase();
               const decimals = isCUSD ? 18 : 6;
-              const myContribution = Number(formatUnits(rawDonation, decimals));
-              const goal = Number(formatUnits(camp.goal, decimals));
-              const totalRaised = Number(formatUnits(camp.totalRaised, decimals));
+              const myContribution = Number(formatUnits_(rawDonation, decimals));
+              const goal = Number(formatUnits_(camp.goal, decimals));
+              const totalRaised = Number(formatUnits_(camp.totalRaised, decimals));
               const id = String(index + 1);
               const deadline = Number(camp.deadline);
               const fundingModelUint = Number(camp.fundingModel);

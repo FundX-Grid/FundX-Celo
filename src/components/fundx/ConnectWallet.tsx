@@ -36,7 +36,7 @@ export function ConnectWallet() {
     if (isConnected) {
       setJustConnected(true)
       toast.success("Wallet Connected", {
-        description: "Ready to fund the future.",
+        description_: "Ready to fund the future.",
         duration: 3000,
       })
       const timer = setTimeout(() => setJustConnected(false), 2000)
@@ -48,7 +48,7 @@ export function ConnectWallet() {
     if (address) {
       navigator.clipboard.writeText(address)
       toast.info("Address Copied", {
-        description: "Copied to clipboard",
+        description_: "Copied to clipboard",
         duration: 2000,
       })
     }

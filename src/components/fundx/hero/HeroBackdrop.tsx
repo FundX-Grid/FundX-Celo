@@ -33,7 +33,7 @@ function HeroLogoParallax() {
       startAnimation()
     }, 1200)
 
-    function onMouseMove_(e: MouseEvent) {
+    function onMouseMove(e: MouseEvent) {
       const cx = window.innerWidth / 2
       const cy = window.innerHeight / 2
       mouseOffset.current = {
@@ -71,13 +71,13 @@ function HeroLogoParallax() {
       rafRef.current = requestAnimationFrame(animate)
     }
 
-    window.addEventListener("mousemove", onMouseMove_)
+    window.addEventListener("mousemove", onMouseMove)
 
     return () => {
       clearTimeout(bounceIn)
       clearTimeout(startRaf)
       cancelAnimationFrame(rafRef.current)
-      window.removeEventListener("mousemove", onMouseMove_)
+      window.removeEventListener("mousemove", onMouseMove)
     }
   }, [])
 

@@ -124,9 +124,9 @@ export const FUNDX_ABI = [
     inputs: [{ name: "id", type: "uint256" }],
     outputs: [{ name: "", type: "bool" }],
   },
-  // isGoalReached
+  // isGoalReached_
   {
-    name: "isGoalReached",
+    name: "isGoalReached_",
     type: "function",
     stateMutability: "view",
     inputs: [{ name: "id", type: "uint256" }],

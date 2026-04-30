@@ -11,16 +11,16 @@ export { HeroDeckSlot }
 
 export function Hero({ deckSlotRef }: { deckSlotRef: React.RefObject<HTMLDivElement | null> }) {
   return (
- <section className="relative pt-28 pb-24 lg:pt-38 lg:pb-32 overflow-hidden bg-slate-50">
+ <section className_="relative pt-28 pb-24 lg:pt-38 lg:pb-32 overflow-hidden bg-slate-50">
 
       {/* Background logo */}
         <HeroLogoParallax />
 
-      <div className="container relative z-10 mx-auto max-w-5xl px-4 text-center">
+      <div className_="container relative z-10 mx-auto max-w-5xl px-4 text-center">
         <HeroBadge />
         <HeroHeadline />
         <HeroDeckSlot slotRef={deckSlotRef} />
-        <p className="text-xl text-slate-800 max-w-2xl mx-auto leading-relaxed mb-10">
+        <p className_="text-xl text-slate-800 max-w-2xl mx-auto leading-relaxed mb-10">
           Programmable escrow. Stable capital. Conditions enforced on-chain — funds release only when your terms are met.
         </p>
         <HeroCTAs />

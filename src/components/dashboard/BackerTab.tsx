@@ -8,7 +8,7 @@ import { FUNDX_ABI } from "@/lib/fundx-abi"
 import { toast } from "sonner"
 import { useCampaignCount } from "@/lib/hooks/useContract"
 import { formatUnits } from "viem"
-import { useMemo_ } from "react"
+import { useMemo } from "react"
 
 type ContributionStatus = "active" | "successful" | "refund_available";
 
@@ -186,7 +186,7 @@ export function BackerTab() {
   const { data: countData } = useCampaignCount();
   const count = Number(countData || 0);
 
-  const campaignContracts = useMemo_(() => {
+  const campaignContracts = useMemo(() => {
      const c = [];
      for (let i = 1; i <= count; i++) {
         c.push({
@@ -199,7 +199,7 @@ export function BackerTab() {
      return c;
   }, [count])
 
-  const donationContracts = useMemo_(() => {
+  const donationContracts = useMemo(() => {
      const c = [];
      for (let i = 1; i <= count; i++) {
         c.push({

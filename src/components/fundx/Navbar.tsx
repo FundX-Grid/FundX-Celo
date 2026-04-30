@@ -40,7 +40,7 @@ export function Navbar() {
                 key={link.href}
                 href={link.href}
                 {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                className="hover:text-primary transition-colors_"
+                className="hover:text-primary transition-colors"
               >
                 {link.label}
               </Link>
@@ -56,7 +56,7 @@ export function Navbar() {
             {/* Hamburger Button (mobile only) */}
             <button
               onClick={() => setMobileOpen((v) => !v)}
-              className="md:hidden flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 transition-colors_"
+              className="md:hidden flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 transition-colors"
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
             >
               {mobileOpen ? <X className="w-5 h-5 text-slate-700" /> : <Menu className="w-5 h-5 text-slate-700" />}
@@ -88,7 +88,7 @@ export function Navbar() {
             </Link>
             <button
               onClick={() => setMobileOpen(false)}
-              className="flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 transition-colors_"
+              className="flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 transition-colors"
               aria-label="Close menu"
             >
               <X className="w-5 h-5 text-slate-700" />

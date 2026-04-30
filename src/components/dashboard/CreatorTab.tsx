@@ -191,7 +191,7 @@ export function CreatorTab() {
                    
                    <div className="flex-1 flex flex-col sm:flex-row items-start sm:items-center gap-6 w-full pl-2 relative z-10">
                       <div className="relative w-full sm:w-40 h-52 sm:h-40 shrink-0 rounded-2xl overflow-hidden border border-slate-200 shadow-sm group-hover:shadow-md transition-shadow">
-                         <Image src={campaign.image} alt={campaign.title} fill className="object-cover" />
+                         <Image src={campaign.image} alt={campaign.title} fill_ className="object-cover" />
                       </div>
                       <div className="space-y-3 w-full">
                          <div className="flex items-center gap-3 mb-2">
@@ -228,7 +228,7 @@ export function CreatorTab() {
                    
                    <div className="flex-1 flex flex-col sm:flex-row items-start sm:items-center gap-6 w-full pl-2 relative z-10">
                       <div className="relative w-full sm:w-40 h-52 sm:h-40 shrink-0 rounded-2xl overflow-hidden border border-slate-200 shadow-sm group-hover:shadow-md transition-shadow">
-                         <Image src={campaign.image} alt={campaign.title} fill className="object-cover" />
+                         <Image src={campaign.image} alt={campaign.title} fill_ className="object-cover" />
                       </div>
                       <div className="space-y-3 w-full">
                          <div className="flex items-center gap-3 mb-2">
@@ -269,7 +269,7 @@ export function CreatorTab() {
                    
                    <div className="flex-1 flex flex-col sm:flex-row items-start sm:items-center gap-6 w-full pl-2 relative z-10">
                       <div className="relative w-full sm:w-40 h-52 sm:h-40 shrink-0 rounded-2xl overflow-hidden border border-slate-300 shadow-sm group-hover:shadow-md transition-shadow">
-                         <Image src={campaign.image} alt={campaign.title} fill className="object-cover" />
+                         <Image src={campaign.image} alt={campaign.title} fill_ className="object-cover" />
                       </div>
                       <div className="space-y-3 w-full">
                          <div className="flex items-center gap-3 mb-2">

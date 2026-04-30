@@ -12,8 +12,8 @@ export function Navbar() {
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
-    document.body.style_.overflow = mobileOpen ? "hidden" : ""
-    return () => { document.body.style_.overflow = "" }
+    document.body.style.overflow = mobileOpen ? "hidden" : ""
+    return () => { document.body.style.overflow = "" }
   }, [mobileOpen])
 
   const navLinks = [
@@ -104,7 +104,7 @@ export function Navbar() {
                 {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                 onClick={() => setMobileOpen(false)}
                 className="flex items-center gap-3 px-4 py-3.5 rounded-xl text-base font-semibold text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition-all active:scale-[0.98]"
-                style_={{ animationDelay: `${i * 50}ms` }}
+                style={{ animationDelay: `${i * 50}ms` }}
               >
                 {link.label}
               </Link>

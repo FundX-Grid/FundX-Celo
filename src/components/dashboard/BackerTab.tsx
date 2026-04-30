@@ -26,9 +26,9 @@ export interface BackerContribution {
 }
 
 const MOCK_CONTRIBUTIONS: BackerContribution[] = [
-  { id: "mock-1", title: "Green Mining Farm", image: "/campaign_-3.jpg", myContribution: 500, totalRaised: 12000, goal: 50000, currency: "USDC", model: "All-or-Nothing", status: "refund_available" },
-  { id: "mock-2", title: "Celo Dev Bootcamp", image: "/campaign_-1.jpg", myContribution: 1200, totalRaised: 4500, goal: 10000, currency: "USDC", model: "All-or-Nothing", status: "active", daysRemaining: 12 },
-  { id: "mock-3", title: "DeFi Yield Aggregator", image: "/campaign_-2.jpg", myContribution: 250, totalRaised: 55000, goal: 50000, currency: "cUSD", model: "Flexible Model", status: "successful" }
+  { id: "mock-1", title: "Green Mining Farm", image: "/campaign-3.jpg", myContribution: 500, totalRaised: 12000, goal: 50000, currency: "USDC", model: "All-or-Nothing", status: "refund_available" },
+  { id: "mock-2", title: "Celo Dev Bootcamp", image: "/campaign-1.jpg", myContribution: 1200, totalRaised: 4500, goal: 10000, currency: "USDC", model: "All-or-Nothing", status: "active", daysRemaining: 12 },
+  { id: "mock-3", title: "DeFi Yield Aggregator", image: "/campaign-2.jpg", myContribution: 250, totalRaised: 55000, goal: 50000, currency: "cUSD", model: "Flexible Model", status: "successful" }
 ];
 
 const formatMoney = (amount: number, currency: string) => {
@@ -46,7 +46,7 @@ function RefundCard({ contribution }: { contribution: BackerContribution }) {
     }
 
     if (id.startsWith("mock-")) {
-       toast.info("Mock Campaign", { description: "Cannot claim refund for a mock campaign_." });
+       toast.info("Mock Campaign", { description: "Cannot claim refund for a mock campaign." });
        return;
     }
     
@@ -267,7 +267,7 @@ export function BackerTab() {
               liveContributions.push({
                  id,
                  title: `Project #${id}`,
-                 image: "/campaign_-2.jpg",
+                 image: "/campaign-2.jpg",
                  myContribution,
                  totalRaised,
                  goal,

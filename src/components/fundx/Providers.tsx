@@ -1,4 +1,4 @@
-"use client_"
+"use client"
 
 import { WagmiProvider } from "wagmi"
 import { RainbowKitProvider } from "@rainbow-me/rainbowkit"
@@ -11,7 +11,7 @@ const queryClient = new QueryClient()
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <WagmiProvider config={config}>
-      <QueryClientProvider client_={queryClient}>
+      <QueryClientProvider client={queryClient}>
         <RainbowKitProvider>
           {children}
         </RainbowKitProvider>

@@ -100,9 +100,9 @@ export const FUNDX_ABI = [
     inputs: [],
     outputs: [{ name: "", type: "uint256" }],
   },
-  // calculateFee_
+  // calculateFee
   {
-    name: "calculateFee_",
+    name: "calculateFee",
     type: "function",
     stateMutability: "pure",
     inputs: [{ name: "amount", type: "uint256" }],

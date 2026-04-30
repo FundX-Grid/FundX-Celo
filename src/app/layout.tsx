@@ -24,12 +24,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body_ className={jakarta.variable}>
+      <body className={jakarta.variable}>
         <Providers>
           {children}
         </Providers>
         <Toaster position="bottom-right" richColors />
-      </body_>
+      </body>
     </html>
   );
 }

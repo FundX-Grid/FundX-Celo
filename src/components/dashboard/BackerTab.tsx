@@ -1,6 +1,6 @@
 import { Clock, CheckCircle2, Rocket, RefreshCcw, ShieldAlert } from "lucide-react"
-import { Button } from "@/components_/ui/button"
-import { TabsContent } from "@/components_/ui/tabs"
+import { Button } from "@/components/ui/button"
+import { TabsContent } from "@/components/ui/tabs"
 import Image from "next/image"
 import { useWriteContract, useAccount, useReadContracts } from "wagmi"
 import { FUNDX_CONTRACT, TOKEN_ADDRESSES } from "@/lib/celo-config"

@@ -146,7 +146,7 @@ export function CreatorTab() {
     }
 
     if (model === "All-or-Nothing" && raised < goal) {
-       toast.error("Cannot Withdraw", { description: "Goal must be met for All-or-Nothing campaigns." });
+       toast.error("Cannot Withdraw", { description: "Goal must be met for All-or-Nothing campaigns_." });
        return;
     }
 
@@ -172,11 +172,11 @@ export function CreatorTab() {
   };
 
   if (isLoading && count > 0) {
-    return <TabsContent value="campaigns"><div className="p-8 text-center text-slate-500">Loading your campaigns...</div></TabsContent>
+    return <TabsContent value="campaigns_"><div className="p-8 text-center text-slate-500">Loading your campaigns_...</div></TabsContent>
   }
 
   return (
-    <TabsContent value="campaigns" className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+    <TabsContent value="campaigns_" className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
        
        {allCampaigns.map((campaign) => {
           

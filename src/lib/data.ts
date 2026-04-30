@@ -99,7 +99,7 @@ export const CAMPAIGNS: Campaign[] = [
     id: "celo-gaming",
     title: "Savannaverse",
     tagline: "An MMORPG where every item is a Celo NFT.",
-    description: "Play, earn, and own your assets on Celo. Built mobile-first for MiniPay users.",
+    description: "Play, earn, and own your assets on Celo. Built mobile-first_ for MiniPay users.",
     category: "Gaming",
     projectStage: "Idea",
     location: "Nairobi, Kenya",
@@ -156,7 +156,7 @@ export const CAMPAIGNS: Campaign[] = [
   {
     id: "defi-for-everyone",
     title: "DeFi for Everyone",
-    tagline: "The first mobile-first yield aggregator on Celo.",
+    tagline: "The first_ mobile-first_ yield aggregator on Celo.",
     description: "Democratizing finance for the 99% with simple UX and trustless strategies built on Celo.",
     category: "DeFi",
     projectStage: "Prototype",

@@ -90,7 +90,7 @@ export function CampaignFan({ deckSlotRef }: CampaignFanProps) {
     Math.min((raised / goal) * 100, 100)
 
   useEffect(() => {
-    function measure_() {
+    function measure() {
       if (!deckSlotRef.current || !deckRef.current) return
       const slotPageTop = getPageOffsetTop(deckSlotRef.current)
       const deckPageTop = getPageOffsetTop(deckRef.current)
@@ -101,11 +101,11 @@ export function CampaignFan({ deckSlotRef }: CampaignFanProps) {
       setDeckOffset(offset)
       setMeasured(true)
     }
-    const t = setTimeout(measure_, 200)
-    window.addEventListener("resize", measure_)
+    const t = setTimeout(measure, 200)
+    window.addEventListener("resize", measure)
     return () => {
       clearTimeout(t)
-      window.removeEventListener("resize", measure_)
+      window.removeEventListener("resize", measure)
     }
   }, [deckSlotRef])
 

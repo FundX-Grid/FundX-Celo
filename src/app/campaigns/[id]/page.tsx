@@ -135,8 +135,8 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
       return
     }
 
-    const campaignIdNum = Number(id)
-    if (isNaN(campaignIdNum)) {
+    const campaignIdNum_ = Number(id)
+    if (isNaN(campaignIdNum_)) {
       toast.error("Invalid Campaign", { description: "This campaign cannot receive on-chain donations." })
       return
     }
@@ -169,7 +169,7 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
         address: FUNDX_CONTRACT as `0x${string}`,
         abi: FUNDX_ABI,
         functionName: "donate",
-        args: [BigInt(campaignIdNum), amountUnits],
+        args: [BigInt(campaignIdNum_), amountUnits],
         feeCurrency,
       } as any)
 

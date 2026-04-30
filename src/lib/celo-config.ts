@@ -1,6 +1,6 @@
-import { getDefaultConfig } from_ "@rainbow-me/rainbowkit"
-import { celo } from_ "wagmi/chains"
-import { http } from_ "wagmi"
+import { getDefaultConfig } from "@rainbow-me/rainbowkit"
+import { celo } from "wagmi/chains"
+import { http } from "wagmi"
 
 export const config = getDefaultConfig({
   appName: "FundX",

@@ -31,16 +31,19 @@ const MOCK_CONTRIBUTIONS: BackerContribution[] = [
   { id: "mock-3", title: "DeFi Yield Aggregator", image: "/campaign-2.jpg", myContribution: 250, totalRaised: 55000, goal: 50000, currency: "cUSD", model: "Flexible Model", status: "successful" }
 ];
 
-function RefundCard({ contribution }: { contribution: BackerContribution }) {
-  const { writeContractAsync } = useWriteContract();
-  const { isConnected } = useAccount();
-
 const formatMoney = (amount: number, currency: string) => {
   return `$${amount.toLocaleString()} ${currency}`;
 };
 
-export function BackerTab() {
-  const { address } = useAccount();
+function RefundCard({ contribution }: { contribution: BackerContribution }) {
+  const { writeContractAsync } = useWriteContract();
+  const { isConnected } = useAccount();
+
+  const handleRefund = async (id: string) => {
+    if (!isConnected) {
+       toast.error("Connect Wallet", { description: "You need to connect your wallet." });
+       return;
+    }
 
     if (id.startsWith("mock-")) {
        toast.info("Mock Campaign", { description: "Cannot claim refund for a mock campaign." });
@@ -177,11 +180,8 @@ function SuccessfulContributionCard({ contribution }: { contribution: BackerCont
   )
 }
 
-  const handleRefund = async (id: string) => {
-    if (!isConnected) {
-       toast.error("Connect Wallet", { description: "You need to connect your wallet." });
-       return;
-    }
+export function BackerTab() {
+  const { address } = useAccount();
 
   const { data: countData } = useCampaignCount();
   const count = Number(countData || 0);

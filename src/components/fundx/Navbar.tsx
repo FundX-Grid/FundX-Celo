@@ -1,10 +1,10 @@
 "use client"
-import { ConnectWallet } from "@/components/fundx/ConnectWallet"
-import { Menu, X } from "lucide-react"
-import Link from "next/link"
 import { useState, useEffect } from "react"
-import { useAccount } from "wagmi"
+import Link from "next/link"
 import Logo from "@/components/Logo"
+import { ConnectWallet } from "@/components/fundx/ConnectWallet"
+import { useAccount } from "wagmi"
+import { Menu, X } from "lucide-react"
 
 export function Navbar() {
   const { isConnected } = useAccount()

@@ -134,16 +134,9 @@ export function CreatorTab() {
 
   const allCampaigns = [...liveCreatorCampaigns, ...MOCK_CREATOR_CAMPAIGNS];
 
-  const handleWithdraw = async (id: string, model: string, goal: number, raised: number) => {
-    if (!isConnected) {
-       toast.error("Connect Wallet", { description: "You need to connect your wallet." });
-       return;
-    }
-    
-    if (id.startsWith("mock-")) {
-       toast.info("Mock Campaign", { description: "This is a mock campaign and cannot be withdrawn on-chain." });
-       return;
-    }
+  const formatMoney = (amount: number, currency: string) => {
+    return `$${amount.toLocaleString()} ${currency}`;
+  };
 
     if (model === "All-or-Nothing" && raised < goal) {
        toast.error("Cannot Withdraw", { description: "Goal must be met for All-or-Nothing campaigns." });
@@ -167,9 +160,16 @@ export function CreatorTab() {
     }
   };
 
-  const formatMoney = (amount: number, currency: string) => {
-    return `$${amount.toLocaleString()} ${currency}`;
-  };
+  const handleWithdraw = async (id: string, model: string, goal: number, raised: number) => {
+    if (!isConnected) {
+       toast.error("Connect Wallet", { description: "You need to connect your wallet." });
+       return;
+    }
+    
+    if (id.startsWith("mock-")) {
+       toast.info("Mock Campaign", { description: "This is a mock campaign and cannot be withdrawn on-chain." });
+       return;
+    }
 
   if (isLoading && count > 0) {
     return <TabsContent value="campaigns"><div className="p-8 text-center text-slate-500">Loading your campaigns...</div></TabsContent>

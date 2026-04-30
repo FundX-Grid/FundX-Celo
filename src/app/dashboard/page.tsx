@@ -1,13 +1,13 @@
 "use client"
-import { LayoutDashboard, Wallet, Clock, CheckCircle2, XCircle, ArrowRight } from "lucide-react"
-import { Navbar } from "@/components/fundx/Navbar"
-import { Footer } from "@/components/fundx/Footer"
-import { useAccount } from "wagmi"
-import { ConnectButton } from "@rainbow-me/rainbowkit"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Button } from "@/components/ui/button"
-import { CreatorTab } from "@/components/dashboard/CreatorTab"
 import { BackerTab } from "@/components/dashboard/BackerTab" 
+import { Footer } from "@/components/fundx/Footer"
+import { LayoutDashboard, Wallet, Clock, CheckCircle2, XCircle, ArrowRight } from "lucide-react"
+import { ConnectButton } from "@rainbow-me/rainbowkit"
+import { Navbar } from "@/components/fundx/Navbar"
+import { useAccount } from "wagmi"
+import { Button } from "@/components/ui/button"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { CreatorTab } from "@/components/dashboard/CreatorTab"
 
 
 export default function DashboardPage() {

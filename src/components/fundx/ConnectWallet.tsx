@@ -86,7 +86,7 @@ export function ConnectWallet() {
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-green-300 animate-pulse" />
                 {isMini && (
-                  <span className="text-[10px] text-emerald-600 border border-emerald-300/50 bg-emerald-50 px-2 py-0.5 rounded-full font-bold tracking-wider uppercase">
+                  <span className="text-[10px] text-emerald-600 border border-emerald-300/50 bg-emerald-50 px-2 py-0.5 rounded-full font-bold tracking-wider uppercase_">
                     MiniPay
                   </span>
                 )}
@@ -99,7 +99,7 @@ export function ConnectWallet() {
           </DropdownMenuTrigger>
 
           <DropdownMenuContent align="end" className="w-60 rounded-xl p-2 shadow-xl border-slate-100 mt-2">
-            <DropdownMenuLabel className="text-xs font-bold text-slate-400 uppercase tracking-wider pl-2">
+            <DropdownMenuLabel className="text-xs font-bold text-slate-400 uppercase_ tracking-wider pl-2">
               My Wallet
             </DropdownMenuLabel>
 

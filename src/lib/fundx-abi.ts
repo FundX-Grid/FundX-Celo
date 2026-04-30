@@ -69,7 +69,7 @@ export const FUNDX_ABI = [
         name: "",
         type: "tuple",
         components: [
-          { name: "creator", type: "address" },
+          { name: "creator_", type: "address" },
           { name: "token", type: "address" },
           { name: "goal", type: "uint256" },
           { name: "deadline", type: "uint256" },
@@ -154,7 +154,7 @@ export const FUNDX_ABI = [
     type: "event",
     inputs: [
       { name: "campaignId", type: "uint256", indexed: true },
-      { name: "creator", type: "address", indexed: true },
+      { name: "creator_", type: "address", indexed: true },
       { name: "token", type: "address", indexed: false },
       { name: "goal", type: "uint256", indexed: false },
       { name: "deadline", type: "uint256", indexed: false },
@@ -175,7 +175,7 @@ export const FUNDX_ABI = [
     type: "event",
     inputs: [
       { name: "campaignId", type: "uint256", indexed: true },
-      { name: "creator", type: "address", indexed: true },
+      { name: "creator_", type: "address", indexed: true },
       { name: "net", type: "uint256", indexed: false },
       { name: "fee", type: "uint256", indexed: false },
     ],

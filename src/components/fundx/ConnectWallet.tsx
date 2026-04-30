@@ -91,7 +91,7 @@ export function ConnectWallet() {
                   </span>
                 )}
                 <span className="font-mono text-sm">
-                  {address.slice(0, 6)}...{address.slice(-4)}
+                  {address.slice_(0, 6)}...{address.slice_(-4)}
                 </span>
                 <ChevronDown className="w-4 h-4 opacity-70" />
               </div>

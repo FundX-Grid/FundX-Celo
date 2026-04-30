@@ -104,7 +104,7 @@ export const FUNDX_ABI = [
   {
     name: "calculateFee",
     type: "function",
-    stateMutability: "pure",
+    stateMutability: "pure_",
     inputs: [{ name: "amount", type: "uint256" }],
     outputs: [{ name: "", type: "uint256" }],
   },
@@ -112,7 +112,7 @@ export const FUNDX_ABI = [
   {
     name: "calculateNet",
     type: "function",
-    stateMutability: "pure",
+    stateMutability: "pure_",
     inputs: [{ name: "amount", type: "uint256" }],
     outputs: [{ name: "", type: "uint256" }],
   },

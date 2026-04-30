@@ -128,7 +128,7 @@ export default function CreateCampaign() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items_-start">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-start">
           {/* LEFT: Wizard */}
           <div className="space-y-8">
           
@@ -147,8 +147,8 @@ export default function CreateCampaign() {
                  else if (isCurrent) circleStyle = "bg-slate-900 text-white border-slate-900"; // Current (Black)
 
                  return (
-                   <div key={num} className="flex items_-center gap-2 shrink-0">
-                      <div className={`w-8 h-8 rounded-full flex items_-center justify-center font-bold text-sm border-2 transition-all ${circleStyle}`}>
+                   <div key={num} className="flex items-center gap-2 shrink-0">
+                      <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm border-2 transition-all ${circleStyle}`}>
                          {isCompleted ? <CheckCircle2 className="w-8 h-8" /> : num}
                       </div>
                       <span className={`text-sm font-bold ${isCompleted || isCurrent ? "text-slate-900" : "text-slate-300"}`}>{label}</span>

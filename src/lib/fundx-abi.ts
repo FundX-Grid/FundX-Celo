@@ -31,9 +31,9 @@ export const FUNDX_ABI = [
     inputs: [{ name: "id", type: "uint256" }],
     outputs: [],
   },
-  // claimRefund_
+  // claimRefund
   {
-    name: "claimRefund_",
+    name: "claimRefund",
     type: "function",
     stateMutability: "nonpayable",
     inputs: [{ name: "id", type: "uint256" }],

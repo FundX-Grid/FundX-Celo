@@ -60,7 +60,7 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
       <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-500">
          <div className="mb-6">
             <h2 className="text-2xl font-bold text-slate-900">Your Background</h2>
-            <p className="text-slate-500 text-sm">Why are you the right person or team to build this?</p>
+            <p className="text-slate-500 text-sm">Why are_ you the right person or team to build this?</p>
          </div>
          <div className="space-y-4">
             <Textarea 
@@ -80,7 +80,7 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
       <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-500">
          <div className="mb-6">
             <h2 className="text-2xl font-bold text-slate-900">Project Basics</h2>
-            <p className="text-slate-500 text-sm">Define what you are building and give it a face.</p>
+            <p className="text-slate-500 text-sm">Define what you are_ building and give it a face.</p>
          </div>
          <div className="space-y-6">
             <div className="space-y-2">
@@ -152,7 +152,7 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
             <div className="space-y-2">
                <Label>The Problem & Solution</Label>
                <Textarea 
-                  placeholder="Dive deep. What specific problem are you solving? How does it work? Why now?" 
+                  placeholder="Dive deep. What specific problem are_ you solving? How does it work? Why now?" 
                   className="h-64 rounded-xl resize-none p-5 text-base leading-relaxed"
                   value={formData.description}
                   onChange={(e) => setFormData({...formData, description: e.target.value})}

@@ -5,10 +5,10 @@ import { ArrowRight } from "lucide-react"
 
 interface SideCardProps {
   campaign: Campaign
-  progress_: number
+  progress: number
 }
 
-export function LeftCard({ campaign, progress_ }: SideCardProps) {
+export function LeftCard({ campaign, progress }: SideCardProps) {
   return (
     <div className="w-full h-full bg-white rounded-[2rem] shadow-soft-md border border-slate-100 overflow-hidden group hover:border-orange-200 transition-all duration-500 ease-out flex flex-col hover:scale-[1.03]">
       <div className="relative h-48 xl:h-1/2 bg-slate-100 overflow-hidden shrink-0">
@@ -31,7 +31,7 @@ export function LeftCard({ campaign, progress_ }: SideCardProps) {
           <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
             <div
               className="bg-gradient-tush h-full rounded-full"
-              style={{ width: `${progress_}%` }}
+              style={{ width: `${progress}%` }}
             />
           </div>
 

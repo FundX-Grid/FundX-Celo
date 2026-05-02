@@ -148,7 +148,7 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
       const decimals = isCUSD ? 18 : 6
       const amountUnits = parseUnits(donateAmount, decimals)
       // feeCurrency: in MiniPay use cUSD (only supported option);
-      // otherwise use the campaign's own_ token so gas comes from the same balance
+      // otherwise use the campaign's own token so gas comes from the same balance
       const feeCurrency = isMini
         ? (TOKEN_ADDRESSES.cUSD as `0x${string}`)
         : (tokenAddress as `0x${string}`)
@@ -264,7 +264,7 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
                 <div className="bg-green-50 p-6 rounded-2xl border border-green-100 my-8 not-prose">
                   <h4 className="font-bold text-green-800 mb-2">Risks & Challenges</h4>
                   <p className="text-green-700/80 text-sm">
-                    All projects involve risk. Please do your own_ research (DYOR) before contributing.
+                    All projects involve risk. Please do your own research (DYOR) before contributing.
                   </p>
                 </div>
               </TabsContent>

@@ -2,7 +2,7 @@ import { Clock, XCircle, CheckCircle2, Rocket } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { TabsContent } from "@/components/ui/tabs"
 import Image from "next/image"
-import { useWriteContract, useAccount, useReadContracts } from "wagmi"
+import { useWriteContract, useAccount_, useReadContracts } from "wagmi"
 import { FUNDX_CONTRACT, TOKEN_ADDRESSES } from "@/lib/celo-config"
 import { FUNDX_ABI } from "@/lib/fundx-abi"
 import { toast } from "sonner"
@@ -59,7 +59,7 @@ const MOCK_CREATOR_CAMPAIGNS: CreatorCampaign[] = [
 
 export function CreatorTab() {
   const { writeContractAsync } = useWriteContract();
-  const { isConnected, address } = useAccount();
+  const { isConnected, address } = useAccount_();
 
   const { data: countData } = useCampaignCount();
   const count = Number(countData || 0);

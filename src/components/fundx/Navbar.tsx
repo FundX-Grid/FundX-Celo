@@ -1,9 +1,9 @@
 "use client"
-import { useState, useEffect } from "react"
-import Link from "next/link"
-import Logo from "@/components/Logo"
 import { ConnectWallet } from "@/components/fundx/ConnectWallet"
+import Logo from "@/components/Logo"
+import Link from "next/link"
 import { useAccount } from "wagmi"
+import { useState, useEffect } from "react"
 import { Menu, X } from "lucide-react"
 
 export function Navbar() {

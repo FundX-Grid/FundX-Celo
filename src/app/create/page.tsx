@@ -35,7 +35,7 @@ export interface CreateCampaignData {
   goal: string;
   duration: string;
   fundingModel: "0" | "1";
-  currency_: "cUSD" | "USDC"; 
+  currency: "cUSD" | "USDC"; 
 }
 
 export default function CreateCampaign() {
@@ -63,7 +63,7 @@ export default function CreateCampaign() {
     goal: "10000",
     duration: "30",
     fundingModel: "0",
-    currency_: "cUSD", 
+    currency: "cUSD", 
   })
 
   const handleNext = () => setStep(step + 1)
@@ -72,7 +72,7 @@ export default function CreateCampaign() {
   useEffect(() => {
     if (isMiniPay()) {
       setIsMini(true)
-      setFormData((prev) => ({ ...prev, currency_: "cUSD" }))
+      setFormData((prev) => ({ ...prev, currency: "cUSD" }))
     }
   }, [])
 
@@ -85,8 +85,8 @@ export default function CreateCampaign() {
     }
     try {
       toast.loading("Deploying Campaign...", { id: "deploy" })
-      const tokenAddress = formData.currency_ === "cUSD" ? TOKEN_ADDRESSES.cUSD : TOKEN_ADDRESSES.USDC
-      const decimals = formData.currency_ === "cUSD" ? 18 : 6
+      const tokenAddress = formData.currency === "cUSD" ? TOKEN_ADDRESSES.cUSD : TOKEN_ADDRESSES.USDC
+      const decimals = formData.currency === "cUSD" ? 18 : 6
       const goalUnits = parseUnits(formData.goal, decimals)
       const durationSeconds = BigInt(Number(formData.duration) * 86400)
       const fundingModelUint = Number(formData.fundingModel)

@@ -118,12 +118,12 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
   }
   
   if (!donateDisabledReason && donateAmount === "0") donateDisabledReason = "Enter Amount"
-  // Mock campaigns (slug IDs) can't accept on-chain donations_
+  // Mock campaigns (slug IDs) can't accept on-chain donations
   if (!donateDisabledReason && !isContractCampaign) donateDisabledReason = "Demo Campaign"
 
   const handleDonate = async () => {
     if (!isContractCampaign) {
-      toast.error("Demo Campaign", { description: "This is a demo campaign. On-chain donations_ are only available for real campaigns." })
+      toast.error("Demo Campaign", { description: "This is a demo campaign. On-chain donations are only available for real campaigns." })
       return
     }
     if (!isConnected && !isMini) {
@@ -137,7 +137,7 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
 
     const campaignIdNum = Number(id)
     if (isNaN(campaignIdNum)) {
-      toast.error("Invalid Campaign", { description: "This campaign cannot receive on-chain donations_." })
+      toast.error("Invalid Campaign", { description: "This campaign cannot receive on-chain donations." })
       return
     }
     

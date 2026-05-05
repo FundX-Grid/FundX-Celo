@@ -39,7 +39,7 @@ function SideCard({ campaign, progress, tilt }: SideCardProps) {
         <Image
           src={campaign.image}
           alt={campaign.title}
-          fill_
+          fill
           className="object-cover group-hover:scale-105 transition-transform duration-700"
         />
       </div>
@@ -210,7 +210,7 @@ export function CampaignFan({ deckSlotRef }: CampaignFanProps) {
               <Image
                 src={hero.image}
                 alt={hero.title}
-                fill_
+                fill
                 className="object-cover group-hover:scale-105 transition-transform duration-700"
               />
             </div>

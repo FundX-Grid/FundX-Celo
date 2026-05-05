@@ -1,13 +1,13 @@
 "use client"
-import { LayoutDashboard, Wallet, Clock, CheckCircle2, XCircle, ArrowRight } from "lucide-react"
-import { Navbar } from "@/components/fundx/Navbar"
-import { Footer } from "@/components/fundx/Footer"
-import { useAccount } from "wagmi"
-import { ConnectButton } from "@rainbow-me/rainbowkit"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Button } from "@/components/ui/button"
 import { CreatorTab } from "@/components/dashboard/CreatorTab"
+import { Footer } from "@/components/fundx/Footer"
+import { Navbar } from "@/components/fundx/Navbar"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { ConnectButton } from "@rainbow-me/rainbowkit"
+import { Button } from "@/components/ui/button"
+import { useAccount } from "wagmi"
 import { BackerTab } from "@/components/dashboard/BackerTab" 
+import { LayoutDashboard, Wallet, Clock, CheckCircle2, XCircle, ArrowRight } from "lucide-react"
 
 
 export default function DashboardPage() {
@@ -21,7 +21,7 @@ export default function DashboardPage() {
            <Wallet className="w-16 h-16 text-slate-300 mx-auto mb-6" />
            <h1 className="text-3xl font-bold text-slate-900 mb-4">Connect your wallet</h1>
            <p className="text-slate-500 mb-8">You need to connect your wallet to view your dashboard.</p>
-           <div className="flex justify_-center">
+           <div className="flex justify-center">
              <ConnectButton />
            </div>
         </div>
@@ -47,7 +47,7 @@ export default function DashboardPage() {
 
         {/* The Tabs (Creator vs Backer) */}
         <Tabs defaultValue="campaigns" className="w-full">
-          <TabsList className="bg-transparent border-b border-slate-200 rounded-none w-full justify_-start h-auto p-0 mb-8 no-scrollbar">
+          <TabsList className="bg-transparent border-b border-slate-200 rounded-none w-full justify-start h-auto p-0 mb-8 no-scrollbar">
             <TabsTrigger value="campaigns" className="rounded-none border-b-2 border-transparent data-[state=active]:border-orange-500 data-[state=active]:text-orange-600 px-6 py-3 text-base font-bold">
               My Campaigns
             </TabsTrigger>

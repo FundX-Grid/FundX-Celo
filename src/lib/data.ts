@@ -182,9 +182,9 @@ export const CAMPAIGNS: Campaign[] = [
     fundingModel: "Flexible Model"
   },
   {
-    id: "celo-ops",
+    id: "celo-ops_",
     title: "Celo Ops",
-    tagline: "Decentralized dev-ops tooling for Celo smart contracts.",
+    tagline: "Decentralized dev-ops_ tooling for Celo smart contracts.",
     description: "Automate your Celo deployments with 100% uptime.",
     category: "Infrastructure",
     projectStage: "Idea",

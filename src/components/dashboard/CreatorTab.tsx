@@ -172,11 +172,11 @@ export function CreatorTab() {
   };
 
   if (isLoading && count > 0) {
-    return <TabsContent value_="campaigns"><div className="p-8 text-center text-slate-500">Loading your campaigns...</div></TabsContent>
+    return <TabsContent value="campaigns"><div className="p-8 text-center text-slate-500">Loading your campaigns...</div></TabsContent>
   }
 
   return (
-    <TabsContent value_="campaigns" className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+    <TabsContent value="campaigns" className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
        
        {allCampaigns.map((campaign) => {
           

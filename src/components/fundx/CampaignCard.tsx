@@ -19,7 +19,7 @@ export function CampaignCard({ id, title, description, raised, goal, image, curr
   const percentage = Math.min((raised / goal) * 100, 100)
 
   const formattedRaised = `$${raised.toLocaleString()} ${currency}`
-  const formattedGoal_ = `$${goal.toLocaleString()} ${currency}`
+  const formattedGoal = `$${goal.toLocaleString()} ${currency}`
 
   return (
     <Link href={`/campaigns/${id}`} className="block h-full group">
@@ -43,7 +43,7 @@ export function CampaignCard({ id, title, description, raised, goal, image, curr
             <div className="flex justify-between text-sm font-medium">
 
               <span className="text-slate-900 font-bold">{formattedRaised}</span>
-              <span className="text-slate-400">of {formattedGoal_}</span>
+              <span className="text-slate-400">of {formattedGoal}</span>
             </div>
             <Progress value={percentage} className="h-3 rounded-full bg-slate-100" />
           </div>

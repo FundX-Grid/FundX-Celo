@@ -212,21 +212,21 @@ export function BackerTab() {
      return c;
   }, [count, address])
 
-  const { data: campaignsData, isLoading: isLoading1 } = useReadContracts({
+  const { data: campaignsData, isLoading_: isLoading1 } = useReadContracts({
     contracts: campaignContracts,
     query: {
        enabled: count > 0 && !!address
     }
   });
 
-  const { data: donationsData, isLoading: isLoading2 } = useReadContracts({
+  const { data: donationsData, isLoading_: isLoading2 } = useReadContracts({
     contracts: donationContracts,
     query: {
        enabled: count > 0 && !!address
     }
   });
   
-  const isLoading = isLoading1 || isLoading2;
+  const isLoading_ = isLoading1 || isLoading2;
 
   const liveContributions: BackerContribution[] = [];
 
@@ -283,7 +283,7 @@ export function BackerTab() {
 
   const allContributions = [...liveContributions, ...MOCK_CONTRIBUTIONS];
 
-  if (isLoading && count > 0) {
+  if (isLoading_ && count > 0) {
     return <TabsContent value="contributions"><div className="p-8 text-center text-slate-500">Loading your contributions...</div></TabsContent>
   }
 

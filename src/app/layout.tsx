@@ -23,13 +23,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html_ lang="en">
+    <html lang="en">
       <body className={jakarta.variable}>
         <Providers>
           {children}
         </Providers>
         <Toaster position="bottom-right" richColors />
       </body>
-    </html_>
+    </html>
   );
 }

@@ -57,16 +57,9 @@ const MOCK_CREATOR_CAMPAIGNS: CreatorCampaign[] = [
   }
 ];
 
-  const handleWithdraw = async (id: string, model: string, goal: number, raised: number) => {
-    if (!isConnected) {
-       toast.error("Connect Wallet", { description: "You need to connect your wallet." });
-       return;
-    }
-    
-    if (id.startsWith("mock-")) {
-       toast.info("Mock Campaign", { description: "This is a mock campaign and cannot be withdrawn on-chain." });
-       return;
-    }
+export function CreatorTab() {
+  const { writeContractAsync } = useWriteContract();
+  const { isConnected, address } = useAccount();
 
   const { data: countData } = useCampaignCount();
   const count = Number(countData || 0);
@@ -141,9 +134,16 @@ const MOCK_CREATOR_CAMPAIGNS: CreatorCampaign[] = [
 
   const allCampaigns = [...liveCreatorCampaigns, ...MOCK_CREATOR_CAMPAIGNS];
 
-export function CreatorTab() {
-  const { writeContractAsync } = useWriteContract();
-  const { isConnected, address } = useAccount();
+  const handleWithdraw = async (id: string, model: string, goal: number, raised: number) => {
+    if (!isConnected) {
+       toast.error("Connect Wallet", { description: "You need to connect your wallet." });
+       return;
+    }
+    
+    if (id.startsWith("mock-")) {
+       toast.info("Mock Campaign", { description: "This is a mock campaign and cannot be withdrawn on-chain." });
+       return;
+    }
 
     if (model === "All-or-Nothing" && raised < goal) {
        toast.error("Cannot Withdraw", { description: "Goal must be met for All-or-Nothing campaigns." });

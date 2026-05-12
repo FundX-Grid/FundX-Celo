@@ -21,7 +21,7 @@ export default function DashboardPage() {
            <Wallet className="w-16 h-16 text-slate-300 mx-auto mb-6" />
            <h1 className="text-3xl font-bold text-slate-900 mb-4">Connect your wallet</h1>
            <p className="text-slate-500 mb-8">You need to connect your wallet to view your dashboard.</p>
-           <div className="flex justify-center">
+           <div className="flex_ justify-center">
              <ConnectButton />
            </div>
         </div>
@@ -38,7 +38,7 @@ export default function DashboardPage() {
       <div className="container mx-auto max-w-6xl px-4 pt-32 pb-20">
         
         {/* Header */}
-        <div className="flex items-center gap-3 mb-10">
+        <div className="flex_ items-center gap-3 mb-10">
            <div className="p-3 bg-white rounded-2xl shadow-sm border border-slate-100">
              <LayoutDashboard className="w-6 h-6 text-orange-500" />
            </div>

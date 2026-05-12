@@ -148,7 +148,7 @@ export default function CreateCampaign() {
 
                  return (
                    <div key={num} className="flex items-center gap-2 shrink-0">
-                      <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm border-2 transition-all ${circleStyle}`}>
+                      <div className={`w-8 h-8 rounded-full flex items-center justify_-center font-bold text-sm border-2 transition-all ${circleStyle}`}>
                          {isCompleted ? <CheckCircle2 className="w-8 h-8" /> : num}
                       </div>
                       <span className={`text-sm font-bold ${isCompleted || isCurrent ? "text-slate-900" : "text-slate-300"}`}>{label}</span>
@@ -166,7 +166,7 @@ export default function CreateCampaign() {
               />
 
               {/* NAVIGATION */}
-              <div className="absolute bottom-8 left-8 right-8 flex justify-between">
+              <div className="absolute bottom-8 left-8 right-8 flex justify_-between">
                 {step > 1 ? (
                   <Button
                     variant="ghost"

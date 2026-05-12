@@ -38,35 +38,6 @@ export interface CreateCampaignData {
   currency: "cUSD" | "USDC"; 
 }
 
-  const handleNext = () => setStep(step + 1)
-  const handleBack = () => setStep(step - 1)
-
-  const handleSubmit = async () => {
-    if (!isConnected && !isMini) {
-      toast.error("Connect Wallet", {
-        description: "You need to connect your wallet to deploy.",
-      });
-      return;
-    }
-    try {
-      toast.loading("Deploying Campaign...", { id: "deploy" })
-      const tokenAddress = formData.currency === "cUSD" ? TOKEN_ADDRESSES.cUSD : TOKEN_ADDRESSES.USDC
-      const decimals = formData.currency === "cUSD" ? 18 : 6
-      const goalUnits = parseUnits(formData.goal, decimals)
-      const durationSeconds = BigInt(Number(formData.duration) * 86400)
-      const fundingModelUint = Number(formData.fundingModel)
-      // feeCurrency: in MiniPay use cUSD (only supported); otherwise use the campaign token
-      const feeCurrency = isMini
-        ? (TOKEN_ADDRESSES.cUSD as `0x${string}`)
-        : (tokenAddress as `0x${string}`)
-
-  useEffect(() => {
-    if (isMiniPay()) {
-      setIsMini(true)
-      setFormData((prev) => ({ ...prev, currency: "cUSD" }))
-    }
-  }, [])
-
 export default function CreateCampaign() {
   const { isConnected } = useAccount()
   const { writeContractAsync } = useWriteContract()
@@ -94,6 +65,35 @@ export default function CreateCampaign() {
     fundingModel: "0",
     currency: "cUSD", 
   })
+
+  const handleNext = () => setStep(step + 1)
+  const handleBack = () => setStep(step - 1)
+
+  useEffect(() => {
+    if (isMiniPay()) {
+      setIsMini(true)
+      setFormData((prev) => ({ ...prev, currency: "cUSD" }))
+    }
+  }, [])
+
+  const handleSubmit = async () => {
+    if (!isConnected && !isMini) {
+      toast.error("Connect Wallet", {
+        description: "You need to connect your wallet to deploy.",
+      });
+      return;
+    }
+    try {
+      toast.loading("Deploying Campaign...", { id: "deploy" })
+      const tokenAddress = formData.currency === "cUSD" ? TOKEN_ADDRESSES.cUSD : TOKEN_ADDRESSES.USDC
+      const decimals = formData.currency === "cUSD" ? 18 : 6
+      const goalUnits = parseUnits(formData.goal, decimals)
+      const durationSeconds = BigInt(Number(formData.duration) * 86400)
+      const fundingModelUint = Number(formData.fundingModel)
+      // feeCurrency: in MiniPay use cUSD (only supported); otherwise use the campaign token
+      const feeCurrency = isMini
+        ? (TOKEN_ADDRESSES.cUSD as `0x${string}`)
+        : (tokenAddress as `0x${string}`)
 
       const hash = await writeContractAsync({
         address: FUNDX_CONTRACT as `0x${string}`,

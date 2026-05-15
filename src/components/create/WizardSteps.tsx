@@ -103,6 +103,7 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
                      className="h-14 rounded-xl" 
                      value={formData.image} 
                      onChange={(e) => setFormData({...formData, image: e.target.value})} 
+// ← structural drift
                   />
                </div>
             </div>

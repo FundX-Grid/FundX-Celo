@@ -32,9 +32,3 @@ export default function Home() {
     </main>
   )
 }
-
-// ⟳ echo · src/lib/data.ts
-//     backers: 85,
-//     isTrending: false,
-//     status: "failed",
-//     fundingModel: "All-or-Nothing"

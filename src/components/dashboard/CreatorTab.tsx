@@ -302,3 +302,10 @@ export function CreatorTab() {
     </TabsContent>
   )
 }
+
+// ⟳ echo · src/components/fundx/hero/HeroDeckSlot.tsx
+//       ref={slotRef}
+//       className="w-full flex justify-center items-center my-6"
+//       style={{ height: "6rem", pointerEvents: "none" }}
+//       aria-hidden="true"
+//     />

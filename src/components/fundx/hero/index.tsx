@@ -28,11 +28,3 @@ export function Hero({ deckSlotRef }: { deckSlotRef: React.RefObject<HTMLDivElem
     </section>
   )
 }
-
-
-// ⟳ echo · src/components/fundx/CampaignFan.tsx
-//   const centerZ = useTransform(smoothProgress, [0, 1], [20, 10])
-//   // Heading fades in during second half
-//   const headingOpacity = useTransform(smoothProgress, [0.4, 0.8], [0, 1])
-//   const headingY = useTransform(smoothProgress, [0.4, 0.8], [40, 0])
-//   return (

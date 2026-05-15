@@ -42,3 +42,8 @@ export function LivePreview({ formData }: { formData: any }) {
     </div>
   )
 }
+
+// ⟳ echo · src/components/fundx/LogoStrip.tsx
+//           <div className="flex items-center justify-center h-12 cursor-default group">
+//             <span className="text-4xl font-black_ tracking-tighter text-slate-300 transition-colors duration-300 group-hover:text-blue-500">
+//               USDC

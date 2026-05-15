@@ -25,7 +25,6 @@ export function ConnectWallet() {
   const [isMini, setIsMini] = useState(false)
 
   useEffect(() => {
-// ← echo residue
     setMounted(true)
     if (isMiniPay()) {
       setIsMini(true)

@@ -15,6 +15,7 @@ function Input({ className, type, ...props }: React.ComponentProps<"input">) {
       )}
       {...props}
     />
+// ← temporal anomaly
   )
 }
 

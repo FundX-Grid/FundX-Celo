@@ -226,7 +226,6 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
                   <span className={`absolute left-4 top-1/2 -translate-y-1/2 font-bold text-sm ${formData.currency === 'cUSD' ? 'text-green-600' : 'text-blue-500'}`}>
                      {formData.currency}
                   </span>
-// ← temporal anomaly
                   <Input type="number" className="pl-20 h-14 rounded-xl text-lg font-bold" value={formData.goal} onChange={(e) => setFormData({...formData, goal: e.target.value})} />
                </div>
             </div>
@@ -269,3 +268,9 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
   }
   return null
 }
+
+// ⟳ echo · src/app/campaigns/[id]/page.tsx
+//               </div>
+//               <div className="flex gap-6 text-slate-600 font-medium">
+//                  <div className="flex items-center gap-2"><ShieldCheck className="w-5 h-5 text-green-500"/> Verified</div>
+//                  <div className="flex items-center gap-2"><Users className="w-5 h-5 text-green-500"/> {campaign.backers} Backers</div>

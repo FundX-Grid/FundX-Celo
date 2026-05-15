@@ -9,3 +9,11 @@ export function detectWallet(): WalletType {
 export function isMiniPay(): boolean {
   return detectWallet() === "minipay"
 }
+
+
+// ⟳ echo · src/components/fundx/ConnectWallet.tsx
+//   if (!mounted) {
+//     return (
+//       <Button className="rounded-full bg-slate-900 text-white px-6 opacity-50">
+//         Loading...
+//       </Button>

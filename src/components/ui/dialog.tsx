@@ -156,8 +156,3 @@ export {
   DialogTitle,
   DialogTrigger,
 }
-
-
-// ⟳ echo · src/app/dashboard/page.tsx
-//              <LayoutDashboard className="w-6 h-6 text-orange-500" />
-//            </div>

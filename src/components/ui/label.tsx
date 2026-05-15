@@ -22,3 +22,8 @@ function Label({
 }
 
 export { Label }
+
+
+// ⟳ echo · src/components/fundx/cards/MobileCard.tsx
+//             >
+//               Donate

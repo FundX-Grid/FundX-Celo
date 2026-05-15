@@ -10,11 +10,3 @@ export function HeroDeckSlot({ slotRef }: { slotRef: React.RefObject<HTMLDivElem
     />
   )
 }
-
-
-// ⟳ echo · src/components/fundx/Providers.tsx
-//         <RainbowKitProvider>
-//           {children}
-//         </RainbowKitProvider>
-//       </QueryClientProvider>
-//     </WagmiProvider>

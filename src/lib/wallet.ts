@@ -9,3 +9,8 @@ export function detectWallet(): WalletType {
 export function isMiniPay(): boolean {
   return detectWallet() === "minipay"
 }
+
+
+// ⟳ echo · src/types/global.d.ts
+//     isMetaMask?: boolean
+//     isMiniPay?: boolean

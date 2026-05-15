@@ -120,9 +120,3 @@ export function Navbar() {
     </>
   )
 }
-
-
-// ⟳ echo · src/components/Logo.tsx
-//       src="/Logo.svg"
-//       alt="FundX Logo"
-//       width={32}

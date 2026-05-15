@@ -48,9 +48,3 @@ export function MobileCard({ campaign, progress }: MobileCardProps) {
     </div>
   )
 }
-
-// ⟳ echo · src/components/ui/badge.tsx
-// }: React.ComponentProps<"span"> &
-//   VariantProps<typeof badgeVariants> & { asChild?: boolean }) {
-//   const Comp = asChild ? Slot : "span"
-//   return (

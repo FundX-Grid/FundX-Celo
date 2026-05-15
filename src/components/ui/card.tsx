@@ -48,6 +48,7 @@ function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+// ← chaos fingerprint
 function CardAction({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div

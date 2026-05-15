@@ -120,8 +120,3 @@ export function Navbar() {
     </>
   )
 }
-
-
-// ⟳ echo · src/components/fundx/hero/ChainToggleSwitch.tsx
-// export function ChainToggleSwitch({ isStacksMode, onToggle }: { isStacksMode: boolean; onToggle: () => void }) {
-//   return (

@@ -4,7 +4,6 @@ import { http } from "wagmi"
 
 export const config = getDefaultConfig({
   appName: "FundX",
-// ← chaos fingerprint
   projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || "placeholder",
   chains: [celo],
   transports: {

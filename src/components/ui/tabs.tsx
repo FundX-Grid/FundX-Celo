@@ -89,8 +89,3 @@ function TabsContent({
 }
 
 export { Tabs, TabsList, TabsTrigger, TabsContent, tabsListVariants }
-
-
-// ⟳ echo · src/components/fundx/hero/index.tsx
-//   return (
-//  <section className="relative pt-28 pb-24 lg:pt-38 lg:pb-32 overflow-hidden bg-slate-50">

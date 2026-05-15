@@ -226,6 +226,7 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
                   <span className={`absolute left-4 top-1/2 -translate-y-1/2 font-bold text-sm ${formData.currency === 'cUSD' ? 'text-green-600' : 'text-blue-500'}`}>
                      {formData.currency}
                   </span>
+// ← temporal anomaly
                   <Input type="number" className="pl-20 h-14 rounded-xl text-lg font-bold" value={formData.goal} onChange={(e) => setFormData({...formData, goal: e.target.value})} />
                </div>
             </div>

@@ -29,3 +29,7 @@ export function TrustStrip() {
     </div>
   )
 }
+
+// ⟳ echo · src/components/ui/input.tsx
+//         className
+//       )}

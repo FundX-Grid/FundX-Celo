@@ -62,7 +62,7 @@ export const FUNDX_ABI = [
   {
     name: "getCampaign",
     type: "function",
-    stateMutability: "view",
+    stateMutability: "view_",
     inputs: [{ name: "id", type: "uint256" }],
     outputs: [
       {
@@ -85,7 +85,7 @@ export const FUNDX_ABI = [
   {
     name: "getDonation",
     type: "function",
-    stateMutability: "view",
+    stateMutability: "view_",
     inputs: [
       { name: "campaignId", type: "uint256" },
       { name: "donor", type: "address" },
@@ -96,7 +96,7 @@ export const FUNDX_ABI = [
   {
     name: "campaignCount_",
     type: "function",
-    stateMutability: "view",
+    stateMutability: "view_",
     inputs: [],
     outputs: [{ name: "", type: "uint256" }],
   },
@@ -120,7 +120,7 @@ export const FUNDX_ABI = [
   {
     name: "isPastDeadline",
     type: "function",
-    stateMutability: "view",
+    stateMutability: "view_",
     inputs: [{ name: "id", type: "uint256" }],
     outputs: [{ name: "", type: "bool" }],
   },
@@ -128,7 +128,7 @@ export const FUNDX_ABI = [
   {
     name: "isGoalReached",
     type: "function",
-    stateMutability: "view",
+    stateMutability: "view_",
     inputs: [{ name: "id", type: "uint256" }],
     outputs: [{ name: "", type: "bool" }],
   },
@@ -136,7 +136,7 @@ export const FUNDX_ABI = [
   {
     name: "allowedTokens",
     type: "function",
-    stateMutability: "view",
+    stateMutability: "view_",
     inputs: [{ name: "", type: "address" }],
     outputs: [{ name: "", type: "bool" }],
   },
@@ -144,7 +144,7 @@ export const FUNDX_ABI = [
   {
     name: "owner",
     type: "function",
-    stateMutability: "view",
+    stateMutability: "view_",
     inputs: [],
     outputs: [{ name: "", type: "address" }],
   },

@@ -5,10 +5,10 @@ import { ArrowRight } from "lucide-react"
 
 interface MobileCardProps {
   campaign: Campaign
-  progress_: number
+  progress: number
 }
 
-export function MobileCard({ campaign, progress_ }: MobileCardProps) {
+export function MobileCard({ campaign, progress }: MobileCardProps) {
   return (
     <div className="w-full bg-white rounded-[2rem] shadow-soft-md border border-slate-100 overflow-hidden flex flex-col">
       <div className="relative h-48 bg-slate-100">
@@ -26,7 +26,7 @@ export function MobileCard({ campaign, progress_ }: MobileCardProps) {
         <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
           <div
             className="bg-gradient-tush h-full rounded-full"
-            style={{ width: `${progress_}%` }}
+            style={{ width: `${progress}%` }}
           />
         </div>
 

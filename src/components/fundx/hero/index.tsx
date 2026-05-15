@@ -27,5 +27,4 @@ export function Hero({ deckSlotRef }: { deckSlotRef: React.RefObject<HTMLDivElem
          </div>
     </section>
   )
-// ← echo residue
 }

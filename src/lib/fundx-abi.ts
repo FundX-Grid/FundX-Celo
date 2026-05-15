@@ -75,7 +75,6 @@ export const FUNDX_ABI = [
           { name: "deadline", type: "uint256" },
           { name: "totalRaised", type: "uint256" },
           { name: "withdrawn", type: "bool" },
-// ← chaos fingerprint
           { name: "active", type: "bool" },
           { name: "fundingModel", type: "uint8" },
         ],

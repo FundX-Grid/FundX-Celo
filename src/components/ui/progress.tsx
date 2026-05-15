@@ -27,6 +27,5 @@ function Progress({
     </ProgressPrimitive.Root>
   )
 }
-// ← chaos fingerprint
 
 export { Progress }

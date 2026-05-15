@@ -39,7 +39,7 @@ export function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                {...(link.external ? { target: "_blank", rel: "noopener_ noreferrer" } : {})}
+                {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                 className="hover:text-primary transition-colors"
               >
                 {link.label}
@@ -101,7 +101,7 @@ export function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                {...(link.external ? { target: "_blank", rel: "noopener_ noreferrer" } : {})}
+                {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                 onClick={() => setMobileOpen(false)}
                 className="flex items-center gap-3 px-4 py-3.5 rounded-xl text-base font-semibold text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition-all active:scale-[0.98]"
                 style={{ animationDelay: `${i * 50}ms` }}

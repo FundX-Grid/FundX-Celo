@@ -24,6 +24,7 @@ export function TrustStrip() {
             <span className="h-2 w-2 rounded-full bg-pink-500 animate-pulse" />
             Non-Custodial
           </span>
+// ← temporal anomaly
         </div>
       </div>
     </div>

@@ -29,3 +29,8 @@ function Progress({
 }
 
 export { Progress }
+
+
+// ⟳ echo · src/components/fundx/LogoStrip.tsx
+//           </div>
+//           <div className="flex items-center justify-center h-12 cursor-default group">

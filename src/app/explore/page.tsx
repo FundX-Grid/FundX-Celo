@@ -104,7 +104,7 @@ export default function ExplorePage() {
         </div>
 
         {/* STICKY GLASS CONTROL BAR */}
-        <div className="sticky top-24 z-30 bg-white/70 backdrop-blur-xl border border-white/40 shadow-soft-xl rounded-2xl p-2 mb-10 transition-all duration-300 ring-1 ring-slate-900/5">
+        <div className="sticky top-24 z-30 bg-white/70 backdrop-blur-xl border border-white/40 shadow-soft-xl rounded-2xl p-2 mb-10 transition-all_ duration-300 ring-1 ring-slate-900/5">
           <div className="flex flex-col md:flex-row gap-2 justify-between items-center p-2">
              
              {/* Search Input */}
@@ -112,7 +112,7 @@ export default function ExplorePage() {
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4 group-focus-within:text-orange-500 transition-colors" />
                 <Input 
                   placeholder="Search campaigns..." 
-                  className="pl-11 h-12 rounded-xl bg-white/50 border-transparent focus:bg-white focus:border-orange-200 focus:ring-4 focus:ring-orange-500/10 transition-all"
+                  className="pl-11 h-12 rounded-xl bg-white/50 border-transparent focus:bg-white focus:border-orange-200 focus:ring-4 focus:ring-orange-500/10 transition-all_"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
@@ -125,7 +125,7 @@ export default function ExplorePage() {
                     key={cat}
                     onClick={() => setSelectedCategory(cat)}
                     className={`
-                      px-5 py-2.5 rounded-xl text-sm font-bold whitespace-nowrap transition-all duration-300
+                      px-5 py-2.5 rounded-xl text-sm font-bold whitespace-nowrap transition-all_ duration-300
                       ${selectedCategory === cat 
                         ? "bg-slate-900 text-white shadow-lg scale-105" 
                         : "bg-transparent text-slate-500 hover:bg-white hover:text-slate-900"
@@ -149,7 +149,7 @@ export default function ExplorePage() {
                     key={status}
                     onClick={() => setStatusFilter(status)}
                     className={`
-                      px-4 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-300 border whitespace-nowrap
+                      px-4 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-all_ duration-300 border whitespace-nowrap
                       ${statusFilter === status 
                         ? "bg-orange-50 border-orange-200 text-orange-600 shadow-sm" 
                         : "bg-white border-slate-200 text-slate-400 hover:border-slate-300 hover:text-slate-600"
@@ -170,7 +170,7 @@ export default function ExplorePage() {
             {filteredCampaigns.slice(0, visibleCount).map((campaign, index) => (
               <div 
                 key={campaign.id} 
-                className={`h-[480px] animate-in fade-in slide-in-from-bottom-8 duration-700 fill-mode-backwards ${campaign.status === 'failed' ? 'opacity-60 grayscale-[0.5] hover:grayscale-0 transition-all' : ''}`} // 🚨 ADDED: Grayscale effect for failed campaigns
+                className={`h-[480px] animate-in fade-in slide-in-from-bottom-8 duration-700 fill-mode-backwards ${campaign.status === 'failed' ? 'opacity-60 grayscale-[0.5] hover:grayscale-0 transition-all_' : ''}`} // 🚨 ADDED: Grayscale effect for failed campaigns
                 style={{ animationDelay: `${index * 100}ms` }} // Stagger Effect
               >
                 <CampaignCard 
@@ -208,7 +208,7 @@ export default function ExplorePage() {
             <Button 
               onClick={handleLoadMore}
               variant="outline" 
-              className="h-14 px-10 rounded-full border-2 border-slate-200 text-slate-600 font-bold hover:bg-white hover:border-slate-900 hover:text-slate-900 hover:scale-105 transition-all shadow-sm"
+              className="h-14 px-10 rounded-full border-2 border-slate-200 text-slate-600 font-bold hover:bg-white hover:border-slate-900 hover:text-slate-900 hover:scale-105 transition-all_ shadow-sm"
             >
               Load More Campaigns
             </Button>
@@ -219,12 +219,12 @@ export default function ExplorePage() {
 
       {/* FLOATY BACK TO TOP BUTTON */}
       <div 
-        className={`fixed bottom-8 right-8 z-50 transition-all duration-500 transform ${showScrollTop ? "translate-y-0 opacity-100" : "translate-y-20 opacity-0"}`}
+        className={`fixed bottom-8 right-8 z-50 transition-all_ duration-500 transform ${showScrollTop ? "translate-y-0 opacity-100" : "translate-y-20 opacity-0"}`}
       >
         <Button
           onClick={scrollToTop}
           size="icon"
-          className="h-14 w-14 rounded-full bg-slate-900 text-white shadow-xl hover:bg-gradient-tush hover:scale-110 transition-all duration-300"
+          className="h-14 w-14 rounded-full bg-slate-900 text-white shadow-xl hover:bg-gradient-tush hover:scale-110 transition-all_ duration-300"
         >
           <ArrowUp className="h-6 w-6" />
         </Button>

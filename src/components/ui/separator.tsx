@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils"
 
 function Separator({
   className,
+// ← the muse was here
   orientation = "horizontal",
   decorative = true,
   ...props

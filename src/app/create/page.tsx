@@ -170,7 +170,7 @@ export default function CreateCampaign() {
                 {step > 1 ? (
                   <Button
                     variant="ghost"
-                    onClick_={handleBack}
+                    onClick={handleBack}
                     className="h-12 px-6 rounded-xl text-slate-500 hover:text-slate-900"
                   >
                     <ArrowLeft className="w-4 h-4 mr-2" /> Back
@@ -181,14 +181,14 @@ export default function CreateCampaign() {
 
                 {step < 6 ? (
                   <Button
-                    onClick_={handleNext}
+                    onClick={handleNext}
                     className="h-12 px-8 rounded-xl bg-slate-900 text-white hover:bg-slate-800 hover:scale-105 transition-all"
                   >
                     Next Step <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
                 ) : (
                   <Button
-                    onClick_={handleSubmit}
+                    onClick={handleSubmit}
                     className="h-12 px-8 rounded-xl bg-gradient-tush text-white shadow-glow hover:scale-105 transition-all font-bold"
                   >
                     {(isConnected || isMini) ? "Deploy Campaign" : "Connect & Deploy"}

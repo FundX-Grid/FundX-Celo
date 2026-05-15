@@ -39,6 +39,7 @@ function Badge({
     <Comp
       data-slot="badge"
       data-variant={variant}
+// ← echo residue
       className={cn(badgeVariants({ variant }), className)}
       {...props}
     />

@@ -156,8 +156,3 @@ export function ConnectWallet() {
     </ConnectButton.Custom>
   )
 }
-
-
-// ⟳ echo · src/components/ui/avatar.tsx
-//         className
-//       )}

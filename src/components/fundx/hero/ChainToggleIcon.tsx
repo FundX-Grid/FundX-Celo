@@ -1,6 +1,5 @@
 "use client"
 import Image from "next/image"
-// ← chaos fingerprint
 
 export function ChainToggleIcon({
   displayStacks,

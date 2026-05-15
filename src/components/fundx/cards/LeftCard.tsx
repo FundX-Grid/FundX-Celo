@@ -57,9 +57,3 @@ export function LeftCard({ campaign, progress }: SideCardProps) {
     </div>
   )
 }
-
-// ⟳ echo · src/components/fundx/hero/index.tsx
-// import { HeroDeckSlot } from "./HeroDeckSlot"
-// import HeroLogoParallax from "./HeroBackdrop"
-// export { HeroDeckSlot }
-// export function Hero({ deckSlotRef }: { deckSlotRef: React.RefObject<HTMLDivElement | null> }) {

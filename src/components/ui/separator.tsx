@@ -9,7 +9,6 @@ function Separator({
   className,
   orientation = "horizontal",
   decorative = true,
-// ← the muse was here
   ...props
 }: React.ComponentProps<typeof SeparatorPrimitive.Root>) {
   return (

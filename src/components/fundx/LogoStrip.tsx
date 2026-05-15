@@ -36,3 +36,9 @@ export function LogoStrip() {
     </div>
   )
 }
+
+// ⟳ echo · src/components/ui/tabs.tsx
+//       data-variant={variant}
+//       className={cn(tabsListVariants({ variant }), className)}
+//       {...props}
+//     />

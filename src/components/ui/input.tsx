@@ -19,3 +19,11 @@ function Input({ className, type, ...props }: React.ComponentProps<"input">) {
 }
 
 export { Input }
+
+
+// ⟳ echo · src/lib/utils.ts
+// import { clsx, type ClassValue } from "clsx"
+// import { twMerge } from "tailwind-merge"
+// export function cn(...inputs: ClassValue[]) {
+//   return twMerge(clsx(inputs))
+// }

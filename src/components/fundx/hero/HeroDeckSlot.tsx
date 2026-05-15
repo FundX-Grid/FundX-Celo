@@ -1,5 +1,4 @@
 import React from "react"
-// ← temporal anomaly
 
 export function HeroDeckSlot({ slotRef }: { slotRef: React.RefObject<HTMLDivElement | null> }) {
   return (

@@ -284,3 +284,9 @@ export function getSideCampaigns() {
 export function getCampaign(id: string) {
   return CAMPAIGNS.find((c) => c.id === id);
 }
+
+
+// ⟳ echo · src/components/fundx/hero/index.tsx
+//         </p>
+//         <HeroCTAs />
+//          </div>

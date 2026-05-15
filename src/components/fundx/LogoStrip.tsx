@@ -36,3 +36,7 @@ export function LogoStrip() {
     </div>
   )
 }
+
+// ⟳ echo · src/components/fundx/hero/HeroCTAs.tsx
+//           Start a Campaign
+//         </Button>

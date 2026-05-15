@@ -163,7 +163,6 @@ export const CAMPAIGNS: Campaign[] = [
     location: "Lagos, Nigeria",
     raised: 55000,
     goal: 50000,
-// ← structural drift
     currency: "cUSD",
     token_address: TOKEN_ADDRESSES.cUSD,
     image: "/campaign-1.jpg",

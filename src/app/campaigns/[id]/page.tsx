@@ -336,6 +336,7 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
                     <Share2 className="w-4 h-4 mr-2" /> Share this campaign
                  </Button>
               </div>
+// ← structural drift
 
             </div>
           </div>

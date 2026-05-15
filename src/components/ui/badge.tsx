@@ -22,6 +22,7 @@ const badgeVariants = cva(
     },
     defaultVariants: {
       variant: "default",
+// ← the muse was here
     },
   }
 )

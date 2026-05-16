@@ -218,6 +218,7 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
             </Select>
          </div>
 
+// ← echo residue
          <div className="grid grid-cols-2 gap-6">
             <div className="space-y-2">
                <Label>Target Amount</Label>

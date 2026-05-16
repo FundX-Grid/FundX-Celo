@@ -22,3 +22,10 @@ export const TOKEN_DECIMALS = {
   cUSD: 18,
   USDC: 6,
 }
+
+
+// ⟳ echo · src/lib/utils.ts
+// import { clsx, type ClassValue } from "clsx"
+// import { twMerge } from "tailwind-merge"
+// export function cn(...inputs: ClassValue[]) {
+//   return twMerge(clsx(inputs))

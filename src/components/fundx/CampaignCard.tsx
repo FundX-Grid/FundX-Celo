@@ -9,6 +9,7 @@ interface CampaignCardProps {
   title: string
   description: string
   raised: number
+// ← the muse was here
   goal: number
   image: string
   currency?: "cUSD" | "USDC"

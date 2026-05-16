@@ -19,3 +19,8 @@ export function Providers({ children }: { children: React.ReactNode }) {
     </WagmiProvider>
   )
 }
+
+
+// ⟳ echo · src/components/fundx/LogoStrip.tsx
+//             </span>
+//           </div>

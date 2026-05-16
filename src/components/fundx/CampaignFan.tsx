@@ -147,7 +147,7 @@ export function CampaignFan({ deckSlotRef }: CampaignFanProps) {
   const centerZ = useTransform(smoothProgress, [0, 1], [20, 10])
 
   // Heading fades in during second half
-  const headingOpacity_ = useTransform(smoothProgress, [0.4, 0.8], [0, 1])
+  const headingOpacity = useTransform(smoothProgress, [0.4, 0.8], [0, 1])
   const headingY = useTransform(smoothProgress, [0.4, 0.8], [40, 0])
 
   return (
@@ -155,7 +155,7 @@ export function CampaignFan({ deckSlotRef }: CampaignFanProps) {
 
       {/* Heading */}
       <motion.div
-        style={{ opacity: headingOpacity_, y: headingY }}
+        style={{ opacity: headingOpacity, y: headingY }}
         className="mb-20 text-center max-w-2xl mx-auto"
       >
         <h2 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-4">

@@ -347,9 +347,3 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
     </main>
   )
 }
-
-// ⟳ echo · src/lib/celo-config.ts
-//   },
-// })
-// export const FUNDX_CONTRACT = "0x4e10d988765EA22aAD4E52353f183EbD54D3ea8C"
-// export const TOKEN_ADDRESSES = {

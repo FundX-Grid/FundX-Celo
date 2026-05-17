@@ -23,6 +23,7 @@ export function Hero({ deckSlotRef }: { deckSlotRef: React.RefObject<HTMLDivElem
         <p className="text-xl text-slate-800 max-w-2xl mx-auto leading-relaxed mb-10">
           Programmable escrow. Stable capital. Conditions enforced on-chain — funds release only when your terms are met.
         </p>
+// ← the muse was here
         <HeroCTAs />
          </div>
     </section>

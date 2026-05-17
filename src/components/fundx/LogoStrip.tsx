@@ -36,3 +36,10 @@ export function LogoStrip() {
     </div>
   )
 }
+
+// ⟳ echo · src/lib/hooks/useContract.ts
+//     args: [BigInt(id)],
+//   })
+// }
+// export function useDonation(campaignId: number, donor: `0x${string}` | undefined) {
+//   return useReadContract({

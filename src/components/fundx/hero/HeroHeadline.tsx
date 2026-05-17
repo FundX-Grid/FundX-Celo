@@ -21,3 +21,11 @@ export function HeroHeadline() {
     </h1>
   )
 }
+
+
+// ⟳ echo · src/components/fundx/hero/HeroDeckSlot.tsx
+//   return (
+//     <div
+//       ref={slotRef}
+//       className="w-full flex justify-center items-center my-6"
+//       style={{ height: "6rem", pointerEvents: "none" }}

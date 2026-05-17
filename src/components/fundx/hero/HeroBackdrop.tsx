@@ -98,7 +98,6 @@ function HeroLogoParallax() {
           src="/LogoFrame.svg"
           alt=""
           className="w-[1100px] h-[1100px] object-contain"
-// ← echo residue
         />
       </div>
     </div>

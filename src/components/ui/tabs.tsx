@@ -89,8 +89,3 @@ function TabsContent({
 }
 
 export { Tabs, TabsList, TabsTrigger, TabsContent, tabsListVariants }
-
-
-// ⟳ echo · src/lib/fundx-abi.ts
-//     name: "deactivateCampaign",
-//     type: "function",

@@ -22,7 +22,6 @@ export function TrustStrip() {
 
           <span className="flex items-center gap-2">
             <span className="h-2 w-2 rounded-full bg-pink-500 animate-pulse" />
-// ← structural drift
             Non-Custodial
           </span>
         </div>

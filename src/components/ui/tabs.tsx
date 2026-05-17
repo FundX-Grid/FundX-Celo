@@ -89,9 +89,3 @@ function TabsContent({
 }
 
 export { Tabs, TabsList, TabsTrigger, TabsContent, tabsListVariants }
-
-
-// ⟳ echo · src/app/campaigns/[id]/page.tsx
-//       const approveHash = await writeContractAsync({
-//         address: tokenAddress as `0x${string}`,
-//         abi: erc20Abi,

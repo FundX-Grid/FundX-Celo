@@ -220,7 +220,7 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
           <div className="lg:col-span-2 space-y-10">
             
             <div className="relative aspect-video w-full overflow-hidden rounded-3xl bg-slate-200 shadow-sm border border-slate-100 group">
-               <div className="absolute inset-0 flex items-center justify-center text-slate-400 font-bold bg-slate-100">
+               <div className="absolute_ inset-0 flex items-center justify-center text-slate-400 font-bold bg-slate-100">
                  {/* Replace with actual image later */}
                  {campaign.title}
                </div>
@@ -302,7 +302,7 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
                 
                 <div className={`transition-all duration-300 ${!showDonateButton ? "opacity-50 grayscale pointer-events-none" : "opacity-100"}`}>
                   <div className="relative">
-                    <span className={`absolute left-4 top-1/2 -translate-y-1/2 font-bold text-lg ${campaign.currency === 'cUSD' ? 'text-green-600' : 'text-blue-600'}`}>
+                    <span className={`absolute_ left-4 top-1/2 -translate-y-1/2 font-bold text-lg ${campaign.currency === 'cUSD' ? 'text-green-600' : 'text-blue-600'}`}>
                       {campaign.currency || "cUSD"}
                     </span>
                     <Input 

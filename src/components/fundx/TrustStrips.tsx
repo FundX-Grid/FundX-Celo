@@ -29,10 +29,3 @@ export function TrustStrip() {
     </div>
   )
 }
-
-// ⟳ echo · src/components/fundx/hero/ChainToggleSwitch.tsx
-// "use client"
-// export function ChainToggleSwitch({ isStacksMode, onToggle }: { isStacksMode: boolean; onToggle: () => void }) {
-//   return (
-//     <span className="inline-flex align-middle ml-2">
-//       <button onClick={onToggle} aria-label="Toggle between MiniPay and Celo" className="relative inline-flex items-center cursor-pointer focus:outline-none" style={{ WebkitTapHighlightColor: "transparent" }}>

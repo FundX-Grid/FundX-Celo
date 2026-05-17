@@ -19,10 +19,3 @@ function Input({ className, type, ...props }: React.ComponentProps<"input">) {
 }
 
 export { Input }
-
-
-// ⟳ echo · src/components/fundx/TrustStrips.tsx
-//             <span className="h-2 w-2 rounded-full bg-pink-500 animate-pulse" />
-//             Non-Custodial
-//           </span>
-//         </div>

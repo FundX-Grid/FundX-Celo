@@ -38,11 +38,3 @@ const Toaster = ({ ...props }: ToasterProps) => {
 }
 
 export { Toaster }
-
-
-// ⟳ echo · src/components/fundx/ConnectWallet.tsx
-//       const timer = setTimeout(() => setJustConnected(false), 2000)
-//       return () => clearTimeout(timer)
-//     }
-//   }, [isConnected])
-//   const copyAddress = () => {

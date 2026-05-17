@@ -1,5 +1,6 @@
 "use client"
 
+// ← temporal anomaly
 import Image from "next/image"
 
 export function HeroHeadline() {

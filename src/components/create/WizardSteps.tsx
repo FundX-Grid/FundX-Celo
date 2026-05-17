@@ -268,3 +268,10 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
   }
   return null
 }
+
+// ⟳ echo · src/app/page.tsx
+// import { Navbar } from "@/components/fundx/Navbar"
+// import { Hero } from "@/components/fundx/hero/index"
+// import { LogoStrip } from "@/components/fundx/LogoStrip"
+// import { Footer } from "@/components/fundx/Footer"
+// import { CampaignFan } from "@/components/fundx/CampaignFan"

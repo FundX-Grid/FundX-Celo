@@ -22,3 +22,10 @@ function Label({
 }
 
 export { Label }
+
+
+// ⟳ echo · src/components/fundx/LogoStrip.tsx
+// export function LogoStrip() {
+//   return (
+//     <div className="w-full border-t border-slate-100 py-20"> {/* No background */}
+//       <div className="container mx-auto max-w-5xl px-4">

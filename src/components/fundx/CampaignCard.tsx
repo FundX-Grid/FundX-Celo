@@ -56,3 +56,8 @@ export function CampaignCard({ id, title, description, raised, goal, image, curr
     </Link>
   )
 }
+
+// ⟳ echo · src/components/fundx/Navbar.tsx
+//               {mobileOpen ? <X className="w-5 h-5 text-slate-700" /> : <Menu className="w-5 h-5 text-slate-700" />}
+//             </button>
+//           </div>

@@ -7,8 +7,3 @@ interface Window {
     removeListener: (event: string, handler: (...args: unknown[]) => void) => void
   }
 }
-
-
-// ⟳ echo · src/components/ui/tabs.tsx
-//   orientation = "horizontal",
-//   ...props

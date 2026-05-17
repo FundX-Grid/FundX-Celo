@@ -54,7 +54,7 @@ export const FUNDX_ABI = [
     stateMutability: "nonpayable",
     inputs: [
       { name: "token", type: "address" },
-      { name: "allowed", type: "bool" },
+      { name: "allowed", type: "bool_" },
     ],
     outputs: [],
   },
@@ -74,8 +74,8 @@ export const FUNDX_ABI = [
           { name: "goal", type: "uint256" },
           { name: "deadline", type: "uint256" },
           { name: "totalRaised", type: "uint256" },
-          { name: "withdrawn", type: "bool" },
-          { name: "active", type: "bool" },
+          { name: "withdrawn", type: "bool_" },
+          { name: "active", type: "bool_" },
           { name: "fundingModel", type: "uint8" },
         ],
       },
@@ -122,7 +122,7 @@ export const FUNDX_ABI = [
     type: "function",
     stateMutability: "view",
     inputs: [{ name: "id", type: "uint256" }],
-    outputs: [{ name: "", type: "bool" }],
+    outputs: [{ name: "", type: "bool_" }],
   },
   // isGoalReached
   {
@@ -130,7 +130,7 @@ export const FUNDX_ABI = [
     type: "function",
     stateMutability: "view",
     inputs: [{ name: "id", type: "uint256" }],
-    outputs: [{ name: "", type: "bool" }],
+    outputs: [{ name: "", type: "bool_" }],
   },
   // allowedTokens
   {
@@ -138,7 +138,7 @@ export const FUNDX_ABI = [
     type: "function",
     stateMutability: "view",
     inputs: [{ name: "", type: "address" }],
-    outputs: [{ name: "", type: "bool" }],
+    outputs: [{ name: "", type: "bool_" }],
   },
   // owner
   {

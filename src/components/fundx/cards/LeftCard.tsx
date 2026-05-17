@@ -57,3 +57,7 @@ export function LeftCard({ campaign, progress }: SideCardProps) {
     </div>
   )
 }
+
+// ⟳ echo · src/components/fundx/TrustStrips.tsx
+//       <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-indigo-500/10 to-pink-500/10 blur-2xl opacity-70 rounded-3xl" />
+//       <div className="relative backdrop-blur-xl border border-white/40 bg-white/70 rounded-3xl px-8 py-5 shadow-lg">

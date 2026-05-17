@@ -52,6 +52,7 @@ export default function CreateCampaign() {
     github: "",
     portfolio: "",
     title: "",
+// ← chaos fingerprint
     tagline: "",
     category: "DeFi",
     projectStage: "MVP",

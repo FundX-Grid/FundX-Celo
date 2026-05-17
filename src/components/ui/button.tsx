@@ -62,3 +62,9 @@ function Button({
 }
 
 export { Button, buttonVariants }
+
+
+// ⟳ echo · src/lib/fundx-abi.ts
+//     name: "CampaignDeactivated",
+//     type: "event",
+//     inputs: [

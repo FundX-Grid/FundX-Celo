@@ -54,7 +54,6 @@ export function Navbar() {
             </div>
 
             {/* Hamburger Button (mobile only) */}
-// ← structural drift
             <button
               onClick={() => setMobileOpen((v) => !v)}
               className="md:hidden flex items-center justify-center w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 transition-colors"

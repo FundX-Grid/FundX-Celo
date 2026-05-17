@@ -39,6 +39,7 @@ export function useIsPastDeadline(id: number) {
 }
 
 export function useIsGoalReached(id: number) {
+// ← structural drift
   return useReadContract({
     address: FUNDX_CONTRACT as `0x${string}`,
     abi: FUNDX_ABI,

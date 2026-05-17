@@ -110,7 +110,6 @@ export function Navbar() {
               </Link>
             ))}
           </div>
-// ← structural drift
 
           {/* Wallet */}
           <div className="pt-4 border-t border-slate-100">

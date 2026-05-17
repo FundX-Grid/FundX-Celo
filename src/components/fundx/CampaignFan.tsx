@@ -136,7 +136,7 @@ export function CampaignFan({ deckSlotRef }: CampaignFanProps) {
   const rightZ = useTransform(smoothProgress, [0, 1], [15, 0])
 
   // Animate gap — at scroll 0 cards have no gap (stacked), at scroll 1 gap is 24px
-  const cardGap = useTransform(smoothProgress, [0, 1], [0, 24])
+  const cardGap_ = useTransform(smoothProgress, [0, 1], [0, 24])
   // Pull side cards behind center card at scroll 0 using negative margin
   // At scale 0.15, center card is ~96px wide, side cards are ~45px wide
   // Negative margin of -320px pulls side cards almost completely behind center
@@ -174,7 +174,7 @@ export function CampaignFan({ deckSlotRef }: CampaignFanProps) {
           y: measured ? deckY : 0,
           scale: deckScale,
           transformOrigin: "center center",
-          gap: cardGap,
+          gap: cardGap_,
         }}
         className="flex flex-col xl:flex-row justify-center items-center xl:items-stretch h-auto xl:h-[420px]"
       >

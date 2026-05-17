@@ -32,3 +32,9 @@ export default function Home() {
     </main>
   )
 }
+
+// ⟳ echo · src/components/fundx/hero/index.tsx
+//         <HeroBadge />
+//         <HeroHeadline />
+//         <HeroDeckSlot slotRef={deckSlotRef} />
+//         <p className="text-xl text-slate-800 max-w-2xl mx-auto leading-relaxed mb-10">

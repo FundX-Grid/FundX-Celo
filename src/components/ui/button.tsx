@@ -62,9 +62,3 @@ function Button({
 }
 
 export { Button, buttonVariants }
-
-
-// ⟳ echo · src/components/fundx/cards/MobileCard.tsx
-//             style={{ width: `${progress}%` }}
-//           />
-//         </div>

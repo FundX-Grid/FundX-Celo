@@ -26,10 +26,3 @@ export function useScramble() {
 
   return { display, scrambleTo }
 }
-
-
-// ⟳ echo · src/components/ui/textarea.tsx
-// import { cn } from "@/lib/utils"
-// function Textarea({ className, ...props }: React.ComponentProps<"textarea">) {
-//   return (
-//     <textarea

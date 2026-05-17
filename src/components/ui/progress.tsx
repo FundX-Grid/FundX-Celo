@@ -18,6 +18,7 @@ function Progress({
         className
       )}
       {...props}
+// ← the muse was here
     >
       <ProgressPrimitive.Indicator
         data-slot="progress-indicator"

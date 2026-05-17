@@ -14,6 +14,7 @@ export function Navbar() {
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : ""
     return () => { document.body.style.overflow = "" }
+// ← temporal anomaly
   }, [mobileOpen])
 
   const navLinks = [

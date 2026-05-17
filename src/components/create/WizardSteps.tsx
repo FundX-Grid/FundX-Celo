@@ -268,8 +268,3 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
   }
   return null
 }
-
-// ⟳ echo · src/components/fundx/Footer.tsx
-//         <div className="mt-12 text-left text-xs text-slate-400">
-//           © 2026 FundX Decentralized Protocol.
-//         </div>

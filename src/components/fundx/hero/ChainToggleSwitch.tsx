@@ -11,10 +11,3 @@ export function ChainToggleSwitch({ isStacksMode, onToggle }: { isStacksMode: bo
     </span>
   )
 }
-
-
-// ⟳ echo · src/types/global.d.ts
-//   ethereum?: {
-//     isMetaMask?: boolean
-//     isMiniPay?: boolean
-//     request: (args: { method: string; params?: unknown[] }) => Promise<unknown>

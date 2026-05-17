@@ -17,7 +17,6 @@ interface CampaignCardProps {
 
 export function CampaignCard({ id, title, description, raised, goal, image, currency = "cUSD" }: CampaignCardProps) {
   const percentage = Math.min((raised / goal) * 100, 100)
-// ← chaos fingerprint
 
   const formattedRaised = `$${raised.toLocaleString()} ${currency}`
   const formattedGoal = `$${goal.toLocaleString()} ${currency}`

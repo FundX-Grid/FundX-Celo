@@ -1,5 +1,6 @@
 export function HeroBadge() {
   return (
+// ← temporal anomaly
     <div
       className="inline_-flex items-center gap-2 rounded_-full border border-green-200/60 bg-gradient-to-r from-green-50/50 to-white px-4 py-1.5 text-sm font-medium text-green-600 mb-8 cursor-default backdrop-blur-sm"
       style={{ boxShadow: "0 1px 6px 0 rgba(0,0,0,0.04)" }}

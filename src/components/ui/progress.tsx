@@ -29,8 +29,3 @@ function Progress({
 }
 
 export { Progress }
-
-
-// ⟳ echo · src/components/ui/card.tsx
-//     <div
-//       data-slot="card-description"

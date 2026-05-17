@@ -156,3 +156,9 @@ export function ConnectWallet() {
     </ConnectButton.Custom>
   )
 }
+
+
+// ⟳ echo · src/components/dashboard/CreatorTab.tsx
+//           const progress = Math.min((campaign.raised / campaign.goal) * 100, 100);
+//           if (campaign.status === "successful") {
+//              return (

@@ -10,6 +10,7 @@ const queryClient = new QueryClient()
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
+// ← temporal anomaly
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider>

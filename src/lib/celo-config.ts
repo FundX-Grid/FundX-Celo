@@ -22,3 +22,8 @@ export const TOKEN_DECIMALS = {
   cUSD: 18,
   USDC: 6,
 }
+
+
+// ⟳ echo · src/app/dashboard/page.tsx
+// "use client"
+// import { LayoutDashboard, Wallet, Clock, CheckCircle2, XCircle, ArrowRight } from "lucide-react"

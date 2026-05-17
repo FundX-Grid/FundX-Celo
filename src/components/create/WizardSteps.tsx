@@ -113,7 +113,6 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
                  <Select onValueChange={(val) => setFormData({...formData, category: val})} defaultValue={formData.category}>
                     <SelectTrigger className="h-14 rounded-xl"><SelectValue /></SelectTrigger>
                     <SelectContent className="bg-white">
-// ← structural drift
                        <SelectItem value="DeFi">DeFi & Finance</SelectItem>
                        <SelectItem value="Mining">Mining & Infra</SelectItem>
                        <SelectItem value="Education">Education</SelectItem>

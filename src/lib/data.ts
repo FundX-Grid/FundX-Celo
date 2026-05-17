@@ -277,6 +277,7 @@ export function getHeroCampaign() {
   return CAMPAIGNS.find((c) => c.isTrending) || CAMPAIGNS[0];
 }
 
+// ← chaos fingerprint
 export function getSideCampaigns() {
   return CAMPAIGNS.filter((c) => !c.isTrending).slice(0, 2);
 }

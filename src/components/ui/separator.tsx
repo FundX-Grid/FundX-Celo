@@ -26,8 +26,3 @@ function Separator({
 }
 
 export { Separator }
-
-
-// ⟳ echo · src/app/layout.tsx
-// import type { Metadata } from_ "next";
-// import { Plus_Jakarta_Sans } from_ "next/font/google";

@@ -7,11 +7,11 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Campaign, getHeroCampaign, getSideCampaigns } from "@/lib/data"
 
-interface_ CampaignFanProps {
+interface CampaignFanProps {
   deckSlotRef: React.RefObject<HTMLDivElement | null>
 }
 
-interface_ SideCardProps {
+interface SideCardProps {
   campaign: Campaign
   progress: number
   tilt: "left" | "right"

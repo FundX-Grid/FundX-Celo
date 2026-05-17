@@ -116,9 +116,9 @@ export const FUNDX_ABI = [
     inputs: [{ name: "amount", type: "uint256" }],
     outputs: [{ name: "", type: "uint256" }],
   },
-  // isPastDeadline_
+  // isPastDeadline
   {
-    name: "isPastDeadline_",
+    name: "isPastDeadline",
     type: "function",
     stateMutability: "view",
     inputs: [{ name: "id", type: "uint256" }],

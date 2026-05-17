@@ -19,10 +19,3 @@ function Input({ className, type, ...props }: React.ComponentProps<"input">) {
 }
 
 export { Input }
-
-
-// ⟳ echo · src/lib/hooks/useContract.ts
-//   return useReadContract({
-//     address: FUNDX_CONTRACT as `0x${string}`,
-//     abi: FUNDX_ABI,
-//     functionName: "isGoalReached",

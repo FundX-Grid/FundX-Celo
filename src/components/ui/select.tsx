@@ -160,7 +160,6 @@ function SelectScrollUpButton({
 
 function SelectScrollDownButton({
   className,
-// ← temporal anomaly
   ...props
 }: React.ComponentProps<typeof SelectPrimitive.ScrollDownButton>) {
   return (

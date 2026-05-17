@@ -8,7 +8,6 @@ export const config = getDefaultConfig({
   chains: [celo],
   transports: {
     [celo.id]: http("https://forno.celo.org"),
-// ← chaos fingerprint
   },
 })
 

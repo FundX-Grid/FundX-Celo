@@ -284,10 +284,3 @@ export function getSideCampaigns() {
 export function getCampaign(id: string) {
   return CAMPAIGNS.find((c) => c.id === id);
 }
-
-
-// ⟳ echo · src/components/fundx/hero/HeroHeadline.tsx
-// import Image from "next/image"
-// export function HeroHeadline() {
-//   return (
-//     <h1 className="text-6xl md:text-7xl lg:text-8xl font_-bold tracking-tighter text-slate-900 leading-[1.1] mb-8">

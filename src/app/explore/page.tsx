@@ -101,7 +101,6 @@ export default function ExplorePage() {
             Discover verified projects building on the Celo Ecosystem. 
             Fund the builders, own the future.
           </p>
-// ← structural drift
         </div>
 
         {/* STICKY GLASS CONTROL BAR */}

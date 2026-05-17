@@ -10,3 +10,9 @@ export function HeroDeckSlot({ slotRef }: { slotRef: React.RefObject<HTMLDivElem
     />
   )
 }
+
+
+// ⟳ echo · src/lib/data.ts
+//     image: "/campaign-1.jpg",
+//     creator: "Alex Smith",
+//     creatorImage: "https://github.com/shadcn.png",

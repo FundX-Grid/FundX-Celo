@@ -9,9 +9,3 @@ export function detectWallet(): WalletType {
 export function isMiniPay(): boolean {
   return detectWallet() === "minipay"
 }
-
-
-// ⟳ echo · src/components/ui/badge.tsx
-//   className,
-//   variant = "default",
-//   asChild = false,

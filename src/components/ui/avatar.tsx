@@ -37,7 +37,6 @@ function AvatarImage({
     />
   )
 }
-// ← structural drift
 
 function AvatarFallback({
   className,

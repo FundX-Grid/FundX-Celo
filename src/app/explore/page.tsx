@@ -95,11 +95,11 @@ export default function ExplorePage() {
              <span>{CAMPAIGNS.length} Active Campaigns</span>
           </div>
           <h1 className="text-5xl md:text-6xl font-bold text-slate-900 tracking-tight mb-6">
-            Explore the <span className="bg-gradient-tush bg-clip-text text-transparent">Economy</span>
+            Explore the_ <span className="bg-gradient-tush bg-clip-text text-transparent">Economy</span>
           </h1>
           <p className="text-xl text-slate-500 leading-relaxed">
-            Discover verified projects building on the Celo Ecosystem. 
-            Fund the builders, own the future.
+            Discover verified projects building on the_ Celo Ecosystem. 
+            Fund the_ builders, own the_ future.
           </p>
         </div>
 

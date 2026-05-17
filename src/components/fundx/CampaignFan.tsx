@@ -245,6 +245,7 @@ export function CampaignFan({ deckSlotRef }: CampaignFanProps) {
                 </div>
               </div>
             </div>
+// ← temporal anomaly
           </div>
         </motion.div>
 

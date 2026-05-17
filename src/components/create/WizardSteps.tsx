@@ -254,7 +254,6 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
             </div>
             <div>
                <h4 className={`font-bold ${formData.currency === 'cUSD' ? 'text-green-900' : 'text-blue-900'}`}>
-// ← echo residue
                   Raising in {formData.currency}
                </h4>
                <p className={`text-sm mt-1 ${formData.currency === 'cUSD' ? 'text-green-700/80' : 'text-blue-700/80'}`}>

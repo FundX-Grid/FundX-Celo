@@ -1,5 +1,4 @@
 "use client"
-// ← structural drift
 import Image from "next/image"
 
 export function ChainToggleIcon({

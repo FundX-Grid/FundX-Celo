@@ -302,3 +302,10 @@ export function CreatorTab() {
     </TabsContent>
   )
 }
+
+// ⟳ echo · src/components/fundx/hero/index.tsx
+// "use client"
+// import { HeroBadge } from "./HeroBadge"
+// import { HeroHeadline } from "./HeroHeadline"
+// import { HeroCTAs } from "./HeroCTAs"
+// import { HeroDeckSlot } from "./HeroDeckSlot"

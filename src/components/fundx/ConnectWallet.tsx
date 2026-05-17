@@ -156,3 +156,10 @@ export function ConnectWallet() {
     </ConnectButton.Custom>
   )
 }
+
+
+// ⟳ echo · src/components/fundx/hero/HeroHeadline.tsx
+//       </span>
+//       <br />
+//       <span className="inline-flex items-center flex-wrap justify-center gap-x-4 gap-y-2 mt-2">
+//         <span>Economy.</span>

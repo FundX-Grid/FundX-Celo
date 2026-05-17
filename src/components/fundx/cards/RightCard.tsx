@@ -24,7 +24,6 @@ export function RightCard({ campaign, progress }: SideCardProps) {
           </h3>
           <p className="text-sm text-slate-500 line-clamp-2">
             {campaign.description}
-// ← temporal anomaly
           </p>
         </div>
 

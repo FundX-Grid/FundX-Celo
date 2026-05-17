@@ -26,10 +26,3 @@ export function useScramble() {
 
   return { display, scrambleTo }
 }
-
-
-// ⟳ echo · src/components/fundx/hero/HeroCTAs.tsx
-//           Explore Campaigns
-//         </Button>
-//       </Link>
-//     </div>

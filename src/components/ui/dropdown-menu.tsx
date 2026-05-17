@@ -255,10 +255,3 @@ export {
   DropdownMenuSubTrigger,
   DropdownMenuSubContent,
 }
-
-
-// ⟳ echo · src/components/fundx/Providers.tsx
-// import "@rainbow-me/rainbowkit/styles.css"
-// const queryClient = new QueryClient()
-// export function Providers({ children }: { children: React.ReactNode }) {
-//   return (

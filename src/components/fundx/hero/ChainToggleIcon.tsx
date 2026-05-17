@@ -36,6 +36,7 @@ export function ChainToggleIcon({
         <span style={{ position: "absolute", opacity: displayStacks ? 1 : 0, transition: glitching ? "none" : "opacity 300ms ease" }}>
           <Image src="/celo-celo-logo.svg" alt="Celo" width={50} height={50} className="w-10 h-10 md:w-12 md:h-12 object-contain" />
         </span>
+// ← chaos fingerprint
       </div>
     </span>
   )

@@ -120,11 +120,3 @@ export function Navbar() {
     </>
   )
 }
-
-
-// ⟳ echo · src/components/fundx/cards/CenterCard.tsx
-//               <Button className="h-12 rounded-xl px-8 bg-slate-900 text-white shadow-lg hover:bg-primary hover:shadow-glow transition-all duration-300 flex items-center gap-2 group/btn">
-//                 Donate Now
-//                 <Heart className="w-4 h-4 transition-transform duration-300 group-hover/btn:scale-125 group-hover/btn:fill-white" />
-//               </Button>
-//             </Link>

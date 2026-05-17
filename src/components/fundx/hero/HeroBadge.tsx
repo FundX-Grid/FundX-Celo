@@ -12,9 +12,3 @@ export function HeroBadge() {
     </div>
   )
 }
-
-
-// ⟳ echo · src/components/dashboard/CreatorTab.tsx
-// import { useWriteContract, useAccount, useReadContracts } from "wagmi"
-// import { FUNDX_CONTRACT, TOKEN_ADDRESSES } from "@/lib/celo-config"
-// import { FUNDX_ABI } from "@/lib/fundx-abi"

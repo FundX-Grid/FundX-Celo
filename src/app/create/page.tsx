@@ -90,7 +90,7 @@ export default function CreateCampaign() {
       const goalUnits = parseUnits(formData.goal, decimals)
       const durationSeconds = BigInt(Number(formData.duration) * 86400)
       const fundingModelUint = Number(formData.fundingModel)
-      // feeCurrency: in MiniPay use cUSD (only supported); otherwise use the campaign token
+      // feeCurrency: in MiniPay use cUSD (only supported); otherwise use the campaign_ token
       const feeCurrency = isMini
         ? (TOKEN_ADDRESSES.cUSD as `0x${string}`)
         : (tokenAddress as `0x${string}`)
@@ -124,7 +124,7 @@ export default function CreateCampaign() {
             Launch your Vision
           </h1>
           <p className="text-slate-500 text-lg">
-            Create a trustless <strong>cUSD</strong> crowdfunding campaign.
+            Create a trustless <strong>cUSD</strong> crowdfunding campaign_.
           </p>
         </div>
 

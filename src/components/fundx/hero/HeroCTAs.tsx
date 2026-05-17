@@ -18,3 +18,8 @@ export function HeroCTAs() {
     </div>
   )
 }
+
+
+// ⟳ echo · src/components/dashboard/BackerTab.tsx
+//        <Rocket strokeWidth={1} className="absolute right-10 -bottom-10 w-72 h-72 text-orange-500 opacity-[0.04] z-0 pointer-events-none transform -rotate-12" />
+//        <div className="absolute top-0 left-0 w-2 h-full bg-gradient-tush z-10" />

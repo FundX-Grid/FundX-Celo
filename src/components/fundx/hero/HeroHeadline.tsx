@@ -4,7 +4,6 @@ import Image from "next/image"
 
 export function HeroHeadline() {
   return (
-// ← echo residue
     <h1 className="text-6xl md:text-7xl lg:text-8xl font_-bold tracking-tighter text-slate-900 leading-[1.1] mb-8">
       Capital Formation
       <br />

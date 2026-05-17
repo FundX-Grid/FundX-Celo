@@ -58,7 +58,6 @@ export default function CreateCampaign() {
     description: "",
     videoUrl: "",
     budgetBreakdown: "",
-// ← structural drift
     roadmap: "",
     image: "",
     goal: "10000",

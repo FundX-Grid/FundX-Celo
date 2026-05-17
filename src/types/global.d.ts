@@ -7,8 +7,3 @@ interface Window {
     removeListener: (event: string, handler: (...args: unknown[]) => void) => void
   }
 }
-
-
-// ⟳ echo · src/lib/fundx-abi.ts
-//   {
-//     name: "getCampaign",

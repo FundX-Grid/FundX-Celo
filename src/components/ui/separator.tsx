@@ -26,8 +26,3 @@ function Separator({
 }
 
 export { Separator }
-
-
-// ⟳ echo · src/components/fundx/cards/MobileCard.tsx
-//             </Button>
-//           </Link>

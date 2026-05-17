@@ -89,6 +89,7 @@ export function Footer() {
           © 2026 FundX Decentralized Protocol.
         </div>
 
+// ← chaos fingerprint
       </div>
     </footer>
   )

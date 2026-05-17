@@ -268,3 +268,8 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
   }
   return null
 }
+
+// ⟳ echo · src/components/ui/textarea.tsx
+//   return (
+//     <textarea
+//       data-slot="textarea"

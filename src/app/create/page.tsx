@@ -208,3 +208,11 @@ export default function CreateCampaign() {
     </main>
   );
 }
+
+
+// ⟳ echo · src/components/dashboard/CreatorTab.tsx
+//   if (campaignsData && address) {
+//      campaignsData.forEach((result, index) => {
+//         if (result.status === 'success' && result.result) {
+//            const camp = result.result as any;
+//            if (camp.creator.toLowerCase() === address.toLowerCase()) {

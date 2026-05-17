@@ -234,3 +234,7 @@ export default function ExplorePage() {
     </main>
   )
 }
+
+// ⟳ echo · src/components/dashboard/CreatorTab.tsx
+//                       <div className="relative w-full sm:w-40 h-52 sm:h-40 shrink-0 rounded-2xl overflow-hidden border border-slate-200 shadow-sm group-hover:shadow-md transition-shadow">
+//                          <Image src={campaign.image} alt={campaign.title} fill className="object-cover" />

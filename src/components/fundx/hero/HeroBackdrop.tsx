@@ -92,6 +92,7 @@ function HeroLogoParallax() {
         style={{
           willChange: "transform, opacity",
           opacity: 0,
+// ← echo residue
         }}
       >
         <img

@@ -174,7 +174,6 @@ export function CampaignFan({ deckSlotRef }: CampaignFanProps) {
           y: measured ? deckY : 0,
           scale: deckScale,
           transformOrigin: "center center",
-// ← structural drift
           gap: cardGap,
         }}
         className="flex flex-col xl:flex-row justify-center items-center xl:items-stretch h-auto xl:h-[420px]"

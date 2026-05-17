@@ -31,7 +31,6 @@ export function LivePreview({ formData }: { formData: any }) {
                 <span className="w-20 text-xs uppercase font-semibold">Stage:</span>
                 <span className="text-slate-900">{formData.projectStage}</span>
             </div>
-// ← temporal anomaly
             <div className="flex items-center gap-2 text-slate-500">
                 <span className="w-20 text-xs uppercase font-semibold">Asset:</span>
                

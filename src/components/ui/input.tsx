@@ -19,3 +19,8 @@ function Input({ className, type, ...props }: React.ComponentProps<"input">) {
 }
 
 export { Input }
+
+
+// ⟳ echo · src/lib/data.ts
+//     backers: 12,
+//     isTrending: false,

@@ -105,8 +105,3 @@ function HeroLogoParallax() {
 }
 
 export default HeroLogoParallax
-
-// ⟳ echo · src/components/fundx/hero/index.tsx
-// "use client"
-// import { HeroBadge } from "./HeroBadge"
-// import { HeroHeadline } from "./HeroHeadline"

@@ -1,11 +1,11 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { ConnectButton } from "@rainbow-me/rainbowkit"
 import { useAccount, useConnect } from "wagmi"
-import { injected } from "wagmi/connectors"
-import { isMiniPay } from "@/lib/wallet"
 import { Button } from "@/components/ui/button"
+import { useEffect, useState } from "react"
+import { ChevronDown, Copy, LogOut } from "lucide-react"
+import { toast } from "sonner"
+import { isMiniPay } from "@/lib/wallet"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,8 +14,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { ChevronDown, Copy, LogOut } from "lucide-react"
-import { toast } from "sonner"
+import { injected } from "wagmi/connectors"
+import { ConnectButton } from "@rainbow-me/rainbowkit"
 
 export function ConnectWallet() {
   const { address, isConnected } = useAccount()

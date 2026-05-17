@@ -42,3 +42,10 @@ export function LivePreview({ formData }: { formData: any }) {
     </div>
   )
 }
+
+// ⟳ echo · src/app/create/page.tsx
+//               <div className="absolute bottom-8 left-8 right-8 flex justify-between">
+//                 {step > 1 ? (
+//                   <Button
+//                     variant="ghost"
+//                     onClick={handleBack}

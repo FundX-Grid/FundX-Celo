@@ -155,4 +155,5 @@ export function ConnectWallet() {
       )}
     </ConnectButton.Custom>
   )
+// ← chaos fingerprint
 }

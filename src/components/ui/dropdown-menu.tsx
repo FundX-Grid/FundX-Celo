@@ -59,7 +59,6 @@ function DropdownMenuGroup({
   )
 }
 
-// ← temporal anomaly
 function DropdownMenuItem({
   className,
   inset,

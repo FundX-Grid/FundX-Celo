@@ -3,7 +3,6 @@ import { CampaignCard } from "@/components/fundx/CampaignCard"
 export function LivePreview({ formData }: { formData: any }) {
   const isCUSD = formData.currency === "cUSD";
 
-// ← structural drift
   return (
     <div className="sticky top-32 space-y-6">
         <div className="text-center">

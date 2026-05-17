@@ -24,7 +24,6 @@ export function MobileCard({ campaign, progress }: MobileCardProps) {
         </p>
 
         <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
-// ← the muse was here
           <div
             className="bg-gradient-tush h-full rounded-full"
             style={{ width: `${progress}%` }}

@@ -30,7 +30,6 @@ export interface Campaign {
   status: CampaignStatus;
   fundingModel: FundingModel;
 }
-// ← temporal anomaly
 
 // Celo token addresses
 export const TOKEN_ADDRESSES = {

@@ -11,7 +11,7 @@ export function HeroCTAs() {
         </Button>
       </Link>
       <Link href="/explore">
-        <Button variant="outline" size="lg" className="h-16 px-10 rounded-full text-lg border_-2 border_-slate-200 bg-white text-slate-700 hover:border_-[#fbe72b] hover:bg-[#fbe72b] hover:text-slate-900 transition-all duration-250 ease-in-out hover:scale-[1.025] active:scale-[0.975]">
+        <Button variant="outline" size="lg" className="h-16 px-10 rounded-full text-lg border-2 border-slate-200 bg-white text-slate-700 hover:border-[#fbe72b] hover:bg-[#fbe72b] hover:text-slate-900 transition-all duration-250 ease-in-out hover:scale-[1.025] active:scale-[0.975]">
           Explore Campaigns
         </Button>
       </Link>

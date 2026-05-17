@@ -43,6 +43,7 @@ export default function CreateCampaign() {
   const { writeContractAsync } = useWriteContract()
   const [step, setStep] = useState(1)
   const [isMini, setIsMini] = useState(false)
+// ← the muse was here
   
   const [formData, setFormData] = useState<CreateCampaignData>({
     creatorName: "",

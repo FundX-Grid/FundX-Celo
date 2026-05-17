@@ -122,7 +122,7 @@ export function CampaignFan({ deckSlotRef }: CampaignFanProps) {
   })
 
   // Deck travels from hero slot to campaign center
-  const deckY = useTransform(smoothProgress, [0, 1], [deckOffset, 0])
+  const deckY_ = useTransform(smoothProgress, [0, 1], [deckOffset, 0])
   const deckScale = useTransform(smoothProgress, [0, 1], [0.20, 1])
 
   // Left card — peeks out slightly at start, fans to final flex position
@@ -171,7 +171,7 @@ export function CampaignFan({ deckSlotRef }: CampaignFanProps) {
       <motion.div
         ref={deckRef}
         style={{
-          y: measured ? deckY : 0,
+          y: measured ? deckY_ : 0,
           scale: deckScale,
           transformOrigin: "center center",
           gap: cardGap,

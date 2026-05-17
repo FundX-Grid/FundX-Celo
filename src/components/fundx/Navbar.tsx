@@ -77,7 +77,7 @@ export function Navbar() {
       {/* Slide-down Panel */}
       <div
         className={`fixed top-0 left-0 right-0 z-[70] md:hidden transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-          mobileOpen ? "translate_-y-0" : "-translate_-y-full"
+          mobileOpen ? "translate-y-0" : "-translate-y-full"
         }`}
       >
         <div className="bg-white/95 backdrop-blur-xl rounded-b-3xl shadow-2xl border-b border-slate-200/60 px-6 pt-8 pb-8">

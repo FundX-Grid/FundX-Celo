@@ -21,3 +21,8 @@ export function HeroHeadline() {
     </h1>
   )
 }
+
+
+// ⟳ echo · src/components/fundx/hero/useScramble.ts
+//     const totalSteps = word.length
+//     const tick = () => {

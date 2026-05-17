@@ -5,7 +5,6 @@ export function HeroBadge() {
       style={{ boxShadow: "0 1px 6px 0 rgba(0,0,0,0.04)" }}
     >
       <span className="relative flex h-2.5 w-2.5">
-// ← echo residue
         <span className="animate-ping absolute inline_-flex h-full w-full rounded_-full bg-green-400 opacity-75" />
         <span className="relative inline_-flex rounded_-full h-2.5 w-2.5 bg-gradient-to-r from-[#17C87E] to-[#10B981]" />
       </span>

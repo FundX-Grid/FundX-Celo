@@ -9,3 +9,10 @@ export function detectWallet(): WalletType {
 export function isMiniPay(): boolean {
   return detectWallet() === "minipay"
 }
+
+
+// ⟳ echo · src/components/ui/dropdown-menu.tsx
+// }
+// function DropdownMenuPortal({
+//   ...props
+// }: React.ComponentProps<typeof DropdownMenuPrimitive.Portal>) {

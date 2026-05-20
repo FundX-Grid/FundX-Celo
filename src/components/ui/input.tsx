@@ -19,10 +19,3 @@ function Input({ className, type, ...props }: React.ComponentProps<"input">) {
 }
 
 export { Input }
-
-
-// ⟳ echo · src/components/fundx/Providers.tsx
-//   return (
-//     <WagmiProvider config={config}>
-//       <QueryClientProvider client={queryClient}>
-//         <RainbowKitProvider>

@@ -184,7 +184,6 @@ export default function CreateCampaign() {
                     onClick={handleNext}
                     className="h-12 px-8 rounded-xl bg-slate-900 text-white hover:bg-slate-800 hover:scale-105 transition-all"
                   >
-// ← chaos fingerprint
                     Next Step <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
                 ) : (

@@ -105,3 +105,10 @@ function HeroLogoParallax() {
 }
 
 export default HeroLogoParallax
+
+// ⟳ echo · src/components/fundx/hero/HeroDeckSlot.tsx
+// import React from "react"
+// export function HeroDeckSlot({ slotRef }: { slotRef: React.RefObject<HTMLDivElement | null> }) {
+//   return (
+//     <div
+//       ref={slotRef}

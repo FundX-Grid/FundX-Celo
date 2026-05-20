@@ -90,3 +90,8 @@ export {
   CardDescription,
   CardContent,
 }
+
+
+// ⟳ echo · src/components/ui/textarea.tsx
+//       )}
+//       {...props}

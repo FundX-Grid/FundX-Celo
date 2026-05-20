@@ -1,8 +1,9 @@
 "use client"
 
-import { useState, use, useEffect } from "react" 
+import { useState, use, useEffect } from "react"
 import { notFound } from "next/navigation"
 import Link from "next/link"
+import Image from "next/image"
 import { Navbar } from "@/components/fundx/Navbar"
 import { Footer } from "@/components/fundx/Footer"
 import { Button } from "@/components/ui/button"
@@ -12,146 +13,174 @@ import { Progress } from "@/components/ui/progress"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Separator } from "@/components/ui/separator"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Clock, Users, ShieldCheck, Share2, MapPin, ArrowLeft } from "lucide-react" 
+import { Clock, Users, ShieldCheck, Share2, MapPin, ArrowLeft, Loader2, CheckCircle2, XCircle, Wallet } from "lucide-react"
 import { useAccount, useWriteContract } from "wagmi"
 import { waitForTransactionReceipt } from "@wagmi/core"
 import { parseUnits, formatUnits, erc20Abi } from "viem"
 import { FUNDX_ABI } from "@/lib/fundx-abi"
-import { FUNDX_CONTRACT, TOKEN_ADDRESSES, config } from "@/lib/celo-config"
+import { FUNDX_CONTRACT, TOKEN_ADDRESSES, TOKEN_DECIMALS, config } from "@/lib/celo-config"
 import { ConnectButton } from "@rainbow-me/rainbowkit"
 import { toast } from "sonner"
+import { useCampaign, useDonation } from "@/lib/hooks/useContract"
 import { getCampaign } from "@/lib/data"
-import { useCampaign } from "@/lib/hooks/useContract"
 import { isMiniPay } from "@/lib/wallet"
 
+const PLACEHOLDER_IMAGES = ["/campaign-1.jpg", "/campaign-2.jpg", "/campaign-3.jpg"]
+
 export default function CampaignPage({ params }: { params: Promise<{ id: string }> }) {
-  const { isConnected } = useAccount()
+  const { isConnected, address } = useAccount()
   const { writeContractAsync } = useWriteContract()
   const [donateAmount, setDonateAmount] = useState("")
   const [mounted, setMounted] = useState(false)
   const [isMini, setIsMini] = useState(false)
+  const [txPending, setTxPending] = useState(false)
 
   const { id } = use(params)
-  
+  const campaignIndex = Number(id)
+
   useEffect(() => {
     setMounted(true)
     setIsMini(isMiniPay())
   }, [])
 
-  const { data: campaignData, isLoading: isLoadingContract, error } = useCampaign(Number(id))
-  
-  const localMock = getCampaign(id)
+  const isMockId = isNaN(campaignIndex)
+  const { data: raw, isLoading, error, refetch } = useCampaign(isMockId ? 0 : campaignIndex)
+  const { data: userDonationRaw } = useDonation(campaignIndex, address)
 
-  let campaign: any = null
-  let isContractCampaign = false
+  // Mock campaign short-circuit — rendered before contract hooks resolve
+  const mockCampaign = isMockId ? getCampaign(id) : null
 
-  if (campaignData && campaignData.creator !== "0x0000000000000000000000000000000000000000") {
-     isContractCampaign = true
-     const isCUSD = campaignData.token.toLowerCase() === TOKEN_ADDRESSES.cUSD.toLowerCase()
-     const decimals = isCUSD ? 18 : 6
-     const c = {
-        id,
-        creator: campaignData.creator,
-        goal: Number(formatUnits(campaignData.goal, decimals)),
-        raised: Number(formatUnits(campaignData.totalRaised, decimals)),
-        currency: isCUSD ? "cUSD" : "USDC",
-        deadline: Number(campaignData.deadline),
-        withdrawn: campaignData.withdrawn,
-        active: campaignData.active,
-        fundingModel: campaignData.fundingModel === 0 ? "Flexible Model" : "All-or-Nothing",
-
-        title: `Campaign #${id}`,
-        description: "An on-chain Celo campaign.",
-        category: "Web3",
-        location: "Celo Network",
-        image: "/campaign-1.jpg",
-        creatorImage: "https://github.com/shadcn.png",
-        backers: 0,
-        daysLeft: Math.max(0, Math.floor((Number(campaignData.deadline) - Date.now() / 1000) / 86400))
-     }
-
-     if (localMock) {
-        c.title = localMock.title
-        c.description = localMock.description
-        c.category = localMock.category
-        c.location = localMock.location
-        c.image = localMock.image
-        c.creatorImage = localMock.creatorImage
-     }
-     
-     campaign = c
-  } else if (localMock) {
-     campaign = localMock
-  }
-
-  if (!mounted || isLoadingContract) {
+  if (!mounted || (!isMockId && isLoading)) {
     return (
-      <main className="min-h-screen bg-slate-50 selection:bg-green-100 font-sans flex items-center justify-center">
-         <div className="animate-spin w-8 h-8 rounded-full border-4 border-green-500 border-t-transparent"></div>
+      <main className="min-h-screen bg-slate-50 font-sans flex items-center justify-center">
+        <Loader2 className="w-8 h-8 text-orange-500 animate-spin" />
       </main>
     )
   }
 
-  if (error && !localMock) {
+  if (isMockId) {
+    if (!mockCampaign) return notFound()
+    const mockProgress = Math.min((mockCampaign.raised / mockCampaign.goal) * 100, 100)
     return (
-      <main className="min-h-screen bg-slate-50 pt-32 pb-20 text-center flex flex-col items-center justify-center">
-        <h1 className="text-2xl font-bold mb-4">Error loading campaign</h1>
-        <p className="text-slate-500 mb-6 w-96">{error.message}</p>
-        <Link href="/explore"><Button>Back to explore</Button></Link>
+      <main className="min-h-screen bg-slate-50 selection:bg-orange-100 font-sans">
+        <Navbar />
+        <div className="container mx-auto max-w-6xl px-4 pt-32 pb-20">
+          <Link href="/explore" className="inline-flex items-center text-slate-400 hover:text-slate-900 mb-8 transition-colors text-sm font-medium">
+            <ArrowLeft className="w-4 h-4 mr-2" /> Back to campaigns
+          </Link>
+          <div className="mb-10">
+            <div className="flex flex-wrap gap-3 mb-4">
+              <Badge variant="secondary" className="text-orange-600 bg-orange-50 border-orange-100 px-3 py-1 text-sm">Demo Campaign</Badge>
+              <Badge variant="secondary" className="text-slate-500 bg-slate-50 border-slate-200 px-3 py-1 text-sm">{mockCampaign.category}</Badge>
+              <div className="flex items-center text-slate-500 text-sm font-medium"><MapPin className="w-3 h-3 mr-1" />{mockCampaign.location}</div>
+            </div>
+            <h1 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-4">{mockCampaign.title}</h1>
+            <p className="text-xl text-slate-500 max-w-3xl">{mockCampaign.description}</p>
+          </div>
+          <div className="grid lg:grid-cols-3 gap-12">
+            <div className="lg:col-span-2 space-y-10">
+              <div className="relative aspect-video w-full overflow-hidden rounded-3xl bg-slate-200 shadow-sm border border-slate-100">
+                <Image src={mockCampaign.image} alt={mockCampaign.title} fill className="object-cover" />
+              </div>
+              <div className="flex items-center gap-4 border-y border-slate-200 py-6">
+                <Avatar className="h-14 w-14 border-4 border-white shadow-sm">
+                  <AvatarImage src={mockCampaign.creatorImage} />
+                  <AvatarFallback>{mockCampaign.creator.slice(0, 2).toUpperCase()}</AvatarFallback>
+                </Avatar>
+                <div>
+                  <p className="text-sm font-medium text-slate-500 uppercase tracking-wide">Organized by</p>
+                  <p className="font-bold text-slate-900 text-lg">{mockCampaign.creator}</p>
+                </div>
+              </div>
+              <div className="prose prose-slate prose-lg max-w-none text-slate-600">
+                <p>{mockCampaign.description}</p>
+                <div className="bg-orange-50 p-6 rounded-2xl border border-orange-100 not-prose mt-6">
+                  <h4 className="font-bold text-orange-800 mb-2">Demo Campaign</h4>
+                  <p className="text-orange-700/80 text-sm">This is a showcase campaign. On-chain donations are only available for live deployed campaigns.</p>
+                </div>
+              </div>
+            </div>
+            <div className="relative h-full">
+              <div className="sticky top-32 p-8 rounded-[2rem] bg-white border border-slate-200 shadow-xl space-y-6">
+                <div className="space-y-5">
+                  <div>
+                    <div className="text-4xl font-black text-slate-900">${mockCampaign.raised.toLocaleString()} <span className="text-xl font-bold text-slate-400">{mockCampaign.currency}</span></div>
+                    <div className="text-base text-slate-400">of ${mockCampaign.goal.toLocaleString()} goal</div>
+                  </div>
+                  <Progress value={mockProgress} className="h-3 bg-slate-100" />
+                  <div className="flex justify-between text-sm font-bold">
+                    <span>{Math.round(mockProgress)}% funded</span>
+                    <span className="flex items-center gap-1 text-orange-500"><Clock className="w-4 h-4" />{mockCampaign.daysLeft}d left</span>
+                  </div>
+                </div>
+                <Separator />
+                <Button disabled className="w-full h-14 rounded-xl bg-slate-200 text-slate-400 text-lg font-bold cursor-not-allowed">
+                  Demo — Not Live
+                </Button>
+                <div className="flex items-center justify-center gap-2 text-xs text-slate-400">
+                  <ShieldCheck className="w-3 h-3" /> Deploy a real campaign to accept donations
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <Footer />
       </main>
     )
   }
 
-  if (!campaign) {
-    return notFound()
-  }
+  if (!raw && error) return notFound()
 
-  const progress = Math.min((campaign.raised / campaign.goal) * 100, 100)
+  if (!raw || raw.creator === "0x0000000000000000000000000000000000000000") return notFound()
 
+  // — Derived values —
+  const nowSec = Math.floor(Date.now() / 1000)
+  const isCUSD = raw.token.toLowerCase() === TOKEN_ADDRESSES.cUSD.toLowerCase()
+  const currency = isCUSD ? "cUSD" : "USDC"
+  const decimals = isCUSD ? TOKEN_DECIMALS.cUSD : TOKEN_DECIMALS.USDC
+  const goal = Number(formatUnits(raw.goal, decimals))
+  const raised = Number(formatUnits(raw.totalRaised, decimals))
+  const deadline = Number(raw.deadline)
+  const isPast = deadline < nowSec
+  const isFlexible = raw.fundingModel === 0
+  const goalReached = raw.totalRaised >= raw.goal
+  const daysLeft = isPast ? 0 : Math.ceil((deadline - nowSec) / 86400)
+  const progress = Math.min((raised / goal) * 100, 100)
+  const userDonation = userDonationRaw ? Number(formatUnits(userDonationRaw as bigint, decimals)) : 0
+
+  const status: "active" | "successful" | "failed" =
+    !isPast ? "active" : isFlexible || goalReached ? "successful" : "failed"
+
+  const isCreator = address && raw.creator.toLowerCase() === address.toLowerCase()
+  const canWithdraw = isCreator && isPast && !raw.withdrawn && (isFlexible || goalReached)
+  const canRefund = !isFlexible && isPast && !goalReached && userDonation > 0
+
+  const image = PLACEHOLDER_IMAGES[campaignIndex % PLACEHOLDER_IMAGES.length]
+  const creatorShort = `${raw.creator.slice(0, 6)}...${raw.creator.slice(-4)}`
+
+  // — Donate guard —
   let donateDisabledReason = ""
-  if (isContractCampaign && campaignData) {
-      if (Number(campaignData.deadline) * 1000 <= Date.now()) donateDisabledReason = "Campaign Ended"
-      else if (!campaignData.active) donateDisabledReason = "Campaign Closed"
-      else if (campaignData.fundingModel === 1 && campaignData.totalRaised >= campaignData.goal) donateDisabledReason = "Goal Reached"
-  } else {
-     if (campaign.daysLeft <= 0) donateDisabledReason = "Campaign Ended"
-  }
-  
-  if (!donateDisabledReason && donateAmount === "0") donateDisabledReason = "Enter Amount"
-  // Mock campaigns (slug IDs) can't accept on-chain donations
-  if (!donateDisabledReason && !isContractCampaign) donateDisabledReason = "Demo Campaign"
+  if (isPast) donateDisabledReason = "Campaign Ended"
+  else if (!raw.active) donateDisabledReason = "Campaign Closed"
+  else if (!isFlexible && goalReached) donateDisabledReason = "Goal Reached"
 
+  // — Handlers —
   const handleDonate = async () => {
-    if (!isContractCampaign) {
-      toast.error("Demo Campaign", { description: "This is a demo campaign. On-chain donations are only available for real campaigns." })
-      return
-    }
     if (!isConnected && !isMini) {
       toast.error("Connect Wallet", { description: "Please connect your wallet to donate." })
       return
     }
     if (!donateAmount || Number(donateAmount) <= 0) {
-      toast.error("Invalid Amount", { description: "Please enter a valid amount to donate." })
+      toast.error("Invalid Amount", { description: "Please enter a valid amount." })
       return
     }
+    const tokenAddress = isCUSD ? TOKEN_ADDRESSES.cUSD : TOKEN_ADDRESSES.USDC
+    const feeCurrency = isMini ? (TOKEN_ADDRESSES.cUSD as `0x${string}`) : (tokenAddress as `0x${string}`)
+    const amountUnits = parseUnits(donateAmount, decimals)
 
-    const campaignIdNum = Number(id)
-    if (isNaN(campaignIdNum)) {
-      toast.error("Invalid Campaign", { description: "This campaign cannot receive on-chain donations." })
-      return
-    }
-    
     try {
+      setTxPending(true)
       toast.loading("Approving token...", { id: "donate" })
-      const isCUSD = campaign.currency === "cUSD"
-      const tokenAddress = isCUSD ? TOKEN_ADDRESSES.cUSD : TOKEN_ADDRESSES.USDC
-      const decimals = isCUSD ? 18 : 6
-      const amountUnits = parseUnits(donateAmount, decimals)
-      // feeCurrency: in MiniPay use cUSD (only supported option);
-      // otherwise use the campaign's own token so gas comes from the same balance
-      const feeCurrency = isMini
-        ? (TOKEN_ADDRESSES.cUSD as `0x${string}`)
-        : (tokenAddress as `0x${string}`)
 
       const approveHash = await writeContractAsync({
         address: tokenAddress as `0x${string}`,
@@ -160,8 +189,6 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
         args: [FUNDX_CONTRACT as `0x${string}`, amountUnits],
         feeCurrency,
       } as any)
-
-      toast.loading("Confirming approval...", { id: "donate" })
       await waitForTransactionReceipt(config, { hash: approveHash })
 
       toast.loading("Sending donation...", { id: "donate" })
@@ -169,173 +196,305 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
         address: FUNDX_CONTRACT as `0x${string}`,
         abi: FUNDX_ABI,
         functionName: "donate",
-        args: [BigInt(campaignIdNum), amountUnits],
+        args: [BigInt(campaignIndex), amountUnits],
         feeCurrency,
       } as any)
 
-      toast.loading("Confirming donation...", { id: "donate" })
       const receipt = await waitForTransactionReceipt(config, { hash: donateHash })
-      if (receipt.status !== "success") throw new Error("Donation was reverted on-chain")
+      if (receipt.status !== "success") throw new Error("Reverted on-chain")
 
-      toast.success("Thank you for your contribution!", { id: "donate" })
+      toast.success("Contribution confirmed!", { id: "donate" })
       setDonateAmount("")
-    } catch (error) {
-       console.error(error)
-       toast.error("Donation Failed", { id: "donate", description: "Failed to complete transaction on Celo." })
+      refetch()
+    } catch (err) {
+      console.error(err)
+      toast.error("Donation Failed", { id: "donate", description: "Transaction failed on Celo." })
+    } finally {
+      setTxPending(false)
     }
   }
 
-  const showDonateButton = isConnected || isMini
+  const handleWithdraw = async () => {
+    const tokenAddress = isCUSD ? TOKEN_ADDRESSES.cUSD : TOKEN_ADDRESSES.USDC
+    const feeCurrency = isMini ? (TOKEN_ADDRESSES.cUSD as `0x${string}`) : (tokenAddress as `0x${string}`)
+    try {
+      setTxPending(true)
+      toast.loading("Withdrawing funds...", { id: "withdraw" })
+      const hash = await writeContractAsync({
+        address: FUNDX_CONTRACT as `0x${string}`,
+        abi: FUNDX_ABI,
+        functionName: "withdraw",
+        args: [BigInt(campaignIndex)],
+        feeCurrency,
+      } as any)
+      const receipt = await waitForTransactionReceipt(config, { hash })
+      if (receipt.status !== "success") throw new Error("Reverted on-chain")
+      toast.success("Funds withdrawn successfully!", { id: "withdraw" })
+      refetch()
+    } catch (err) {
+      console.error(err)
+      toast.error("Withdrawal Failed", { id: "withdraw", description: "Transaction failed on Celo." })
+    } finally {
+      setTxPending(false)
+    }
+  }
+
+  const handleRefund = async () => {
+    const tokenAddress = isCUSD ? TOKEN_ADDRESSES.cUSD : TOKEN_ADDRESSES.USDC
+    const feeCurrency = isMini ? (TOKEN_ADDRESSES.cUSD as `0x${string}`) : (tokenAddress as `0x${string}`)
+    try {
+      setTxPending(true)
+      toast.loading("Claiming refund...", { id: "refund" })
+      const hash = await writeContractAsync({
+        address: FUNDX_CONTRACT as `0x${string}`,
+        abi: FUNDX_ABI,
+        functionName: "claimRefund",
+        args: [BigInt(campaignIndex)],
+        feeCurrency,
+      } as any)
+      const receipt = await waitForTransactionReceipt(config, { hash })
+      if (receipt.status !== "success") throw new Error("Reverted on-chain")
+      toast.success(`Refund of ${userDonation} ${currency} claimed!`, { id: "refund" })
+      refetch()
+    } catch (err) {
+      console.error(err)
+      toast.error("Refund Failed", { id: "refund", description: "Transaction failed on Celo." })
+    } finally {
+      setTxPending(false)
+    }
+  }
+
+  const statusBadge = {
+    active: { label: "Active", className: "text-green-600 bg-green-50 border-green-100" },
+    successful: { label: "Funded", className: "text-blue-600 bg-blue-50 border-blue-100" },
+    failed: { label: "Failed", className: "text-red-600 bg-red-50 border-red-100" },
+  }[status]
 
   return (
-    <main className="min-h-screen bg-slate-50 selection:bg-green-100 font-sans">
+    <main className="min-h-screen bg-slate-50 selection:bg-orange-100 font-sans">
       <Navbar />
 
       <div className="container mx-auto max-w-6xl px-4 pt-32 pb-20">
-        
+
         <Link href="/explore" className="inline-flex items-center text-slate-400 hover:text-slate-900 mb-8 transition-colors text-sm font-medium">
           <ArrowLeft className="w-4 h-4 mr-2" /> Back to campaigns
         </Link>
 
         <div className="mb-10 text-center md:text-left">
           <div className="flex flex-wrap gap-3 justify-center md:justify-start mb-4">
-             <Badge variant="secondary" className="text-green-600 bg-green-50 hover:bg-green-100 px-3 py-1 text-sm border border-green-100">
-               {campaign.category}
-             </Badge>
-             <div className="flex items-center text-slate-500 text-sm font-medium">
-               <MapPin className="w-3 h-3 mr-1" /> {campaign.location}
-             </div>
+            <Badge variant="secondary" className={`px-3 py-1 text-sm border ${statusBadge.className}`}>
+              {status === "active" && <CheckCircle2 className="w-3 h-3 mr-1 inline" />}
+              {status === "failed" && <XCircle className="w-3 h-3 mr-1 inline" />}
+              {statusBadge.label}
+            </Badge>
+            <Badge variant="secondary" className="text-slate-500 bg-slate-50 border-slate-200 px-3 py-1 text-sm">
+              {isFlexible ? "Flexible Model" : "All-or-Nothing"}
+            </Badge>
+            <div className="flex items-center text-slate-500 text-sm font-medium">
+              <MapPin className="w-3 h-3 mr-1" /> Celo Network
+            </div>
           </div>
-          
+
           <h1 className="text-4xl md:text-5xl font-bold text-slate-900 tracking-tight mb-4 leading-tight">
-            {campaign.title}
+            Campaign #{id}
           </h1>
           <p className="text-xl text-slate-500 max-w-3xl">
-            {campaign.description}
+            A verified on-chain campaign raising {currency} on the Celo network.
           </p>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-12">
-          
+
+          {/* LEFT: Content */}
           <div className="lg:col-span-2 space-y-10">
-            
-            <div className="relative aspect-video w-full overflow-hidden rounded-3xl bg-slate-200 shadow-sm border border-slate-100 group">
-               <div className="absolute inset-0 flex items-center justify-center text-slate-400 font-bold bg-slate-100">
-                 {/* Replace with actual image later */}
-                 {campaign.title}
-               </div>
+
+            <div className="relative aspect-video w-full overflow-hidden rounded-3xl bg-slate-200 shadow-sm border border-slate-100">
+              <Image src={image} alt={`Campaign #${id}`} fill className="object-cover" />
             </div>
 
             <div className="flex flex-col sm:flex-row sm:items-center justify-between border-y border-slate-200 py-6 gap-4">
               <div className="flex items-center gap-4">
                 <Avatar className="h-14 w-14 border-4 border-white shadow-sm">
-                  <AvatarImage src={campaign.creatorImage} />
-                  <AvatarFallback>{campaign.creator?.slice(0,2).toUpperCase()}</AvatarFallback>
+                  <AvatarFallback>{creatorShort.slice(0, 2).toUpperCase()}</AvatarFallback>
                 </Avatar>
                 <div>
-                  <p className="text-sm font-medium text-slate-500 uppercase tracking-wide">Organized by</p>
-                  <p className="font-bold text-slate-900 text-lg">
-                    {campaign.creator?.startsWith("0x") ? `${campaign.creator.slice(0, 6)}...${campaign.creator.slice(-4)}` : campaign.creator}
-                  </p>
+                  <p className="text-sm font-medium text-slate-500 uppercase tracking-wide">Deployed by</p>
+                  <p className="font-bold text-slate-900 font-mono text-base">{creatorShort}</p>
                 </div>
               </div>
               <div className="flex gap-6 text-slate-600 font-medium">
-                 <div className="flex items-center gap-2"><ShieldCheck className="w-5 h-5 text-green-500"/> Verified</div>
-                 <div className="flex items-center gap-2"><Users className="w-5 h-5 text-green-500"/> {campaign.backers} Backers</div>
+                <div className="flex items-center gap-2"><ShieldCheck className="w-5 h-5 text-green-500" /> Verified</div>
+                {userDonation > 0 && (
+                  <div className="flex items-center gap-2 text-orange-500">
+                    <Wallet className="w-5 h-5" /> You contributed {userDonation} {currency}
+                  </div>
+                )}
               </div>
             </div>
 
             <Tabs defaultValue="story" className="w-full">
-              <TabsList className="w-full justify-start bg-transparent border-b border-slate-200 rounded-none h-auto p-0 mb-8 overflow-x-auto">
-                <TabsTrigger value="story" className="rounded-none border-b-2 border-transparent data-[state=active]:border-green-500 data-[state=active]:text-green-600 px-6 py-3 text-base">
-                  The Story
+              <TabsList className="w-full justify-start bg-transparent border-b border-slate-200 rounded-none h-auto p-0 mb-8">
+                <TabsTrigger value="story" className="rounded-none border-b-2 border-transparent data-[state=active]:border-orange-500 data-[state=active]:text-orange-600 px-6 py-3 text-base">
+                  Campaign Info
                 </TabsTrigger>
-                <TabsTrigger value="updates" className="rounded-none border-b-2 border-transparent data-[state=active]:border-green-500 data-[state=active]:text-green-600 px-6 py-3 text-base">
+                <TabsTrigger value="updates" className="rounded-none border-b-2 border-transparent data-[state=active]:border-orange-500 data-[state=active]:text-orange-600 px-6 py-3 text-base">
                   Updates
                 </TabsTrigger>
               </TabsList>
-              
+
               <TabsContent value="story" className="prose prose-slate prose-lg max-w-none text-slate-600">
-                <p>{campaign.description}</p>
-                <p>
-                  This is the full story of the campaign. In a real app, this would be rich text content loaded from the database.
-                </p>
-                
-                <div className="bg-green-50 p-6 rounded-2xl border border-green-100 my-8 not-prose">
-                  <h4 className="font-bold text-green-800 mb-2">Risks & Challenges</h4>
-                  <p className="text-green-700/80 text-sm">
-                    All projects involve risk. Please do your own research (DYOR) before contributing.
+                <div className="grid grid-cols-2 gap-6 not-prose mb-8">
+                  <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm">
+                    <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Funding Model</p>
+                    <p className="text-lg font-bold text-slate-900">{isFlexible ? "Flexible" : "All-or-Nothing"}</p>
+                    <p className="text-xs text-slate-400 mt-1">{isFlexible ? "Creator can withdraw at any time after deadline" : "Refunds issued if goal not met"}</p>
+                  </div>
+                  <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm">
+                    <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Token</p>
+                    <p className="text-lg font-bold text-slate-900">{currency}</p>
+                    <p className="text-xs text-slate-400 mt-1 font-mono">{raw.token.slice(0, 10)}...{raw.token.slice(-6)}</p>
+                  </div>
+                  <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm">
+                    <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Deadline</p>
+                    <p className="text-lg font-bold text-slate-900">{new Date(deadline * 1000).toLocaleDateString()}</p>
+                    <p className="text-xs text-slate-400 mt-1">{isPast ? "Ended" : `${daysLeft} days remaining`}</p>
+                  </div>
+                  <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm">
+                    <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Contract</p>
+                    <p className="text-sm font-bold text-slate-900 font-mono">{FUNDX_CONTRACT.slice(0, 8)}...{FUNDX_CONTRACT.slice(-6)}</p>
+                    <p className="text-xs text-slate-400 mt-1">Celo Mainnet</p>
+                  </div>
+                </div>
+
+                <div className="bg-orange-50 p-6 rounded-2xl border border-orange-100 not-prose">
+                  <h4 className="font-bold text-orange-800 mb-2">Smart Contract Enforced</h4>
+                  <p className="text-orange-700/80 text-sm">
+                    All fund movements are governed entirely by the FundX Escrow contract on Celo. No custodians, no discretion.
                   </p>
                 </div>
               </TabsContent>
+
               <TabsContent value="updates" className="py-8 text-center text-slate-500">
-                 No updates yet.
+                No updates yet.
               </TabsContent>
             </Tabs>
           </div>
 
-     
+          {/* RIGHT: Sticky funding panel */}
           <div className="relative h-full">
-            <div className="sticky top-32 p-8 rounded-[2rem] bg-white border border-slate-200 shadow-xl">
-              
-              <div className="space-y-5 mb-8">
+            <div className="sticky top-32 p-8 rounded-[2rem] bg-white border border-slate-200 shadow-xl space-y-6">
+
+              <div className="space-y-5">
                 <div className="space-y-1">
-                   <div className="text-4xl font-black text-slate-900 tracking-tight">${campaign.raised.toLocaleString()}</div>
-                   <div className="text-base font-medium text-slate-400">raised of ${campaign.goal.toLocaleString()} goal</div>
+                  <div className="text-4xl font-black text-slate-900 tracking-tight">
+                    ${raised.toLocaleString()} <span className="text-xl font-bold text-slate-400">{currency}</span>
+                  </div>
+                  <div className="text-base font-medium text-slate-400">of ${goal.toLocaleString()} goal</div>
                 </div>
-                
+
                 <Progress value={progress} className="h-3 bg-slate-100" />
 
-                <div className="flex justify-between text-sm font-bold pt-2">
+                <div className="flex justify-between text-sm font-bold pt-1">
                   <span className="text-slate-900">{Math.round(progress)}% funded</span>
-                  <span className="flex items-center gap-1 text-green-600"><Clock className="w-4 h-4"/> {campaign.daysLeft} days left</span>
+                  <span className="flex items-center gap-1 text-orange-500">
+                    <Clock className="w-4 h-4" />
+                    {isPast ? "Ended" : `${daysLeft}d left`}
+                  </span>
                 </div>
               </div>
 
-              <Separator className="my-8" />
+              <Separator />
 
-              <div className="space-y-6">
-                <div className="space-y-2">
-                  <h4 className="font-bold text-slate-900 text-lg">Make a contribution</h4>
-                  <p className="text-sm text-slate-500">Support the creator to make this happen.</p>
-                </div>
-                
-                <div className={`transition-all duration-300 ${!showDonateButton ? "opacity-50 grayscale pointer-events-none" : "opacity-100"}`}>
-                  <div className="relative">
-                    <span className={`absolute left-4 top-1/2 -translate-y-1/2 font-bold text-lg ${campaign.currency === 'cUSD' ? 'text-green-600' : 'text-blue-600'}`}>
-                      {campaign.currency || "cUSD"}
-                    </span>
-                    <Input 
-                      type="number" 
-                      placeholder="100" 
-                      value={donateAmount}
-                      onChange={(e) => setDonateAmount(e.target.value)}
-                      className="pl-24 h-14 rounded-xl border-slate-200 bg-slate-50 text-xl font-bold focus-visible:ring-green-500"
-                    />
-                  </div>
-                </div>
-
-                {showDonateButton ? (
-                  <Button disabled={!!donateDisabledReason} onClick={handleDonate} className="w-full h-14 rounded-xl bg-slate-900 text-white shadow-glow hover:scale-[1.02] transition-transform text-lg font-bold">
-                    {donateDisabledReason || "Donate Now"}
+              {/* Creator: Withdraw */}
+              {canWithdraw && (
+                <div className="bg-green-50 rounded-2xl p-5 border border-green-100">
+                  <p className="text-sm font-bold text-green-800 mb-1">You are the creator</p>
+                  <p className="text-xs text-green-600 mb-4">
+                    {raised > 0 ? `$${raised.toLocaleString()} ${currency} is ready to withdraw.` : "No funds to withdraw."}
+                  </p>
+                  <Button
+                    onClick={handleWithdraw}
+                    disabled={txPending || raised === 0}
+                    className="w-full h-12 rounded-xl bg-green-600 hover:bg-green-700 text-white font-bold"
+                  >
+                    {txPending ? <Loader2 className="w-4 h-4 animate-spin" /> : `Withdraw ${raised.toLocaleString()} ${currency}`}
                   </Button>
-                ) : (
-                  <div className="flex justify-center mt-4">
-                    <ConnectButton />
-                  </div>
-                )}
-
-                <div className="flex items-center justify-center gap-2 text-xs text-slate-400">
-                  <ShieldCheck className="w-3 h-3" />
-                  <span>Secure transaction via Celo</span>
                 </div>
+              )}
+
+              {/* Backer: Refund */}
+              {canRefund && (
+                <div className="bg-red-50 rounded-2xl p-5 border border-red-100">
+                  <p className="text-sm font-bold text-red-800 mb-1">Refund available</p>
+                  <p className="text-xs text-red-600 mb-4">
+                    Goal was not reached. You can reclaim your {userDonation} {currency}.
+                  </p>
+                  <Button
+                    onClick={handleRefund}
+                    disabled={txPending}
+                    className="w-full h-12 rounded-xl bg-red-500 hover:bg-red-600 text-white font-bold"
+                  >
+                    {txPending ? <Loader2 className="w-4 h-4 animate-spin" /> : `Claim ${userDonation} ${currency} Refund`}
+                  </Button>
+                </div>
+              )}
+
+              {/* Donor: Donate */}
+              {!isCreator && status === "active" && (
+                <div className="space-y-4">
+                  <div>
+                    <h4 className="font-bold text-slate-900 text-lg">Make a contribution</h4>
+                    <p className="text-sm text-slate-500">Support this campaign.</p>
+                  </div>
+
+                  <div className={`transition-all duration-300 ${(!isConnected && !isMini) ? "opacity-50 grayscale pointer-events-none" : ""}`}>
+                    <div className="relative">
+                      <span className={`absolute left-4 top-1/2 -translate-y-1/2 font-bold text-base ${isCUSD ? "text-green-600" : "text-blue-600"}`}>
+                        {currency}
+                      </span>
+                      <Input
+                        type="number"
+                        placeholder="100"
+                        value={donateAmount}
+                        onChange={(e) => setDonateAmount(e.target.value)}
+                        className="pl-20 h-14 rounded-xl border-slate-200 bg-slate-50 text-xl font-bold focus-visible:ring-orange-500"
+                      />
+                    </div>
+                  </div>
+
+                  {(isConnected || isMini) ? (
+                    <Button
+                      disabled={!!donateDisabledReason || txPending || !donateAmount || Number(donateAmount) <= 0}
+                      onClick={handleDonate}
+                      className="w-full h-14 rounded-xl bg-slate-900 text-white hover:scale-[1.02] transition-transform text-lg font-bold"
+                    >
+                      {txPending ? <Loader2 className="w-5 h-5 animate-spin" /> : donateDisabledReason || "Donate Now"}
+                    </Button>
+                  ) : (
+                    <div className="flex justify-center">
+                      <ConnectButton />
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Creator already withdrew */}
+              {isCreator && raw.withdrawn && (
+                <div className="bg-slate-50 rounded-2xl p-5 border border-slate-100 text-center">
+                  <CheckCircle2 className="w-8 h-8 text-green-500 mx-auto mb-2" />
+                  <p className="font-bold text-slate-700">Funds withdrawn</p>
+                  <p className="text-sm text-slate-400">This campaign has been settled.</p>
+                </div>
+              )}
+
+              <div className="flex items-center justify-center gap-2 text-xs text-slate-400">
+                <ShieldCheck className="w-3 h-3" />
+                <span>Secured by FundX Escrow on Celo</span>
               </div>
 
-              <div className="mt-8 flex justify-center">
-                 <Button variant="ghost" className="w-full text-slate-500 hover:text-slate-900 hover:bg-slate-50 rounded-xl h-12">
-                    <Share2 className="w-4 h-4 mr-2" /> Share this campaign
-                 </Button>
-              </div>
+              <Button variant="ghost" className="w-full text-slate-500 hover:text-slate-900 hover:bg-slate-50 rounded-xl h-12">
+                <Share2 className="w-4 h-4 mr-2" /> Share this campaign
+              </Button>
 
             </div>
           </div>

@@ -1,303 +1,264 @@
-import { Clock, CheckCircle2, Rocket, RefreshCcw, ShieldAlert } from "lucide-react"
+"use client"
+
+import { Clock, CheckCircle2, Rocket, RefreshCcw, ShieldAlert, Loader2, PackageOpen } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { TabsContent } from "@/components/ui/tabs"
 import Image from "next/image"
+import Link from "next/link"
 import { useWriteContract, useAccount, useReadContracts } from "wagmi"
-import { FUNDX_CONTRACT, TOKEN_ADDRESSES } from "@/lib/celo-config"
+import { waitForTransactionReceipt } from "@wagmi/core"
+import { FUNDX_CONTRACT, TOKEN_ADDRESSES, config } from "@/lib/celo-config"
 import { FUNDX_ABI } from "@/lib/fundx-abi"
 import { toast } from "sonner"
-import { useCampaignCount } from "@/lib/hooks/useContract"
+import { useAllCampaigns, OnChainCampaign } from "@/lib/hooks/useContract"
+import { isMiniPay } from "@/lib/wallet"
+import { useMemo, useState } from "react"
 import { formatUnits } from "viem"
-import { useMemo } from "react"
 
-type ContributionStatus = "active" | "successful" | "refund_available";
-
-export interface BackerContribution {
-  id: string;
-  title: string;
-  image: string;
-  myContribution: number;
-  totalRaised: number;
-  goal: number;
-  currency: "cUSD" | "USDC";
-  model: "Flexible Model" | "All-or-Nothing";
-  status: ContributionStatus;
-  daysRemaining?: number;
+function formatMoney(amount: number, currency: string) {
+  return `$${amount.toLocaleString()} ${currency}`
 }
 
-const MOCK_CONTRIBUTIONS: BackerContribution[] = [
-  { id: "mock-1", title: "Green Mining Farm", image: "/campaign-3.jpg", myContribution: 500, totalRaised: 12000, goal: 50000, currency: "USDC", model: "All-or-Nothing", status: "refund_available" },
-  { id: "mock-2", title: "Celo Dev Bootcamp", image: "/campaign-1.jpg", myContribution: 1200, totalRaised: 4500, goal: 10000, currency: "USDC", model: "All-or-Nothing", status: "active", daysRemaining: 12 },
-  { id: "mock-3", title: "DeFi Yield Aggregator", image: "/campaign-2.jpg", myContribution: 250, totalRaised: 55000, goal: 50000, currency: "cUSD", model: "Flexible Model", status: "successful" }
-];
+interface Contribution {
+  campaign: OnChainCampaign
+  myContribution: number
+  status: "active" | "successful" | "refund_available"
+}
 
-const formatMoney = (amount: number, currency: string) => {
-  return `$${amount.toLocaleString()} ${currency}`;
-};
+function RefundCard({ c, onSuccess }: { c: Contribution; onSuccess: () => void }) {
+  const { writeContractAsync } = useWriteContract()
+  const [pending, setPending] = useState(false)
+  const mini = typeof window !== "undefined" && isMiniPay()
 
-function RefundCard({ contribution }: { contribution: BackerContribution }) {
-  const { writeContractAsync } = useWriteContract();
-  const { isConnected } = useAccount();
-
-  const handleRefund = async (id: string) => {
-    if (!isConnected) {
-       toast.error("Connect Wallet", { description: "You need to connect your wallet." });
-       return;
-    }
-
-    if (id.startsWith("mock-")) {
-       toast.info("Mock Campaign", { description: "Cannot claim refund for a mock campaign." });
-       return;
-    }
-    
+  const handleRefund = async () => {
+    const tokenAddress = c.campaign.currency === "cUSD" ? TOKEN_ADDRESSES.cUSD : TOKEN_ADDRESSES.USDC
+    const feeCurrency = mini ? (TOKEN_ADDRESSES.cUSD as `0x${string}`) : (tokenAddress as `0x${string}`)
     try {
-      toast.loading("Claiming refund...", { id: "refund" });
-      await writeContractAsync({
+      setPending(true)
+      toast.loading("Claiming refund...", { id: `refund-${c.campaign.id}` })
+      const hash = await writeContractAsync({
         address: FUNDX_CONTRACT as `0x${string}`,
         abi: FUNDX_ABI,
         functionName: "claimRefund",
-        args: [BigInt(id)],
-      });
-      toast.success("Refund claimed successfully!", { id: "refund" });
-    } catch (e) {
-      console.error(e);
-      toast.error("Refund Failed", { id: "refund", description: "Could not claim refund." });
+        args: [BigInt(c.campaign.id)],
+        feeCurrency,
+      } as any)
+      await waitForTransactionReceipt(config, { hash })
+      toast.success(`Refund of ${c.myContribution} ${c.campaign.currency} claimed!`, { id: `refund-${c.campaign.id}` })
+      onSuccess()
+    } catch (err) {
+      console.error(err)
+      toast.error("Refund Failed", { id: `refund-${c.campaign.id}`, description: "Transaction failed on Celo." })
+    } finally {
+      setPending(false)
     }
-  };
+  }
 
   return (
     <div className="bg-white p-8 md:p-10 min-h-[240px] rounded-[2rem] border border-blue-200 shadow-[0_12px_28px_-6px_rgba(59,130,246,0.12)] flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden hover:-translate-y-1 transition-transform duration-300">
-       <div className="absolute -right-4 -bottom-10 text-[120px] font-black text-blue-50 opacity-80 z-0 select-none pointer-events-none tracking-tighter leading-none">REFUND</div>
-       <RefreshCcw strokeWidth={1} className="absolute right-10 -bottom-12 w-72 h-72 text-blue-500 opacity-5 z-0 pointer-events-none" />
-       <div className="absolute top-0 left-0 w-2 h-full bg-blue-500 z-10" />
-       
-       <div className="flex-1 flex flex-col sm:flex-row items-start sm:items-center gap-6 w-full pl-2 relative z-10">
-          <div className="relative w-full sm:w-40 h-52 sm:h-40 shrink-0 rounded-2xl overflow-hidden border border-slate-200 shadow-sm group-hover:shadow-md transition-shadow grayscale-[0.2]">
-             <Image src={contribution.image} alt={contribution.title} fill className="object-cover" />
+      <div className="absolute -right-4 -bottom-10 text-[120px] font-black text-blue-50 opacity-80 z-0 select-none pointer-events-none tracking-tighter leading-none">REFUND</div>
+      <RefreshCcw strokeWidth={1} className="absolute right-10 -bottom-12 w-72 h-72 text-blue-500 opacity-5 z-0 pointer-events-none" />
+      <div className="absolute top-0 left-0 w-2 h-full bg-blue-500 z-10" />
+
+      <div className="flex-1 flex flex-col sm:flex-row items-start sm:items-center gap-6 w-full pl-2 relative z-10">
+        <div className="relative w-full sm:w-40 h-52 sm:h-40 shrink-0 rounded-2xl overflow-hidden border border-slate-200 shadow-sm grayscale-[0.2]">
+          <Image src={c.campaign.image} alt={c.campaign.title} fill className="object-cover" />
+        </div>
+        <div className="space-y-3 w-full">
+          <div className="flex items-center gap-3 mb-2">
+            <span className="px-3 py-1 rounded-lg bg-blue-50 border border-blue-100/50 text-blue-700 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
+              <ShieldAlert className="w-3.5 h-3.5 text-blue-500" /> Goal Missed
+            </span>
+            <span className="text-slate-400 text-sm font-semibold">{c.campaign.fundingModel}</span>
           </div>
-          <div className="space-y-3 w-full">
-             <div className="flex items-center gap-3 mb-2">
-                <span className="px-3 py-1 rounded-lg bg-blue-50 border border-blue-100/50 text-blue-700 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
-                   <ShieldAlert className="w-3.5 h-3.5 text-blue-500" /> Goal Missed
-                </span>
-                <span className="text-slate-400 text-sm font-semibold">{contribution.model}</span>
-             </div>
-             <h3 className="text-3xl font-bold text-slate-900 tracking-tight">{contribution.title}</h3>
-             <div className="flex items-center gap-4 text-sm mt-4">
-                <div className="font-semibold text-blue-900 bg-blue-50 px-5 py-2.5 rounded-xl border border-blue-200/60 shadow-[inset_0_2px_4px_rgba(0,0,0,0.03)] text-base">
-                   My Contribution: <span className="text-blue-600 font-extrabold">{formatMoney(contribution.myContribution, contribution.currency)}</span>
-                </div>
-                <div className="text-slate-500 font-medium text-base">Project raised {formatMoney(contribution.totalRaised, contribution.currency)}</div>
-             </div>
+          <h3 className="text-3xl font-bold text-slate-900 tracking-tight">{c.campaign.title}</h3>
+          <div className="flex flex-wrap items-center gap-4 text-sm mt-4">
+            <div className="font-semibold text-blue-900 bg-blue-50 px-5 py-2.5 rounded-xl border border-blue-200/60 text-base">
+              My Contribution: <span className="text-blue-600 font-extrabold">{formatMoney(c.myContribution, c.campaign.currency)}</span>
+            </div>
+            <div className="text-slate-500 font-medium text-base">
+              Project raised {formatMoney(c.campaign.raised, c.campaign.currency)}
+            </div>
           </div>
-       </div>
-       
-       <div className="w-full md:w-auto shrink-0 relative z-10 mt-6 md:mt-0">
-          <Button onClick={() => handleRefund(contribution.id)} className="w-full md:w-auto h-16 px-10 rounded-xl bg-gradient-to-b from-blue-400 to-blue-500 border border-blue-600 text-white shadow-[inset_0_1px_1px_rgba(255,255,255,0.4),0_4px_15px_rgba(59,130,246,0.4)] font-bold text-lg transition-all hover:scale-[1.02] active:scale-95 active:shadow-inner flex items-center gap-2">
-             <RefreshCcw className="w-5 h-5" /> Claim Refund
-          </Button>
-       </div>
+        </div>
+      </div>
+
+      <div className="w-full md:w-auto shrink-0 relative z-10 mt-6 md:mt-0">
+        <Button
+          onClick={handleRefund}
+          disabled={pending}
+          className="w-full md:w-auto h-16 px-10 rounded-xl bg-gradient-to-b from-blue-400 to-blue-500 border border-blue-600 text-white font-bold text-lg transition-all hover:scale-[1.02] active:scale-95 flex items-center gap-2"
+        >
+          {pending ? <Loader2 className="w-5 h-5 animate-spin" /> : <><RefreshCcw className="w-5 h-5" /> Claim Refund</>}
+        </Button>
+      </div>
     </div>
   )
 }
 
-function ActiveContributionCard({ contribution }: { contribution: BackerContribution }) {
-  const progress = Math.min((contribution.totalRaised / contribution.goal) * 100, 100);
-
+function ActiveCard({ c }: { c: Contribution }) {
+  const progress = Math.min((c.campaign.raised / c.campaign.goal) * 100, 100)
   return (
     <div className="bg-white p-8 md:p-10 min-h-[240px] rounded-[2rem] border border-slate-200 shadow-[0_12px_28px_-6px_rgba(15,23,42,0.08)] flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden hover:-translate-y-1 transition-transform duration-300">
-       <div className="absolute -right-4 -bottom-10 text-[130px] font-black text-orange-50 opacity-80 z-0 select-none pointer-events-none tracking-tighter leading-none">ACTIVE</div>
-       <Rocket strokeWidth={1} className="absolute right-10 -bottom-10 w-72 h-72 text-orange-500 opacity-[0.04] z-0 pointer-events-none transform -rotate-12" />
-       <div className="absolute top-0 left-0 w-2 h-full bg-gradient-tush z-10" />
-       
-       <div className="flex-1 flex flex-col sm:flex-row items-start sm:items-center gap-6 w-full pl-2 relative z-10">
-          <div className="relative w-full sm:w-40 h-52 sm:h-40 shrink-0 rounded-2xl overflow-hidden border border-slate-200 shadow-sm group-hover:shadow-md transition-shadow">
-             <Image src={contribution.image} alt={contribution.title} fill className="object-cover" />
-          </div>
-          <div className="space-y-3 w-full">
-             <div className="flex items-center gap-3 mb-2">
-                <span className="px-3 py-1 rounded-lg bg-orange-50 border border-orange-100/50 text-orange-600 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
-                   <Clock className="w-3.5 h-3.5" /> Funding
-                </span>
-                <span className="text-slate-400 text-sm font-semibold">{contribution.model}</span>
-             </div>
-             <h3 className="text-3xl font-bold text-slate-900 tracking-tight">{contribution.title}</h3>
-             <div className="flex items-center gap-4 text-sm mt-4">
-                <div className="font-semibold text-slate-700 bg-slate-50 px-5 py-2.5 rounded-xl border border-slate-200/60 shadow-[inset_0_2px_4px_rgba(0,0,0,0.03)] text-base">
-                   My Contribution: <span className="text-orange-600 font-extrabold">{formatMoney(contribution.myContribution, contribution.currency)}</span>
-                </div>
-                <div className="text-slate-500 font-medium text-base">Goal: {contribution.goal.toLocaleString()} {contribution.currency}</div>
-             </div>
-             <div className="w-full max-w-md bg-slate-100 rounded-full h-8 mt-6 overflow-hidden shadow-[inset_0_3px_6px_rgba(0,0,0,0.1)] border border-slate-200/50 p-1 relative z-10">
-                <div className="bg-gradient-to-r from-[#FF6B4A] to-[#FF3D71] h-full rounded-full shadow-[0_0_15px_rgba(255,107,74,0.6)] relative flex items-center px-4" style={{ width: `${progress}%` }}>
-                   <div className="absolute top-0 left-0 w-full h-1/2 bg-white/20 rounded-t-full" />
-                </div>
-             </div>
-          </div>
-       </div>
+      <div className="absolute -right-4 -bottom-10 text-[130px] font-black text-orange-50 opacity-80 z-0 select-none pointer-events-none tracking-tighter leading-none">ACTIVE</div>
+      <Rocket strokeWidth={1} className="absolute right-10 -bottom-10 w-72 h-72 text-orange-500 opacity-[0.04] z-0 pointer-events-none transform -rotate-12" />
+      <div className="absolute top-0 left-0 w-2 h-full bg-gradient-to-b from-orange-400 to-orange-500 z-10" />
 
-       <div className="w-full md:w-auto shrink-0 text-left md:text-right px-4 relative z-10 mt-6 md:mt-0">
-          <div className="text-4xl font-black text-slate-900 tracking-tight drop-shadow-sm">{contribution.daysRemaining} Days</div>
-          <div className="text-sm font-bold text-slate-400 uppercase tracking-widest mt-2">Remaining</div>
-       </div>
+      <div className="flex-1 flex flex-col sm:flex-row items-start sm:items-center gap-6 w-full pl-2 relative z-10">
+        <div className="relative w-full sm:w-40 h-52 sm:h-40 shrink-0 rounded-2xl overflow-hidden border border-slate-200 shadow-sm">
+          <Image src={c.campaign.image} alt={c.campaign.title} fill className="object-cover" />
+        </div>
+        <div className="space-y-3 w-full">
+          <div className="flex items-center gap-3 mb-2">
+            <span className="px-3 py-1 rounded-lg bg-orange-50 border border-orange-100/50 text-orange-600 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
+              <Clock className="w-3.5 h-3.5" /> Funding
+            </span>
+            <span className="text-slate-400 text-sm font-semibold">{c.campaign.fundingModel}</span>
+          </div>
+          <h3 className="text-3xl font-bold text-slate-900 tracking-tight">{c.campaign.title}</h3>
+          <div className="flex flex-wrap items-center gap-4 text-sm mt-4">
+            <div className="font-semibold text-slate-700 bg-slate-50 px-5 py-2.5 rounded-xl border border-slate-200/60 text-base">
+              My Contribution: <span className="text-orange-600 font-extrabold">{formatMoney(c.myContribution, c.campaign.currency)}</span>
+            </div>
+            <div className="text-slate-500 font-medium text-base">Goal: {c.campaign.goal.toLocaleString()} {c.campaign.currency}</div>
+          </div>
+          <div className="w-full max-w-md bg-slate-100 rounded-full h-6 mt-6 overflow-hidden shadow-inner border border-slate-200/50 p-1">
+            <div className="bg-gradient-to-r from-orange-400 to-orange-500 h-full rounded-full relative" style={{ width: `${progress}%` }}>
+              <div className="absolute top-0 left-0 w-full h-1/2 bg-white/20 rounded-t-full" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="w-full md:w-auto shrink-0 text-left md:text-right px-4 relative z-10 mt-6 md:mt-0">
+        <div className="text-4xl font-black text-slate-900 tracking-tight">{c.campaign.daysLeft}</div>
+        <div className="text-sm font-bold text-slate-400 uppercase tracking-widest mt-2">Days Left</div>
+      </div>
     </div>
   )
 }
 
-function SuccessfulContributionCard({ contribution }: { contribution: BackerContribution }) {
+function SuccessCard({ c }: { c: Contribution }) {
   return (
-    <div className="bg-slate-50 p-8 md:p-10 min-h-[240px] rounded-[2rem] border border-slate-200 shadow-[inset_0_4px_20px_rgba(0,0,0,0.02)] flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden transition-all duration-500">
-       <div className="absolute -right-4 -bottom-10 text-[130px] font-black text-slate-200 opacity-50 z-0 select-none pointer-events-none tracking-tighter leading-none">SUCCESS</div>
-       <CheckCircle2 strokeWidth={1} className="absolute right-10 -bottom-10 w-72 h-72 text-slate-300 opacity-20 z-0 pointer-events-none" />
-       <div className="absolute top-0 left-0 w-2 h-full bg-slate-300 z-10" />
-       
-       <div className="flex-1 flex flex-col sm:flex-row items-start sm:items-center gap-6 w-full pl-2 relative z-10">
-          <div className="relative w-full sm:w-40 h-52 sm:h-40 shrink-0 rounded-2xl overflow-hidden border border-slate-300 shadow-sm group-hover:shadow-md transition-shadow">
-             <Image src={contribution.image} alt={contribution.title} fill className="object-cover" />
+    <div className="bg-slate-50 p-8 md:p-10 min-h-[240px] rounded-[2rem] border border-slate-200 shadow-inner flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
+      <div className="absolute -right-4 -bottom-10 text-[130px] font-black text-slate-200 opacity-50 z-0 select-none pointer-events-none tracking-tighter leading-none">FUNDED</div>
+      <CheckCircle2 strokeWidth={1} className="absolute right-10 -bottom-10 w-72 h-72 text-slate-300 opacity-20 z-0 pointer-events-none" />
+      <div className="absolute top-0 left-0 w-2 h-full bg-slate-300 z-10" />
+
+      <div className="flex-1 flex flex-col sm:flex-row items-start sm:items-center gap-6 w-full pl-2 relative z-10">
+        <div className="relative w-full sm:w-40 h-52 sm:h-40 shrink-0 rounded-2xl overflow-hidden border border-slate-300 shadow-sm">
+          <Image src={c.campaign.image} alt={c.campaign.title} fill className="object-cover" />
+        </div>
+        <div className="space-y-3 w-full">
+          <div className="flex items-center gap-3 mb-2">
+            <span className="px-3 py-1 rounded-lg bg-white border border-slate-200 text-slate-600 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
+              <CheckCircle2 className="w-3.5 h-3.5 text-slate-500" /> Funded
+            </span>
+            <span className="text-slate-400 text-sm font-semibold">{c.campaign.fundingModel}</span>
           </div>
-          <div className="space-y-3 w-full">
-             <div className="flex items-center gap-3 mb-2">
-                <span className="px-3 py-1 rounded-lg bg-white border border-slate-200 text-slate-600 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
-                   <CheckCircle2 className="w-3.5 h-3.5 text-slate-500" /> Funded
-                </span>
-                <span className="text-slate-400 text-sm font-semibold">{contribution.model}</span>
-             </div>
-             <h3 className="text-3xl font-bold text-slate-700 tracking-tight">{contribution.title}</h3>
-             <div className="flex items-center gap-4 text-sm mt-4">
-                <div className="font-semibold text-slate-600 bg-white/80 px-5 py-2.5 rounded-xl border border-slate-200/60 shadow-[inset_0_2px_4px_rgba(0,0,0,0.03)] text-base">
-                   My Contribution: {formatMoney(contribution.myContribution, contribution.currency)}
-                </div>
-             </div>
+          <h3 className="text-3xl font-bold text-slate-700 tracking-tight">{c.campaign.title}</h3>
+          <div className="flex items-center gap-4 text-sm mt-4">
+            <div className="font-semibold text-slate-600 bg-white/80 px-5 py-2.5 rounded-xl border border-slate-200/60 text-base">
+              My Contribution: {formatMoney(c.myContribution, c.campaign.currency)}
+            </div>
           </div>
-       </div>
-       
-       <div className="w-full md:w-auto shrink-0 relative z-10 mt-6 md:mt-0">
-          <Button variant="outline" disabled className="w-full md:w-auto h-16 px-10 rounded-xl bg-white border-slate-200 text-slate-600 font-bold shadow-sm cursor-not-allowed text-lg">
-             View Project
+        </div>
+      </div>
+
+      <div className="w-full md:w-auto shrink-0 relative z-10 mt-6 md:mt-0">
+        <Link href={`/campaigns/${c.campaign.id}`}>
+          <Button variant="outline" className="w-full md:w-auto h-16 px-10 rounded-xl bg-white border-slate-200 text-slate-600 font-bold shadow-sm text-lg">
+            View Campaign
           </Button>
-       </div>
+        </Link>
+      </div>
     </div>
   )
 }
 
 export function BackerTab() {
-  const { address } = useAccount();
+  const { address } = useAccount()
+  const { campaigns, isLoading, count, refetch } = useAllCampaigns()
 
-  const { data: countData } = useCampaignCount();
-  const count = Number(countData || 0);
+  const donationContracts = useMemo(
+    () =>
+      Array.from({ length: count }, (_, i) => ({
+        address: FUNDX_CONTRACT as `0x${string}`,
+        abi: FUNDX_ABI,
+        functionName: "getDonation" as const,
+        args: [BigInt(i), (address ?? "0x0000000000000000000000000000000000000000") as `0x${string}`],
+      })),
+    [count, address]
+  )
 
-  const campaignContracts = useMemo(() => {
-     const c = [];
-     for (let i = 1; i <= count; i++) {
-        c.push({
-           address: FUNDX_CONTRACT as `0x${string}`,
-           abi: FUNDX_ABI,
-           functionName: 'getCampaign',
-           args: [BigInt(i)]
-        });
-     }
-     return c;
-  }, [count])
-
-  const donationContracts = useMemo(() => {
-     const c = [];
-     for (let i = 1; i <= count; i++) {
-        c.push({
-           address: FUNDX_CONTRACT as `0x${string}`,
-           abi: FUNDX_ABI,
-           functionName: 'getDonation',
-           args: [BigInt(i), address as `0x${string}`]
-        });
-     }
-     return c;
-  }, [count, address])
-
-  const { data: campaignsData, isLoading: isLoading1 } = useReadContracts({
-    contracts: campaignContracts,
-    query: {
-       enabled: count > 0 && !!address
-    }
-  });
-
-  const { data: donationsData, isLoading: isLoading2 } = useReadContracts({
+  const { data: donationsData, isLoading: isDonationsLoading } = useReadContracts({
     contracts: donationContracts,
-    query: {
-       enabled: count > 0 && !!address
-    }
-  });
-  
-  const isLoading = isLoading1 || isLoading2;
+    query: { enabled: count > 0 && !!address },
+  })
 
-  const liveContributions: BackerContribution[] = [];
+  const contributions: Contribution[] = useMemo(() => {
+    if (!donationsData || !address) return []
+    const nowSec = Math.floor(Date.now() / 1000)
 
-  if (campaignsData && donationsData && address) {
-     campaignsData.forEach((result, index) => {
-        const donationResult = donationsData[index];
-        if (result.status === 'success' && result.result && donationResult?.status === 'success') {
-           const camp = result.result as any;
-           const rawDonation = donationResult.result as bigint;
+    return campaigns
+      .map((campaign, i) => {
+        const donResult = donationsData[i]
+        if (donResult?.status !== "success") return null
+        const rawDon = donResult.result as bigint
+        if (!rawDon || rawDon === BigInt(0)) return null
 
-           if (rawDonation > BigInt(0)) {
-              const isCUSD = camp.token.toLowerCase() === TOKEN_ADDRESSES.cUSD.toLowerCase();
-              const decimals = isCUSD ? 18 : 6;
-              const myContribution = Number(formatUnits(rawDonation, decimals));
-              const goal = Number(formatUnits(camp.goal, decimals));
-              const totalRaised = Number(formatUnits(camp.totalRaised, decimals));
-              const id = String(index + 1);
-              const deadline = Number(camp.deadline);
-              const fundingModelUint = Number(camp.fundingModel);
-              
-              let status: ContributionStatus = "active";
-              const now = Date.now() / 1000;
-              const isPastDeadline = deadline <= now;
-              const isAllOrNothing = fundingModelUint === 1;
+        const decimals = campaign.currency === "cUSD" ? 18 : 6
+        const myContribution = Number(formatUnits(rawDon, decimals))
+        const isPast = campaign.deadline < nowSec
+        const isFlexible = campaign.fundingModel === "Flexible Model"
+        const goalReached = campaign.raised >= campaign.goal
 
-              if (!isPastDeadline) {
-                 status = "active";
-              } else if (!isAllOrNothing) {
-                 status = "successful";
-              } else if (isAllOrNothing && totalRaised >= goal) {
-                 status = "successful";
-              } else if (isAllOrNothing && totalRaised < goal && isPastDeadline) {
-                 status = "refund_available";
-              }
-              
-              const daysRemaining = Math.max(0, Math.floor((deadline - now) / 86400));
-              
-              liveContributions.push({
-                 id,
-                 title: `Project #${id}`,
-                 image: "/campaign-2.jpg",
-                 myContribution,
-                 totalRaised,
-                 goal,
-                 currency: isCUSD ? "cUSD" : "USDC",
-                 model: isAllOrNothing ? "All-or-Nothing" : "Flexible Model",
-                 status,
-                 daysRemaining
-              });
-           }
-        }
-     });
+        let status: Contribution["status"] = "active"
+        if (!isPast) status = "active"
+        else if (!isFlexible) status = "successful"
+        else if (goalReached) status = "successful"
+        else status = "refund_available"
+
+        return { campaign, myContribution, status }
+      })
+      .filter(Boolean) as Contribution[]
+  }, [campaigns, donationsData, address])
+
+  if (isLoading || isDonationsLoading) {
+    return (
+      <TabsContent value="contributions">
+        <div className="flex items-center justify-center py-20 gap-3 text-slate-400">
+          <Loader2 className="w-5 h-5 animate-spin" />
+          <span>Loading your contributions...</span>
+        </div>
+      </TabsContent>
+    )
   }
 
-  const allContributions = [...liveContributions, ...MOCK_CONTRIBUTIONS];
-
-  if (isLoading && count > 0) {
-    return <TabsContent value="contributions"><div className="p-8 text-center text-slate-500">Loading your contributions...</div></TabsContent>
+  if (contributions.length === 0) {
+    return (
+      <TabsContent value="contributions">
+        <div className="text-center py-20">
+          <PackageOpen className="w-16 h-16 text-slate-200 mx-auto mb-6" />
+          <h3 className="text-2xl font-bold text-slate-900 mb-2">No contributions yet</h3>
+          <p className="text-slate-500 mb-8">You haven&apos;t backed any campaigns on Celo.</p>
+          <Link href="/explore">
+            <Button className="h-12 px-8 rounded-xl bg-slate-900 text-white font-bold">
+              Explore Campaigns
+            </Button>
+          </Link>
+        </div>
+      </TabsContent>
+    )
   }
 
   return (
     <TabsContent value="contributions" className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-       
-       {allContributions.map((contribution) => {
-          if (contribution.status === "refund_available") return <RefundCard key={contribution.id} contribution={contribution} />
-          if (contribution.status === "active") return <ActiveContributionCard key={contribution.id} contribution={contribution} />
-          if (contribution.status === "successful") return <SuccessfulContributionCard key={contribution.id} contribution={contribution} />
-          
-          return null;
-       })}
-
+      {contributions.map((c) => {
+        if (c.status === "refund_available") return <RefundCard key={c.campaign.id} c={c} onSuccess={refetch} />
+        if (c.status === "active") return <ActiveCard key={c.campaign.id} c={c} />
+        return <SuccessCard key={c.campaign.id} c={c} />
+      })}
     </TabsContent>
   )
 }

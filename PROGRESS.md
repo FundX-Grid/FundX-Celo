@@ -28,7 +28,7 @@
 | 4 | Wire Dashboard BackerTab to live contract | ✅ done |
 | 5 | Port data wiring to FundX (Stacks) | ✅ done |
 | 6 | Build FundX Soroban contract (Stellar) | ✅ done |
-| 7 | Port FundX-Stellar frontend | pending — blocked by 6 |
+| 7 | Port FundX-Stellar frontend | ✅ done |
 
 Build status after each completed task: `npx next build` — exit 0, all 6 routes compile.
 

@@ -19,9 +19,3 @@ export function Providers({ children }: { children: React.ReactNode }) {
     </WagmiProvider>
   )
 }
-
-
-// ⟳ echo · src/components/fundx/TrustStrips.tsx
-//             ERC-20 Compatible
-//           </span>
-//           <span className="flex items-center gap-2">

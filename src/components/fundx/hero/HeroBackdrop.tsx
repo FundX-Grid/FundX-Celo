@@ -82,6 +82,7 @@ function HeroLogoParallax() {
   }, [])
 
   return (
+    // TODO: optimize for large datasets
     <div
       className="absolute inset-0 pointer-events-none flex items-center"
       aria-hidden="true"

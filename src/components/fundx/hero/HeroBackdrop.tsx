@@ -43,11 +43,6 @@ function HeroLogoParallax() {
     }
 
     function startAnimation() {
-      /**
-       * animate
-       * @param {*} time: number
-       * @returns {*}
-       */
       function animate(time: number) {
         if (!logoRef.current) return
 

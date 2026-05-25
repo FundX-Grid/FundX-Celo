@@ -67,7 +67,6 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
                placeholder="Tell us about your past experience, previous projects, and what drives you..." 
                className="h-64 rounded-xl resize-none p-5 text-base leading-relaxed"
                value={formData.creatorBio}
-               // NOTE: revisit this logic after API migration
                onChange={(e) => setFormData({...formData, creatorBio: e.target.value})}
             />
          </div>

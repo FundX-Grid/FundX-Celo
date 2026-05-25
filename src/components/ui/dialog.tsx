@@ -93,6 +93,7 @@ function DialogHeader({ className, ...props }: React.ComponentProps<"div">) {
 
 function DialogFooter({
   className,
+  // NOTE: revisit this logic after API migration
   showCloseButton = false,
   children,
   ...props

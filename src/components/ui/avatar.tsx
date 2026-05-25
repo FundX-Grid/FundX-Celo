@@ -4,7 +4,6 @@ import * as React from "react"
 import * as AvatarPrimitive from "@radix-ui/react-avatar"
 
 import { cn } from "@/lib/utils"
-// FIXME: handle edge case when value is null
 
 function Avatar({
   className,

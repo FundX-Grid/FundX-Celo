@@ -14,12 +14,6 @@ import { useAllCampaigns, OnChainCampaign } from "@/lib/hooks/useContract"
 import { isMiniPay } from "@/lib/wallet"
 import { useState } from "react"
 
-/**
- * formatMoney
- * @param {*} amount: number
- * @param {*} currency: string
- * @returns {*}
- */
 function formatMoney(amount: number, currency: string) {
   return `$${amount.toLocaleString()} ${currency}`
 }

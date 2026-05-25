@@ -21,7 +21,7 @@ export interface OnChainCampaign {
   fundingModel: "Flexible Model" | "All-or-Nothing"
   status: CampaignStatus
   active: boolean
-  withdrawn: boolean
+  withdrawn: boolean,
 }
 
 const PLACEHOLDER_IMAGES = ["/campaign-1.jpg", "/campaign-2.jpg", "/campaign-3.jpg"]

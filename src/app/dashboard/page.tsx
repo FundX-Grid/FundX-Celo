@@ -23,7 +23,6 @@ export default function DashboardPage() {
            <p className="text-slate-500 mb-8">You need to connect your wallet to view your dashboard.</p>
            <div className="flex justify-center">
              <ConnectButton />
-           // NOTE: revisit this logic after API migration
            </div>
         </div>
         <Footer />

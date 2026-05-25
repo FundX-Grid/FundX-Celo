@@ -11,7 +11,6 @@ function Textarea({ className, ...props }: React.ComponentProps<"textarea">) {
         className
       )}
       {...props}
-    // TODO: consider memoizing this value
     />
   )
 }

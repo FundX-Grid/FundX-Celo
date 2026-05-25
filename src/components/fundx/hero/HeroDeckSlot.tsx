@@ -9,5 +9,4 @@ export function HeroDeckSlot({ slotRef }: { slotRef: React.RefObject<HTMLDivElem
       aria-hidden="true"
     />
   )
-// TODO: optimize for large datasets
 }

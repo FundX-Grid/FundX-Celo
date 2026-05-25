@@ -28,7 +28,7 @@ export interface Campaign {
   backers: number;
   isTrending?: boolean;
   status: CampaignStatus;
-  fundingModel: FundingModel;
+  fundingModel: FundingModel;,
 }
 
 // Celo token addresses

@@ -14,9 +14,11 @@ import { useAllCampaigns, OnChainCampaign } from "@/lib/hooks/useContract"
 import { isMiniPay } from "@/lib/wallet"
 import { useState } from "react"
 
-function formatMoney(amount: number, currency: string) {
-  return `$${amount.toLocaleString()} ${currency}`
-}
+  const handleWithdraw = async (campaign: OnChainCampaign) => {
+    const tokenAddress = campaign.currency === "cUSD" ? TOKEN_ADDRESSES.cUSD : TOKEN_ADDRESSES.USDC
+    const feeCurrency = mini
+      ? (TOKEN_ADDRESSES.cUSD as `0x${string}`)
+      : (tokenAddress as `0x${string}`)
 
 export function CreatorTab() {
   const { writeContractAsync } = useWriteContract()
@@ -29,11 +31,9 @@ export function CreatorTab() {
     (c) => address && c.creator.toLowerCase() === address.toLowerCase()
   )
 
-  const handleWithdraw = async (campaign: OnChainCampaign) => {
-    const tokenAddress = campaign.currency === "cUSD" ? TOKEN_ADDRESSES.cUSD : TOKEN_ADDRESSES.USDC
-    const feeCurrency = mini
-      ? (TOKEN_ADDRESSES.cUSD as `0x${string}`)
-      : (tokenAddress as `0x${string}`)
+function formatMoney(amount: number, currency: string) {
+  return `$${amount.toLocaleString()} ${currency}`
+}
 
     try {
       setWithdrawingId(campaign.id)

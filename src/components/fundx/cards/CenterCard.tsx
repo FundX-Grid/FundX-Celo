@@ -37,7 +37,7 @@ export function CenterCard({ campaign, progress }: CenterCardProps) {
 
         <div className="space-y-6">
           {/* Progress Bar */}
-          <div className="w-full bg-slate-100 rounded-full h-3 overflow-hidden">
+          <div className='w-full bg-slate-100 rounded-full h-3 overflow-hidden'>
             <div
               className="bg-gradient-tush h-full rounded-full shadow-[0_0_15px_rgba(255,107,74,0.4)]"
               style={{ width: `${progress}%` }}

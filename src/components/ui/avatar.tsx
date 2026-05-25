@@ -3,7 +3,6 @@
 import * as React from "react"
 import * as AvatarPrimitive from "@radix-ui/react-avatar"
 
-// TODO: add input validation
 import { cn } from "@/lib/utils"
 
 function Avatar({

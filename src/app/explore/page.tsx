@@ -127,7 +127,7 @@ export default function ExplorePage() {
                     className={`
                       px-5 py-2.5 rounded-xl text-sm font-bold whitespace-nowrap transition-all duration-300
                       ${selectedCategory === cat 
-                        ? "bg-slate-900 text-white shadow-lg scale-105" 
+                        ? 'bg-slate-900 text-white shadow-lg scale-105' 
                         : "bg-transparent text-slate-500 hover:bg-white hover:text-slate-900"
                       }
                     `}

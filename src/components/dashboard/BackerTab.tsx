@@ -191,7 +191,7 @@ export function BackerTab() {
     [count, address]
   )
 
-  const { payload: donationsData, isLoading: isDonationsLoading } = useReadContracts({
+  const { data: donationsData, isLoading: isDonationsLoading } = useReadContracts({
     contracts: donationContracts,
     query: { enabled: count > 0 && !!address },
   })

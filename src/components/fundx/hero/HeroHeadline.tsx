@@ -10,8 +10,8 @@ export function HeroHeadline() {
       <span className="inline-flex items-center flex-wrap justify-center gap-x-4 mt-2">
         on the
         <span className="inline-flex items-center justify-center gap-3">
-          <Image src="/celo-celo-logo.svg" alt="Celo" width={48} height={48} className="w-12 h-12 md:w-14 md:h-14 object-contain drop-shadow-sm" />
-          <span className="bg-[#fbe72b] text-slate-900 px-5 py-2 md:py-3 rounded-[2rem] border border-black/5 shadow-lg shadow-[#fbe72b]/30 font-extrabold pb-1">Celo</span>
+          <Image src="/celo-celo-logo.svg" alt="Celo" width={80} height={80} className="w-16 h-16 md:w-20 md:h-20 object-contain drop-shadow-sm transform -rotate-6" />
+          <span className="text-[#fbe72b] font-extrabold pb-1 drop-shadow-sm">Celo</span>
         </span>
       </span>
       <br />

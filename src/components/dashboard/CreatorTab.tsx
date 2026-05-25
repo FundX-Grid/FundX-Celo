@@ -1,18 +1,18 @@
 "use client"
 
+import { Clock, XCircle, CheckCircle2, Rocket, Loader2, PlusCircle } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { TabsContent } from "@/components/ui/tabs"
 import Image from "next/image"
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Clock, XCircle, CheckCircle2, Rocket, Loader2, PlusCircle } from "lucide-react"
-import { FUNDX_ABI } from "@/lib/fundx-abi"
-import { FUNDX_CONTRACT, TOKEN_ADDRESSES, config } from "@/lib/celo-config"
-import { TabsContent } from "@/components/ui/tabs"
-import { isMiniPay } from "@/lib/wallet"
-import { toast } from "sonner"
-import { useAllCampaigns, OnChainCampaign } from "@/lib/hooks/useContract"
-import { useState } from "react"
 import { useWriteContract, useAccount } from "wagmi"
 import { waitForTransactionReceipt } from "@wagmi/core"
+import { FUNDX_CONTRACT, TOKEN_ADDRESSES, config } from "@/lib/celo-config"
+import { FUNDX_ABI } from "@/lib/fundx-abi"
+import { toast } from "sonner"
+import { useAllCampaigns, OnChainCampaign } from "@/lib/hooks/useContract"
+import { isMiniPay } from "@/lib/wallet"
+import { useState } from "react"
 
 function formatMoney(amount: number, currency: string) {
   return `$${amount.toLocaleString()} ${currency}`

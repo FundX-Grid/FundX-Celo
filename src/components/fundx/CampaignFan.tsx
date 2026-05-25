@@ -199,7 +199,7 @@ export function CampaignFan({ deckSlotRef }: CampaignFanProps) {
           style={{ zIndex: centerZ, position: "relative" }}
           className="w-full max-w-3xl xl:flex-1"
         >
-          <div className='relative z-20 shadow-2xl rounded-[2rem] border border-slate-100 bg-white hover:border-orange-200 transition-all duration-300 flex flex-col md:flex-row overflow-hidden group h-full'>
+          <div className="relative z-20 shadow-2xl rounded-[2rem] border border-slate-100 bg-white hover:border-orange-200 transition-all duration-300 flex flex-col md:flex-row overflow-hidden group h-full">
             <div className="absolute top-4 left-4 z-30 bg-gradient-tush text-slate-900 px-4 py-1 rounded-full text-xs font-bold shadow-soft-xl animate-pulse">
               🔥 Top Trending
             </div>

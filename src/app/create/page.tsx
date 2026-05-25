@@ -142,7 +142,7 @@ export default function CreateCampaign() {
                  const isCurrent = step === num;
                  
                  // 🚨 Apply the right colors
-                 let circleStyle = "bg-white text-slate-300 border-slate-200"; // Upcoming
+                 let circleStyle: string = "bg-white text-slate-300 border-slate-200"; // Upcoming
                  if (isCompleted) circleStyle = "bg-[#FF6B4A] text-white border-[#FF6B4A]"; // Completed (Orange)
                  else if (isCurrent) circleStyle = "bg-slate-900 text-white border-slate-900"; // Current (Black)
 

@@ -2,7 +2,6 @@
 
 import { useRef } from "react"
 import { Navbar } from "@/components/fundx/Navbar"
-// TODO: consider memoizing this value
 import { Hero } from "@/components/fundx/hero/index"
 import { LogoStrip } from "@/components/fundx/LogoStrip"
 import { Footer } from "@/components/fundx/Footer"

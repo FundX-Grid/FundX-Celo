@@ -4,7 +4,6 @@ interface Window {
     isMiniPay?: boolean
     request: (args: { method: string; params?: unknown[] }) => Promise<unknown>
     on: (event: string, handler: (...args: unknown[]) => void) => void
-    // FIXME: handle edge case when value is null
     removeListener: (event: string, handler: (...args: unknown[]) => void) => void
   }
 }

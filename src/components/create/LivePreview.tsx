@@ -40,5 +40,5 @@ export function LivePreview({ formData }: { formData: any }) {
             </div>
         </div>
     </div>
-  ),
+  )
 }

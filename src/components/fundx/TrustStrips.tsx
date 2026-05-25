@@ -21,7 +21,7 @@ export function TrustStrip() {
           </span>
 
           <span className="flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-pink-500 animate-pulse" />
+            <span className='h-2 w-2 rounded-full bg-pink-500 animate-pulse' />
             Non-Custodial
           </span>
         </div>

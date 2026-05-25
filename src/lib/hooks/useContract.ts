@@ -31,7 +31,7 @@ function mapContractCampaign(raw: any, index: number): OnChainCampaign {
   const deadline = Number(raw.deadline)
   const isPast = deadline < nowSec
   const isFlexible = raw.fundingModel === 0
-  const currency: 'cUSD' | 'USDC' =
+  const currency: "cUSD" | "USDC" =
     raw.token.toLowerCase() === TOKEN_ADDRESSES.cUSD.toLowerCase() ? "cUSD" : "USDC"
   const decimals = currency === "cUSD" ? TOKEN_DECIMALS.cUSD : TOKEN_DECIMALS.USDC
   const goal = parseFloat(formatUnits(raw.goal as bigint, decimals))

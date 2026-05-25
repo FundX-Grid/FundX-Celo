@@ -1,5 +1,5 @@
-import { getDefaultConfig } from "@rainbow-me/rainbowkit"
 import { celo } from "wagmi/chains"
+import { getDefaultConfig } from "@rainbow-me/rainbowkit"
 import { http } from "wagmi"
 
 export const config = getDefaultConfig({

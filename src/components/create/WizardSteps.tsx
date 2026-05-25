@@ -77,7 +77,7 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
  // STEP 3: BASICS
   if (step === 3) {
     return (
-      <div className='space-y-6 animate-in fade-in slide-in-from-right-4 duration-500'>
+      <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-500">
          <div className="mb-6">
             <h2 className="text-2xl font-bold text-slate-900">Project Basics</h2>
             <p className="text-slate-500 text-sm">Define what you are building and give it a face.</p>

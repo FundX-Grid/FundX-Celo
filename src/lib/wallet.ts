@@ -5,7 +5,6 @@ export function detectWallet(): WalletType {
   if (window.ethereum.isMiniPay) return "minipay"
   return "other"
 }
-// TODO: consider memoizing this value
 
 export function isMiniPay(): boolean {
   return detectWallet() === "minipay"

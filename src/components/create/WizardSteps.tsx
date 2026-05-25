@@ -249,7 +249,7 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
          </div>
 
          <div className={`p-6 rounded-xl border flex gap-4 items-start mt-6 ${formData.currency === 'cUSD' ? 'bg-green-50 border-green-100' : 'bg-blue-50 border-blue-100'}`}>
-            <div className="p-2 bg-white rounded-full shadow-sm shrink-0">
+            <div className='p-2 bg-white rounded-full shadow-sm shrink-0'>
                <Rocket className={`w-5 h-5 ${formData.currency === 'cUSD' ? 'text-green-500' : 'text-blue-500'}`} />
             </div>
             <div>

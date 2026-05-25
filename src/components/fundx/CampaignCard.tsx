@@ -35,7 +35,7 @@ export function CampaignCard({ id, title, description, raised, goal, image, curr
 
         <div className="space-y-4">
           <div>
-            <h3 className='text-xl font-bold text-slate-900 group-hover:text-slate-700 transition-colors'>{title}</h3>
+            <h3 className="text-xl font-bold text-slate-900 group-hover:text-slate-700 transition-colors">{title}</h3>
             <p className="text-sm text-slate-500 line-clamp-2 mt-2">{description}</p>
           </div>
 

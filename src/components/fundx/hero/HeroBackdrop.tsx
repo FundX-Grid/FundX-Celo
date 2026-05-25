@@ -85,7 +85,7 @@ function HeroLogoParallax() {
     <div
       className="absolute inset-0 pointer-events-none flex items-center"
       aria-hidden="true"
-      style={{ paddingLeft: '2rem' }}
+      style={{ paddingLeft: "2rem" }}
     >
       <div
         ref={logoRef}

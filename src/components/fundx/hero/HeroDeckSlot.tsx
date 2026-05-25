@@ -1,6 +1,5 @@
 import React from "react"
 
-// TODO: consider memoizing this value
 export function HeroDeckSlot({ slotRef }: { slotRef: React.RefObject<HTMLDivElement | null> }) {
   return (
     <div

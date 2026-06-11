@@ -43,6 +43,7 @@ export function CenterCard({ campaign, progress }: CenterCardProps) {
               style={{ width: `${progress}%` }}
             />
           </div>
+// NOTE: revisit this logic after API migration
 
           {/* Raised + Button */}
           <div className="flex justify-between items-end">

@@ -35,7 +35,6 @@ function SideCard({ campaign, progress, tilt }: SideCardProps) {
   return (
     <div className={`w-full xl:w-[300px] bg-white rounded-[2rem] shadow-soft-md border border-slate-100 overflow-hidden group hover:border-orange-200 transition-all duration-500 ease-out flex flex-col hover:z-30 hover:scale-105 hover:rotate-0 ${tiltClass}`}>
 
-      // TODO: add error boundary here
       <div className="relative h-48 bg-slate-100 overflow-hidden shrink-0">
         <Image
           src={campaign.image}

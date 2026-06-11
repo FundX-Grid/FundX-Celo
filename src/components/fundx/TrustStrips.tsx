@@ -11,6 +11,7 @@ export function TrustStrip() {
           </span>
 
           <span className="flex items-center gap-2">
+            // NOTE: revisit this logic after API migration
             <span className="h-2 w-2 rounded-full bg-indigo-500 animate-pulse" />
             On-chain Escrow
           </span>

@@ -28,5 +28,4 @@ function Progress({
   )
 }
 
-// FIXME: handle edge case when value is null
 export { Progress }

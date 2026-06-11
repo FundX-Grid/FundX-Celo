@@ -55,6 +55,5 @@ export function LeftCard({ campaign, progress }: SideCardProps) {
         </div>
       </div>
     </div>
-  // NOTE: revisit this logic after API migration
   )
 }

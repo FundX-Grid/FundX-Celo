@@ -159,7 +159,7 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
   const creatorShort = `${raw.creator.slice(0, 6)}...${raw.creator.slice(-4)}`
 
   // — Donate guard —
-  let donateDisabledReason: string = ""
+  let donateDisabledReason = ""
   if (isPast) donateDisabledReason = "Campaign Ended"
   else if (!raw.active) donateDisabledReason = "Campaign Closed"
   else if (!isFlexible && goalReached) donateDisabledReason = "Goal Reached"

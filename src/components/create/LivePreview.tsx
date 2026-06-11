@@ -31,7 +31,7 @@ export function LivePreview({ formData }: { formData: any }) {
                 <span className="w-20 text-xs uppercase font-semibold">Stage:</span>
                 <span className="text-slate-900">{formData.projectStage}</span>
             </div>
-            <div className='flex items-center gap-2 text-slate-500'>
+            <div className="flex items-center gap-2 text-slate-500">
                 <span className="w-20 text-xs uppercase font-semibold">Asset:</span>
                
                 <span className={`font-bold px-2 py-0.5 rounded-md text-xs ${isCUSD ? 'bg-green-100 text-green-600' : 'bg-blue-50 text-blue-600'}`}>

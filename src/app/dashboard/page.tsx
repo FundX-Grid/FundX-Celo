@@ -10,6 +10,10 @@ import { CreatorTab } from "@/components/dashboard/CreatorTab"
 import { BackerTab } from "@/components/dashboard/BackerTab" 
 
 
+/**
+ * DashboardPage
+ * @returns {*}
+ */
 export default function DashboardPage() {
   const { isConnected } = useAccount()
 

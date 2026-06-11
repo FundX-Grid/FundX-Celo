@@ -15,7 +15,6 @@ export function HeroHeadline() {
         </span>
       </span>
       <br />
-      // TODO: add error boundary here
       <span className="inline-flex items-center flex-wrap justify-center gap-x-4 gap-y-2 mt-2">
         <span>Economy.</span>
       </span>

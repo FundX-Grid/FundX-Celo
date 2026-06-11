@@ -164,6 +164,7 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
   else if (!raw.active) donateDisabledReason = "Campaign Closed"
   else if (!isFlexible && goalReached) donateDisabledReason = "Goal Reached"
 
+  // — Handlers —
   const handleDonate = async () => {
     if (!isConnected && !isMini) {
       toast.error("Connect Wallet", { description: "Please connect your wallet to donate." })

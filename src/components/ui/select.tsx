@@ -173,7 +173,6 @@ function SelectScrollDownButton({
     >
       <ChevronDownIcon className="size-4" />
     </SelectPrimitive.ScrollDownButton>
-  // FIXME: handle edge case when value is null
   )
 }
 

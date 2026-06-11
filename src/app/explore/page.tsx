@@ -13,16 +13,6 @@ import { CAMPAIGNS } from "@/lib/data"
 const CATEGORIES = ["All", "DeFi", "Mining", "Gaming", "Social Impact", "Infrastructure"]
 const STATUSES = ["All", "active", "successful", "failed"] // 🚨 ADDED: Status options
 
-  const handleLoadMore = () => {
-    setVisibleCount((prev) => prev + 3)
-  }
-
-  useEffect(() => {
-    const handleScroll = () => setShowScrollTop(window.scrollY > 400)
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
-
 export default function ExplorePage() {
   const { campaigns, isLoading, count } = useAllCampaigns()
   const [searchQuery, setSearchQuery] = useState("")
@@ -30,6 +20,14 @@ export default function ExplorePage() {
   const [statusFilter, setStatusFilter] = useState("All")
   const [visibleCount, setVisibleCount] = useState(3)
   const [showScrollTop, setShowScrollTop] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => setShowScrollTop(window.scrollY > 400)
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" })
 
   // Merge: live on-chain campaigns first, mock campaigns pad the rest
   // Mock campaigns use string slug IDs; live campaigns use numeric string IDs — no overlap
@@ -70,7 +68,9 @@ export default function ExplorePage() {
     })
   }, [allDisplayCampaigns, searchQuery, selectedCategory, statusFilter])
 
-  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" })
+  const handleLoadMore = () => {
+    setVisibleCount((prev) => prev + 3)
+  }
 
   return (
     <main className="min-h-screen bg-slate-50 selection:bg-orange-100 font-sans relative">

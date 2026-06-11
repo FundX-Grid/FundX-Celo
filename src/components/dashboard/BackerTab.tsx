@@ -96,11 +96,6 @@ function RefundCard({ c, onSuccess }: { c: Contribution; onSuccess: () => void }
   )
 }
 
-/**
- * ActiveCard
- * @param {*} { c }: { c: Contribution }
- * @returns {*}
- */
 function ActiveCard({ c }: { c: Contribution }) {
   const progress = Math.min((c.campaign.raised / c.campaign.goal) * 100, 100)
   return (

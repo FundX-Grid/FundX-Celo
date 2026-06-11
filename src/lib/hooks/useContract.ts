@@ -112,10 +112,6 @@ export function useIsGoalReached(id: number) {
   })
 }
 
-/**
- * useAllCampaigns
- * @returns {*}
- */
 export function useAllCampaigns() {
   const { data: countData, isLoading: isCountLoading } = useCampaignCount()
   const count = countData ? Number(countData) : 0

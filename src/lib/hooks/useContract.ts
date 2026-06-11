@@ -1,7 +1,7 @@
-import { FUNDX_CONTRACT, TOKEN_ADDRESSES, TOKEN_DECIMALS } from "@/lib/celo-config"
 import { FUNDX_ABI } from "@/lib/fundx-abi"
-import { useReadContract, useReadContracts } from "wagmi"
+import { FUNDX_CONTRACT, TOKEN_ADDRESSES, TOKEN_DECIMALS } from "@/lib/celo-config"
 import { formatUnits } from "viem"
+import { useReadContract, useReadContracts } from "wagmi"
 
 export type CampaignStatus = "active" | "successful" | "failed"
 

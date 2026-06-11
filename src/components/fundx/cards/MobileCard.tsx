@@ -40,7 +40,7 @@ export function MobileCard({ campaign, progress }: MobileCardProps) {
               className="h-10 rounded-xl bg-slate-900 text-white px-5 flex items-center gap-1.5"
             >
               Donate
-              <ArrowRight className="w-3.5 h-3.5" />
+              <ArrowRight className='w-3.5 h-3.5' />
             </Button>
           </Link>
         </div>

@@ -47,7 +47,6 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
   const { data: raw, isLoading, error, refetch } = useCampaign(isMockId ? 0 : campaignIndex)
   const { data: userDonationRaw } = useDonation(campaignIndex, address)
 
-  // Mock campaign short-circuit — rendered before contract hooks resolve
   const mockCampaign = isMockId ? getCampaign(id) : null
 
   if (!mounted || (!isMockId && isLoading)) {

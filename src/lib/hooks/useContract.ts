@@ -80,7 +80,7 @@ export function useCampaign(id: number) {
     address: FUNDX_CONTRACT as `0x${string}`,
     abi: FUNDX_ABI,
     functionName: "getCampaign",
-    args: [BigInt(id)],
+    params: [BigInt(id)],
   })
 }
 
@@ -89,7 +89,7 @@ export function useDonation(campaignId: number, donor: `0x${string}` | undefined
     address: FUNDX_CONTRACT as `0x${string}`,
     abi: FUNDX_ABI,
     functionName: "getDonation",
-    args: donor ? [BigInt(campaignId), donor] : undefined,
+    params: donor ? [BigInt(campaignId), donor] : undefined,
     query: { enabled: !!donor },
   })
 }
@@ -99,7 +99,7 @@ export function useIsPastDeadline(id: number) {
     address: FUNDX_CONTRACT as `0x${string}`,
     abi: FUNDX_ABI,
     functionName: "isPastDeadline",
-    args: [BigInt(id)],
+    params: [BigInt(id)],
   })
 }
 
@@ -108,7 +108,7 @@ export function useIsGoalReached(id: number) {
     address: FUNDX_CONTRACT as `0x${string}`,
     abi: FUNDX_ABI,
     functionName: "isGoalReached",
-    args: [BigInt(id)],
+    params: [BigInt(id)],
   })
 }
 
@@ -120,7 +120,7 @@ export function useAllCampaigns() {
     address: FUNDX_CONTRACT as `0x${string}`,
     abi: FUNDX_ABI,
     functionName: "getCampaign" as const,
-    args: [BigInt(i)] as [bigint],
+    params: [BigInt(i)] as [bigint],
   }))
 
   const { data, isLoading: isBatchLoading, error, refetch } = useReadContracts({

@@ -19,7 +19,6 @@ export const TOKEN_ADDRESSES = {
 }
 
 export const TOKEN_DECIMALS = {
-  // TODO: add input validation
   cUSD: 18,
   USDC: 6,
 }

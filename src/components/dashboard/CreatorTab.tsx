@@ -50,8 +50,8 @@ export function CreatorTab() {
       await waitForTransactionReceipt(config, { hash })
       toast.success("Funds withdrawn successfully!", { id: `withdraw-${campaign.id}` })
       refetch()
-    } catch (err) {
-      console.error(err)
+    } catch (error) {
+      console.error(error)
       toast.error("Withdrawal Failed", { id: `withdraw-${campaign.id}`, description: "Transaction failed on Celo." })
     } finally {
       setWithdrawingId(null)

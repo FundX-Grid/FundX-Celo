@@ -130,7 +130,7 @@ export const FUNDX_ABI = [
     type: "function",
     stateMutability: "view",
     inputs: [{ name: "id", type: "uint256" }],
-    outputs: [{ name: '', type: 'bool' }],
+    outputs: [{ name: "", type: "bool" }],
   },
   // allowedTokens
   {

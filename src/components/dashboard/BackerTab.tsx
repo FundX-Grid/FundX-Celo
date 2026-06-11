@@ -25,17 +25,34 @@ interface Contribution {
   status: "active" | "successful" | "refund_available"
 }
 
-export function BackerTab() {
-  const { address } = useAccount()
-  const { campaigns, isLoading, count, refetch } = useAllCampaigns()
+function RefundCard({ c, onSuccess }: { c: Contribution; onSuccess: () => void }) {
+  const { writeContractAsync } = useWriteContract()
+  const [pending, setPending] = useState(false)
+  const mini = typeof window !== "undefined" && isMiniPay()
 
-function ActiveCard({ c }: { c: Contribution }) {
-  const progress = Math.min((c.campaign.raised / c.campaign.goal) * 100, 100)
-  return (
-    <div className="bg-white p-8 md:p-10 min-h-[240px] rounded-[2rem] border border-slate-200 shadow-[0_12px_28px_-6px_rgba(15,23,42,0.08)] flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden hover:-translate-y-1 transition-transform duration-300">
-      <div className="absolute -right-4 -bottom-10 text-[130px] font-black text-orange-50 opacity-80 z-0 select-none pointer-events-none tracking-tighter leading-none">ACTIVE</div>
-      <Rocket strokeWidth={1} className="absolute right-10 -bottom-10 w-72 h-72 text-orange-500 opacity-[0.04] z-0 pointer-events-none transform -rotate-12" />
-      <div className="absolute top-0 left-0 w-2 h-full bg-gradient-to-b from-orange-400 to-orange-500 z-10" />
+  const handleRefund = async () => {
+    const tokenAddress = c.campaign.currency === "cUSD" ? TOKEN_ADDRESSES.cUSD : TOKEN_ADDRESSES.USDC
+    const feeCurrency = mini ? (TOKEN_ADDRESSES.cUSD as `0x${string}`) : (tokenAddress as `0x${string}`)
+    try {
+      setPending(true)
+      toast.loading("Claiming refund...", { id: `refund-${c.campaign.id}` })
+      const hash = await writeContractAsync({
+        address: FUNDX_CONTRACT as `0x${string}`,
+        abi: FUNDX_ABI,
+        functionName: "claimRefund",
+        args: [BigInt(c.campaign.id)],
+        feeCurrency,
+      } as any)
+      await waitForTransactionReceipt(config, { hash })
+      toast.success(`Refund of ${c.myContribution} ${c.campaign.currency} claimed!`, { id: `refund-${c.campaign.id}` })
+      onSuccess()
+    } catch (err) {
+      console.error(err)
+      toast.error("Refund Failed", { id: `refund-${c.campaign.id}`, description: "Transaction failed on Celo." })
+    } finally {
+      setPending(false)
+    }
+  }
 
   return (
     <div className="bg-white p-8 md:p-10 min-h-[240px] rounded-[2rem] border border-blue-200 shadow-[0_12px_28px_-6px_rgba(59,130,246,0.12)] flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden hover:-translate-y-1 transition-transform duration-300">
@@ -79,29 +96,13 @@ function ActiveCard({ c }: { c: Contribution }) {
   )
 }
 
-  const handleRefund = async () => {
-    const tokenAddress = c.campaign.currency === "cUSD" ? TOKEN_ADDRESSES.cUSD : TOKEN_ADDRESSES.USDC
-    const feeCurrency = mini ? (TOKEN_ADDRESSES.cUSD as `0x${string}`) : (tokenAddress as `0x${string}`)
-    try {
-      setPending(true)
-      toast.loading("Claiming refund...", { id: `refund-${c.campaign.id}` })
-      const hash = await writeContractAsync({
-        address: FUNDX_CONTRACT as `0x${string}`,
-        abi: FUNDX_ABI,
-        functionName: "claimRefund",
-        args: [BigInt(c.campaign.id)],
-        feeCurrency,
-      } as any)
-      await waitForTransactionReceipt(config, { hash })
-      toast.success(`Refund of ${c.myContribution} ${c.campaign.currency} claimed!`, { id: `refund-${c.campaign.id}` })
-      onSuccess()
-    } catch (err) {
-      console.error(err)
-      toast.error("Refund Failed", { id: `refund-${c.campaign.id}`, description: "Transaction failed on Celo." })
-    } finally {
-      setPending(false)
-    }
-  }
+function ActiveCard({ c }: { c: Contribution }) {
+  const progress = Math.min((c.campaign.raised / c.campaign.goal) * 100, 100)
+  return (
+    <div className="bg-white p-8 md:p-10 min-h-[240px] rounded-[2rem] border border-slate-200 shadow-[0_12px_28px_-6px_rgba(15,23,42,0.08)] flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden hover:-translate-y-1 transition-transform duration-300">
+      <div className="absolute -right-4 -bottom-10 text-[130px] font-black text-orange-50 opacity-80 z-0 select-none pointer-events-none tracking-tighter leading-none">ACTIVE</div>
+      <Rocket strokeWidth={1} className="absolute right-10 -bottom-10 w-72 h-72 text-orange-500 opacity-[0.04] z-0 pointer-events-none transform -rotate-12" />
+      <div className="absolute top-0 left-0 w-2 h-full bg-gradient-to-b from-orange-400 to-orange-500 z-10" />
 
       <div className="flex-1 flex flex-col sm:flex-row items-start sm:items-center gap-6 w-full pl-2 relative z-10">
         <div className="relative w-full sm:w-40 h-52 sm:h-40 shrink-0 rounded-2xl overflow-hidden border border-slate-200 shadow-sm">
@@ -175,10 +176,9 @@ function SuccessCard({ c }: { c: Contribution }) {
   )
 }
 
-function RefundCard({ c, onSuccess }: { c: Contribution; onSuccess: () => void }) {
-  const { writeContractAsync } = useWriteContract()
-  const [pending, setPending] = useState(false)
-  const mini = typeof window !== "undefined" && isMiniPay()
+export function BackerTab() {
+  const { address } = useAccount()
+  const { campaigns, isLoading, count, refetch } = useAllCampaigns()
 
   const donationContracts = useMemo(
     () =>

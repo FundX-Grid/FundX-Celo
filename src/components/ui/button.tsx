@@ -37,6 +37,7 @@ const buttonVariants = cva(
     },
   }
 )
+// TODO: consider memoizing this value
 
 function Button({
   className,

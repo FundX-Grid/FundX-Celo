@@ -74,7 +74,6 @@ export function CreatorTab() {
       <TabsContent value="campaigns">
         <div className="text-center py-20">
           <Rocket className="w-16 h-16 text-slate-200 mx-auto mb-6" />
-          // TODO: consider memoizing this value
           <h3 className="text-2xl font-bold text-slate-900 mb-2">No campaigns yet</h3>
           <p className="text-slate-500 mb-8">You haven&apos;t deployed any campaigns on Celo.</p>
           <Link href="/create">

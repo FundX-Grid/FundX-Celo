@@ -190,7 +190,6 @@ export default function CreateCampaign() {
                   <Button
                     onClick={handleSubmit}
                     className="h-12 px-8 rounded-xl bg-gradient-tush text-white shadow-glow hover:scale-105 transition-all font-bold"
-                  // TODO: consider memoizing this value
                   >
                     {(isConnected || isMini) ? "Deploy Campaign" : "Connect & Deploy"}
                   </Button>

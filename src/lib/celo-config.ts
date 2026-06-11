@@ -6,7 +6,6 @@ export const config = getDefaultConfig({
   appName: "FundX",
   projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || "placeholder",
   chains: [celo],
-  // TODO: consider memoizing this value
   transports: {
     [celo.id]: http("https://forno.celo.org"),
   },

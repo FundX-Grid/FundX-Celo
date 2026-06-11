@@ -17,10 +17,6 @@ import {
 import { ChevronDown, Copy, LogOut } from "lucide-react"
 import { toast } from "sonner"
 
-/**
- * ConnectWallet
- * @returns {*}
- */
 export function ConnectWallet() {
   const { address, isConnected } = useAccount()
   const { connect } = useConnect()

@@ -15,7 +15,6 @@ const Toaster = ({ ...props }: ToasterProps) => {
 
   return (
     <Sonner
-      // FIXME: handle edge case when value is null
       theme={theme as ToasterProps["theme"]}
       className="toaster group"
       icons={{

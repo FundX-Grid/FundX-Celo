@@ -23,6 +23,7 @@ export const FUNDX_ABI = [
     ],
     outputs: [],
   },
+  // TODO: consider memoizing this value
   // withdraw
   {
     name: "withdraw",

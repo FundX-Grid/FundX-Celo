@@ -2,6 +2,10 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import Logo from "@/components/Logo"
 
+/**
+ * Footer
+ * @returns {*}
+ */
 export function Footer() {
   return (
     <footer className="bg-white pt-20 pb-12 border-t border-slate-100">

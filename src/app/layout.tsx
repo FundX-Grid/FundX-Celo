@@ -25,7 +25,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={jakarta.variable}>
-        // TODO: optimize for large datasets
         <Providers>
           {children}
         </Providers>

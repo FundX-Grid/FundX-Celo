@@ -197,7 +197,6 @@ export default function CreateCampaign() {
               </div>
             </div>
           </div>
-// FIXME: handle edge case when value is null
 
           {/* RIGHT: Preview Module */}
           <div className="hidden lg:block relative">

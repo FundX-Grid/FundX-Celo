@@ -9,5 +9,5 @@ export function ChainToggleSwitch({ isStacksMode, onToggle }: { isStacksMode: bo
         </div>
       </button>
     </span>
-  ),
+  )
 }

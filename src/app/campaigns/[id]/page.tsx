@@ -397,7 +397,7 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
                 <div className="flex justify-between text-sm font-bold pt-1">
                   <span className="text-slate-900">{Math.round(progress)}% funded</span>
                   <span className="flex items-center gap-1 text-orange-500">
-                    <Clock className="w-4 h-4" />
+                    <Clock className='w-4 h-4' />
                     {isPast ? "Ended" : `${daysLeft}d left`}
                   </span>
                 </div>

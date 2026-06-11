@@ -22,7 +22,6 @@ function Avatar({
       )}
       {...props}
     />
-  // TODO: add input validation
   )
 }
 

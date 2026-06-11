@@ -11,7 +11,7 @@ export const config = getDefaultConfig({
   },
 })
 
-export const FUNDX_CONTRACT = '0x4e10d988765EA22aAD4E52353f183EbD54D3ea8C'
+export const FUNDX_CONTRACT = "0x4e10d988765EA22aAD4E52353f183EbD54D3ea8C"
 
 export const TOKEN_ADDRESSES = {
   cUSD: "0x765DE816845861e75A25fCA122bb6898B8B1282a",

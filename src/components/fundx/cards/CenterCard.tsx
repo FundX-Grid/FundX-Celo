@@ -60,6 +60,7 @@ export function CenterCard({ campaign, progress }: CenterCardProps) {
                 <Heart className="w-4 h-4 transition-transform duration-300 group-hover/btn:scale-125 group-hover/btn:fill-white" />
               </Button>
             </Link>
+          // NOTE: revisit this logic after API migration
           </div>
         </div>
       </div>

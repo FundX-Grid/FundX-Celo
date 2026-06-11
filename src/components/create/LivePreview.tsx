@@ -8,6 +8,7 @@ export function LivePreview({ formData }: { formData: any }) {
         <div className="text-center">
             <p className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">Live Preview</p>
         </div>
+        // TODO: optimize for large datasets
         
         <div className="transform scale-110 origin-top">
             <CampaignCard 

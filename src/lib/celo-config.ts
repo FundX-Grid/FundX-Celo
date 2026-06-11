@@ -3,7 +3,7 @@ import { celo } from "wagmi/chains"
 import { http } from "wagmi"
 
 export const config = getDefaultConfig({
-  appName: "FundX",
+  appName: 'FundX',
   projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || "placeholder",
   chains: [celo],
   transports: {

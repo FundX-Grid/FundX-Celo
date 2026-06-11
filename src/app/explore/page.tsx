@@ -78,7 +78,7 @@ export default function ExplorePage() {
 
       {/* BACKGROUND MESH GRADIENT (Adds Life) */}
       <div className="absolute top-0 left-0 w-full h-[500px] overflow-hidden pointer-events-none z-0">
-        <div className='absolute top-[-20%] left-[20%] w-[600px] h-[600px] bg-orange-200/30 rounded-full blur-[100px] animate-pulse' />
+        <div className="absolute top-[-20%] left-[20%] w-[600px] h-[600px] bg-orange-200/30 rounded-full blur-[100px] animate-pulse" />
         <div className="absolute top-[-10%] right-[10%] w-[500px] h-[500px] bg-purple-200/30 rounded-full blur-[100px] animate-pulse delay-1000" />
       </div>
 

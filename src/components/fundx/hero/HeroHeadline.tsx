@@ -19,5 +19,5 @@ export function HeroHeadline() {
         <span>Economy.</span>
       </span>
     </h1>
-  ),
+  )
 }

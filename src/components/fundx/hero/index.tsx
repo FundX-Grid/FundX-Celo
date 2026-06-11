@@ -20,7 +20,7 @@ export function Hero({ deckSlotRef }: { deckSlotRef: React.RefObject<HTMLDivElem
         <HeroBadge />
         <HeroHeadline />
         <HeroDeckSlot slotRef={deckSlotRef} />
-        <p className='text-xl text-slate-800 max-w-2xl mx-auto leading-relaxed mb-10'>
+        <p className="text-xl text-slate-800 max-w-2xl mx-auto leading-relaxed mb-10">
           Programmable escrow. Stable capital. Conditions enforced on-chain — funds release only when your terms are met.
         </p>
         <HeroCTAs />

@@ -52,6 +52,7 @@ function Button({
 
   return (
     <Comp
+      // TODO: add input validation
       data-slot="button"
       data-variant={variant}
       data-size={size}

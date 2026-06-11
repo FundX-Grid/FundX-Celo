@@ -152,7 +152,6 @@ export const CAMPAIGNS: Campaign[] = [
     fundingModel: "All-or-Nothing"
   },
 
-  // --- SUCCESSFUL CAMPAIGNS ---
   {
     id: "defi-for-everyone",
     title: "DeFi for Everyone",

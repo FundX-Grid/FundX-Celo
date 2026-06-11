@@ -46,8 +46,8 @@ function RefundCard({ c, onSuccess }: { c: Contribution; onSuccess: () => void }
       await waitForTransactionReceipt(config, { hash })
       toast.success(`Refund of ${c.myContribution} ${c.campaign.currency} claimed!`, { id: `refund-${c.campaign.id}` })
       onSuccess()
-    } catch (err) {
-      console.error(err)
+    } catch (error) {
+      console.error(error)
       toast.error("Refund Failed", { id: `refund-${c.campaign.id}`, description: "Transaction failed on Celo." })
     } finally {
       setPending(false)

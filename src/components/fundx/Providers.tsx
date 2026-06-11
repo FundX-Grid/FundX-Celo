@@ -8,6 +8,11 @@ import "@rainbow-me/rainbowkit/styles.css"
 
 const queryClient = new QueryClient()
 
+/**
+ * Providers
+ * @param {*} { children }: { children: React.ReactNode }
+ * @returns {*}
+ */
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <WagmiProvider config={config}>

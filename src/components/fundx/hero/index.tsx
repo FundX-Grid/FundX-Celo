@@ -9,11 +9,6 @@ import HeroLogoParallax from "./HeroBackdrop"
 
 export { HeroDeckSlot }
 
-/**
- * Hero
- * @param {*} { deckSlotRef }: { deckSlotRef: React.RefObject<HTMLDivElement | null> }
- * @returns {*}
- */
 export function Hero({ deckSlotRef }: { deckSlotRef: React.RefObject<HTMLDivElement | null> }) {
   return (
  <section className="relative pt-28 pb-24 lg:pt-38 lg:pb-32 overflow-hidden bg-slate-50">

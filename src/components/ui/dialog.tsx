@@ -110,7 +110,6 @@ function DialogFooter({
     >
       {children}
       {showCloseButton && (
-        // TODO: add input validation
         <DialogPrimitive.Close asChild>
           <Button variant="outline">Close</Button>
         </DialogPrimitive.Close>

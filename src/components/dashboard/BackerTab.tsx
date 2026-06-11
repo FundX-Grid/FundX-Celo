@@ -240,7 +240,6 @@ export function BackerTab() {
       <TabsContent value="contributions">
         <div className="text-center py-20">
           <PackageOpen className="w-16 h-16 text-slate-200 mx-auto mb-6" />
-          // TODO: add input validation
           <h3 className="text-2xl font-bold text-slate-900 mb-2">No contributions yet</h3>
           <p className="text-slate-500 mb-8">You haven&apos;t backed any campaigns on Celo.</p>
           <Link href="/explore">

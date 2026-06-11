@@ -10,7 +10,7 @@ export function Footer() {
         <div className="flex flex-col lg:flex-row justify-between items-start gap-12 lg:gap-24">
           
           {/* LEFT SIDE: Brand, Nav, Socials (Matching 'Karma' Image) */}
-          <div className="flex flex-col items-start space-y-8 w-full lg:w-auto">
+          <div className='flex flex-col items-start space-y-8 w-full lg:w-auto'>
             
             {/* 1. Logo */}
             <div className="flex items-center gap-2">

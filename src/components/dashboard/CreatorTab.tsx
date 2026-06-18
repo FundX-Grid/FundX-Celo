@@ -43,7 +43,7 @@ export function CreatorTab() {
         address: FUNDX_CONTRACT as `0x${string}`,
         abi: FUNDX_ABI,
         functionName: "withdraw",
-        params: [BigInt(campaign.id)],
+        args: [BigInt(campaign.id)],
         feeCurrency,
       } as any)
 

@@ -139,7 +139,7 @@ export const CAMPAIGNS: Campaign[] = [
     creator: "DEX DAO",
     creatorImage: "https://github.com/shadcn.png",
     creatorBio: "DeFi maximalists building on Celo.",
-    twitter: '@ZeroFeeDex',
+    twitter: "@ZeroFeeDex",
     github: "",
     portfolio: "",
     videoUrl: "",

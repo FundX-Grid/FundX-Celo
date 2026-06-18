@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Campaign, getHeroCampaign, getSideCampaigns } from "@/lib/data"
 
 interface CampaignFanProps {
-  deckSlotRef: React.RefObject<HTMLDivElement | null>,
+  deckSlotRef: React.RefObject<HTMLDivElement | null>
 }
 
 interface SideCardProps {

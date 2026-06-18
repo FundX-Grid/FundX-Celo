@@ -5,7 +5,8 @@ const HERO_DECK_SLOT_STYLES = {
   style: {
     height: "6rem",
     pointerEvents: "none"
-  }
+  },
+  ariaHidden: true
 }
 
 export function HeroDeckSlot({ slotRef }: { slotRef: React.RefObject<HTMLDivElement | null> }) {
@@ -14,7 +15,7 @@ export function HeroDeckSlot({ slotRef }: { slotRef: React.RefObject<HTMLDivElem
       ref={slotRef}
       className={HERO_DECK_SLOT_STYLES.className}
       style={HERO_DECK_SLOT_STYLES.style}
-      aria-hidden="true"
+      aria-hidden={HERO_DECK_SLOT_STYLES.ariaHidden}
     />
   )
 }

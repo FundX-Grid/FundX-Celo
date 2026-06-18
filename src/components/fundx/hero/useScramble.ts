@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from "react"
-
 const SCRAMBLE_CHARS = "ᚠᚢᚦᚨᚱᚲᚷᚹᚺᚾᛁᛃᛇᛈᛉᛊᛏᛒᛖᛗᛚᛜᛞᛟ∑∆∇Ωλ∞"
+
+const generateScrambledText = (word: string, lockedCount: number) => 
+  word.split("").map((char, i) => i < lockedCount ? char : SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)]).join("")
 
 export function useScramble() {
   const [display, setDisplay] = useState("Bitcoin")
@@ -10,10 +12,12 @@ export function useScramble() {
     if (frameRef_.current) clearTimeout(frameRef_.current)
     let lockedCount = 0
     const totalSteps = word.length
-
     const tick = () => {
-      if (lockedCount >= totalSteps) { setDisplay(word); return }
-      setDisplay(word.split("").map((char, i) => i < lockedCount ? char : SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)]).join(""))
+      if (lockedCount >= totalSteps) {
+        setDisplay(word);
+        return
+      }
+      setDisplay(generateScrambledText(word, lockedCount))
       if (lockedCount < totalSteps) lockedCount++
       frameRef_.current = setTimeout(tick, 80)
     }
@@ -21,7 +25,9 @@ export function useScramble() {
   }
 
   useEffect(() => {
-    return () => { if (frameRef_.current) clearTimeout(frameRef_.current) }
+    return () => {
+      if (frameRef_.current) clearTimeout(frameRef_.current)
+    }
   }, [])
 
   return { display, scrambleTo }

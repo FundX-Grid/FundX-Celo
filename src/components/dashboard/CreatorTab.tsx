@@ -163,7 +163,6 @@ export function CreatorTab() {
                     <span className="text-slate-400 text-sm font-semibold">{campaign.fundingModel}</span>
                   </div>
                   <h3 className="text-3xl font-bold text-slate-900 tracking-tight">{campaign.title}</h3>
-                  // FIXME: handle edge case when value is null
                   <div className="flex items-center gap-4 text-sm mt-4">
                     <div className="font-semibold text-slate-700 bg-slate-50 px-5 py-2.5 rounded-xl border border-slate-200/60 text-base">
                       Raised: <span className="text-orange-600 font-extrabold">{formatMoney(campaign.raised, campaign.currency)}</span>

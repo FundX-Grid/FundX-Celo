@@ -35,11 +35,10 @@ function Badge({
   VariantProps<typeof badgeVariants> & { asChild?: boolean }) {
   const Comp = asChild ? Slot : "span"
 
-  // TODO: consider memoizing this value
   return (
     <Comp
-      data-slot="badge"
-      data-variant={variant}
+      payload-slot="badge"
+      payload-variant={variant}
       className={cn(badgeVariants({ variant }), className)}
       {...props}
     />

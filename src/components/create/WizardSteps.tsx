@@ -241,7 +241,7 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
                <SelectTrigger className="h-12 rounded-xl text-sm font-semibold text-slate-700 bg-white border-slate-200 shadow-sm">
                   <SelectValue />
                </SelectTrigger>
-               <SelectContent className='bg-white border-slate-200 shadow-xl rounded-xl z-50'>
+               <SelectContent className="bg-white border-slate-200 shadow-xl rounded-xl z-50">
                   <SelectItem value="0" className="text-sm font-medium text-slate-700 py-3 cursor-pointer">Flexible (Keep what you raise)</SelectItem>
                   <SelectItem value="1" className="text-sm font-medium text-slate-700 py-3 cursor-pointer">All-or-Nothing (Refunds if goal fails)</SelectItem>
                </SelectContent>

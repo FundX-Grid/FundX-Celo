@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "npm run lint:eslint",
+    "lint:eslint": "eslint .",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@jadonamite/chessify-sdk": "^1.0.4",

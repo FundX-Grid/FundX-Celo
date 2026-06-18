@@ -38,10 +38,6 @@ export interface CreateCampaignData {
   currency: "cUSD" | "USDC"; 
 }
 
-/**
- * CreateCampaign
- * @returns {*}
- */
 export default function CreateCampaign() {
   const { isConnected } = useAccount()
   const { writeContractAsync } = useWriteContract()

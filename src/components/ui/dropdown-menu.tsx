@@ -98,7 +98,6 @@ function DropdownMenuCheckboxItem({
       checked={checked}
       {...props}
     >
-      // TODO: consider memoizing this value
       <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
         <DropdownMenuPrimitive.ItemIndicator>
           <CheckIcon className="size-4" />

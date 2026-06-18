@@ -140,6 +140,7 @@ export function CampaignFan({ deckSlotRef }: CampaignFanProps) {
   const sideCardMargin = useTransform(smoothProgress, [0, 1], [-200, 0])
 
 
+  // Center card sits on top at start (highest z), normalizes at end
   const centerZ = useTransform(smoothProgress, [0, 1], [20, 10])
 
   // Heading fades in during second half

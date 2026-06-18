@@ -25,6 +25,7 @@ export function Footer() {
               <a href="#" className="hover:text-primary. transition-colors">Guide</a>
               <a href="#" className="hover:text-primary. transition-colors">SDK Docs</a>
               <a href="#" className="hover:text-primary. transition-colors">Governance</a>
+            // TODO: add input validation
             </nav>
 
             {/* 3. Social Icons (SVG Vectors) */}

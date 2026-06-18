@@ -281,6 +281,11 @@ export function getSideCampaigns() {
   return CAMPAIGNS.filter((c) => !c.isTrending).slice(0, 2);
 }
 
+/**
+ * getCampaign
+ * @param {*} id: string
+ * @returns {*}
+ */
 export function getCampaign(id: string) {
   return CAMPAIGNS.find((c) => c.id === id);
 }

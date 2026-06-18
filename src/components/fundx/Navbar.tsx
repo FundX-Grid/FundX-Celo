@@ -1,10 +1,39 @@
-"use client"
+use client
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import Logo from "@/components/Logo"
 import { ConnectWallet } from "@/components/fundx/ConnectWallet"
 import { useAccount } from "wagmi"
 import { Menu, X } from "lucide-react"
+
+const renderNavLinks = (navLinks, isConnected, mobileOpen, setMobileOpen) => {
+  return navLinks.map((link, i) => (
+    <Link
+      key={link.href}
+      href={link.href}
+      {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+      onClick={() => mobileOpen && setMobileOpen(false)}
+      className="hover:text-primary transition-colors"
+    >
+      {link.label}
+    </Link>
+  ))
+}
+
+const renderMobileNavLinks = (navLinks, setMobileOpen) => {
+  return navLinks.map((link, i) => (
+    <Link
+      key={link.href}
+      href={link.href}
+      {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+      onClick={() => setMobileOpen(false)}
+      className="flex items-center gap-3 px-4 py-3.5 rounded-xl text-base font-semibold text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition-all active:scale-[0.98]"
+      style={{ animationDelay: `${i * 50}ms` }}
+    >
+      {link.label}
+    </Link>
+  ))
+}
 
 export function Navbar() {
   const { isConnected } = useAccount()
@@ -13,7 +42,9 @@ export function Navbar() {
   // Lock body scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : ""
-    return () => { document.body.style.overflow = "" }
+    return () => {
+      document.body.style.overflow = ""
+    }
   }, [mobileOpen])
 
   const navLinks = [
@@ -27,32 +58,19 @@ export function Navbar() {
     <>
       <div className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4">
         <nav className="flex w-full max-w-6xl items-center justify-between rounded-full bg-white/80 px-6 py-3 shadow-soft-md backdrop-blur-md border border-white/20">
-          
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 cursor-pointer">
             <Logo className="h-10 w-24" />
           </Link>
-
           {/* Desktop Links */}
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-500">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                className="hover:text-primary transition-colors"
-              >
-                {link.label}
-              </Link>
-            ))}
+            {renderNavLinks(navLinks, isConnected, mobileOpen, setMobileOpen)}
           </div>
-
           {/* Desktop Wallet + Mobile Hamburger */}
           <div className="flex items-center gap-3">
             <div className="hidden md:block">
               <ConnectWallet />
             </div>
-
             {/* Hamburger Button (mobile only) */}
             <button
               onClick={() => setMobileOpen((v) => !v)}
@@ -64,7 +82,6 @@ export function Navbar() {
           </div>
         </nav>
       </div>
-
       {/* ── Mobile Drawer ── */}
       {/* Backdrop */}
       <div
@@ -73,7 +90,6 @@ export function Navbar() {
         }`}
         onClick={() => setMobileOpen(false)}
       />
-
       {/* Slide-down Panel */}
       <div
         className={`fixed top-0 left-0 right-0 z-[70] md:hidden transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] ${
@@ -94,23 +110,10 @@ export function Navbar() {
               <X className="w-5 h-5 text-slate-700" />
             </button>
           </div>
-
           {/* Nav Links */}
           <div className="flex flex-col gap-1 mb-8">
-            {navLinks.map((link, i) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                onClick={() => setMobileOpen(false)}
-                className="flex items-center gap-3 px-4 py-3.5 rounded-xl text-base font-semibold text-slate-700 hover:bg-slate-50 hover:text-slate-900 transition-all active:scale-[0.98]"
-                style={{ animationDelay: `${i * 50}ms` }}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {renderMobileNavLinks(navLinks, setMobileOpen)}
           </div>
-
           {/* Wallet */}
           <div className="pt-4 border-t border-slate-100">
             <ConnectWallet />

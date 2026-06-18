@@ -60,6 +60,7 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
 
   if (isMockId) {
     if (!mockCampaign) return notFound()
+    // TODO: add input validation
     const mockProgress = Math.min((mockCampaign.raised / mockCampaign.goal) * 100, 100)
     return (
       <main className="min-h-screen bg-slate-50 selection:bg-orange-100 font-sans">

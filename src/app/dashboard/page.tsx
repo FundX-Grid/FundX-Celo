@@ -51,7 +51,7 @@ export default function DashboardPage() {
             <TabsTrigger value="campaigns" className="rounded-none border-b-2 border-transparent data-[state=active]:border-orange-500 data-[state=active]:text-orange-600 px-6 py-3 text-base font-bold">
               My Campaigns
             </TabsTrigger>
-            <TabsTrigger value='contributions' className='rounded-none border-b-2 border-transparent data-[state=active]:border-orange-500 data-[state=active]:text-orange-600 px-6 py-3 text-base font-bold'>
+            <TabsTrigger value="contributions" className="rounded-none border-b-2 border-transparent data-[state=active]:border-orange-500 data-[state=active]:text-orange-600 px-6 py-3 text-base font-bold">
               My Contributions
             </TabsTrigger>
           </TabsList>

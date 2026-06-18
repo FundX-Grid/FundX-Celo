@@ -269,10 +269,6 @@ export const CAMPAIGNS: Campaign[] = [
   }
 ];
 
-/**
- * getAllCampaigns
- * @returns {*}
- */
 export function getAllCampaigns() {
   return CAMPAIGNS;
 }

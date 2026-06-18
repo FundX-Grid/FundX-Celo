@@ -8,6 +8,20 @@ interface MobileCardProps {
   progress: number
 }
 
+const ProgressBar = ({ progress }: { progress: number }) => (
+  <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
+    <div className="bg-gradient-tush h-full rounded-full" style={{ width: `${progress}%` }} />
+  </div>
+)
+
+const DonateButton = ({ campaign }: { campaign: Campaign }) => (
+  <Link href={`/campaigns/${campaign.id}`}> 
+    <Button size="sm" className="h-10 rounded-xl bg-slate-900 text-white px-5 flex items-center gap-1.5">
+      Donate <ArrowRight className="w-3.5 h-3.5" />
+    </Button>
+  </Link>
+)
+
 export function MobileCard({ campaign, progress }: MobileCardProps) {
   return (
     <div className="w-full bg-white rounded-[2rem] shadow-soft-md border border-slate-100 overflow-hidden flex flex-col">
@@ -16,33 +30,17 @@ export function MobileCard({ campaign, progress }: MobileCardProps) {
           [Image]
         </div>
       </div>
-
       <div className="p-6 flex flex-col gap-4">
         <h3 className="text-xl font-bold text-slate-900">{campaign.title}</h3>
         <p className="text-sm text-slate-500 line-clamp-2">
           {campaign.description}
         </p>
-
-        <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
-          <div
-            className="bg-gradient-tush h-full rounded-full"
-            style={{ width: `${progress}%` }}
-          />
-        </div>
-
+        <ProgressBar progress={progress} />
         <div className="flex justify-between items-center">
           <span className="text-sm font-bold text-primary">
             ${campaign.raised.toLocaleString()}
           </span>
-          <Link href={`/campaigns/${campaign.id}`}>
-            <Button
-              size="sm"
-              className="h-10 rounded-xl bg-slate-900 text-white px-5 flex items-center gap-1.5"
-            >
-              Donate
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Button>
-          </Link>
+          <DonateButton campaign={campaign} />
         </div>
       </div>
     </div>

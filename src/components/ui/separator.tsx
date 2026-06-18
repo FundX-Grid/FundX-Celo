@@ -1,24 +1,9 @@
-import * as React from "react";
-import * as SeparatorPrimitive from "@radix-ui/react-separator";
-import { cn } from "@/lib/utils";
+"use client"
 
-function getHorizontalClassName(className?: string) {
-  return cn("h-px w-full", className);
-}
+import * as React from "react"
+import * as SeparatorPrimitive from "@radix-ui/react-separator"
 
-function getVerticalClassName(className?: string) {
-  return cn("h-full w-px", className);
-}
-
-function getSeparatorClassName(orientation: string, className?: string) {
-  const baseClassName = "bg-border shrink-0";
-  if (orientation === "horizontal") {
-    return cn(baseClassName, getHorizontalClassName(className));
-  } else if (orientation === "vertical") {
-    return cn(baseClassName, getVerticalClassName(className));
-  }
-  return baseClassName;
-}
+import { cn } from "@/lib/utils"
 
 function Separator({
   className,
@@ -31,10 +16,13 @@ function Separator({
       data-slot="separator"
       decorative={decorative}
       orientation={orientation}
-      className={getSeparatorClassName(orientation, className)}
+      className={cn(
+        "bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px",
+        className
+      )}
       {...props}
     />
-  );
+  )
 }
 
-export { Separator };
+export { Separator }

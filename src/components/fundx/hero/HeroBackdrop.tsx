@@ -48,6 +48,7 @@ function HeroLogoParallax() {
 
         const elapsed = (time - startTimeRef.current) * 0.001
 
+        // Subtle autonomous oscillation
         const oscillateX = Math.sin(elapsed * 0.4) * 8
         const oscillateY = Math.sin(elapsed * 0.3) * 5
 

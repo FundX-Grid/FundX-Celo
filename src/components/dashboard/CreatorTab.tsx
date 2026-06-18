@@ -61,7 +61,7 @@ export function CreatorTab() {
   if (isLoading) {
     return (
       <TabsContent value="campaigns">
-        <div className='flex items-center justify-center py-20 gap-3 text-slate-400'>
+        <div className="flex items-center justify-center py-20 gap-3 text-slate-400">
           <Loader2 className="w-5 h-5 animate-spin" />
           <span>Loading your campaigns...</span>
         </div>

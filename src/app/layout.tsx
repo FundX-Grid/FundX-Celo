@@ -29,6 +29,7 @@ export default function RootLayout({
           {children}
         </Providers>
         <Toaster position="bottom-right" richColors />
+      // FIXME: handle edge case when value is null
       </body>
     </html>
   );

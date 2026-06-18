@@ -1,11 +1,11 @@
 "use client"
 
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Rocket } from "lucide-react"
 import { CreateCampaignData } from "@/app/create/page" 
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Rocket } from "lucide-react"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Textarea } from "@/components/ui/textarea"
 
 
 interface WizardProps {
@@ -241,7 +241,7 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
                <SelectTrigger className="h-12 rounded-xl text-sm font-semibold text-slate-700 bg-white border-slate-200 shadow-sm">
                   <SelectValue />
                </SelectTrigger>
-               <SelectContent className="bg-white border-slate-200 shadow-xl rounded-xl z-50">
+               <SelectContent className='bg-white border-slate-200 shadow-xl rounded-xl z-50'>
                   <SelectItem value="0" className="text-sm font-medium text-slate-700 py-3 cursor-pointer">Flexible (Keep what you raise)</SelectItem>
                   <SelectItem value="1" className="text-sm font-medium text-slate-700 py-3 cursor-pointer">All-or-Nothing (Refunds if goal fails)</SelectItem>
                </SelectContent>

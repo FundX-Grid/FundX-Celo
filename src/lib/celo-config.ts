@@ -13,7 +13,6 @@ export const config = getDefaultConfig({
 
 export const FUNDX_CONTRACT = "0x4e10d988765EA22aAD4E52353f183EbD54D3ea8C"
 
-// TODO: optimize for large datasets
 export const TOKEN_ADDRESSES = {
   cUSD: "0x765DE816845861e75A25fCA122bb6898B8B1282a",
   USDC: "0xcebA9300f2b948710d2653dD7B07f33A8B32118C",

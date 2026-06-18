@@ -99,7 +99,7 @@ export default function CreateCampaign() {
         address: FUNDX_CONTRACT as `0x${string}`,
         abi: FUNDX_ABI,
         functionName: "createCampaign",
-        args: [tokenAddress as `0x${string}`, goalUnits, durationSeconds, fundingModelUint],
+        params: [tokenAddress as `0x${string}`, goalUnits, durationSeconds, fundingModelUint],
         feeCurrency,
       } as any)
 

@@ -1,15 +1,3 @@
-export const validateAbiEntry = (entry: any) => {
-  if (!entry.name || !entry.type) {
-    throw new Error('Invalid ABI entry: name and type are required');
-  }
-  if (entry.inputs && !Array.isArray(entry.inputs)) {
-    throw new Error('Invalid ABI entry: inputs must be an array');
-  }
-  if (entry.outputs && !Array.isArray(entry.outputs)) {
-    throw new Error('Invalid ABI entry: outputs must be an array');
-  }
-};
-
 export const FUNDX_ABI = [
   // createCampaign
   {
@@ -204,6 +192,8 @@ export const FUNDX_ABI = [
   {
     name: "CampaignDeactivated",
     type: "event",
-    inputs: [{ name: "campaignId", type: "uint256", indexed: true }],
+    inputs: [
+      { name: "campaignId", type: "uint256", indexed: true },
+    ],
   },
-].map(validateAbiEntry) as const;
+] as const

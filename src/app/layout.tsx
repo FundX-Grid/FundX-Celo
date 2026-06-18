@@ -21,7 +21,6 @@ export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-// TODO: add input validation
 }>) {
   return (
     <html lang="en">

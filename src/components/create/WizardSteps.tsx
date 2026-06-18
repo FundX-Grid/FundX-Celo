@@ -37,7 +37,6 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
             </div>
             <div className="grid md:grid-cols-3 gap-5">
                <div className="space-y-2">
-                  // FIXME: handle edge case when value is null
                   <Label>Twitter / X</Label>
                   <Input placeholder="@username" className="h-14 rounded-xl" value={formData.twitter} onChange={(e) => setFormData({...formData, twitter: e.target.value})} />
                </div>

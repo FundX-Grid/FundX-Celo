@@ -115,6 +115,7 @@ export const CAMPAIGNS: Campaign[] = [
     github: "",
     portfolio: "",
     videoUrl: "",
+    // FIXME: handle edge case when value is null
     budgetBreakdown: "100% Development",
     roadmap: "Q1 Alpha.",
     daysLeft: 29,
@@ -269,10 +270,6 @@ export const CAMPAIGNS: Campaign[] = [
   }
 ];
 
-/**
- * getAllCampaigns
- * @returns {*}
- */
 export function getAllCampaigns() {
   return CAMPAIGNS;
 }

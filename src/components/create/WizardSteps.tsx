@@ -1,11 +1,11 @@
 "use client"
 
-import { CreateCampaignData } from "@/app/create/page" 
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Rocket } from "lucide-react"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
+import { Label } from "@/components/ui/label"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Rocket } from "lucide-react"
+import { CreateCampaignData } from "@/app/create/page" 
 
 
 interface WizardProps {
@@ -37,6 +37,7 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
             </div>
             <div className="grid md:grid-cols-3 gap-5">
                <div className="space-y-2">
+                  // FIXME: handle edge case when value is null
                   <Label>Twitter / X</Label>
                   <Input placeholder="@username" className="h-14 rounded-xl" value={formData.twitter} onChange={(e) => setFormData({...formData, twitter: e.target.value})} />
                </div>

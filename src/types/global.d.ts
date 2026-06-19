@@ -1,9 +1,1 @@
-interface Window {
-  ethereum?: {
-    isMetaMask?: boolean
-    isMiniPay?: boolean
-    request: (args: { method: string; params?: unknown[] }) => Promise<unknown>
-    on: (event: string, handler: (...args: unknown[]) => void) => void
-    removeListener: (event: string, handler: (...args: unknown[]) => void) => void
-  }
-}
+interface Window { ethereum?: { isMetaMask?: boolean; isMiniPay?: boolean; request: (args: { method: string; params?: unknown[] }) => Promise<unknown>; on: (event: string, handler: (...args: unknown[]) => void) => void; removeListener: (event: string, handler: (...args: unknown[]) => void) => void; } } export function isEthereumAvailable(window: Window): boolean { return window.ethereum !== undefined; } export function isMetaMaskAvailable(window: Window): boolean { return isEthereumAvailable(window) && window.ethereum.isMetaMask === true; } export function isMiniPayAvailable(window: Window): boolean { return isEthereumAvailable(window) && window.ethereum.isMiniPay === true; }

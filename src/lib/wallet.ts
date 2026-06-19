@@ -1,18 +1,11 @@
 export type WalletType = "minipay" | "other" | "none"
 
-export function getEthereumWallet(): WalletType | null {
-  if (typeof window === "undefined" || !window.ethereum) return null
-  return window.ethereum
-}
-
 export function detectWallet(): WalletType {
-  const ethereumWallet = getEthereumWallet()
-  if (!ethereumWallet) return "none"
-  if (ethereumWallet.isMiniPay) return "minipay"
+  if (typeof window === "undefined" || !window.ethereum) return "none"
+  if (window.ethereum.isMiniPay) return "minipay"
   return "other"
 }
 
 export function isMiniPay(): boolean {
-  const ethereumWallet = getEthereumWallet()
-  return !!ethereumWallet && ethereumWallet.isMiniPay
+  return detectWallet() === "minipay"
 }

@@ -232,7 +232,6 @@ export const CAMPAIGNS: Campaign[] = [
     portfolio: "ecobit.io",
     videoUrl: "",
     budgetBreakdown: "80% Hardware Procurement, 20% Land Lease",
-    // FIXME: handle edge case when value is null
     roadmap: "Project Suspended",
     daysLeft: 0,
     backers: 85,

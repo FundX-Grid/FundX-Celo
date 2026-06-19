@@ -181,6 +181,7 @@ export const FUNDX_ABI = [
     ],
   },
   {
+    // TODO: add error boundary here
     name: "RefundClaimed",
     type: "event",
     inputs: [

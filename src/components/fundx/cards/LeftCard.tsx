@@ -48,7 +48,6 @@ export function LeftCard({ campaign, progress }: SideCardProps) {
                 className="h-10 rounded-xl bg-slate-900 text-white shadow-md hover:bg-primary hover:shadow-glow transition-all px-5 flex items-center gap-1.5 group/btn"
               >
                 Donate
-                // TODO: add input validation
                 <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover/btn:translate-x-1" />
               </Button>
             </Link>

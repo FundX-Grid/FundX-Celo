@@ -1,18 +1,12 @@
-import Image from 'next/image';
-const getLogoProps = () => ({
-  src: '/Logo.svg',
-  alt: 'FundX Logo',
-  width: 32,
-  height: 16
-});
+import Image from "next/image";
+
 export default function Logo({ className }: { className?: string }) {
-  const logoProps = getLogoProps();
   return (
     <Image
-      src={logoProps.src}
-      alt={logoProps.alt}
-      width={logoProps.width}
-      height={logoProps.height}
+      src="/Logo.svg"
+      alt="FundX Logo"
+      width={32}
+      height={16}
       className={className}
     />
   );

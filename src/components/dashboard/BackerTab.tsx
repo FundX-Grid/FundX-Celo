@@ -176,10 +176,6 @@ function SuccessCard({ c }: { c: Contribution }) {
   )
 }
 
-/**
- * BackerTab
- * @returns {*}
- */
 export function BackerTab() {
   const { address } = useAccount()
   const { campaigns, isLoading, count, refetch } = useAllCampaigns()

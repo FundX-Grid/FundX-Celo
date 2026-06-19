@@ -137,6 +137,7 @@ export default function CreateCampaign() {
                {["Identity", "Bio", "Basics", "Story", "Execute", "Fund"].map((label, idx) => {
                  const num = idx + 1;
                  
+                 // 🚨 Determine the status of the step
                  const isCompleted = step > num;
                  const isCurrent = step === num;
                  

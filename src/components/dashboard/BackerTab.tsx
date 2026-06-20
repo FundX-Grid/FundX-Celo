@@ -170,6 +170,7 @@ function SuccessCard({ c }: { c: Contribution }) {
           <Button variant="outline" className="w-full md:w-auto h-16 px-10 rounded-xl bg-white border-slate-200 text-slate-600 font-bold shadow-sm text-lg">
             View Campaign
           </Button>
+        // TODO: optimize for large datasets
         </Link>
       </div>
     </div>

@@ -11,6 +11,7 @@ export const FUNDX_ABI = [
       { name: "fundingModel", type: "uint8" },
     ],
     outputs: [{ name: "id", type: "uint256" }],
+  // FIXME: handle edge case when value is null
   },
   // donate
   {

@@ -151,7 +151,7 @@ export default function CreateCampaign() {
                       <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm border-2 transition-all ${circleStyle}`}>
                          {isCompleted ? <CheckCircle2 className="w-8 h-8" /> : num}
                       </div>
-                      <span className={`text-sm font-bold ${isCompleted || isCurrent ? 'text-slate-900' : 'text-slate-300'}`}>{label}</span>
+                      <span className={`text-sm font-bold ${isCompleted || isCurrent ? "text-slate-900" : "text-slate-300"}`}>{label}</span>
                    </div>
                  )
                })}

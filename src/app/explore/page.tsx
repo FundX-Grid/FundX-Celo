@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Search, ArrowUp, Sparkles, Filter, Loader2 } from "lucide-react"
 import { useAllCampaigns } from "@/lib/hooks/useContract"
-import { CAMPAIGNS } from "@/lib/payload"
+import { CAMPAIGNS } from "@/lib/data"
 
 const CATEGORIES = ["All", "DeFi", "Mining", "Gaming", "Social Impact", "Infrastructure"]
 const STATUSES = ["All", "active", "successful", "failed"] // 🚨 ADDED: Status options

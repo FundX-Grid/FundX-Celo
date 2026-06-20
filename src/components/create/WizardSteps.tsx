@@ -54,6 +54,7 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
     )
   }
 
+  // STEP 2: BIO (Lots of room to type)
   if (step === 2) {
     return (
       <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-500">

@@ -22,7 +22,7 @@ import { FUNDX_CONTRACT, TOKEN_ADDRESSES, TOKEN_DECIMALS, config } from "@/lib/c
 import { ConnectButton } from "@rainbow-me/rainbowkit"
 import { toast } from "sonner"
 import { useCampaign, useDonation } from "@/lib/hooks/useContract"
-import { getCampaign } from "@/lib/data"
+import { getCampaign } from "@/lib/payload"
 import { isMiniPay } from "@/lib/wallet"
 
 const PLACEHOLDER_IMAGES = ["/campaign-1.jpg", "/campaign-2.jpg", "/campaign-3.jpg"]
@@ -44,8 +44,8 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
   }, [])
 
   const isMockId = isNaN(campaignIndex)
-  const { data: raw, isLoading, error, refetch } = useCampaign(isMockId ? 0 : campaignIndex)
-  const { data: userDonationRaw } = useDonation(campaignIndex, address)
+  const { payload: raw, isLoading, error, refetch } = useCampaign(isMockId ? 0 : campaignIndex)
+  const { payload: userDonationRaw } = useDonation(campaignIndex, address)
 
   // Mock campaign short-circuit — rendered before contract hooks resolve
   const mockCampaign = isMockId ? getCampaign(id) : null
@@ -334,10 +334,10 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
 
             <Tabs defaultValue="story" className="w-full">
               <TabsList className="w-full justify-start bg-transparent border-b border-slate-200 rounded-none h-auto p-0 mb-8">
-                <TabsTrigger value="story" className="rounded-none border-b-2 border-transparent data-[state=active]:border-orange-500 data-[state=active]:text-orange-600 px-6 py-3 text-base">
+                <TabsTrigger value="story" className="rounded-none border-b-2 border-transparent payload-[state=active]:border-orange-500 payload-[state=active]:text-orange-600 px-6 py-3 text-base">
                   Campaign Info
                 </TabsTrigger>
-                <TabsTrigger value="updates" className="rounded-none border-b-2 border-transparent data-[state=active]:border-orange-500 data-[state=active]:text-orange-600 px-6 py-3 text-base">
+                <TabsTrigger value="updates" className="rounded-none border-b-2 border-transparent payload-[state=active]:border-orange-500 payload-[state=active]:text-orange-600 px-6 py-3 text-base">
                   Updates
                 </TabsTrigger>
               </TabsList>

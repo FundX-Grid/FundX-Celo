@@ -3,15 +3,25 @@ pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
+import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 
 // ================================================================
 // FUNDX ESCROW CONTRACT
 // Network  : Celo Mainnet / Alfajores Testnet
-// Tokens   : cUSD, USDC
-// Version  : 1.0.0
+// Assets   : native CELO  OR  an allow-listed ERC20 (cUSD, USDC)
+// Version  : 2.0.0  (v4 parity — adds native-asset rail)
+// ================================================================
+// Each campaign settles in EXACTLY ONE asset, chosen at creation:
+//   * native CELO                 -> token == address(0)
+//   * an allow-listed ERC20 token -> token == cUSD / USDC / ...
+//
+// Mirrors the Stacks v4 model (single goal, single total-raised,
+// flexible / all-or-nothing, 2% fee, map-delete refund,
+// checks-effects-interactions ordering) and adds a parallel native
+// CELO rail alongside the proven ERC20 rail.
 // ================================================================
 
-contract FundXEscrow {
+contract FundXEscrow is ReentrancyGuard {
     using SafeERC20 for IERC20;
 
     // -------------------------------------------------------
@@ -25,6 +35,9 @@ contract FundXEscrow {
 
     uint256 public constant PLATFORM_FEE_BPS = 200;
     uint256 public constant BPS_DENOMINATOR  = 10000;
+
+    // address(0) sentinel == native CELO
+    address public constant NATIVE_ASSET = address(0);
 
     address public constant CUSD_ADDRESS = 0x765DE816845861e75A25fCA122bb6898B8B1282a;
     address public constant USDC_ADDRESS = 0xcebA9300f2b948710d2653dD7B07f33A8B32118C;
@@ -47,6 +60,7 @@ contract FundXEscrow {
     error NotOwner();
     error TokenNotAllowed();
     error InvalidModel();
+    error WrongAsset();      // native value sent to an ERC20 campaign or vice versa
 
     // -------------------------------------------------------
     // EVENTS
@@ -55,7 +69,7 @@ contract FundXEscrow {
     event CampaignCreated(
         uint256 indexed campaignId,
         address indexed creator,
-        address token,
+        address token,           // address(0) == native CELO
         uint256 goal,
         uint256 deadline,
         uint8 fundingModel
@@ -88,7 +102,7 @@ contract FundXEscrow {
 
     struct Campaign {
         address creator;
-        address token;
+        address token;           // address(0) == native CELO
         uint256 goal;
         uint256 deadline;
         uint256 totalRaised;
@@ -144,6 +158,10 @@ contract FundXEscrow {
         return donations[campaignId][donor];
     }
 
+    function isNative(uint256 id) public view campaignExists(id) returns (bool) {
+        return campaigns[id].token == NATIVE_ASSET;
+    }
+
     function calculateFee(uint256 amount) public pure returns (uint256) {
         return (amount * PLATFORM_FEE_BPS) / BPS_DENOMINATOR;
     }
@@ -162,20 +180,35 @@ contract FundXEscrow {
     }
 
     // -------------------------------------------------------
-    // CREATE CAMPAIGN
+    // INTERNAL HELPERS
     // -------------------------------------------------------
 
+    function _payOut(address token, address to, uint256 amount) private {
+        if (amount == 0) return;
+        if (token == NATIVE_ASSET) {
+            (bool ok, ) = payable(to).call{value: amount}("");
+            if (!ok) revert TransferFailed();
+        } else {
+            IERC20(token).safeTransfer(to, amount);
+        }
+    }
+
+    // -------------------------------------------------------
+    // CREATE CAMPAIGN
+    // -------------------------------------------------------
+    // token == address(0)  -> native CELO campaign
+    // token != address(0)  -> must be an allow-listed ERC20
     function createCampaign(
         address token,
         uint256 goal,
         uint256 duration,
         uint8 fundingModel
     ) external returns (uint256 id) {
-        if (!allowedTokens[token])                            revert TokenNotAllowed();
-        if (goal == 0)                                        revert InvalidAmount();
-        if (duration == 0)                                    revert InvalidAmount();
+        if (token != NATIVE_ASSET && !allowedTokens[token]) revert TokenNotAllowed();
+        if (goal == 0)                                       revert InvalidAmount();
+        if (duration == 0)                                   revert InvalidAmount();
         if (fundingModel != FLEXIBLE && fundingModel != ALL_OR_NOTHING)
-                                                              revert InvalidModel();
+                                                             revert InvalidModel();
 
         campaignCount++;
         id = campaignCount;
@@ -197,15 +230,26 @@ contract FundXEscrow {
     // -------------------------------------------------------
     // DONATE
     // -------------------------------------------------------
-
-    function donate(uint256 id, uint256 amount) external campaignExists(id) {
+    // Native campaign: send CELO as msg.value, amount must equal msg.value.
+    // ERC20 campaign : amount pulled via transferFrom, msg.value must be 0.
+    function donate(uint256 id, uint256 amount)
+        external
+        payable
+        campaignExists(id)
+        nonReentrant
+    {
         Campaign storage c = campaigns[id];
 
-        if (!c.active)                           revert Inactive();
-        if (block.timestamp >= c.deadline)       revert Expired();
-        if (amount == 0)                         revert InvalidAmount();
+        if (!c.active)                     revert Inactive();
+        if (block.timestamp >= c.deadline) revert Expired();
+        if (amount == 0)                   revert InvalidAmount();
 
-        IERC20(c.token).safeTransferFrom(msg.sender, address(this), amount);
+        if (c.token == NATIVE_ASSET) {
+            if (msg.value != amount) revert WrongAsset();
+        } else {
+            if (msg.value != 0) revert WrongAsset();
+            IERC20(c.token).safeTransferFrom(msg.sender, address(this), amount);
+        }
 
         donations[id][msg.sender] += amount;
         c.totalRaised += amount;
@@ -217,12 +261,12 @@ contract FundXEscrow {
     // WITHDRAW
     // -------------------------------------------------------
 
-    function withdraw(uint256 id) external campaignExists(id) {
+    function withdraw(uint256 id) external campaignExists(id) nonReentrant {
         Campaign storage c = campaigns[id];
 
-        if (msg.sender != c.creator)             revert NotCreator();
-        if (c.withdrawn)                         revert AlreadyWithdrawn();
-        if (block.timestamp < c.deadline)        revert StillActive();
+        if (msg.sender != c.creator)      revert NotCreator();
+        if (c.withdrawn)                  revert AlreadyWithdrawn();
+        if (block.timestamp < c.deadline) revert StillActive();
 
         if (
             c.fundingModel == ALL_OR_NOTHING &&
@@ -236,8 +280,8 @@ contract FundXEscrow {
         c.withdrawn = true;
         c.active    = false;
 
-        IERC20(c.token).safeTransfer(owner, fee);
-        IERC20(c.token).safeTransfer(c.creator, net);
+        _payOut(c.token, owner, fee);
+        _payOut(c.token, c.creator, net);
 
         emit FundsWithdrawn(id, c.creator, net, fee);
     }
@@ -246,19 +290,19 @@ contract FundXEscrow {
     // CLAIM REFUND
     // -------------------------------------------------------
 
-    function claimRefund(uint256 id) external campaignExists(id) {
+    function claimRefund(uint256 id) external campaignExists(id) nonReentrant {
         Campaign storage c = campaigns[id];
 
         uint256 amount = donations[id][msg.sender];
 
-        if (c.fundingModel != ALL_OR_NOTHING)    revert RefundNotAllowed();
-        if (block.timestamp < c.deadline)        revert StillActive();
-        if (c.totalRaised >= c.goal)             revert RefundNotAllowed();
-        if (amount == 0)                         revert NotDonor();
+        if (c.fundingModel != ALL_OR_NOTHING) revert RefundNotAllowed();
+        if (block.timestamp < c.deadline)     revert StillActive();
+        if (c.totalRaised >= c.goal)          revert RefundNotAllowed();
+        if (amount == 0)                      revert NotDonor();
 
         donations[id][msg.sender] = 0;
 
-        IERC20(c.token).safeTransfer(msg.sender, amount);
+        _payOut(c.token, msg.sender, amount);
 
         emit RefundClaimed(id, msg.sender, amount);
     }

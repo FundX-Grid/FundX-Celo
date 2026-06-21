@@ -2,6 +2,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Campaign } from "@/lib/data"
 import { Heart } from "lucide-react"
+import { CampaignProgress } from "./CampaignProgress"
 
 interface CenterCardProps {
   campaign: Campaign
@@ -37,12 +38,7 @@ export function CenterCard({ campaign, progress }: CenterCardProps) {
 
         <div className="space-y-6">
           {/* Progress Bar */}
-          <div className="w-full bg-slate-100 rounded-full h-3 overflow-hidden">
-            <div
-              className="bg-gradient-tush h-full rounded-full shadow-[0_0_15px_rgba(255,107,74,0.4)]"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
+          <CampaignProgress progress={progress} size="lg" />
 
           {/* Raised + Button */}
           <div className="flex justify-between items-end">

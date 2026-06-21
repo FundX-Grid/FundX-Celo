@@ -2,6 +2,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Campaign } from "@/lib/data"
 import { ArrowRight } from "lucide-react"
+import { CampaignProgress } from "./CampaignProgress"
 
 interface SideCardProps {
   campaign: Campaign
@@ -28,12 +29,7 @@ export function RightCard({ campaign, progress }: SideCardProps) {
         </div>
 
         <div className="space-y-3 pt-4">
-          <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
-            <div
-              className="bg-gradient-tush h-full rounded-full"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
+          <CampaignProgress progress={progress} />
 
           <div className="flex justify-between items-center">
             <div>

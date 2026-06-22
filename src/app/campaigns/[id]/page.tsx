@@ -27,13 +27,30 @@ import { isMiniPay } from "@/lib/wallet"
 
 const PLACEHOLDER_IMAGES = ["/campaign-1.jpg", "/campaign-2.jpg", "/campaign-3.jpg"]
 
-export default function CampaignPage({ params }: { params: Promise<{ id: string }> }) {
-  const { isConnected, address } = useAccount()
-  const { writeContractAsync } = useWriteContract()
-  const [donateAmount, setDonateAmount] = useState("")
-  const [mounted, setMounted] = useState(false)
-  const [isMini, setIsMini] = useState(false)
-  const [txPending, setTxPending] = useState(false)
+  const handleRefund = async () => {
+    const tokenAddress = isCUSD ? TOKEN_ADDRESSES.cUSD : TOKEN_ADDRESSES.USDC
+    const feeCurrency = isMini ? (TOKEN_ADDRESSES.cUSD as `0x${string}`) : (tokenAddress as `0x${string}`)
+    try {
+      setTxPending(true)
+      toast.loading("Claiming refund...", { id: "refund" })
+      const hash = await writeContractAsync({
+        address: FUNDX_CONTRACT as `0x${string}`,
+        abi: FUNDX_ABI,
+        functionName: "claimRefund",
+        args: [BigInt(campaignIndex)],
+        feeCurrency,
+      } as any)
+      const receipt = await waitForTransactionReceipt(config, { hash })
+      if (receipt.status !== "success") throw new Error("Reverted on-chain")
+      toast.success(`Refund of ${userDonation} ${currency} claimed!`, { id: "refund" })
+      refetch()
+    } catch (err) {
+      console.error(err)
+      toast.error("Refund Failed", { id: "refund", description: "Transaction failed on Celo." })
+    } finally {
+      setTxPending(false)
+    }
+  }
 
   const { id } = use(params)
   const campaignIndex = Number(id)
@@ -214,6 +231,14 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
     }
   }
 
+export default function CampaignPage({ params }: { params: Promise<{ id: string }> }) {
+  const { isConnected, address } = useAccount()
+  const { writeContractAsync } = useWriteContract()
+  const [donateAmount, setDonateAmount] = useState("")
+  const [mounted, setMounted] = useState(false)
+  const [isMini, setIsMini] = useState(false)
+  const [txPending, setTxPending] = useState(false)
+
   const handleWithdraw = async () => {
     const tokenAddress = isCUSD ? TOKEN_ADDRESSES.cUSD : TOKEN_ADDRESSES.USDC
     const feeCurrency = isMini ? (TOKEN_ADDRESSES.cUSD as `0x${string}`) : (tokenAddress as `0x${string}`)
@@ -234,31 +259,6 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
     } catch (err) {
       console.error(err)
       toast.error("Withdrawal Failed", { id: "withdraw", description: "Transaction failed on Celo." })
-    } finally {
-      setTxPending(false)
-    }
-  }
-
-  const handleRefund = async () => {
-    const tokenAddress = isCUSD ? TOKEN_ADDRESSES.cUSD : TOKEN_ADDRESSES.USDC
-    const feeCurrency = isMini ? (TOKEN_ADDRESSES.cUSD as `0x${string}`) : (tokenAddress as `0x${string}`)
-    try {
-      setTxPending(true)
-      toast.loading("Claiming refund...", { id: "refund" })
-      const hash = await writeContractAsync({
-        address: FUNDX_CONTRACT as `0x${string}`,
-        abi: FUNDX_ABI,
-        functionName: "claimRefund",
-        args: [BigInt(campaignIndex)],
-        feeCurrency,
-      } as any)
-      const receipt = await waitForTransactionReceipt(config, { hash })
-      if (receipt.status !== "success") throw new Error("Reverted on-chain")
-      toast.success(`Refund of ${userDonation} ${currency} claimed!`, { id: "refund" })
-      refetch()
-    } catch (err) {
-      console.error(err)
-      toast.error("Refund Failed", { id: "refund", description: "Transaction failed on Celo." })
     } finally {
       setTxPending(false)
     }

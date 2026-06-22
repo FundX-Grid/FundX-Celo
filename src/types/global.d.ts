@@ -1,5 +1,4 @@
 interface Window {
-  // TODO: optimize for large datasets
   ethereum?: {
     isMetaMask?: boolean
     isMiniPay?: boolean

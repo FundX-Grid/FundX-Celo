@@ -1,7 +1,7 @@
 interface CampaignProgressProps {
   progress: number
   /** "lg" is used by the featured center card: taller bar with a glow. */
-  size?: 'sm' | 'lg'
+  size?: "sm" | "lg"
 }
 
 // Shared progress bar for the campaign card family (Left / Right / Center / Mobile).

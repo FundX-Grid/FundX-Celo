@@ -28,7 +28,7 @@ export function ConnectWallet() {
     setMounted(true)
     if (isMiniPay()) {
       setIsMini(true)
-      connect({ connector: injected({ target: "metaMask" }) })
+      connect({ connector: injected({ target: 'metaMask' }) })
     }
   }, [])
 

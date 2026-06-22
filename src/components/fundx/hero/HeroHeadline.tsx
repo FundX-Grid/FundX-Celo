@@ -1,6 +1,22 @@
-"use client"
-
+use client
 import Image from "next/image"
+
+const Logo = () => {
+  return (
+    <span className="inline-flex items-center justify-center gap-3">
+      <Image src="/celo-celo-logo.svg" alt="Celo" width={80} height={80} className="w-16 h-16 md:w-20 md:h-20 object-contain drop-shadow-sm transform -rotate-6" />
+      <span className="text-[#fbe72b] font-extrabold pb-1 drop-shadow-sm">Celo</span>
+    </span>
+  )
+}
+
+const Economy = () => {
+  return (
+    <span className="inline-flex items-center flex-wrap justify-center gap-x-4 gap-y-2 mt-2">
+      <span>Economy.</span>
+    </span>
+  )
+}
 
 export function HeroHeadline() {
   return (
@@ -9,15 +25,10 @@ export function HeroHeadline() {
       <br />
       <span className="inline-flex items-center flex-wrap justify-center gap-x-4 mt-2">
         on the
-        <span className="inline-flex items-center justify-center gap-3">
-          <Image src="/celo-celo-logo.svg" alt="Celo" width={80} height={80} className="w-16 h-16 md:w-20 md:h-20 object-contain drop-shadow-sm transform -rotate-6" />
-          <span className="text-[#fbe72b] font-extrabold pb-1 drop-shadow-sm">Celo</span>
-        </span>
+        <Logo />
       </span>
       <br />
-      <span className="inline-flex items-center flex-wrap justify-center gap-x-4 gap-y-2 mt-2">
-        <span>Economy.</span>
-      </span>
+      <Economy />
     </h1>
   )
 }

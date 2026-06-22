@@ -11,7 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 interface WizardProps {
   step: number
   formData: CreateCampaignData
-  setFormData: (data: CreateCampaignData) => void
+  setFormData: (payload: CreateCampaignData) => void
 }
 
 export function WizardSteps({ step, formData, setFormData }: WizardProps) {

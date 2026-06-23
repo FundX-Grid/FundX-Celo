@@ -123,7 +123,6 @@ export function CampaignFan({ deckSlotRef }: CampaignFanProps) {
   const deckScale = useTransform(smoothProgress, [0, 1], [0.20, 1])
 
   // Left card — peeks out slightly at start, fans to final flex position
-  // At scale 1 the flex layout naturally places left card ~310px left of center
   const leftX = useTransform(smoothProgress, [0, 1], [-8, 0])
   const leftRotate = useTransform(smoothProgress, [0, 1], [-6, 0])
   const leftZ = useTransform(smoothProgress, [0, 1], [15, 0])

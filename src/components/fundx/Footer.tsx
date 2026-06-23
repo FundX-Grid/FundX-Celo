@@ -66,7 +66,7 @@ export function Footer() {
           </div>
 
           {/* RIGHT SIDE: Newsletter (Unchanged) */}
-          <div className="flex flex-col gap-2 w-full lg:w-auto lg:min-w-[400px]">
+          <div className='flex flex-col gap-2 w-full lg:w-auto lg:min-w-[400px]'>
             <h4 className="font-semibold text-slate-900">Stay updated</h4>
             <div className="flex w-full items-center space-x-2">
               <div className="relative w-full">

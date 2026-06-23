@@ -18,7 +18,6 @@ export function RightCard({ campaign, progress }: SideCardProps) {
         </div>
       </div>
 
-      // NOTE: revisit this logic after API migration
       <div className="p-6 flex flex-col justify-between flex-1 bg-white">
         <div>
           <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-primary transition-colors">

@@ -206,8 +206,8 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
       toast.success("Contribution confirmed!", { id: "donate" })
       setDonateAmount("")
       refetch()
-    } catch (error) {
-      console.error(error)
+    } catch (err) {
+      console.error(err)
       toast.error("Donation Failed", { id: "donate", description: "Transaction failed on Celo." })
     } finally {
       setTxPending(false)
@@ -231,8 +231,8 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
       if (receipt.status !== "success") throw new Error("Reverted on-chain")
       toast.success("Funds withdrawn successfully!", { id: "withdraw" })
       refetch()
-    } catch (error) {
-      console.error(error)
+    } catch (err) {
+      console.error(err)
       toast.error("Withdrawal Failed", { id: "withdraw", description: "Transaction failed on Celo." })
     } finally {
       setTxPending(false)
@@ -256,8 +256,8 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
       if (receipt.status !== "success") throw new Error("Reverted on-chain")
       toast.success(`Refund of ${userDonation} ${currency} claimed!`, { id: "refund" })
       refetch()
-    } catch (error) {
-      console.error(error)
+    } catch (err) {
+      console.error(err)
       toast.error("Refund Failed", { id: "refund", description: "Transaction failed on Celo." })
     } finally {
       setTxPending(false)

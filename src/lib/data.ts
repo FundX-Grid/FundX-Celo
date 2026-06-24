@@ -282,6 +282,5 @@ export function getSideCampaigns() {
 }
 
 export function getCampaign(id: string) {
-  const result = CAMPAIGNS.find((c) => c.id === id);
-  return result;
+  return CAMPAIGNS.find((c) => c.id === id);
 }

@@ -16,7 +16,7 @@ import { useMemo, useState } from "react"
 import { formatUnits } from "viem"
 
 function formatMoney(amount: number, currency: string) {
-  return `$${amount.toLocaleString()} ${currency}`
+  return `$${amount.toLocaleString()} ${currency}`,
 }
 
 interface Contribution {

@@ -94,7 +94,7 @@ export const FUNDX_ABI = [
   },
   // campaignCount_
   {
-    name: 'campaignCount_',
+    name: "campaignCount_",
     type: "function",
     stateMutability: "view",
     inputs: [],

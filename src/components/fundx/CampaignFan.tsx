@@ -110,7 +110,6 @@ export function CampaignFan({ deckSlotRef }: CampaignFanProps) {
     target: containerRef,
     offset: ["start end", "end end"],
   })
-// TODO: add input validation
 
   // Smooth spring applied to raw scroll progress
   const smoothProgress = useSpring(scrollYProgress, {

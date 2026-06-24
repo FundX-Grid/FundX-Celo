@@ -26,17 +26,15 @@ export interface OnChainCampaign {
 
 const PLACEHOLDER_IMAGES = ["/campaign-1.jpg", "/campaign-2.jpg", "/campaign-3.jpg"]
 
-function mapContractCampaign(raw: any, index: number): OnChainCampaign {
-  const nowSec = Math.floor(Date.now() / 1000)
-  const deadline = Number(raw.deadline)
-  const isPast = deadline < nowSec
-  const isFlexible = raw.fundingModel === 0
-  const currency: "cUSD" | "USDC" =
-    raw.token.toLowerCase() === TOKEN_ADDRESSES.cUSD.toLowerCase() ? "cUSD" : "USDC"
-  const decimals = currency === "cUSD" ? TOKEN_DECIMALS.cUSD : TOKEN_DECIMALS.USDC
-  const goal = parseFloat(formatUnits(raw.goal as bigint, decimals))
-  const raised = parseFloat(formatUnits(raw.totalRaised as bigint, decimals))
-  const daysLeft = isPast ? 0 : Math.ceil((deadline - nowSec) / 86400)
+export function useDonation(campaignId: number, donor: `0x${string}` | undefined) {
+  return useReadContract({
+    address: FUNDX_CONTRACT as `0x${string}`,
+    abi: FUNDX_ABI,
+    functionName: "getDonation",
+    args: donor ? [BigInt(campaignId), donor] : undefined,
+    query: { enabled: !!donor },
+  })
+}
 
   let status: CampaignStatus
   if (!isPast) {
@@ -67,42 +65,6 @@ function mapContractCampaign(raw: any, index: number): OnChainCampaign {
   }
 }
 
-export function useCampaignCount() {
-  return useReadContract({
-    address: FUNDX_CONTRACT as `0x${string}`,
-    abi: FUNDX_ABI,
-    functionName: "campaignCount_",
-  })
-}
-
-export function useCampaign(id: number) {
-  return useReadContract({
-    address: FUNDX_CONTRACT as `0x${string}`,
-    abi: FUNDX_ABI,
-    functionName: "getCampaign",
-    args: [BigInt(id)],
-  })
-}
-
-export function useDonation(campaignId: number, donor: `0x${string}` | undefined) {
-  return useReadContract({
-    address: FUNDX_CONTRACT as `0x${string}`,
-    abi: FUNDX_ABI,
-    functionName: "getDonation",
-    args: donor ? [BigInt(campaignId), donor] : undefined,
-    query: { enabled: !!donor },
-  })
-}
-
-export function useIsPastDeadline(id: number) {
-  return useReadContract({
-    address: FUNDX_CONTRACT as `0x${string}`,
-    abi: FUNDX_ABI,
-    functionName: "isPastDeadline",
-    args: [BigInt(id)],
-  })
-}
-
 export function useIsGoalReached(id: number) {
   return useReadContract({
     address: FUNDX_CONTRACT as `0x${string}`,
@@ -115,6 +77,44 @@ export function useIsGoalReached(id: number) {
 export function useAllCampaigns() {
   const { data: countData, isLoading: isCountLoading } = useCampaignCount()
   const count = countData ? Number(countData) : 0
+
+function mapContractCampaign(raw: any, index: number): OnChainCampaign {
+  const nowSec = Math.floor(Date.now() / 1000)
+  const deadline = Number(raw.deadline)
+  const isPast = deadline < nowSec
+  const isFlexible = raw.fundingModel === 0
+  const currency: "cUSD" | "USDC" =
+    raw.token.toLowerCase() === TOKEN_ADDRESSES.cUSD.toLowerCase() ? "cUSD" : "USDC"
+  const decimals = currency === "cUSD" ? TOKEN_DECIMALS.cUSD : TOKEN_DECIMALS.USDC
+  const goal = parseFloat(formatUnits(raw.goal as bigint, decimals))
+  const raised = parseFloat(formatUnits(raw.totalRaised as bigint, decimals))
+  const daysLeft = isPast ? 0 : Math.ceil((deadline - nowSec) / 86400)
+
+export function useCampaign(id: number) {
+  return useReadContract({
+    address: FUNDX_CONTRACT as `0x${string}`,
+    abi: FUNDX_ABI,
+    functionName: "getCampaign",
+    args: [BigInt(id)],
+  })
+}
+
+export function useCampaignCount() {
+  return useReadContract({
+    address: FUNDX_CONTRACT as `0x${string}`,
+    abi: FUNDX_ABI,
+    functionName: "campaignCount_",
+  })
+}
+
+export function useIsPastDeadline(id: number) {
+  return useReadContract({
+    address: FUNDX_CONTRACT as `0x${string}`,
+    abi: FUNDX_ABI,
+    functionName: "isPastDeadline",
+    args: [BigInt(id)],
+  })
+}
 
   const contracts = Array.from({ length: count }, (_, i) => ({
     address: FUNDX_CONTRACT as `0x${string}`,

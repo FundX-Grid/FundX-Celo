@@ -71,7 +71,7 @@ function HeroLogoParallax() {
       rafRef.current = requestAnimationFrame(animate)
     }
 
-    window.addEventListener("mousemove", onMouseMove)
+    window.addEventListener('mousemove', onMouseMove)
 
     return () => {
       clearTimeout(bounceIn)

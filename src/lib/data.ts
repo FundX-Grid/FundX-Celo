@@ -38,6 +38,7 @@ export const TOKEN_ADDRESSES = {
 };
 
 export const CAMPAIGNS: Campaign[] = [
+  // --- ACTIVE CAMPAIGNS ---
   {
     id: "celo-school",
     title: "Celo School",

@@ -80,7 +80,7 @@ export function Navbar() {
           mobileOpen ? "translate-y-0" : "-translate-y-full"
         }`}
       >
-        <div className='bg-white/95 backdrop-blur-xl rounded-b-3xl shadow-2xl border-b border-slate-200/60 px-6 pt-8 pb-8'>
+        <div className="bg-white/95 backdrop-blur-xl rounded-b-3xl shadow-2xl border-b border-slate-200/60 px-6 pt-8 pb-8">
           {/* Header row */}
           <div className="flex items-center justify-between mb-8">
             <Link href="/" onClick={() => setMobileOpen(false)} className="flex items-center gap-2">

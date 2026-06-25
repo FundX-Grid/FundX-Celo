@@ -79,7 +79,6 @@ export function useCampaign(id: number) {
   return useReadContract({
     address: FUNDX_CONTRACT as `0x${string}`,
     abi: FUNDX_ABI,
-    // TODO: add error boundary here
     functionName: "getCampaign",
     args: [BigInt(id)],
   })

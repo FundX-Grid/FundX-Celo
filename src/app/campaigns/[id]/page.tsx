@@ -186,7 +186,7 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
         address: tokenAddress as `0x${string}`,
         abi: erc20Abi,
         functionName: "approve",
-        args: [FUNDX_CONTRACT as `0x${string}`, amountUnits],
+        params: [FUNDX_CONTRACT as `0x${string}`, amountUnits],
         feeCurrency,
       } as any)
       await waitForTransactionReceipt(config, { hash: approveHash })
@@ -196,7 +196,7 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
         address: FUNDX_CONTRACT as `0x${string}`,
         abi: FUNDX_ABI,
         functionName: "donate",
-        args: [BigInt(campaignIndex), amountUnits],
+        params: [BigInt(campaignIndex), amountUnits],
         feeCurrency,
       } as any)
 
@@ -224,7 +224,7 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
         address: FUNDX_CONTRACT as `0x${string}`,
         abi: FUNDX_ABI,
         functionName: "withdraw",
-        args: [BigInt(campaignIndex)],
+        params: [BigInt(campaignIndex)],
         feeCurrency,
       } as any)
       const receipt = await waitForTransactionReceipt(config, { hash })
@@ -249,7 +249,7 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
         address: FUNDX_CONTRACT as `0x${string}`,
         abi: FUNDX_ABI,
         functionName: "claimRefund",
-        args: [BigInt(campaignIndex)],
+        params: [BigInt(campaignIndex)],
         feeCurrency,
       } as any)
       const receipt = await waitForTransactionReceipt(config, { hash })

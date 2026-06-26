@@ -1,15 +1,18 @@
-"use client"
+use client
 import * as React from "react"
 import * as SeparatorPrimitive from "@radix-ui/react-separator"
 import { cn } from "@/lib/utils"
 
+const getHorizontalClassName = (className?: string) =>
+  cn("bg-border shrink-0 h-px w-full", className)
+
+const getVerticalClassName = (className?: string) =>
+  cn("bg-border shrink-0 h-full w-px", className)
+
 function getSeparatorClassName(orientation: string, className?: string) {
-  return cn(
-    "bg-border shrink-0",
-    { "data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full": orientation === "horizontal" },
-    { "data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px": orientation === "vertical" },
-    className
-  )
+  if (orientation === "horizontal") return getHorizontalClassName(className)
+  if (orientation === "vertical") return getVerticalClassName(className)
+  return ""
 }
 
 function Separator({

@@ -1,1 +1,24 @@
-const trustStripItems = [ { label: 'cUSD-backed', dot: 'bg-emerald-500' }, { label: 'On-chain Escrow', dot: 'bg-indigo-500' }, { label: 'ERC-20 Compatible', dot: 'bg-purple-500' }, { label: 'Non-Custodial', dot: 'bg-pink-500' }, ] interface TrustStripItemProps { item: { label: string; dot: string }; } function TrustStripItem({ item }: TrustStripItemProps) { return ( <span key={item.label} className='flex items-center gap-2'> <span className={`h-2 w-2 rounded-full ${item.dot} animate-pulse`} /> {item.label} </span> ); } export function TrustStrip() { return ( <div className='mt-12 relative'> <div className='absolute inset-0 bg-gradient-to-r from-purple-500/10 via-indigo-500/10 to-pink-500/10 blur-2xl opacity-70 rounded-3xl' /> <div className='relative backdrop-blur-xl border border-white/40 bg-white/70 rounded-3xl px-8 py-5 shadow-lg'> <div className='flex flex-wrap justify-center gap-8 text-sm font-semibold text-slate-700 tracking-wide'> {trustStripItems.map((item) => ( <TrustStripItem key={item.label} item={item} /> ))} </div> </div> </div> ); }}
+const trustStripItems = [
+  { label: "cUSD-backed", dot: "bg-emerald-500" },
+  { label: "On-chain Escrow", dot: "bg-indigo-500" },
+  { label: "ERC-20 Compatible", dot: "bg-purple-500" },
+  { label: "Non-Custodial", dot: "bg-pink-500" },
+]
+
+export function TrustStrip() {
+  return (
+    <div className="mt-12 relative">
+      <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-indigo-500/10 to-pink-500/10 blur-2xl opacity-70 rounded-3xl" />
+      <div className="relative backdrop-blur-xl border border-white/40 bg-white/70 rounded-3xl px-8 py-5 shadow-lg">
+        <div className="flex flex-wrap justify-center gap-8 text-sm font-semibold text-slate-700 tracking-wide">
+          {trustStripItems.map((item) => (
+            <span key={item.label} className="flex items-center gap-2">
+              <span className={`h-2 w-2 rounded-full ${item.dot} animate-pulse`} />
+              {item.label}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}

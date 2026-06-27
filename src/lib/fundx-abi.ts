@@ -148,7 +148,6 @@ export const FUNDX_ABI = [
     inputs: [],
     outputs: [{ name: "", type: "address" }],
   },
-  // FIXME: handle edge case when value is null
   // Events
   {
     name: "CampaignCreated",

@@ -1,35 +1,13 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Campaign } from "@/lib/data";
-import { ArrowRight } from "lucide-react";
-import { CampaignProgress } from "./CampaignProgress";
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import { Campaign } from "@/lib/data"
+import { ArrowRight } from "lucide-react"
+import { CampaignProgress } from "./CampaignProgress"
 
 interface MobileCardProps {
-  campaign: Campaign;
-  progress: number;
+  campaign: Campaign
+  progress: number
 }
-
-const renderCampaignInfo = ({ campaign, progress }: MobileCardProps) => (
-  <>
-    <h3 className="text-xl font-bold text-slate-900">{campaign.title}</h3>
-    <p className="text-sm text-slate-500 line-clamp-2">{campaign.description}</p>
-    <CampaignProgress progress={progress} />
-    <div className="flex justify-between items-center">
-      <span className="text-sm font-bold text-primary">
-        ${campaign.raised.toLocaleString()}
-      </span>
-      <Link href={`/campaigns/${campaign.id}`}>
-        <Button
-          size="sm"
-          className="h-10 rounded-xl bg-slate-900 text-white px-5 flex items-center gap-1.5"
-        >
-          Donate
-          <ArrowRight className="w-3.5 h-3.5" />
-        </Button>
-      </Link>
-    </div>
-  </>
-);
 
 export function MobileCard({ campaign, progress }: MobileCardProps) {
   return (
@@ -39,9 +17,30 @@ export function MobileCard({ campaign, progress }: MobileCardProps) {
           [Image]
         </div>
       </div>
+
       <div className="p-6 flex flex-col gap-4">
-        {renderCampaignInfo({ campaign, progress })}
+        <h3 className="text-xl font-bold text-slate-900">{campaign.title}</h3>
+        <p className="text-sm text-slate-500 line-clamp-2">
+          {campaign.description}
+        </p>
+
+        <CampaignProgress progress={progress} />
+
+        <div className="flex justify-between items-center">
+          <span className="text-sm font-bold text-primary">
+            ${campaign.raised.toLocaleString()}
+          </span>
+          <Link href={`/campaigns/${campaign.id}`}>
+            <Button
+              size="sm"
+              className="h-10 rounded-xl bg-slate-900 text-white px-5 flex items-center gap-1.5"
+            >
+              Donate
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Button>
+          </Link>
+        </div>
       </div>
     </div>
-  );
+  )
 }

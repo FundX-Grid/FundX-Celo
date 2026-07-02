@@ -1,4 +1,4 @@
-use client
+"use client"
 import { LayoutDashboard, Wallet, Clock, CheckCircle2, XCircle, ArrowRight } from "lucide-react"
 import { Navbar } from "@/components/fundx/Navbar"
 import { Footer } from "@/components/fundx/Footer"
@@ -7,7 +7,8 @@ import { ConnectButton } from "@rainbow-me/rainbowkit"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
 import { CreatorTab } from "@/components/dashboard/CreatorTab"
-import { BackerTab } from "@/components/dashboard/BackerTab"
+import { BackerTab } from "@/components/dashboard/BackerTab" 
+
 
 export default function DashboardPage() {
   const { isConnected } = useAccount()
@@ -28,6 +29,7 @@ export default function DashboardPage() {
       </main>
     )
   }
+
 
   return (
     <main className="min-h-screen bg-slate-50 font-sans">
@@ -61,7 +63,8 @@ export default function DashboardPage() {
       <BackerTab />
         </Tabs>
 
-      
+     
+
       </div>
       
       <Footer />

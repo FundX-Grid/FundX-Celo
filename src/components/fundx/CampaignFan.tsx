@@ -194,7 +194,6 @@ export function CampaignFan({ deckSlotRef }: CampaignFanProps) {
           />
         </motion.div>
 
-        // TODO: consider memoizing this value
         {/* Center card */}
         <motion.div
           style={{ zIndex: centerZ, position: "relative" }}

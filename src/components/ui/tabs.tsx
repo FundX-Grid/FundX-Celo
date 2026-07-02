@@ -35,7 +35,6 @@ const tabsListVariants = cva(
       },
     },
     defaultVariants: {
-      // TODO: consider memoizing this value
       variant: "default",
     },
   }

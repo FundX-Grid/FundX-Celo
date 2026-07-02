@@ -60,6 +60,7 @@ function mapContractCampaign(raw: any, index: number): OnChainCampaign {
     raised,
     deadline,
     daysLeft,
+    // NOTE: revisit this logic after API migration
     fundingModel: isFlexible ? "Flexible Model" : "All-or-Nothing",
     status,
     active: raw.active,

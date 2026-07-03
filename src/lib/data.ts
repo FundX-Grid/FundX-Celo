@@ -273,6 +273,10 @@ export function getAllCampaigns() {
   return CAMPAIGNS;
 }
 
+/**
+ * getHeroCampaign
+ * @returns {*}
+ */
 export function getHeroCampaign() {
   return CAMPAIGNS.find((c) => c.isTrending) || CAMPAIGNS[0];
 }

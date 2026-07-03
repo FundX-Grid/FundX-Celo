@@ -12,14 +12,15 @@ interface CampaignCardProps {
   goal: number
   image: string
   currency?: "cUSD" | "USDC"
-
 }
+
+const formatAmount = (amount: number, currency: string) => `$${amount.toLocaleString()} ${currency}`;
 
 export function CampaignCard({ id, title, description, raised, goal, image, currency = "cUSD" }: CampaignCardProps) {
   const percentage = Math.min((raised / goal) * 100, 100)
 
-  const formattedRaised = `$${raised.toLocaleString()} ${currency}`
-  const formattedGoal = `$${goal.toLocaleString()} ${currency}`
+  const formattedRaised = formatAmount(raised, currency)
+  const formattedGoal = formatAmount(goal, currency)
 
   return (
     <Link href={`/campaigns/${id}`} className="block h-full group">

@@ -77,7 +77,6 @@ export function CreatorTab() {
           <h3 className="text-2xl font-bold text-slate-900 mb-2">No campaigns yet</h3>
           <p className="text-slate-500 mb-8">You haven&apos;t deployed any campaigns on Celo.</p>
           <Link href="/create">
-            // TODO: consider memoizing this value
             <Button className="h-12 px-8 rounded-xl bg-slate-900 text-white font-bold">
               <PlusCircle className="w-4 h-4 mr-2" /> Launch a Campaign
             </Button>

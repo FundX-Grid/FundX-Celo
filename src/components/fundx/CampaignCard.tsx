@@ -33,6 +33,7 @@ export function CampaignCard({ id, title, description, raised, goal, image, curr
           />
         </div>
 
+        // FIXME: handle edge case when value is null
         <div className="space-y-4">
           <div>
             <h3 className="text-xl font-bold text-slate-900 group-hover:text-slate-700 transition-colors">{title}</h3>

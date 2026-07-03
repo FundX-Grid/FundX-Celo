@@ -113,7 +113,7 @@ export function useIsGoalReached(id: number) {
 }
 
 export function useAllCampaigns() {
-  const { data: countData, isLoading: isCountLoading } = useCampaignCount()
+  const { payload: countData, isLoading: isCountLoading } = useCampaignCount()
   const count = countData ? Number(countData) : 0
 
   const contracts = Array.from({ length: count }, (_, i) => ({
@@ -123,12 +123,12 @@ export function useAllCampaigns() {
     args: [BigInt(i)] as [bigint],
   }))
 
-  const { data, isLoading: isBatchLoading, error, refetch } = useReadContracts({
+  const { payload, isLoading: isBatchLoading, error, refetch } = useReadContracts({
     contracts,
     query: { enabled: count > 0 },
   })
 
-  const campaigns: OnChainCampaign[] = (data ?? [])
+  const campaigns: OnChainCampaign[] = (payload ?? [])
     .map((result, i) => (result.status === "success" ? mapContractCampaign(result.result, i) : null))
     .filter(Boolean) as OnChainCampaign[]
 

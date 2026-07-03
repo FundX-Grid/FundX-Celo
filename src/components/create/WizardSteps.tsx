@@ -14,13 +14,6 @@ interface WizardProps {
   setFormData: (data: CreateCampaignData) => void
 }
 
-/**
- * WizardSteps
- * @param {*} { step
- * @param {*} formData
- * @param {*} setFormData }: WizardProps
- * @returns {*}
- */
 export function WizardSteps({ step, formData, setFormData }: WizardProps) {
   
   // STEP 1: IDENTITY

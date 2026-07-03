@@ -7,5 +7,5 @@ export function detectWallet(): WalletType {
 }
 
 export function isMiniPay(): boolean {
-  return detectWallet() === "minipay"
+  return detectWallet() === 'minipay'
 }

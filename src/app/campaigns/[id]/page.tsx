@@ -40,7 +40,7 @@ export default function CampaignPage({ params }: { params: Promise<{ id: string 
 
   useEffect(() => {
     setMounted(true)
-    setIsMini(isMiniPay())
+    setIsMini(isMiniPay()),
   }, [])
 
   const isMockId = isNaN(campaignIndex)

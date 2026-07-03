@@ -6,11 +6,6 @@ export function detectWallet(): WalletType {
   return "other"
 }
 
-export function getWalletInfo(): { type: WalletType, isMiniPay: boolean } {
-  const walletType = detectWallet()
-  return { type: walletType, isMiniPay: walletType === "minipay" }
-}
-
 export function isMiniPay(): boolean {
-  return getWalletInfo().isMiniPay
+  return detectWallet() === "minipay"
 }

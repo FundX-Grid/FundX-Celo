@@ -27,6 +27,11 @@ import { isMiniPay } from "@/lib/wallet"
 
 const PLACEHOLDER_IMAGES = ["/campaign-1.jpg", "/campaign-2.jpg", "/campaign-3.jpg"]
 
+/**
+ * CampaignPage
+ * @param {*} { params }: { params: Promise<{ id: string }> }
+ * @returns {*}
+ */
 export default function CampaignPage({ params }: { params: Promise<{ id: string }> }) {
   const { isConnected, address } = useAccount()
   const { writeContractAsync } = useWriteContract()

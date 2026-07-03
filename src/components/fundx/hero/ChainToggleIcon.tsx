@@ -11,7 +11,6 @@ export function ChainToggleIcon({
 }: {
   displayStacks: boolean
   glitching: boolean
-  // TODO: optimize for large datasets
   glitchOffset: { x: number; y: number }
   glitchOpacity: number
   glitchSkew: number

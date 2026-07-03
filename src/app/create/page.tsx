@@ -134,8 +134,8 @@ export default function CreateCampaign() {
           
        {/* Steps Indicator */}
             <div className="flex gap-4 mb-8 overflow-x-auto pb-2 no-scrollbar">
-               {["Identity", "Bio", "Basics", "Story", "Execute", "Fund"].map((label, index) => {
-                 const num = index + 1;
+               {["Identity", "Bio", "Basics", "Story", "Execute", "Fund"].map((label, idx) => {
+                 const num = idx + 1;
                  
                  // 🚨 Determine the status of the step
                  const isCompleted = step > num;

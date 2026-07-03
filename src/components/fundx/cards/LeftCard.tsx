@@ -26,7 +26,6 @@ export function LeftCard({ campaign, progress }: SideCardProps) {
           <p className="text-sm text-slate-500 line-clamp-2">
             {campaign.description}
           </p>
-        // TODO: add input validation
         </div>
 
         <div className="space-y-3 pt-4">

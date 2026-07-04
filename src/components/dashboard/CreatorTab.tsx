@@ -109,7 +109,7 @@ export function CreatorTab() {
                 </div>
                 <div className="space-y-3 w-full">
                   <div className="flex items-center gap-3 mb-2">
-                    <span className='px-3 py-1 rounded-lg bg-green-50 border border-green-100/50 text-green-700 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-sm'>
+                    <span className="px-3 py-1 rounded-lg bg-green-50 border border-green-100/50 text-green-700 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
                       <CheckCircle2 className="w-3.5 h-3.5 text-green-500" />
                       {campaign.withdrawn ? "Withdrawn" : "Successful"}
                     </span>

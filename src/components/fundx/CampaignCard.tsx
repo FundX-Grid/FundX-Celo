@@ -42,7 +42,7 @@ export function CampaignCard({ id, title, description, raised, goal, image, curr
           <div className="space-y-2">
             <div className="flex justify-between text-sm font-medium">
 
-              <span className="text-slate-900 font-bold">{formattedRaised}</span>
+              <span className='text-slate-900 font-bold'>{formattedRaised}</span>
               <span className="text-slate-400">of {formattedGoal}</span>
             </div>
             <Progress value={percentage} className="h-3 rounded-full bg-slate-100" />

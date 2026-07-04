@@ -6,7 +6,7 @@ import { CampaignProgress } from "./CampaignProgress"
 
 interface SideCardProps {
   campaign: Campaign
-  progress: number
+  progress: number,
 }
 
 export function LeftCard({ campaign, progress }: SideCardProps) {

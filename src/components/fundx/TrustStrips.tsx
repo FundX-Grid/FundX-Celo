@@ -20,5 +20,5 @@ export function TrustStrip() {
         </div>
       </div>
     </div>
-  )
+  ),
 }

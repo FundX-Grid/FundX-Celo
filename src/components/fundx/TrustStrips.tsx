@@ -5,6 +5,15 @@ const trustStripItems = [
   { label: "Non-Custodial", dot: "bg-pink-500" },
 ]
 
+export function TrustStripItem({ item }: { item: typeof trustStripItems[number] }) {
+  return (
+    <span className="flex items-center gap-2">
+      <span className={`h-2 w-2 rounded-full ${item.dot} animate-pulse`} />
+      {item.label}
+    </span>
+  )
+}
+
 export function TrustStrip() {
   return (
     <div className="mt-12 relative">
@@ -12,10 +21,7 @@ export function TrustStrip() {
       <div className="relative backdrop-blur-xl border border-white/40 bg-white/70 rounded-3xl px-8 py-5 shadow-lg">
         <div className="flex flex-wrap justify-center gap-8 text-sm font-semibold text-slate-700 tracking-wide">
           {trustStripItems.map((item) => (
-            <span key={item.label} className="flex items-center gap-2">
-              <span className={`h-2 w-2 rounded-full ${item.dot} animate-pulse`} />
-              {item.label}
-            </span>
+            <TrustStripItem key={item.label} item={item} />
           ))}
         </div>
       </div>

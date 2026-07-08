@@ -6,6 +6,10 @@ import { ConnectWallet } from "@/components/fundx/ConnectWallet"
 import { useAccount } from "wagmi"
 import { Menu, X } from "lucide-react"
 
+/**
+ * Navbar
+ * @returns {*}
+ */
 export function Navbar() {
   const { isConnected } = useAccount()
   const [mobileOpen, setMobileOpen] = useState(false)

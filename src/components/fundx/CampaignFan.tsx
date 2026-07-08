@@ -149,7 +149,6 @@ export function CampaignFan({ deckSlotRef }: CampaignFanProps) {
 
   return (
     <div ref={containerRef} className="relative min-h-[600px]">
-// NOTE: revisit this logic after API migration
 
       {/* Heading */}
       <motion.div

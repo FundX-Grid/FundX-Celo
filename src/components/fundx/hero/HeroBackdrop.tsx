@@ -1,4 +1,4 @@
-use client
+"use client"
 
 import { useEffect, useRef } from "react"
 
@@ -48,7 +48,20 @@ function HeroLogoParallax() {
 
         const elapsed = (time - startTimeRef.current) * 0.001
 
-        const { x, y, scale, opacity } = calculateLogoPosition(elapsed)
+        // Subtle autonomous oscillation
+        const oscillateX = Math.sin(elapsed * 0.4) * 8
+        const oscillateY = Math.sin(elapsed * 0.3) * 5
+
+        // Smooth lerp toward mouse
+        currentMouse.current.x += (mouseOffset.current.x - currentMouse.current.x) * 0.12
+        currentMouse.current.y += (mouseOffset.current.y - currentMouse.current.y) * 0.12
+
+        const progress = Math.min(window.scrollY / (window.innerHeight * 0.7), 1)
+        const scale = 1 + progress * 0.35
+        const opacity = 0.20 * (1 - progress)
+
+        const x = currentMouse.current.x + oscillateX
+        const y = currentMouse.current.y + oscillateY
 
         logoRef.current.style.transform = `translate(${x}px, ${y}px) scale(${scale})`
         logoRef.current.style.opacity = String(opacity)
@@ -89,25 +102,6 @@ function HeroLogoParallax() {
       </div>
     </div>
   )
-}
-
-function calculateLogoPosition(elapsed: number): { x: number; y: number; scale: number; opacity: number } {
-  const oscillateX = Math.sin(elapsed * 0.4) * 8
-  const oscillateY = Math.sin(elapsed * 0.3) * 5
-
-  const progress = Math.min(window.scrollY / (window.innerHeight * 0.7), 1)
-  const scale = 1 + progress * 0.35
-  const opacity = 0.20 * (1 - progress)
-
-  const currentMouse = {
-    x: (mouseOffset.current.x - currentMouse.current.x) * 0.12 + currentMouse.current.x,
-    y: (mouseOffset.current.y - currentMouse.current.y) * 0.12 + currentMouse.current.y,
-  }
-
-  const x = currentMouse.x + oscillateX
-  const y = currentMouse.y + oscillateY
-
-  return { x, y, scale, opacity }
 }
 
 export default HeroLogoParallax

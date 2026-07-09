@@ -171,7 +171,7 @@ export default function CreateCampaign() {
                   <Button
                     variant="ghost"
                     onClick={handleBack}
-                    className='h-12 px-6 rounded-xl text-slate-500 hover:text-slate-900'
+                    className="h-12 px-6 rounded-xl text-slate-500 hover:text-slate-900"
                   >
                     <ArrowLeft className="w-4 h-4 mr-2" /> Back
                   </Button>

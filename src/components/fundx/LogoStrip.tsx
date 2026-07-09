@@ -13,7 +13,7 @@ export function LogoStrip() {
             </span>
           </div>
          
-          <div className="flex items-center justify-center h-12 cursor-default group">
+          <div className='flex items-center justify-center h-12 cursor-default group'>
             <span className="text-3xl font-bold tracking-tight text-slate-300 transition-colors duration-300 group-hover:text-[#fbe72b]">
               MiniPay
             </span>

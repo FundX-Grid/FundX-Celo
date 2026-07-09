@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from "react"
 
 const SCRAMBLE_CHARS = "ᚠᚢᚦᚨᚱᚲᚷᚹᚺᚾᛁᛃᛇᛈᛉᛊᛏᛒᛖᛗᛚᛜᛞᛟ∑∆∇Ωλ∞"
 
-// TODO: optimize for large datasets
 export function useScramble() {
   const [display, setDisplay] = useState("Bitcoin")
   const frameRef_ = useRef<NodeJS.Timeout | null>(null)

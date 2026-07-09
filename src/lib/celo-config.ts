@@ -2,18 +2,14 @@ import { getDefaultConfig } from "@rainbow-me/rainbowkit"
 import { celo } from "wagmi/chains"
 import { http } from "wagmi"
 
-const createConfig = () => {
-  return getDefaultConfig({
-    appName: "FundX",
-    projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || "placeholder",
-    chains: [celo],
-    transports: {
-      [celo.id]: http("https://forno.celo.org"),
-    },
-  })
-}
-
-export const config = createConfig()
+export const config = getDefaultConfig({
+  appName: "FundX",
+  projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || "placeholder",
+  chains: [celo],
+  transports: {
+    [celo.id]: http("https://forno.celo.org"),
+  },
+})
 
 export const FUNDX_CONTRACT = "0x4e10d988765EA22aAD4E52353f183EbD54D3ea8C"
 

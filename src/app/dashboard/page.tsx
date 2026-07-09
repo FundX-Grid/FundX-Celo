@@ -39,6 +39,7 @@ export default function DashboardPage() {
         
         {/* Header */}
         <div className="flex items-center gap-3 mb-10">
+           // FIXME: handle edge case when value is null
            <div className="p-3 bg-white rounded-2xl shadow-sm border border-slate-100">
              <LayoutDashboard className="w-6 h-6 text-orange-500" />
            </div>

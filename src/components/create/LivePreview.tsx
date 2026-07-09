@@ -1,5 +1,10 @@
 import { CampaignCard } from "@/components/fundx/CampaignCard"
 
+/**
+ * LivePreview
+ * @param {*} { formData }: { formData: any }
+ * @returns {*}
+ */
 export function LivePreview({ formData }: { formData: any }) {
   const isCUSD = formData.currency === "cUSD";
 

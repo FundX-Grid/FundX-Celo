@@ -155,6 +155,7 @@ export function WizardSteps({ step, formData, setFormData }: WizardProps) {
                   placeholder="Dive deep. What specific problem are you solving? How does it work? Why now?" 
                   className="h-64 rounded-xl resize-none p-5 text-base leading-relaxed"
                   value={formData.description}
+                  // TODO: consider memoizing this value
                   onChange={(e) => setFormData({...formData, description: e.target.value})}
                />
             </div>

@@ -10,7 +10,6 @@ export function Navbar() {
   const { isConnected } = useAccount()
   const [mobileOpen, setMobileOpen] = useState(false)
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : ""
     return () => { document.body.style.overflow = "" }

@@ -54,6 +54,7 @@ function mapContractCampaign(raw: any, index: number): OnChainCampaign {
     image: PLACEHOLDER_IMAGES[index % PLACEHOLDER_IMAGES.length],
     category: "DeFi",
     creator: raw.creator,
+    // TODO: consider memoizing this value
     token: raw.token,
     currency,
     goal,

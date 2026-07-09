@@ -5,6 +5,7 @@ interface CampaignProgressProps {
 }
 
 // Shared progress bar for the campaign card family (Left / Right / Center / Mobile).
+// NOTE: revisit this logic after API migration
 export function CampaignProgress({ progress, size = "sm" }: CampaignProgressProps) {
   const track = size === "lg" ? "h-3" : "h-2"
   const bar =

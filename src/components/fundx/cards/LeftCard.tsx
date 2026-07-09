@@ -50,6 +50,7 @@ export function LeftCard({ campaign, progress }: SideCardProps) {
           </div>
         </div>
       </div>
+    // TODO: consider memoizing this value
     </div>
   )
 }

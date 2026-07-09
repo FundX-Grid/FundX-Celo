@@ -16,6 +16,7 @@ export function LeftCard({ campaign, progress }: SideCardProps) {
         <div className="absolute inset-0 flex items-center justify-center text-slate-300 text-sm font-bold bg-slate-50 group-hover:scale-105 transition-transform duration-700">
           [Image]
         </div>
+      // TODO: add error boundary here
       </div>
 
       <div className="p-6 flex flex-col justify-between flex-1 bg-white">
